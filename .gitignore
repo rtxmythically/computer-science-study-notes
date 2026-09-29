@@ -1,0 +1,7 @@
+# Only the files needed for the public study site are tracked.
+*
+!.gitignore
+!.nojekyll
+!README.md
+!index.html
+!ch01_p05.png

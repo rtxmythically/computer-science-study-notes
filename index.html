@@ -1,0 +1,2499 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>計算機概論｜Ch01–Ch02 互動筆記</title>
+  <style>
+    :root{
+      --bg:#07111f;
+      --bg-2:#0a1728;
+      --panel:rgba(14,29,48,.82);
+      --panel-strong:#10223a;
+      --panel-soft:rgba(255,255,255,.055);
+      --text:#edf5ff;
+      --muted:#9cb0c7;
+      --border:rgba(154,191,232,.16);
+      --cyan:#56d6ff;
+      --cyan-2:#1ba8dd;
+      --purple:#a78bfa;
+      --green:#5ee6a8;
+      --yellow:#ffd166;
+      --red:#ff7d8c;
+      --shadow:0 24px 70px rgba(0,0,0,.28);
+      --radius:22px;
+      --radius-sm:14px;
+      --sidebar:270px;
+      --max:1120px;
+    }
+
+    html[data-theme="light"]{
+      --bg:#f5f8fc;
+      --bg-2:#eaf0f8;
+      --panel:rgba(255,255,255,.86);
+      --panel-strong:#fff;
+      --panel-soft:rgba(20,45,75,.055);
+      --text:#102034;
+      --muted:#60758d;
+      --border:rgba(29,78,126,.13);
+      --cyan:#087fae;
+      --cyan-2:#0a91c4;
+      --purple:#7558d8;
+      --green:#168b5a;
+      --yellow:#ad7200;
+      --red:#c43f52;
+      --shadow:0 24px 70px rgba(40,73,110,.12);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100vh;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 8%, rgba(86,214,255,.13), transparent 28rem),
+        radial-gradient(circle at 80% 12%, rgba(167,139,250,.12), transparent 30rem),
+        linear-gradient(180deg,var(--bg),var(--bg-2));
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Noto Sans TC", "PingFang TC", sans-serif;
+      line-height:1.7;
+    }
+
+    button,input,select{font:inherit}
+    button{color:inherit}
+    a{color:inherit}
+    code{
+      font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+      font-size:.92em;
+    }
+
+    .app{min-height:100vh}
+    .sidebar{
+      position:fixed;
+      inset:0 auto 0 0;
+      width:var(--sidebar);
+      padding:26px 18px 22px;
+      background:rgba(5,14,26,.76);
+      border-right:1px solid var(--border);
+      backdrop-filter:blur(22px);
+      z-index:40;
+      overflow:auto;
+    }
+    html[data-theme="light"] .sidebar{background:rgba(246,249,253,.88)}
+
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      padding:0 8px 22px;
+    }
+    .brand-mark{
+      width:42px;height:42px;border-radius:13px;
+      display:grid;place-items:center;
+      font-weight:900;color:#06121f;
+      background:linear-gradient(135deg,var(--cyan),#a6f1ff 55%,var(--purple));
+      box-shadow:0 12px 28px rgba(86,214,255,.22);
+    }
+    .brand strong{display:block;font-size:15px;letter-spacing:.02em}
+    .brand small{display:block;color:var(--muted);font-size:12px;margin-top:1px}
+
+    .side-label{
+      font-size:11px;
+      letter-spacing:.14em;
+      color:var(--muted);
+      text-transform:uppercase;
+      padding:8px 10px;
+      margin-top:8px;
+    }
+    .nav-link{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:var(--muted);
+      padding:10px 11px;
+      border-radius:12px;
+      font-size:14px;
+      margin:2px 0;
+      transition:.2s ease;
+    }
+    .nav-link:hover,.nav-link.active{
+      color:var(--text);
+      background:var(--panel-soft);
+    }
+    .nav-link.active{
+      box-shadow:inset 3px 0 0 var(--cyan);
+    }
+    .nav-dot{
+      width:8px;height:8px;border-radius:999px;background:currentColor;opacity:.65;flex:0 0 auto
+    }
+
+    .side-progress{
+      margin:24px 7px 0;
+      padding:14px;
+      border:1px solid var(--border);
+      background:var(--panel-soft);
+      border-radius:15px;
+    }
+    .side-progress-row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .side-progress strong{font-size:13px}
+    .side-progress span{font-weight:800;color:var(--cyan);font-size:13px}
+    .bar{
+      height:7px;border-radius:99px;background:rgba(128,160,190,.14);
+      overflow:hidden;margin-top:10px
+    }
+    .bar > i{
+      display:block;height:100%;width:0;border-radius:inherit;
+      background:linear-gradient(90deg,var(--cyan),var(--purple));
+      transition:width .35s ease;
+    }
+
+    .main{margin-left:var(--sidebar);min-height:100vh}
+    .topbar{
+      position:sticky;top:0;z-index:35;
+      display:flex;gap:12px;align-items:center;
+      padding:15px 28px;
+      border-bottom:1px solid var(--border);
+      background:color-mix(in srgb,var(--bg) 74%, transparent);
+      backdrop-filter:blur(20px);
+    }
+    .menu-btn{display:none}
+    .icon-btn,.mode-btn,.learn-btn,.primary-btn,.ghost-btn{
+      border:1px solid var(--border);
+      background:var(--panel-soft);
+      border-radius:12px;
+      cursor:pointer;
+      transition:.18s ease;
+    }
+    .icon-btn{
+      width:42px;height:42px;display:grid;place-items:center;flex:0 0 auto;
+    }
+    .icon-btn:hover,.mode-btn:hover,.ghost-btn:hover,.learn-btn:hover{background:rgba(86,214,255,.11);border-color:rgba(86,214,255,.3)}
+    .search-wrap{position:relative;flex:1;max-width:720px}
+    .search-wrap input{
+      width:100%;height:44px;
+      padding:0 92px 0 42px;
+      border-radius:13px;
+      border:1px solid var(--border);
+      outline:none;
+      background:var(--panel);
+      color:var(--text);
+      box-shadow:0 8px 28px rgba(0,0,0,.08);
+    }
+    .search-wrap input:focus{border-color:rgba(86,214,255,.55);box-shadow:0 0 0 4px rgba(86,214,255,.08)}
+    .search-icon{position:absolute;left:14px;top:11px;color:var(--muted)}
+    .keycap{
+      position:absolute;right:10px;top:9px;
+      font-size:11px;color:var(--muted);
+      border:1px solid var(--border);border-radius:7px;padding:2px 7px;
+      background:var(--panel-soft);
+    }
+    .mode-btn{height:42px;padding:0 13px;font-size:13px;white-space:nowrap}
+
+    .content{max-width:var(--max);margin:0 auto;padding:36px 34px 90px}
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding:42px;
+      border:1px solid var(--border);
+      border-radius:30px;
+      background:
+        linear-gradient(135deg,rgba(86,214,255,.09),rgba(167,139,250,.08)),
+        var(--panel);
+      box-shadow:var(--shadow);
+      margin-bottom:30px;
+    }
+    .hero:after{
+      content:"";
+      position:absolute;right:-90px;top:-130px;width:340px;height:340px;border-radius:50%;
+      background:radial-gradient(circle,rgba(86,214,255,.16),transparent 68%);
+      pointer-events:none;
+    }
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
+      color:var(--cyan);margin-bottom:14px;
+    }
+    .eyebrow:before{content:"";width:24px;height:1px;background:currentColor}
+    h1{font-size:clamp(34px,5vw,64px);line-height:1.04;letter-spacing:-.04em;margin:0;max-width:760px}
+    .hero p{max-width:720px;color:var(--muted);font-size:16px;margin:18px 0 0}
+    .hero-stats{
+      display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:28px
+    }
+    .stat{
+      padding:14px 15px;border-radius:15px;background:var(--panel-soft);border:1px solid var(--border)
+    }
+    .stat strong{display:block;font-size:17px}
+    .stat span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+
+    .section{
+      scroll-margin-top:92px;
+      margin:26px 0;
+      padding:28px;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:var(--panel);
+      box-shadow:0 12px 38px rgba(0,0,0,.08);
+    }
+    .section.hidden-by-search{display:none}
+    .section-head{
+      display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:22px
+    }
+    .section-kicker{font-size:12px;font-weight:800;color:var(--cyan);letter-spacing:.12em;text-transform:uppercase}
+    h2{font-size:28px;line-height:1.15;letter-spacing:-.025em;margin:5px 0 4px}
+    h3{font-size:18px;margin:22px 0 9px;letter-spacing:-.01em}
+    h4{font-size:15px;margin:0 0 6px}
+    p{margin:8px 0}
+    .section-desc{color:var(--muted);margin:4px 0 0;font-size:14px}
+    .learn-btn{padding:8px 12px;font-size:12px;white-space:nowrap}
+    .learn-btn.done{
+      color:#062218;background:var(--green);border-color:transparent;font-weight:800
+    }
+
+    .grid{display:grid;gap:14px}
+    .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .card{
+      padding:18px;border-radius:17px;border:1px solid var(--border);background:var(--panel-soft)
+    }
+    .card .tag{
+      display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;
+      color:var(--cyan);text-transform:uppercase;margin-bottom:8px
+    }
+    .card p,.card li{color:var(--muted);font-size:14px}
+    .card ul{margin:7px 0 0;padding-left:19px}
+
+    .callout{
+      margin:16px 0;
+      padding:15px 17px;
+      border-radius:15px;
+      background:linear-gradient(90deg,rgba(86,214,255,.08),rgba(167,139,250,.05));
+      border:1px solid rgba(86,214,255,.2);
+    }
+    .callout strong{color:var(--cyan)}
+    .formula{
+      display:flex;align-items:center;justify-content:center;
+      min-height:76px;padding:14px;margin:12px 0;
+      border:1px solid var(--border);border-radius:15px;
+      background:rgba(5,16,30,.28);
+      font-family:"SFMono-Regular",Consolas,monospace;
+      font-size:clamp(15px,2vw,20px);
+      text-align:center;
+    }
+    html[data-theme="light"] .formula{background:rgba(60,100,140,.045)}
+
+    .layers{
+      display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:stretch
+    }
+    .layers-visual{display:flex;flex-direction:column;justify-content:center;gap:7px}
+    .layer{
+      padding:12px 14px;text-align:center;border-radius:12px;font-size:13px;font-weight:800;
+      border:1px solid var(--border);
+      background:linear-gradient(90deg,rgba(86,214,255,.10),rgba(167,139,250,.06));
+    }
+    .image-card{
+      padding:10px;border-radius:17px;border:1px solid var(--border);background:var(--panel-soft)
+    }
+    .image-card img{display:block;width:100%;height:auto;border-radius:11px}
+    .caption{font-size:12px;color:var(--muted);padding:8px 4px 2px}
+
+    .timeline{position:relative;padding-left:24px;margin-top:8px}
+    .timeline:before{content:"";position:absolute;left:5px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--cyan),var(--purple))}
+    .event{position:relative;padding:0 0 19px 18px}
+    .event:last-child{padding-bottom:0}
+    .event:before{
+      content:"";position:absolute;left:-24px;top:8px;width:10px;height:10px;border-radius:50%;
+      background:var(--cyan);box-shadow:0 0 0 5px rgba(86,214,255,.1)
+    }
+    .event strong{display:block;font-size:15px}
+    .event span{color:var(--muted);font-size:13px}
+
+    .generation{
+      display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:15px 0
+    }
+    .gen{
+      position:relative;overflow:hidden;padding:16px 14px;border:1px solid var(--border);border-radius:15px;background:var(--panel-soft)
+    }
+    .gen b{display:block;font-size:13px;color:var(--cyan);margin-bottom:5px}
+    .gen strong{font-size:15px}
+    .gen small{display:block;color:var(--muted);margin-top:6px;line-height:1.45}
+    .arrow-flow{
+      display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0
+    }
+    .pill{
+      padding:8px 11px;border-radius:999px;background:var(--panel-soft);border:1px solid var(--border);font-size:13px
+    }
+    .arrow{color:var(--cyan);font-weight:900}
+
+    .compare{
+      width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;
+      border:1px solid var(--border);border-radius:15px
+    }
+    .compare th,.compare td{padding:12px 13px;border-bottom:1px solid var(--border);text-align:left;font-size:13px}
+    .compare th{background:var(--panel-soft);color:var(--text)}
+    .compare td{color:var(--muted)}
+    .compare tr:last-child td{border-bottom:0}
+
+    .tool{
+      padding:18px;border-radius:18px;border:1px solid rgba(86,214,255,.2);
+      background:linear-gradient(135deg,rgba(86,214,255,.075),rgba(167,139,250,.05));
+    }
+    .tool-grid{display:grid;grid-template-columns:1fr 180px;gap:10px}
+    .field label{display:block;color:var(--muted);font-size:12px;margin:0 0 6px}
+    .field input,.field select{
+      width:100%;height:44px;padding:0 12px;border-radius:11px;outline:none;
+      border:1px solid var(--border);background:var(--panel);color:var(--text)
+    }
+    .field input:focus,.field select:focus{border-color:rgba(86,214,255,.55)}
+    .convert-results{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:12px}
+    .result{
+      padding:13px;border:1px solid var(--border);border-radius:12px;background:var(--panel-soft);min-width:0
+    }
+    .result span{display:block;font-size:11px;color:var(--muted)}
+    .result code{display:block;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:800}
+    .error{color:var(--red);font-size:12px;margin-top:10px;display:none}
+
+    .practice{
+      display:grid;grid-template-columns:1fr auto;gap:14px;align-items:end
+    }
+    .practice-question{
+      font-family:"SFMono-Regular",Consolas,monospace;
+      font-size:20px;font-weight:800;margin:4px 0 10px
+    }
+    .primary-btn{
+      padding:10px 14px;
+      color:#061522;
+      font-weight:900;
+      background:linear-gradient(135deg,var(--cyan),#9cecff);
+      border-color:transparent;
+    }
+    .ghost-btn{padding:9px 13px}
+    .answer-row{display:flex;gap:8px;margin-top:10px}
+    .answer-row input{
+      flex:1;min-width:0;height:44px;padding:0 12px;border-radius:11px;
+      border:1px solid var(--border);background:var(--panel);color:var(--text);outline:none
+    }
+    .feedback{font-size:13px;margin-top:9px;min-height:23px}
+    .feedback.ok{color:var(--green)}
+    .feedback.bad{color:var(--red)}
+
+    .ch1-quiz{border-color:rgba(86,214,255,.32)}
+    .ch1-quiz [hidden]{display:none!important}
+    .quiz-badge{color:var(--cyan);font-size:12px;border:1px solid var(--border);border-radius:999px;padding:6px 12px;white-space:nowrap}
+    .quiz-status{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+    .quiz-question{font-size:clamp(19px,2.3vw,25px);line-height:1.5;margin:22px 0 18px}
+    .quiz-options{display:grid;gap:10px}
+    .quiz-option{display:flex;gap:12px;align-items:center;width:100%;padding:15px;border:1px solid var(--border);border-radius:14px;background:var(--panel-soft);text-align:left;cursor:pointer;color:var(--text);line-height:1.6}
+    .quiz-option:enabled:hover{border-color:var(--cyan);background:rgba(86,214,255,.09)}
+    .quiz-option:focus-visible,.ch1-quiz button:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+    .quiz-letter{display:grid;place-items:center;width:32px;height:32px;flex:0 0 32px;border:1px solid var(--border);border-radius:9px;font-weight:800;font-family:monospace}
+    .quiz-option:disabled{cursor:default;opacity:1}
+    .quiz-option.correct{border-color:var(--green);background:rgba(94,230,168,.10)}
+    .quiz-option.incorrect{border-color:var(--red);background:rgba(255,125,140,.09)}
+    .quiz-option.correct .quiz-letter{color:var(--green);border-color:var(--green)}
+    .quiz-option.incorrect .quiz-letter{color:var(--red);border-color:var(--red)}
+    .quiz-feedback{margin-top:18px;padding:18px;background:var(--panel-soft);border:1px solid var(--border);border-radius:15px}
+    .quiz-feedback strong{display:block;margin-bottom:8px}
+    .quiz-feedback p,.quiz-feedback li{font-size:14px;color:var(--muted)}
+    .quiz-feedback ul{margin:0;padding-left:20px}
+    .quiz-feedback li+li{margin-top:6px}
+    .quiz-feedback.correct strong{color:var(--green)}
+    .quiz-feedback.incorrect strong{color:var(--red)}
+    .quiz-controls{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;margin-top:20px}
+    .quiz-actions{display:flex;gap:9px;flex-wrap:wrap}
+    .ch1-quiz button:disabled:not(.quiz-option){opacity:.4;cursor:default}
+    .quiz-source{font-size:12px;color:var(--muted);margin-top:14px}
+    .quiz-summary-score{font-size:38px;line-height:1.2;color:var(--cyan);margin:12px 0}
+    .quiz-summary-list{padding-left:20px;color:var(--muted);font-size:14px}
+
+    .study-section [hidden]{display:none!important}
+    .study-section button:focus-visible,.study-path a:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+    .study-path{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0 8px}
+    .study-path a{display:block;padding:9px 13px;border-radius:12px;background:var(--panel-soft);border:1px solid var(--border);font-size:13px;text-decoration:none}
+    .study-path a:hover{color:var(--cyan);border-color:var(--cyan)}
+    .source-note,.example-label{color:var(--muted);font-size:12px}
+    .example-label{color:var(--purple);font-weight:800;letter-spacing:.05em;margin-bottom:8px}
+    .study-section .intro{font-size:15px;line-height:1.9;margin-bottom:18px}
+    .study-section .intro strong{color:var(--cyan)}
+    .study-section .card p+p{margin-top:10px}
+    .study-section .card h4{line-height:1.65}
+    .study-section .compare td{vertical-align:top;line-height:1.8}
+    .study-section .compare caption{text-align:left;font-size:12px;color:var(--muted);padding:0 0 9px}
+    .table-scroll{max-width:100%;overflow-x:auto;border-radius:15px;margin:14px 0}
+    .table-scroll .compare{min-width:560px}
+    .explore-button{display:block;width:100%;text-align:center;cursor:pointer;color:var(--text)}
+    .explore-button[aria-pressed="true"]{border-color:var(--cyan);box-shadow:inset 3px 0 0 var(--cyan);background:rgba(86,214,255,.13)}
+    .explore-panel{padding:22px;border:1px solid var(--border);border-radius:17px;background:var(--panel-soft);min-width:0}
+    .explore-panel h4{font-size:20px;margin:5px 0 12px}
+    .explore-panel p{font-size:14px;line-height:1.9}
+    .lab{margin:22px 0 8px;padding:21px;border-radius:19px;border:1px solid rgba(86,214,255,.22);background:linear-gradient(135deg,rgba(86,214,255,.07),rgba(167,139,250,.04))}
+    .lab-kicker{font-size:11px;font-weight:900;letter-spacing:.12em;color:var(--cyan);margin-bottom:7px}
+    .lab h4{font-size:18px;margin-bottom:10px}
+    .lab .hint{font-size:13px;color:var(--muted);margin:8px 0 15px}
+    .lab-controls{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin:12px 0}
+    .lab-controls button{padding:9px 13px}
+    .lab-controls button[aria-pressed="true"]{color:var(--cyan);border-color:var(--cyan);background:rgba(86,214,255,.1)}
+    .lab button:disabled{cursor:default;opacity:.48}
+    .lab-output{padding:15px;border-radius:13px;background:var(--panel-soft);border:1px solid var(--border);font-size:14px;line-height:1.85;margin:14px 0 0}
+    .lab-output.ok{border-color:var(--green)}
+    .lab-output.bad{border-color:var(--red)}
+    .mini-options{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0}
+    .mini-options button{padding:10px 14px}
+    .mini-options button.correct{border-color:var(--green);background:rgba(94,230,168,.1);opacity:1}
+    .mini-options button.incorrect{border-color:var(--red);background:rgba(255,125,140,.1);opacity:1}
+    .mini-position{font-size:12px;color:var(--muted)}
+    .mini-question{font-size:17px;font-weight:750;line-height:1.7;margin:12px 0}
+    .match-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:14px;margin:17px 0}
+    .match-column{display:grid;gap:8px}
+    .match-column button{padding:13px;text-align:left;border:1px solid var(--border);border-radius:12px;background:var(--panel-soft);color:var(--text);cursor:pointer;font-size:13px;line-height:1.6}
+    .match-column button[aria-pressed="true"]{border-color:var(--cyan);background:rgba(86,214,255,.12)}
+    .match-column button.matched{border-color:var(--green);background:rgba(94,230,168,.08);opacity:.8}
+    .era-buttons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:15px 0}
+    .era-buttons button{padding:12px 8px;border-radius:12px;border:1px solid var(--border);background:var(--panel-soft);color:var(--text);cursor:pointer;font-size:13px;line-height:1.6}
+    .era-buttons button[aria-pressed="true"]{border-color:var(--cyan);background:rgba(86,214,255,.12)}
+    .era-buttons small{display:block;color:var(--muted)}
+    .era-inspector{padding:21px;border:1px solid var(--border);border-radius:17px;background:var(--panel-soft)}
+    .era-inspector .grid{margin-top:15px}
+    .range-label{display:flex;justify-content:space-between;gap:10px;font-size:14px;margin:14px 0 6px}
+    .range-label output{color:var(--cyan);font-weight:800}
+    .study-range{width:100%;accent-color:var(--cyan);margin:12px 0 20px}
+    .number-card strong{display:block;font-size:30px;color:var(--cyan);line-height:1.2;margin:8px 0}
+    .number-card span{font-size:12px;color:var(--muted)}
+    .workers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:17px 0}
+    .worker{padding:15px 10px;text-align:center;border-radius:15px;border:1px solid var(--border);background:var(--panel-soft);min-width:0}
+    .worker small{font-size:11px;color:var(--muted)}
+    .worker .instruction{color:var(--purple);font-size:14px;font-weight:800;margin:10px 0}
+    .worker .input-value,.worker .output-value{display:block;font-size:24px;font-weight:800}
+    .worker .output-value{color:var(--cyan)}
+    .worker .work-arrow{color:var(--muted);font-size:17px;margin:5px 0}
+    .step-track{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0}
+    .step-chip{padding:7px 10px;border:1px solid var(--border);border-radius:10px;font-size:12px;color:var(--muted);background:var(--panel-soft)}
+    .step-chip.active{border-color:var(--cyan);color:var(--text);background:rgba(86,214,255,.1)}
+    .packet-row{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}
+    .packet{display:flex;flex-direction:column;align-items:center;gap:5px;padding:14px 21px;background:var(--panel-soft);border:1px solid var(--border);border-radius:13px;min-width:74px}
+    .packet small{font-size:11px;color:var(--muted)}
+    .packet code{font-size:22px;color:var(--cyan);font-weight:800}
+    .cpu-task-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:15px 0}
+    .cpu-task{padding:16px;border:1px solid var(--border);border-radius:14px;background:var(--panel-soft)}
+    .cpu-task.active{border-color:var(--cyan);background:rgba(86,214,255,.1)}
+    .cpu-task.done{border-color:var(--green)}
+    .cpu-task h4{font-size:14px;margin:0 0 6px}
+    .cpu-task span{color:var(--muted);font-size:12px}
+    .cpu-task .bar{margin-top:10px}
+    .cpu-task .bar i{background:var(--cyan)}
+    .study-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+    .study-actions a{color:var(--cyan);text-decoration:none;font-size:13px;padding:9px 12px;border:1px solid var(--border);border-radius:10px}
+
+    @media (max-width:680px){
+      .lab{padding:17px 13px}
+      .era-buttons,.workers{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .match-grid{gap:8px;grid-template-columns:1fr 1fr}
+      .match-column button{padding:11px 8px;font-size:12px}
+      .cpu-task-grid{grid-template-columns:1fr}
+      .explore-panel{padding:17px}
+    }
+
+    .checklist{display:grid;gap:8px}
+    .check{
+      display:flex;gap:11px;align-items:flex-start;
+      padding:12px;border-radius:13px;border:1px solid var(--border);background:var(--panel-soft);cursor:pointer
+    }
+    .check input{margin-top:5px;accent-color:var(--cyan)}
+    .check strong{font-size:14px}
+    .check span{display:block;color:var(--muted);font-size:12px;margin-top:1px}
+
+    details{
+      border:1px solid var(--border);border-radius:14px;background:var(--panel-soft);margin:9px 0;overflow:hidden
+    }
+    summary{
+      list-style:none;cursor:pointer;padding:13px 15px;font-weight:750;font-size:14px
+    }
+    summary::-webkit-details-marker{display:none}
+    summary:after{content:"＋";float:right;color:var(--cyan)}
+    details[open] summary:after{content:"−"}
+    details .answer{padding:0 15px 14px;color:var(--muted);font-size:13px}
+
+    .study-only [data-practice-only]{display:none!important}
+    .practice-only [data-study-only]{display:none!important}
+    .practice-only .section[data-practice-only]{display:block!important}
+
+    mark{background:rgba(255,209,102,.35);color:inherit;border-radius:3px;padding:0 2px}
+    .no-results{
+      display:none;text-align:center;padding:40px 20px;color:var(--muted)
+    }
+    footer{text-align:center;color:var(--muted);font-size:12px;padding:22px 0 0}
+
+    @media (max-width:980px){
+      .sidebar{transform:translateX(-100%);transition:transform .22s ease}
+      .sidebar.open{transform:translateX(0)}
+      .main{margin-left:0}
+      .menu-btn{display:grid}
+      .content{padding:28px 22px 70px}
+      .hero{padding:30px}
+      .hero-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .generation{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media (max-width:680px){
+      .topbar{padding:12px 14px}
+      .mode-btn{display:none}
+      .keycap{display:none}
+      .search-wrap input{padding-right:12px}
+      .content{padding:20px 14px 62px}
+      .hero{padding:24px;border-radius:22px}
+      h1{font-size:38px}
+      .section{padding:20px 16px}
+      .section-head{display:block}
+      .learn-btn{margin-top:10px}
+      .grid.two,.grid.three,.layers,.tool-grid{grid-template-columns:1fr}
+      .generation{grid-template-columns:1fr}
+      .convert-results{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .practice{grid-template-columns:1fr}
+      .compare{display:block;overflow:auto}
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar" aria-label="章節導覽">
+    <div class="brand">
+      <div class="brand-mark">CS</div>
+      <div>
+        <strong>計算機概論</strong>
+        <small>Ch01–Ch02 Study Lab</small>
+      </div>
+    </div>
+
+    <div class="side-label">Overview</div>
+    <a class="nav-link active" href="#overview"><span class="nav-dot"></span>首頁</a>
+
+    <div class="side-label">Chapter 01</div>
+    <a class="nav-link" href="#ch1-start"><span class="nav-dot"></span>第一章學習路線</a>
+    <a class="nav-link" href="#ch1-system"><span class="nav-dot"></span>Computing System</a>
+    <a class="nav-link" href="#ch1-history"><span class="nav-dot"></span>歷史人物與發展</a>
+    <a class="nav-link" href="#ch1-hardware"><span class="nav-dot"></span>硬體世代</a>
+    <a class="nav-link" href="#ch1-parallel"><span class="nav-dot"></span>Parallel Computing</a>
+    <a class="nav-link" href="#ch1-network"><span class="nav-dot"></span>Networking & Cloud</a>
+    <a class="nav-link" href="#ch1-software"><span class="nav-dot"></span>Software & Time-sharing</a>
+    <a class="nav-link" href="#ch1-discipline"><span class="nav-dot"></span>工具與學科 · 四項能力</a>
+    <a class="nav-link" href="#ch1-test"><span class="nav-dot"></span>第一章選擇題 · 30 題</a>
+
+    <div class="side-label">Chapter 02</div>
+    <a class="nav-link" href="#ch2-number"><span class="nav-dot"></span>進位與位置記數法</a>
+    <a class="nav-link" href="#ch2-conversion"><span class="nav-dot"></span>進位轉換</a>
+    <a class="nav-link" href="#ch2-binary"><span class="nav-dot"></span>Binary Arithmetic</a>
+    <a class="nav-link" href="#ch2-data"><span class="nav-dot"></span>Bit / Byte / Word</a>
+
+    <div class="side-label">Review</div>
+    <a class="nav-link" href="#practice"><span class="nav-dot"></span>互動練習</a>
+    <a class="nav-link" href="#exam"><span class="nav-dot"></span>考前清單</a>
+    <a class="nav-link" href="#quiz"><span class="nav-dot"></span>自我測驗</a>
+
+    <div class="side-progress">
+      <div class="side-progress-row">
+        <strong>學習進度</strong>
+        <span id="progressText">0%</span>
+      </div>
+      <div class="bar"><i id="progressBar"></i></div>
+    </div>
+  </aside>
+
+  <main class="main" id="main">
+    <div class="topbar">
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="開啟章節選單">☰</button>
+      <div class="search-wrap">
+        <span class="search-icon">⌕</span>
+        <input id="searchInput" type="search" placeholder="搜尋：SIMD、Moore's Law、16 進位…" autocomplete="off">
+        <span class="keycap">⌘ K</span>
+      </div>
+      <button class="mode-btn" id="modeBtn" title="切換學習 / 練習模式">學習模式</button>
+      <button class="icon-btn" id="themeBtn" aria-label="切換深色或淺色主題">◐</button>
+    </div>
+
+    <div class="content">
+      <header class="hero" id="overview" data-study-only>
+        <div class="eyebrow">Introduction to Computers</div>
+        <h1>把 Ch01–Ch02<br>變成真的會用的知識</h1>
+        <p>
+          第一章先讀概念，再動手配對、探索分層、執行模擬，最後用選擇題檢查理解。第二章接著學進位換算與二進位運算。
+          每讀完一節就按「標記已學」，進度會自動存在這台電腦。
+        </p>
+        <div class="hero-stats">
+          <div class="stat"><strong>Ch01</strong><span>Computer Science Basics</span></div>
+          <div class="stat"><strong>Ch02</strong><span>Binary Values & Number Systems</span></div>
+          <div class="stat"><strong>7 大主題</strong><span>第一章完整學習路線</span></div>
+          <div class="stat"><strong>Offline</strong><span>可離線直接開啟</span></div>
+        </div>
+      </header>
+
+      <section class="section searchable study-section" id="ch1-start" data-study-only>
+        <div class="section-kicker">Chapter 01 · Learning Path</div>
+        <h2>第一章：先弄懂，再記名詞</h2>
+        <p class="intro">這一章在回答三個問題：<strong>電腦系統由什麼組成？它怎麼一步步發展？計算機科學在研究什麼？</strong>先把英文名詞連到它的工作，再記人物和世代，比只背一串縮寫容易。</p>
+        <div class="study-path">
+          <a href="#ch1-system">01 系統與六層架構</a>
+          <a href="#ch1-history">02 人物與發明</a>
+          <a href="#ch1-hardware">03 硬體四世代</a>
+          <a href="#ch1-parallel">04 平行計算</a>
+          <a href="#ch1-network">05 網路與雲端</a>
+          <a href="#ch1-software">06 軟體五世代</a>
+          <a href="#ch1-discipline">07 工具與學科</a>
+          <a href="#ch1-test">章末 30 題選擇題 →</a>
+        </div>
+        <div class="callout"><strong>每節的讀法：</strong>先讀解釋 → 操作互動區 → 試著用自己的話說一次 → 再標記已學。頁碼對照 ch01.pdf；「理解用例」是為了說明概念而加入的例子。</div>
+        <p class="source-note">來源：ch01.pdf 全 22 頁。硬體／軟體世代的年份依講義分期；軟體和設備名稱保留講義中的例子。</p>
+      </section>
+
+      <section class="section searchable study-section" id="ch1-system" data-study-only data-learn-id="ch1-system">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Chapter 01 · 01 · PDF p.3–5</div>
+            <h2>Computing System：零件怎麼一起完成工作？</h2>
+            <p class="section-desc">先分清硬體與軟體，再用六層架構看它們如何合作。</p>
+          </div>
+          <button class="learn-btn">○ 標記已學</button>
+        </div>
+        <p class="intro">講義把 computing system 定義成一個 <strong>dynamic entity（動態實體）</strong>：它接收環境中的資訊、處理問題，並與環境互動。例如你按下鍵盤，系統處理輸入，畫面顯示文字；這一連串行為就是系統正在運作。</p>
+        <div class="grid two">
+          <div class="card">
+            <span class="tag">Hardware · 實體元件</span>
+            <h4>電腦「用什麼」執行工作</h4>
+            <p>Hardware 是實體元件。講義例子有 printer（印表機）、circuit boards（電路板）、wires（線路）、keyboard（鍵盤）。它們能接收、傳送或處理實際的訊號。</p>
+            <p><strong>辨認方法：</strong>看這個名詞指的是設備或元件，還是提供指令的程式。</p>
+          </div>
+          <div class="card">
+            <span class="tag">Software · 程式與指令</span>
+            <h4>電腦「按照什麼規則」工作</h4>
+            <p>Software 是提供 instructions（指令）的 programs（程式）。例如「把輸入的文字顯示出來」這個行為，需要軟體告訴硬體要怎麼做。</p>
+            <p><strong>理解用例：</strong>手機的螢幕是硬體；執行中的聊天程式是軟體。作業系統也是軟體。</p>
+          </div>
+        </div>
+        <div class="callout"><strong>兩者的關係：</strong>軟體提供做事的規則，硬體執行這些規則。辨認時看名詞的角色：下載的程式屬於軟體，承載它的儲存設備屬於硬體。</div>
+        <div class="lab" data-mini="hardware">
+          <div class="lab-kicker">TRY IT · 硬體還是軟體？</div>
+          <h4>先分對角色</h4>
+          <p class="hint">選一個答案，看原因，再換下一個例子。</p>
+          <div data-mini-mount></div>
+        </div>
+
+        <h3>六層架構：點一層，看它負責什麼</h3>
+        <p>講義第 5 頁的圖，由內到外是 <strong>Information → Hardware → Programming → Operating systems → Applications → Communications</strong>。最內層關心資訊，外側逐步加入操作資訊的設備、程式、管理、應用與通訊。</p>
+        <div class="layers" style="margin-top:16px">
+          <div class="layers-visual" role="group" aria-label="探索電腦系統六層，由外到內排列">
+            <button class="layer explore-button" type="button" data-layer="communications" aria-pressed="false">外層 · Communications（通訊）</button>
+            <button class="layer explore-button" type="button" data-layer="applications" aria-pressed="false">Applications（應用程式）</button>
+            <button class="layer explore-button" type="button" data-layer="os" aria-pressed="false">Operating systems（作業系統）</button>
+            <button class="layer explore-button" type="button" data-layer="programming" aria-pressed="false">Programming（程式設計）</button>
+            <button class="layer explore-button" type="button" data-layer="hardware" aria-pressed="false">Hardware（硬體）</button>
+            <button class="layer explore-button" type="button" data-layer="information" aria-pressed="true">內層 · Information（資訊）</button>
+          </div>
+          <div class="explore-panel" id="layerDetail" aria-live="polite">
+            <span class="tag" id="layerLevel"></span>
+            <h4 id="layerName"></h4>
+            <p id="layerMeaning"></p>
+            <div class="example-label">理解用例 · 傳送一則訊息</div>
+            <p id="layerExample"></p>
+            <p class="source-note" id="layerReminder"></p>
+          </div>
+        </div>
+        <details>
+          <summary>對照講義原本的六層圖</summary>
+          <div class="answer"><img src="ch01_p05.png" alt="講義第5頁：由內至外為 Information、Hardware、Programming、Operating systems、Applications、Communications" style="display:block;width:100%;max-width:800px;height:auto;border-radius:12px"></div>
+        </details>
+        <div class="study-actions"><a href="#ch1-history">下一節：人物與發明 →</a></div>
+      </section>
+
+      <section class="section searchable study-section" id="ch1-history" data-study-only data-learn-id="ch1-history">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Chapter 01 · 02 · PDF p.7–8</div>
+            <h2>歷史：從記錄數值，到描述計算步驟</h2>
+            <p class="section-desc">把每個人物連到一項貢獻，再理解這項貢獻讓什麼變得可能。</p>
+          </div>
+          <button class="learn-btn">○ 標記已學</button>
+        </div>
+        <p class="intro">這段歷史可以沿著一條線理解：<strong>記錄數值 → 機械運算 → 用編碼控制動作 → 設計計算機 → 撰寫計算步驟 → 研究計算的理論</strong>。這樣遇到人物配對題，就能從他的工作找答案。</p>
+        <div class="timeline">
+          <div class="event"><strong>Abacus（算盤）→ 記錄數值</strong><span>講義將算盤列為早期記錄 numeric values 的裝置。重點是用可操作的形式表示數值。</span></div>
+          <div class="event"><strong>Blaise Pascal → 機械式加減</strong><span>早期機械裝置能做 addition、subtraction；講義接著指出後來的裝置擴展到乘法與除法。看到 Pascal，要想到 mechanical calculation。</span></div>
+          <div class="event"><strong>Joseph Jacquard → 織布機與 Punched card</strong><span>打孔卡用來控制織布機。理解重點：把要做的動作編成可讀取的形式，機器就能照編碼操作。</span></div>
+          <div class="event"><strong>Charles Babbage → Analytical Engine（分析引擎）</strong><span>講義將分析引擎與 Babbage 配對。記住他主要對應的是計算機的設計。</span></div>
+          <div class="event"><strong>Ada Lovelace → First programmer／Loop</strong><span>講義稱她為第一位程式設計師，並列出迴圈概念。Loop 是讓相同的一組步驟重複執行，重點在描述「怎麼算」。</span></div>
+          <div class="event"><strong>Alan Turing → Turing machine（圖靈機）</strong><span>講義強調圖靈機奠定計算理論的重要基礎。看到 Turing，要想到對計算本身的理論研究。</span></div>
+        </div>
+        <div class="grid two" style="margin-top:20px">
+          <div class="card"><h4>容易混淆：Babbage vs Ada</h4><p><strong>Babbage＝機器設計；Ada＝程式與迴圈。</strong>兩人都與分析引擎的脈絡有關，但配對時要看題目在問機器，還是程式設計。</p></div>
+          <div class="card"><h4>早期電腦名稱</h4><p><strong>Harvard Mark I、ENIAC、UNIVAC I</strong> 都是講義列出的早期電腦。講義指出它們開啟數學、物理、工程與經濟等領域的新應用。</p><p>Fortran／COBOL／Lisp 是語言；Mosaic／Netscape 是瀏覽器。先判斷名稱是哪一類，選項就容易排除。</p></div>
+        </div>
+        <div class="callout"><strong>配對口訣：</strong>算盤＝數值；Pascal＝加減；Jacquard＝打孔卡；Babbage＝分析引擎；Ada＝程式／迴圈；Turing＝圖靈機。</div>
+        <div class="lab" id="historyMatch">
+          <div class="lab-kicker">TRY IT · 人物與貢獻配對</div>
+          <h4>先點左邊，再點右邊的貢獻</h4>
+          <p class="hint">完成一組就會鎖定；配錯時會解釋那項貢獻對應誰。</p>
+          <div class="match-grid">
+            <div class="match-column" id="historyPeople" role="group" aria-label="選擇人物或裝置"></div>
+            <div class="match-column" id="historyContributions" role="group" aria-label="選擇對應貢獻"></div>
+          </div>
+          <div class="lab-output" id="historyMatchFeedback" role="status" aria-live="polite"></div>
+          <div class="lab-controls"><button class="ghost-btn" id="historyMatchReset" type="button">重新配對</button><span class="mini-position" id="historyMatchScore"></span></div>
+        </div>
+        <div class="study-actions"><a href="#ch1-hardware">下一節：硬體四世代 →</a></div>
+      </section>
+
+      <section class="section searchable study-section" id="ch1-hardware" data-study-only data-learn-id="ch1-hardware">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Chapter 01 · 03 · PDF p.9–12</div>
+            <h2>硬體四世代：元件、記憶體、儲存一起看</h2>
+            <p class="section-desc">先記代表元件，再補上每一代解決了前一代的什麼問題。</p>
+          </div>
+          <button class="learn-btn">○ 標記已學</button>
+        </div>
+        <p class="intro">四世代主線是 <strong>Vacuum Tube → Transistor → IC → LSI／VLSI</strong>。這在描述硬體元件與整合程度的演進；磁鼓、磁芯、磁帶、磁碟則是另一組與記憶及儲存有關的名詞，兩組要分開辨認。</p>
+        <div class="era-buttons" role="group" aria-label="選擇硬體世代">
+          <button type="button" data-era="0" aria-pressed="true">第一代<small>1951–1959 · 真空管</small></button>
+          <button type="button" data-era="1" aria-pressed="false">第二代<small>1959–1965 · 電晶體</small></button>
+          <button type="button" data-era="2" aria-pressed="false">第三代<small>1965–1971 · IC</small></button>
+          <button type="button" data-era="3" aria-pressed="false">第四代<small>1971 起 · LSI／VLSI</small></button>
+        </div>
+        <div class="era-inspector" id="eraInspector" aria-live="polite">
+          <div class="section-kicker" id="eraYears"></div>
+          <h3 id="eraTitle" style="margin-top:8px"></h3>
+          <p id="eraSummary"></p>
+          <div class="grid three">
+            <div class="card"><h4>代表元件</h4><p id="eraComponent"></p></div>
+            <div class="card"><h4>記憶體／儲存與設備</h4><p id="eraDevices"></p></div>
+            <div class="card"><h4>這一代記住什麼？</h4><p id="eraKey"></p></div>
+          </div>
+        </div>
+        <h3>完整比較表</h3>
+        <div class="table-scroll">
+          <table class="compare">
+            <caption>硬體世代與年份依講義分期。</caption>
+            <thead><tr><th>世代</th><th>代表元件與改進</th><th>其他講義重點</th></tr></thead>
+            <tbody>
+              <tr><td>第一代<br>1951–1959</td><td>Vacuum Tube（真空管）<br>體積大、可靠度較低、發熱多</td><td>Magnetic Drum（磁鼓）作為記憶體；Card Readers → Magnetic Tape Drives；輔助儲存採循序存取。</td></tr>
+              <tr><td>第二代<br>1959–1965</td><td>Transistor（電晶體）取代真空管<br>快、小、耐用、便宜</td><td>Magnetic Cores（磁芯）取代磁鼓；Magnetic Disks（磁碟）取代磁帶，可直接存取。</td></tr>
+              <tr><td>第三代<br>1965–1971</td><td>Integrated Circuits（IC）<br>把原本分散在電路板上的電路整合進晶片；更小、便宜、快、可靠</td><td>電晶體也用於記憶體；Terminal（終端機）帶有鍵盤和螢幕；講義介紹早期 Moore’s Law。</td></tr>
+              <tr><td>第四代<br>1971 起</td><td>LSI／VLSI（大型／超大型積體電路）<br>晶片整合技術進步</td><td>PC、Workstations、CISC／RISC、可攜式電腦；講義列 IBM、HP、Apple、Sun；修訂版 Moore’s Law。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="grid two">
+          <div class="card"><h4>Sequential vs Direct access</h4><p><strong>Sequential（循序）</strong>像從前面依序讀資料；<strong>Direct（直接）</strong>能定位要取出的資料。講義用磁帶與磁碟來比較兩者。</p><p class="example-label">理解用例</p><p>像要找第六筆紀錄：循序方式一路讀過前面的紀錄；直接方式可指定要找的紀錄。這個比喻用來理解「存取方式」。</p></div>
+          <div class="card"><h4>CISC vs RISC</h4><p><strong>CISC＝Complex-instruction-set computer（複雜指令集）。RISC＝Reduced-instruction-set computer（精簡指令集）。</strong></p><p>先抓 Complex／Reduced 這兩個英文詞。它們是在分指令集設計；看到名詞，先回答它代表哪種設計。</p><p>Portable computer 的講義例子有 notebook、laptop、tablet computer、smart phone。</p></div>
+        </div>
+        <h3>Moore’s Law：注意講義有兩個版本</h3>
+        <div class="grid two">
+          <div class="card"><span class="tag">PDF p.11 · Early version</span><h4>早期版本：每年加倍</h4><p>講義第 11 頁描述：單一 IC 可容納的電路數量，每年加倍。</p></div>
+          <div class="card"><span class="tag">PDF p.12 · Revised version</span><h4>修訂版：每 18 個月加倍</h4><p>第 12 頁改以晶片密度描述，約每 18 個月加倍；同價可取得約兩倍能力，或同樣能力的成本約減半。</p></div>
+        </div>
+        <div class="lab">
+          <div class="lab-kicker">TRY IT · 倍增模型</div>
+          <h4>拉動時間，看看「加倍」如何累積</h4>
+          <p class="hint">依講義第 12 頁的 18 個月模型試算，起點設為 1 倍；下列數字為理解用的相對值。</p>
+          <div class="range-label"><label for="mooreMonths">經過時間</label><output id="mooreTime" for="mooreMonths">18 個月</output></div>
+          <input class="study-range" id="mooreMonths" type="range" min="0" max="72" step="18" value="18">
+          <div class="grid three">
+            <div class="card number-card"><h4>相對晶片密度</h4><strong id="mooreDensity">2 倍</strong><span>每 18 個月 × 2</span></div>
+            <div class="card number-card"><h4>固定價格下的能力</h4><strong id="moorePower">2 倍</strong><span>依講義的倍增假設</span></div>
+            <div class="card number-card"><h4>固定能力下的成本</h4><strong id="mooreCost">50%</strong><span>相對於起點成本</span></div>
+          </div>
+          <div class="lab-output" id="mooreExplanation" aria-live="polite"></div>
+        </div>
+        <div class="lab" data-mini="generations"><div class="lab-kicker">TRY IT · 世代辨認</div><h4>把元件與記憶體分清楚</h4><div data-mini-mount></div></div>
+        <div class="study-actions"><a href="#ch1-parallel">下一節：平行計算 →</a></div>
+      </section>
+
+      <section class="section searchable study-section" id="ch1-parallel" data-study-only data-learn-id="ch1-parallel">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Chapter 01 · 04 · PDF p.13</div>
+            <h2>Parallel Computing：分工的是指令，還是資料？</h2>
+            <p class="section-desc">把縮寫拆成 Instruction 與 Data，再看實際的分工。</p>
+          </div>
+          <button class="learn-btn">○ 標記已學</button>
+        </div>
+        <p class="intro">講義的平行計算是利用<strong>相互連接的處理單元或記憶單元</strong>增加處理速度。理解 SIMD／MIMD 時，先問兩件事：「大家收到同一種指令嗎？」以及「大家處理的是多份資料嗎？」</p>
+        <div class="grid two">
+          <div class="card"><span class="tag">SIMD</span><h4>Single Instruction, Multiple Data Stream</h4><p><strong>SI＝單一指令；MD＝多筆資料。</strong>多個處理單元使用相同指令，分別作用在不同資料上。</p><p class="example-label">理解用例</p><p>四個人分別拿到 2、4、6、8；所有人都接到「加 1」的指令。工作相同，資料不同。</p></div>
+          <div class="card"><span class="tag">MIMD</span><h4>Multiple Instruction, Multiple Data Stream</h4><p><strong>MI＝多種指令；MD＝多筆資料。</strong>不同處理單元可以執行不同指令，處理不同資料。</p><p class="example-label">理解用例</p><p>四個人分別接到「加 1、乘 2、減 1、平方」的工作；各自處理自己的資料。</p></div>
+        </div>
+        <div class="callout"><strong>縮寫讀法：</strong>先看前半段 SI／MI，決定指令是同一種還是多種。兩者的 MD 都表示 Multiple Data；差異就在 Instruction。</div>
+        <div class="lab">
+          <div class="lab-kicker">TRY IT · 讓四個處理單元執行一次</div>
+          <h4>切換架構，觀察每個單元收到的指令</h4>
+          <div class="lab-controls" role="group" aria-label="選擇平行架構">
+            <button class="ghost-btn" type="button" data-parallel="simd" aria-pressed="true">SIMD · 全部加 1</button>
+            <button class="ghost-btn" type="button" data-parallel="mimd" aria-pressed="false">MIMD · 各做不同運算</button>
+          </div>
+          <div class="workers" id="parallelWorkers"></div>
+          <div class="lab-controls"><button class="primary-btn" id="parallelRun" type="button">執行一次</button><button class="ghost-btn" id="parallelReset" type="button">清除結果</button></div>
+          <div class="lab-output" id="parallelFeedback" role="status" aria-live="polite"></div>
+          <p class="source-note">理解示意：使用四組小數字觀察指令與資料的差異。</p>
+        </div>
+        <div class="lab" data-mini="parallel"><div class="lab-kicker">TRY IT · 換個情境還認得出來嗎？</div><h4>選 SIMD 或 MIMD</h4><div data-mini-mount></div></div>
+        <div class="study-actions"><a href="#ch1-network">下一節：網路與雲端 →</a></div>
+      </section>
+
+      <section class="section searchable study-section" id="ch1-network" data-study-only data-learn-id="ch1-network">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Chapter 01 · 05 · PDF p.14</div>
+            <h2>Networking：讓電腦共享資源</h2>
+            <p class="section-desc">從電腦之間的連線，到 Internet 上的資源與雲端運算。</p>
+          </div>
+          <button class="learn-btn">○ 標記已學</button>
+        </div>
+        <p class="intro">網路讓電腦可以<strong>交換資料、共享設備或服務</strong>。講義先用 Ethernet 連接小型電腦共享資源，再列出 file server、LAN、ARPANET、Internet、封包交換、TCP/IP，最後介紹雲端運算。</p>
+        <div class="table-scroll">
+          <table class="compare">
+            <thead><tr><th>名詞</th><th>核心意思</th><th>理解用例／辨認重點</th></tr></thead>
+            <tbody>
+              <tr><td>Ethernet<br>乙太網路</td><td>連接電腦，讓資源可以共享。</td><td>教室中的多台電腦透過網路連線共享資源。</td></tr>
+              <tr><td>File server<br>檔案伺服器</td><td>提供其他電腦存取檔案的服務。</td><td>講義列出 1980 年代末以 file server 連接 PCs 的發展。</td></tr>
+              <tr><td>LAN<br>Local Area Network</td><td>區域網路，涵蓋一個較小的本地範圍。</td><td>同一個教室、辦公室或建築物裡的網路。</td></tr>
+              <tr><td>ARPANET／Internet</td><td>講義列出的網路發展名稱；Internet 把不同網路互連起來。</td><td>先分清網路名稱與軟體名稱，遇到選項再判斷它的角色。</td></tr>
+              <tr><td>Packet switching<br>封包交換</td><td>將要傳遞的資料分成封包，透過網路傳送。</td><td>像把長訊息拆成幾個帶有識別資訊的小包，再由接收端整理。</td></tr>
+              <tr><td>TCP/IP</td><td>Transmission Control Protocol／Internet Protocol。</td><td>TCP 側重有序、可靠的傳送；IP 處理定址與網路間的傳遞。</td></tr>
+              <tr><td>Cloud Computing<br>雲端運算</td><td>使用 Internet 中的電腦資源。</td><td>透過網路使用遠端的計算或儲存服務。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="grid two">
+          <div class="card"><h4>Internet 與 World Wide Web 的關係</h4><p>Internet 是互連的網路；World Wide Web（WWW）是透過 Internet 使用的網頁服務。講義第 20 頁將 WWW 和 browser 放在第五代軟體的脈絡中。</p><p>先想「網路基礎」和「在網路上使用的應用」，比較容易理解兩者的關係。</p></div>
+          <div class="card"><h4>Cloud 的關鍵：資源在哪裡？</h4><p>本機計算使用你所在裝置的資源；雲端運算透過 Internet 使用遠端資源。</p><p class="example-label">理解用例</p><p>同樣是處理資料，可以由自己電腦的 CPU 執行，也可以交給遠端服務執行，再透過網路取回結果。</p></div>
+        </div>
+        <div class="lab">
+          <div class="lab-kicker">TRY IT · 資料如何分塊與重組</div>
+          <h4>跟著 HELLO 走一遍</h4>
+          <p class="hint">按「下一步」，觀察分塊、順序標記、抵達順序與接收端重組。</p>
+          <div class="step-track" id="packetStages" aria-label="傳輸示意步驟"></div>
+          <h4 id="packetTitle"></h4>
+          <div class="packet-row" id="packetVisual"></div>
+          <div class="lab-output" id="packetExplanation" role="status" aria-live="polite"></div>
+          <div class="lab-controls"><button class="primary-btn" id="packetNext" type="button">下一步 →</button><button class="ghost-btn" id="packetReset" type="button">從頭看一次</button></div>
+          <p class="source-note">理解示意：用三段資料展示封包傳輸與有序重組的概念。</p>
+        </div>
+        <div class="lab" data-mini="network"><div class="lab-kicker">TRY IT · 網路名詞辨認</div><h4>從用途判斷名詞</h4><div data-mini-mount></div></div>
+        <div class="study-actions"><a href="#ch1-software">下一節：軟體五世代 →</a></div>
+      </section>
+
+      <section class="section searchable study-section" id="ch1-software" data-study-only data-learn-id="ch1-software">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Chapter 01 · 06 · PDF p.15–20</div>
+            <h2>軟體五世代：從指令到應用與系統管理</h2>
+            <p class="section-desc">軟體世代看語言、管理方式與應用的發展；先分清各工具在做哪一件事。</p>
+          </div>
+          <button class="learn-btn">○ 標記已學</button>
+        </div>
+        <p class="intro">早期程式直接用 0、1 表示指令，後來改用助記碼與較接近英文的高階語言；系統軟體再負責連結、載入、排程，讓應用程式更容易被使用。<strong>語言的表示方式、程式翻譯、系統管理</strong>是三個不同的角色。</p>
+        <div class="table-scroll">
+          <table class="compare">
+            <caption>軟體世代依講義分期；下列軟體名稱是講義的歷史例子。</caption>
+            <thead><tr><th>世代</th><th>核心發展</th><th>講義例子／工具</th></tr></thead>
+            <tbody>
+              <tr><td>第一代<br>1951–1959</td><td>Machine Language：二進位 0、1。<br>Assembly Language：用 mnemonic codes 表示機器指令。</td><td>Assembler 將組合語言翻成機器語言。</td></tr>
+              <tr><td>第二代<br>1959–1965</td><td>High-Level Languages：敘述較接近英文。<br>需要翻成機器指令才能執行。</td><td>Fortran、COBOL、Lisp；Compiler（編譯器）。</td></tr>
+              <tr><td>第三代<br>1965–1971</td><td>Systems Software、Utility programs、Operating system；管理電腦資源與工作執行。<br>Time-sharing 讓多位使用者共享一台電腦。</td><td>Loaders、Linkers、Language translators；OS 組織、排程不同的 jobs。</td></tr>
+              <tr><td>第四代<br>1971–1989</td><td>Structured Programming：有邏輯、有組織的程式設計。<br>作業系統與應用軟體普及。</td><td>Pascal、BASIC、C、C++；PC-DOS、MS-DOS、Macintosh；Lotus 1-2-3、WordPerfect、dBase。</td></tr>
+              <tr><td>第五代<br>1990 起（講義分期）</td><td>Object-Oriented Design、World Wide Web、Embedded System。</td><td>Windows／Microsoft 應用；C++、Java；Mosaic、Netscape、IE、Firefox 等瀏覽器。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Machine Language → Assembly → High-Level Language</h3>
+        <div class="grid three">
+          <div class="card"><h4>機器語言</h4><p>直接用 binary（1s and 0s）表示指令。早期程式設計師必須記住不同位元組合代表的操作。</p></div>
+          <div class="card"><h4>組合語言</h4><p>用 mnemonic codes（助記碼）代表機器指令，較容易辨認操作；再由 Assembler 翻譯。</p></div>
+          <div class="card"><h4>高階語言</h4><p>用較接近英文或人類想法的敘述寫程式；依講義，由 Compiler 翻成機器指令。</p></div>
+        </div>
+        <div class="callout"><strong>避免混淆：</strong>Assembler／Compiler 負責翻譯；Linker 負責連結；Loader 負責載入；OS 負責管理資源與安排工作。看到題目先辨認動詞。</div>
+        <div class="table-scroll">
+          <table class="compare">
+            <thead><tr><th>工具</th><th>做什麼</th><th>記憶方式</th></tr></thead>
+            <tbody>
+              <tr><td>Assembler<br>組譯器</td><td>組合語言 → 機器語言。</td><td>Assembly 配 Assembler。</td></tr>
+              <tr><td>Compiler<br>編譯器</td><td>高階語言 → 機器可執行的指令（依講義）。</td><td>看到 High-Level Language 想 Compiler。</td></tr>
+              <tr><td>Linker<br>連結器</td><td>將大型程式的各片段連結起來。</td><td>Link＝連結片段。</td></tr>
+              <tr><td>Loader<br>載入器</td><td>將程式載入記憶體。</td><td>Load＝載入 Memory。</td></tr>
+              <tr><td>Operating System<br>作業系統</td><td>決定程式何時執行，控制與分配資源。</td><td>管理／排程。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lab">
+          <div class="lab-kicker">TRY IT · 程式執行路線</div>
+          <h4>從你寫的程式，到電腦執行</h4>
+          <p class="hint">選起點，再按下一步。用一條簡化的路線辨認翻譯、連結、載入與排程各負責什麼。</p>
+          <div class="lab-controls" role="group" aria-label="選擇程式的起始語言">
+            <button class="ghost-btn" type="button" data-pipeline="high" aria-pressed="true">從高階語言開始</button>
+            <button class="ghost-btn" type="button" data-pipeline="assembly" aria-pressed="false">從組合語言開始</button>
+          </div>
+          <div class="step-track" id="pipelineStages"></div>
+          <h4 id="pipelineTitle"></h4>
+          <div class="lab-output" id="pipelineExplanation" role="status" aria-live="polite"></div>
+          <div class="lab-controls"><button class="primary-btn" id="pipelineNext" type="button">下一步 →</button><button class="ghost-btn" id="pipelineReset" type="button">從頭看一次</button></div>
+        </div>
+        <h3>Time-sharing：多位使用者如何共享一台電腦？</h3>
+        <p>講義描述多位使用者各用一台 terminal（終端機），與同一台電腦互動；OS 會組織並排程不同的 jobs。<strong>重點在 CPU 的時間如何被安排</strong>。它和前面 SIMD／MIMD 討論多個處理單元的分工，是不同的切入點。</p>
+        <div class="lab">
+          <div class="lab-kicker">TRY IT · 分時排程</div>
+          <h4>一個 CPU，輪流處理三位使用者的工作</h4>
+          <p class="hint">理解示意：此例採輪流分配時間片，每項工作需要 3 片時間。按一下，就看 OS 下一次把 CPU 分給誰。</p>
+          <div class="cpu-task-grid" id="timeTasks"></div>
+          <div class="lab-controls"><button class="primary-btn" id="timeNext" type="button">下一個時間片 →</button><button class="ghost-btn" id="timeReset" type="button">重設</button></div>
+          <div class="lab-output" id="timeExplanation" role="status" aria-live="polite"></div>
+        </div>
+        <h3>第四、第五代：看懂這些應用名詞</h3>
+        <div class="grid two">
+          <div class="card"><h4>Structured Programming（結構化程式設計）</h4><p>講義強調 logical and disciplined：用有邏輯、有組織的方式寫程式。語言例子包含 Pascal、BASIC、C、C++。</p><p>這裡的 <strong>Pascal 是語言名稱</strong>；前面 Blaise Pascal 是歷史人物。看題目的脈絡再判斷。</p></div>
+          <div class="card"><h4>Application Software（應用軟體）</h4><p><strong>Spreadsheets</strong>：試算表，例 Lotus 1-2-3。<strong>Word processors</strong>：文書處理，例 WordPerfect。<strong>Database management systems</strong>：資料庫管理，例 dBase。</p><p>它們提供使用者完成具體任務的功能。</p></div>
+          <div class="card"><h4>Object-Oriented Design（物件導向設計）</h4><p>講義以資料物件的階層來描述設計，並列 C++、Java 為例。理解時，可以想成將相關資料與行為組織在物件中。</p><p>C++ 在講義第四、第五代都出現；辨認世代時，看主題是在說結構化程式設計，還是物件導向。</p></div>
+          <div class="card"><h4>WWW 與 Embedded System</h4><p><strong>WWW</strong> 透過 Internet 支援全球溝通，Browser 的講義例子有 Mosaic、Netscape、IE、Firefox。</p><p><strong>Embedded System（嵌入式系統）</strong>把晶片整合到設備中，執行或控制功能。理解用例：設備內的控制晶片依設定調節運作。</p></div>
+        </div>
+        <div class="lab" data-mini="software"><div class="lab-kicker">TRY IT · 先看工作動詞</div><h4>翻譯、連結、載入，分得清楚嗎？</h4><div data-mini-mount></div></div>
+        <div class="study-actions"><a href="#ch1-discipline">下一節：工具與學科 →</a></div>
+      </section>
+
+      <section class="section searchable study-section" id="ch1-discipline" data-study-only data-learn-id="ch1-discipline">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Chapter 01 · 07 · PDF p.22</div>
+            <h2>Computer as a Tool and a Discipline</h2>
+            <p class="section-desc">把「使用電腦做事」與「研究如何有效率地自動化」連起來。</p>
+          </div>
+          <button class="learn-btn">○ 標記已學</button>
+        </div>
+        <p class="intro">電腦可以是<strong>工具</strong>，幫其他領域解決問題；計算機科學也是一個<strong>學科</strong>，研究如何表示問題、設計步驟、寫成程式，並有效率地自動化。講義最後的根本問題是：<strong>What can be efficiently automated?</strong></p>
+        <div class="grid two">
+          <div class="card"><span class="tag">Algorithmic thinking</span><h4>演算思考：把問題拆成可執行步驟</h4><p>先想清楚輸入、要做哪些操作、完成條件和輸出。</p><p class="example-label">理解用例 · 計算平均成績</p><p>逐筆取出成績 → 相加 → 除以人數 → 得到平均。這是在設計解題步驟。</p></div>
+          <div class="card"><span class="tag">Representation</span><h4>表示：資料要用什麼形式存放？</h4><p>選擇能清楚表達問題與資料的形式。</p><p class="example-label">理解用例 · 同一個成績問題</p><p>把學生名字與成績整理成表格，或將成績放成一串數值。這是在決定資料如何表示。</p></div>
+          <div class="card"><span class="tag">Programming</span><h4>程式設計：讓電腦照步驟執行</h4><p>把想好的計算步驟，用程式語言表達。</p><p class="example-label">理解用例</p><p>寫迴圈逐筆加總，最後計算平均並顯示結果。這是在實作演算法。</p></div>
+          <div class="card"><span class="tag">Design</span><h4>設計：規劃整體如何合作</h4><p>安排系統的流程、功能與各部分的關係，讓使用者能完成目標。</p><p class="example-label">理解用例</p><p>規劃成績輸入、資料檢查、平均計算與結果呈現的完整流程。</p></div>
+        </div>
+        <div class="callout"><strong>串起四項能力：</strong>思考步驟 → 選擇表示方式 → 用程式實作 → 規劃整體設計。實際做事時會一起使用；練習題先辨認情境主要強調哪個角色。</div>
+        <div class="lab" data-mini="skills"><div class="lab-kicker">TRY IT · 把能力連到實際行為</div><h4>這個動作主要在做什麼？</h4><div data-mini-mount></div></div>
+        <div class="study-actions"><a href="#ch1-test">讀完了，開始 30 題選擇題 →</a><a href="#ch1-start">回到第一章學習路線</a></div>
+      </section>
+
+      <section class="section searchable ch1-quiz" id="ch1-test" aria-labelledby="ch1TestTitle">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Chapter 01 · Quiz</div>
+            <h2 id="ch1TestTitle">第一章選擇題</h2>
+            <p class="section-desc">直接點 A／B／C／D。答完看解析，再按「下一題」。題目依第一章講義整理。</p>
+          </div>
+          <span class="quiz-badge" id="ch1QuizScope">全部 30 題</span>
+        </div>
+        <div class="quiz-status">
+          <span id="ch1QuizPosition"></span>
+          <span id="ch1QuizScore"></span>
+        </div>
+        <div class="bar" aria-label="作答進度"><i id="ch1QuizProgress"></i></div>
+        <div id="ch1QuizCard">
+          <h3 class="quiz-question" id="ch1QuizQuestion" tabindex="-1"></h3>
+          <div class="quiz-options" id="ch1QuizOptions" role="group" aria-labelledby="ch1QuizQuestion"></div>
+          <div class="quiz-feedback" id="ch1QuizFeedback" role="status" aria-live="polite" hidden></div>
+          <p class="quiz-source" id="ch1QuizSource"></p>
+          <div class="quiz-controls">
+            <button class="ghost-btn" id="ch1QuizPrev" type="button">上一題</button>
+            <button class="primary-btn" id="ch1QuizNext" type="button" disabled>下一題 →</button>
+          </div>
+        </div>
+        <div id="ch1QuizSummary" hidden>
+          <h3 id="ch1QuizSummaryTitle" tabindex="-1">這輪完成</h3>
+          <p class="quiz-summary-score" id="ch1QuizSummaryScore"></p>
+          <p id="ch1QuizSummaryText"></p>
+          <ul class="quiz-summary-list" id="ch1QuizWeakTopics"></ul>
+        </div>
+        <div class="quiz-controls">
+          <span class="quiz-source">可按 A／B／C／D 作答，Enter 進下一題。進度自動保存。</span>
+          <div class="quiz-actions">
+            <button class="ghost-btn" id="ch1QuizRetry" type="button" disabled>只重練錯題</button>
+            <button class="ghost-btn" id="ch1QuizRestart" type="button">完整重練</button>
+          </div>
+        </div>
+        <noscript>請啟用瀏覽器的 JavaScript，才能點選答案並查看解析。</noscript>
+      </section>
+
+      <section class="section searchable" id="ch2-number" data-study-only data-learn-id="ch2-number">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Chapter 02 · 01</div>
+            <h2>Number Systems & Positional Notation</h2>
+            <p class="section-desc">進位真正的核心只有一件事：每個位置都有不同的 base 次方權重。</p>
+          </div>
+          <button class="learn-btn">○ 標記已學</button>
+        </div>
+
+        <div class="grid two">
+          <div class="card">
+            <span class="tag">Common Bases</span>
+            <h4>常見進位</h4>
+            <ul>
+              <li>Binary：base 2 → 0, 1</li>
+              <li>Octal：base 8 → 0–7</li>
+              <li>Decimal：base 10 → 0–9</li>
+              <li>Hexadecimal：base 16 → 0–9, A–F</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="tag">Number Sets</span>
+            <h4>數字集合</h4>
+            <ul>
+              <li>Natural numbers（自然數，N）</li>
+              <li>Negative numbers（負數）</li>
+              <li>Integers（整數，Z）</li>
+              <li>Rational numbers（有理數，Q）</li>
+              <li>Real numbers（實數，R）</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Base（基底）是什麼？</h3>
+        <div class="callout">
+          <strong>Base 決定一個進位系統有多少個可用的 digit。</strong>
+          Base 10 有 10 個 digit：0–9；Base 2 只有 2 個 digit：0、1。
+        </div>
+
+        <h3>0–15 四種進位對照</h3>
+        <table class="compare">
+          <thead><tr><th>Decimal</th><th>Binary</th><th>Octal</th><th>Hex</th></tr></thead>
+          <tbody>
+            <tr><td>0</td><td>0000</td><td>00</td><td>0</td></tr>
+            <tr><td>1</td><td>0001</td><td>01</td><td>1</td></tr>
+            <tr><td>2</td><td>0010</td><td>02</td><td>2</td></tr>
+            <tr><td>3</td><td>0011</td><td>03</td><td>3</td></tr>
+            <tr><td>4</td><td>0100</td><td>04</td><td>4</td></tr>
+            <tr><td>5</td><td>0101</td><td>05</td><td>5</td></tr>
+            <tr><td>6</td><td>0110</td><td>06</td><td>6</td></tr>
+            <tr><td>7</td><td>0111</td><td>07</td><td>7</td></tr>
+            <tr><td>8</td><td>1000</td><td>10</td><td>8</td></tr>
+            <tr><td>9</td><td>1001</td><td>11</td><td>9</td></tr>
+            <tr><td>10</td><td>1010</td><td>12</td><td>A</td></tr>
+            <tr><td>11</td><td>1011</td><td>13</td><td>B</td></tr>
+            <tr><td>12</td><td>1100</td><td>14</td><td>C</td></tr>
+            <tr><td>13</td><td>1101</td><td>15</td><td>D</td></tr>
+            <tr><td>14</td><td>1110</td><td>16</td><td>E</td></tr>
+            <tr><td>15</td><td>1111</td><td>17</td><td>F</td></tr>
+          </tbody>
+        </table>
+
+        <h3>位置記數法</h3>
+        <div class="formula">(dₙ…d₂d₁d₀)ᵦ = Σ dᵢ × bⁱ</div>
+        <p class="section-desc">每一位數字 dᵢ 乘上 base b 的對應次方，再全部相加。</p>
+
+        <div class="card" style="margin-top:14px">
+          <h4>教材先用 Decimal 說明位置記數法</h4>
+          <div class="formula">(943)₁₀ = 9×10² + 4×10¹ + 3×10⁰ = 900 + 40 + 3</div>
+        </div>
+
+        <div class="grid two" style="margin-top:14px">
+          <div class="card">
+            <h4>例 1：Hex → Decimal</h4>
+            <div class="formula">(30B)₁₆ = 3×16² + 0×16¹ + 11×16⁰ = 779</div>
+          </div>
+          <div class="card">
+            <h4>例 2：Base 13 → Decimal</h4>
+            <div class="formula">(943)₁₃ = 9×13² + 4×13 + 3 = 1576</div>
+          </div>
+        </div>
+
+        <div class="grid two" style="margin-top:14px">
+          <div class="card">
+            <h4>教材例：Binary → Decimal</h4>
+            <div class="formula">(111)₂ = 1×2² + 1×2¹ + 1×2⁰ = (7)₁₀</div>
+          </div>
+          <div class="card">
+            <h4>教材例：Octal → Decimal</h4>
+            <div class="formula">(112)₈ = 1×8² + 1×8¹ + 2×8⁰ = (74)₁₀</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section searchable" id="ch2-conversion" data-study-only data-learn-id="ch2-conversion">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Chapter 02 · 02</div>
+            <h2>進位轉換：三個方法</h2>
+            <p class="section-desc">不同方向用不同方法，會比硬背所有表格簡單很多。</p>
+          </div>
+          <button class="learn-btn">○ 標記已學</button>
+        </div>
+
+        <div class="grid three">
+          <div class="card">
+            <span class="tag">To Decimal</span>
+            <h4>其他進位 → 10 進位</h4>
+            <p>使用位置權重：每位數 × base 的次方後相加。</p>
+          </div>
+          <div class="card">
+            <span class="tag">From Decimal</span>
+            <h4>10 進位 → 其他進位</h4>
+            <p>整數常用「反覆除以 base，記錄餘數，再由下往上讀」。</p>
+          </div>
+          <div class="card">
+            <span class="tag">Shortcut</span>
+            <h4>2 ↔ 8 / 16</h4>
+            <p>Octal 每 1 位對應 3 bits；Hex 每 1 位對應 4 bits。</p>
+          </div>
+        </div>
+
+        <h3>考試怎麼算：先判斷是哪一種題型</h3>
+        <div class="callout">
+          <strong>先記這三句：</strong>
+          看到「→ Decimal」就乘次方；
+          看到「Decimal →」就一直除、餘數倒著讀；
+          看到 Binary ↔ Octal / Hex，就直接每 3 bits / 4 bits 分組。
+        </div>
+
+        <div class="grid two">
+          <div class="card">
+            <span class="tag">Type 1 · To Decimal</span>
+            <h4>① 其他進位 → 10 進位：乘權重再相加</h4>
+            <p>例：<strong>(30B)₁₆ → (?)₁₀</strong></p>
+            <p>16 進位中 A=10、B=11、C=12、D=13、E=14、F=15。</p>
+            <p>從最右邊開始，位數權重依序是 16⁰、16¹、16²⋯。</p>
+            <div class="formula">(30B)₁₆ = 3×16² + 0×16¹ + 11×16⁰</div>
+            <div class="formula">= 3×256 + 0 + 11 = 779</div>
+            <p><strong>答案：</strong> (30B)₁₆ = <strong>(779)₁₀</strong></p>
+            <p>其實和十進位 352 = 3×10² + 5×10¹ + 2×10⁰ 是同一個概念，只是把 base 換成 16。</p>
+          </div>
+
+          <div class="card">
+            <span class="tag">Type 2 · From Decimal</span>
+            <h4>② 10 進位 → 其他進位：一直除，餘數倒著讀</h4>
+            <p>例：<strong>(2748)₁₀ → (?)₁₆</strong></p>
+            <table class="compare">
+              <thead><tr><th>計算</th><th>商</th><th>餘數</th></tr></thead>
+              <tbody>
+                <tr><td>2748 ÷ 16</td><td>171</td><td>12 = C</td></tr>
+                <tr><td>171 ÷ 16</td><td>10</td><td>11 = B</td></tr>
+                <tr><td>10 ÷ 16</td><td>0</td><td>10 = A</td></tr>
+              </tbody>
+            </table>
+            <p style="margin-top:12px">餘數一定要<strong>由下往上讀</strong>：A → B → C。</p>
+            <div class="formula">(2748)₁₀ = (ABC)₁₆</div>
+            <p><strong>最常錯：</strong>把餘數由上往下讀成 CBA。</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <span class="tag">Type 3 · Binary Shortcut</span>
+          <h4>③ Binary ↔ Octal / Hex：直接分組</h4>
+          <p>因為 8 = 2³，所以 Binary ↔ Octal 每 <strong>3 bits</strong> 一組；16 = 2⁴，所以 Binary ↔ Hex 每 <strong>4 bits</strong> 一組。</p>
+
+          <div class="grid two" style="margin-top:12px">
+            <div>
+              <h4>Binary → Hex</h4>
+              <p>例：<strong>(10010110)₂</strong></p>
+              <div class="formula">1001&nbsp;&nbsp;0110 → 9&nbsp;&nbsp;6</div>
+              <p>所以 <strong>(10010110)₂ = (96)₁₆</strong>。</p>
+            </div>
+            <div>
+              <h4>Binary → Octal</h4>
+              <p>從右邊每 3 bits 分組，不足時在左邊補 0。</p>
+              <div class="formula">10010110 → 010&nbsp;&nbsp;010&nbsp;&nbsp;110 → 2&nbsp;&nbsp;2&nbsp;&nbsp;6</div>
+              <p>所以 <strong>(10010110)₂ = (226)₈</strong>。</p>
+            </div>
+          </div>
+
+          <div class="callout" style="margin-bottom:0">
+            <strong>反過來 Octal / Hex → Binary：</strong>
+            每一個 Octal digit 各換成 3 bits；每一個 Hex digit 各換成 4 bits，再把各組接起來。
+            例如 (226)₈ → 010 010 110 → (10010110)₂；最左邊不影響數值的 0 可以省略。
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>同一個值的完整對照：</strong>
+          (150)₁₀ = (10010110)₂ = (226)₈ = (96)₁₆。
+          考試時先看「從哪一進位轉去哪一進位」，再選方法，不要全部都用同一套算法。
+        </div>
+
+        <h3>課本例題</h3>
+        <div class="grid two">
+          <div class="card">
+            <h4>(2748)₁₀ → Hex</h4>
+            <div class="formula">(2748)₁₀ = (ABC)₁₆</div>
+          </div>
+          <div class="card">
+            <h4>同一個值的不同表示</h4>
+            <div class="formula">(150)₁₀ = (10010110)₂ = (226)₈ = (96)₁₆</div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>超重要：</strong> Binary ↔ Octal：每 <b>3 bits</b> 分一組。Binary ↔ Hex：每 <b>4 bits</b> 分一組。
+        </div>
+      </section>
+
+      <section class="section searchable" id="ch2-binary" data-study-only data-learn-id="ch2-binary">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Chapter 02 · 03</div>
+            <h2>Binary Arithmetic</h2>
+            <p class="section-desc">二進位加法規則少，但進位的位置很容易粗心。</p>
+          </div>
+          <button class="learn-btn">○ 標記已學</button>
+        </div>
+
+        <table class="compare">
+          <thead><tr><th>運算</th><th>結果</th><th>說明</th></tr></thead>
+          <tbody>
+            <tr><td>0 + 0</td><td>0</td><td>不進位</td></tr>
+            <tr><td>0 + 1 / 1 + 0</td><td>1</td><td>不進位</td></tr>
+            <tr><td>1 + 1</td><td>10₂</td><td>寫 0，進 1</td></tr>
+            <tr><td>1 + 1 + 1</td><td>11₂</td><td>寫 1，進 1</td></tr>
+          </tbody>
+        </table>
+
+        <h3>教材例題：二進位直式相加</h3>
+        <div class="card">
+          <p>和十進位直式加法一樣，<strong>從最右邊開始</strong>，只是二進位逢 2 就進位。</p>
+          <div class="formula" style="white-space:pre; line-height:1.5">  1010111
++ 1001011
+---------
+ 10100010</div>
+          <p><strong>第一步：</strong>最右邊 1 + 1 = 10₂，所以這一欄寫 0，往左進 1。</p>
+          <p><strong>第二步：</strong>下一欄要把進位一起加：1 + 1 + 1 = 11₂，所以寫 1，再進 1。</p>
+          <p>後面每一欄都照同樣規則往左算，最後得到 <strong>(10100010)₂</strong>。</p>
+        </div>
+
+        <div class="callout">
+          <strong>考試做法：</strong>從右往左一欄一欄加；遇到 1 + 1 就「寫 0 進 1」，遇到 1 + 1 + 1 就「寫 1 進 1」。建議把進位標在上一列，比較不容易漏掉。
+        </div>
+
+        <h3>Binary Subtraction（二進位減法）</h3>
+        <div class="callout">
+          <strong>先懂「借 1」是什麼：</strong>
+          十進位向左借 1，這一欄會多 10；二進位向左借 1，這一欄會多 <strong>2</strong>，也就是 <strong>10₂</strong>。
+          所以遇到 0 − 1 時，可以變成 10₂ − 1₂ = 1₂。
+        </div>
+
+        <div class="grid two">
+          <div class="card">
+            <span class="tag">Step 1 · Rules</span>
+            <h4>先記 4 個基本情況</h4>
+            <table class="compare">
+              <thead><tr><th>運算</th><th>結果</th><th>要不要借位</th></tr></thead>
+              <tbody>
+                <tr><td>0 − 0</td><td>0</td><td>不用</td></tr>
+                <tr><td>1 − 0</td><td>1</td><td>不用</td></tr>
+                <tr><td>1 − 1</td><td>0</td><td>不用</td></tr>
+                <tr><td>0 − 1</td><td>1</td><td>要：先變成 10₂ − 1₂</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <span class="tag">Step 2 · Simple Borrow</span>
+            <h4>最簡單借位：10₂ − 1₂</h4>
+            <div class="formula" style="white-space:pre; line-height:1.5">  10
+- 01
+----
+  01</div>
+            <p>最右邊是 0 − 1，不夠減，所以向左邊的 1 借 1。</p>
+            <p>左邊的 1 變成 0；右邊的 0 得到 10₂，所以 10₂ − 1₂ = 1₂。</p>
+          </div>
+        </div>
+
+        <h3>連續借位：中間遇到 0 怎麼辦？</h3>
+        <div class="card">
+          <p>例如 <strong>1000₂ − 0001₂</strong>。最右邊 0 − 1 不夠，但左邊緊鄰的兩欄也都是 0，所以要一路往左找到第一個 1。</p>
+          <div class="formula" style="white-space:pre; line-height:1.5">  1000
+- 0001
+------
+  0111</div>
+          <p>最左邊的 1 借出去後變 0；借位一路傳過兩個 0，最後右邊三欄都能完成減法，所以 <strong>(1000)₂ − (1)₂ = (111)₂</strong>。</p>
+        </div>
+
+        <h3>教材例題：逐欄看 borrow</h3>
+        <div class="card">
+          <div class="formula" style="white-space:pre; line-height:1.5">  1010111
+- 0111011
+---------
+  0011100</div>
+          <p><strong>從最右邊開始：</strong></p>
+          <ol style="margin:8px 0 0; padding-left:22px; color:var(--muted); font-size:14px">
+            <li>第 1 欄：1 − 1 = 0。</li>
+            <li>第 2 欄：1 − 1 = 0。</li>
+            <li>第 3 欄：1 − 0 = 1。</li>
+            <li>第 4 欄：0 − 1 不夠，向左借 1 → 10₂ − 1₂ = 1。</li>
+            <li>第 5 欄：因為剛剛被借走，這欄變成 0；現在又是 0 − 1，所以要再向左借。</li>
+            <li>左邊下一欄也是 0，因此借位要再往左找到 1，再把 borrow 傳回來。</li>
+            <li>剩下各欄完成相減後，結果是 <strong>0011100₂</strong>。</li>
+          </ol>
+        </div>
+
+        <div class="callout">
+          <strong>考試口訣：</strong>從右往左減；<strong>夠減就直接減，不夠減就向左借 1</strong>。如果左邊是 0，就繼續往左找到第一個 1。Addition 看 carry；Subtraction 看 borrow。
+        </div>
+      </section>
+
+      <section class="section searchable" id="ch2-data" data-study-only data-learn-id="ch2-data">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Chapter 02 · 04</div>
+            <h2>Bit、Byte、Word 與 32/64-bit</h2>
+            <p class="section-desc">把單位關係背成倍數會比零散記憶容易。</p>
+          </div>
+          <button class="learn-btn">○ 標記已學</button>
+        </div>
+
+        <div class="generation">
+          <div class="gen"><b>Bit</b><strong>1 bit</strong><small>一個 binary digit，值為 0 或 1。</small></div>
+          <div class="gen"><b>Byte</b><strong>8 bits</strong><small>1 Byte = 8 bits。</small></div>
+          <div class="gen"><b>Full Word</b><strong>32 bits</strong><small>課程中的典型 word 尺寸。</small></div>
+          <div class="gen"><b>Double Word</b><strong>64 bits</strong><small>兩倍 32-bit word。</small></div>
+        </div>
+
+        <table class="compare">
+          <thead><tr><th>名稱</th><th>Bytes</th><th>Bits</th></tr></thead>
+          <tbody>
+            <tr><td>Byte</td><td>1 Byte</td><td>8 bits</td></tr>
+            <tr><td>Half Word</td><td>2 Bytes</td><td>16 bits</td></tr>
+            <tr><td>Full Word</td><td>4 Bytes</td><td>32 bits</td></tr>
+            <tr><td>Double Word</td><td>8 Bytes</td><td>64 bits</td></tr>
+          </tbody>
+        </table>
+
+        <h3>32-bit / 64-bit machines</h3>
+        <div class="grid two">
+          <div class="card">
+            <span class="tag">32-bit</span>
+            <h4>32-bit machine</h4>
+            <p>教材定義：電腦處理時以 <strong>32-bit data</strong> 為一個單位；每個 time interval 可處理 32-bit data。</p>
+          </div>
+          <div class="card">
+            <span class="tag">64-bit</span>
+            <h4>64-bit machine</h4>
+            <p>教材接著列出 64-bit machines；理解時對照 32-bit machine，重點是資料處理單位提升為 <strong>64 bits</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section searchable" id="practice" data-practice-only data-learn-id="practice">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Interactive Lab</div>
+            <h2>進位制轉換器</h2>
+            <p class="section-desc">先自己算，再用工具核對。支援 base 2 / 8 / 10 / 16。</p>
+          </div>
+          <button class="learn-btn">○ 標記已學</button>
+        </div>
+
+        <div class="tool">
+          <div class="tool-grid">
+            <div class="field">
+              <label for="convertValue">輸入數字</label>
+              <input id="convertValue" value="150" spellcheck="false" inputmode="text">
+            </div>
+            <div class="field">
+              <label for="convertBase">原始進位</label>
+              <select id="convertBase">
+                <option value="2">Binary · 2</option>
+                <option value="8">Octal · 8</option>
+                <option value="10" selected>Decimal · 10</option>
+                <option value="16">Hex · 16</option>
+              </select>
+            </div>
+          </div>
+          <div class="convert-results">
+            <div class="result"><span>BIN · base 2</span><code id="r2">10010110</code></div>
+            <div class="result"><span>OCT · base 8</span><code id="r8">226</code></div>
+            <div class="result"><span>DEC · base 10</span><code id="r10">150</code></div>
+            <div class="result"><span>HEX · base 16</span><code id="r16">96</code></div>
+          </div>
+          <div class="error" id="convertError"></div>
+        </div>
+
+        <h3>隨機練習</h3>
+        <div class="tool practice">
+          <div>
+            <div class="section-desc">請把下面的數字轉成指定進位：</div>
+            <div class="practice-question" id="practiceQuestion">—</div>
+            <div class="answer-row">
+              <input id="practiceAnswer" placeholder="輸入答案，例如 ABC" spellcheck="false">
+              <button class="primary-btn" id="checkAnswer">檢查</button>
+            </div>
+            <div class="feedback" id="practiceFeedback"></div>
+          </div>
+          <button class="ghost-btn" id="newQuestion">換一題</button>
+        </div>
+      </section>
+
+      <section class="section searchable" id="exam" data-practice-only>
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Exam Ready</div>
+            <h2>考前必會清單</h2>
+            <p class="section-desc">勾選狀態會保留。全部都能不看筆記回答，再進考場。</p>
+          </div>
+        </div>
+
+        <div class="checklist" id="examChecklist">
+          <label class="check"><input type="checkbox" data-check="layers"><span><strong>能區分硬體／軟體，並說出六層架構</strong><span>Information → Hardware → Programming → OS → Applications → Communications。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="people"><span><strong>早期裝置、人物與貢獻能做正確配對</strong><span>算盤、Pascal、Jacquard、Babbage、Ada Lovelace、Alan Turing。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="generations"><span><strong>硬體四世代順序會背</strong><span>Vacuum Tube → Transistor → IC → LSI/VLSI。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="storage"><span><strong>能分清元件、記憶體和儲存設備的演進</strong><span>電晶體取代真空管；磁芯取代磁鼓；磁碟取代磁帶。磁帶循序、磁碟直接存取。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="moore"><span><strong>能區分講義的兩個 Moore’s Law 版本</strong><span>第11頁早期版本每年；第12頁修訂版每18個月加倍。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="parallel"><span><strong>SIMD 與 MIMD 能用自己的話比較</strong><span>Single/Multiple Instruction 與 Multiple Data。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="network"><span><strong>能用用途辨認網路與雲端名詞</strong><span>Ethernet、File server、LAN、Packet switching、TCP/IP、Cloud Computing。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="translator"><span><strong>翻譯、連結、載入、排程能分清楚</strong><span>Assembler／Compiler、Linker、Loader、OS。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="software-generations"><span><strong>能辨認軟體五世代的重點</strong><span>機器／組合語言 → 高階語言 → 系統軟體 → 結構化程式設計／應用 → 物件導向／WWW／嵌入式系統。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="skills"><span><strong>能把四項必要能力連到實際行為</strong><span>Algorithmic thinking、Representation、Programming、Design；哪些事情能有效率地自動化？</span></span></label>
+          <label class="check"><input type="checkbox" data-check="positional"><span><strong>會用位置記數法轉成 Decimal</strong><span>例如 (30B)₁₆、(943)₁₃。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="fromdecimal"><span><strong>會把 Decimal 轉成其他進位</strong><span>懂反覆除法與餘數倒讀。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="binaryhex"><span><strong>Binary ↔ Octal / Hex 快速轉換</strong><span>3 bits 一組 / 4 bits 一組。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="binarymath"><span><strong>二進位加減法會處理 carry / borrow</strong><span>加法 1+1=10₂；減法遇到 0−1 要向左借位。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="word"><span><strong>Bit / Byte / Word 關係會背</strong><span>1 Byte=8 bits；16/32/64-bit 對應 Half/Full/Double Word。</span></span></label>
+        </div>
+      </section>
+
+      <section class="section searchable" id="quiz" data-practice-only>
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Self Test</div>
+            <h2>自我測驗</h2>
+            <p class="section-desc">先在腦中回答，再點開答案。能解釋原因才算真的會。</p>
+          </div>
+        </div>
+
+        <details>
+          <summary>1. SIMD 的完整名稱是什麼？它和 MIMD 最大差在哪裡？</summary>
+          <div class="answer">SIMD = Single Instruction, Multiple Data；MIMD = Multiple Instruction, Multiple Data。前者讓多筆資料執行同一指令，後者可同時執行不同指令處理不同資料。</div>
+        </details>
+        <details>
+          <summary>2. Jacquard、Babbage、Ada Lovelace、Turing 各對應什麼？</summary>
+          <div class="answer">Jacquard → punched card；Babbage → Analytical Engine；Ada Lovelace → first programmer / loop；Alan Turing → Turing machine。</div>
+        </details>
+        <details>
+          <summary>3. 硬體世代從第一代到第四代的關鍵元件？</summary>
+          <div class="answer">Vacuum Tube → Transistor → Integrated Circuit → LSI/VLSI。</div>
+        </details>
+        <details>
+          <summary>4. 為什麼 (30B)₁₆ = 779₁₀？</summary>
+          <div class="answer">因為 B 代表 11，所以 3×16² + 0×16¹ + 11×16⁰ = 768 + 11 = 779。</div>
+        </details>
+        <details>
+          <summary>5. Binary 要轉 Hex，為什麼是 4 bits 一組？</summary>
+          <div class="answer">因為 16 = 2⁴，所以一個十六進位數字可以剛好表示 4 個 binary bits 的 16 種組合。</div>
+        </details>
+        <details>
+          <summary>6. 150₁₀ 用 Binary、Octal、Hex 表示？</summary>
+          <div class="answer">150₁₀ = 10010110₂ = 226₈ = 96₁₆。</div>
+        </details>
+        <details>
+          <summary>7. 1 Byte、Half Word、Full Word、Double Word 各是多少 bits？</summary>
+          <div class="answer">Byte = 8；Half Word = 16；Full Word = 32；Double Word = 64 bits。</div>
+        </details>
+        <details>
+          <summary>8. Binary subtraction 遇到 0 − 1 怎麼辦？</summary>
+          <div class="answer">向左邊借 1。因為二進位的一個借位在目前欄等於 10₂，所以 10₂ − 1₂ = 1₂。這就是教材標示的 borrow。</div>
+        </details>
+        <details>
+          <summary>9. 第一章第5頁的六層架構，由內到外的順序是什麼？</summary>
+          <div class="answer">Information → Hardware → Programming → Operating systems → Applications → Communications。先辨認資訊、實體設備、程式設計、系統管理、使用者應用、系統間通訊各在做什麼。</div>
+        </details>
+        <details>
+          <summary>10. 第二代硬體的三組「取代關係」是什麼？</summary>
+          <div class="answer">Transistor 取代 Vacuum Tube；Magnetic Cores 取代 Magnetic Drums；Magnetic Disks 取代 Magnetic Tape。分別是在講代表元件、記憶體、輔助儲存，三組要分開記。</div>
+        </details>
+        <details>
+          <summary>11. Assembler、Compiler、Linker、Loader、OS 各負責什麼？</summary>
+          <div class="answer">Assembler：組合語言翻成機器語言；Compiler：高階語言翻成機器指令（依講義）；Linker：連結程式片段；Loader：載入程式到記憶體；OS：管理資源並安排工作。抓住翻譯、連結、載入、排程四種工作。</div>
+        </details>
+        <details>
+          <summary>12. 講義的 Moore’s Law 為什麼有「每年」與「18個月」兩個數字？</summary>
+          <div class="answer">第11頁介紹早期版本，描述單一IC可容納的電路數量每年加倍；第12頁列修訂版本，描述晶片密度每18個月加倍。看題目指定的版本來回答。</div>
+        </details>
+        <details>
+          <summary>13. 計算平均成績時，如何使用最後一頁的四項能力？</summary>
+          <div class="answer">Algorithmic thinking：想出逐筆加總再除以人數的步驟；Representation：決定如何表示名字與成績；Programming：把步驟寫成程式；Design：安排輸入、檢查、計算、呈現結果的整體流程。它們共同支援有效率地自動化。</div>
+        </details>
+      </section>
+
+      <div class="no-results" id="noResults">找不到符合的內容。可以試試「SIMD」、「Babbage」、「Hex」或「Byte」。</div>
+      <footer>計算機概論 Ch01–Ch02 · Interactive Study Notes · Progress saved locally</footer>
+    </div>
+  </main>
+</div>
+
+<script>
+  (() => {
+    const $ = (s, root = document) => root.querySelector(s);
+    const $$ = (s, root = document) => [...root.querySelectorAll(s)];
+
+    const state = {
+      theme: localStorage.getItem('cs-theme') || 'dark',
+      mode: localStorage.getItem('cs-mode') || 'all',
+      learned: JSON.parse(localStorage.getItem('cs-learned') || '{}'),
+      checks: JSON.parse(localStorage.getItem('cs-checks') || '{}'),
+      practice: null
+    };
+
+    function setTheme(theme) {
+      state.theme = theme;
+      document.documentElement.dataset.theme = theme;
+      localStorage.setItem('cs-theme', theme);
+      $('#themeBtn').textContent = theme === 'dark' ? '☀' : '◐';
+    }
+    setTheme(state.theme);
+    $('#themeBtn').addEventListener('click', () => setTheme(state.theme === 'dark' ? 'light' : 'dark'));
+
+    const sidebar = $('#sidebar');
+    $('#menuBtn').addEventListener('click', () => sidebar.classList.toggle('open'));
+    $$('.nav-link').forEach(link => link.addEventListener('click', () => sidebar.classList.remove('open')));
+
+    function setMode(mode) {
+      state.mode = mode;
+      document.body.classList.remove('study-only', 'practice-only');
+      if (mode === 'study') document.body.classList.add('study-only');
+      if (mode === 'practice') document.body.classList.add('practice-only');
+      $('#modeBtn').textContent = mode === 'all' ? '完整模式' : mode === 'study' ? '學習模式' : '練習模式';
+      localStorage.setItem('cs-mode', mode);
+    }
+    setMode(state.mode);
+    $('#modeBtn').addEventListener('click', () => {
+      const next = state.mode === 'all' ? 'study' : state.mode === 'study' ? 'practice' : 'all';
+      setMode(next);
+    });
+
+    const learnSections = $$('[data-learn-id]');
+    function renderLearned() {
+      let done = 0;
+      learnSections.forEach(section => {
+        const id = section.dataset.learnId;
+        const btn = $('.learn-btn', section);
+        if (!btn) return;
+        const yes = !!state.learned[id];
+        btn.classList.toggle('done', yes);
+        btn.textContent = yes ? '✓ 已學會' : '○ 標記已學';
+        if (yes) done++;
+      });
+      const total = learnSections.filter(s => $('.learn-btn', s)).length;
+      const pct = total ? Math.round((done / total) * 100) : 0;
+      $('#progressText').textContent = pct + '%';
+      $('#progressBar').style.width = pct + '%';
+    }
+    learnSections.forEach(section => {
+      const btn = $('.learn-btn', section);
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        const id = section.dataset.learnId;
+        state.learned[id] = !state.learned[id];
+        localStorage.setItem('cs-learned', JSON.stringify(state.learned));
+        renderLearned();
+      });
+    });
+    renderLearned();
+
+    const search = $('#searchInput');
+    function runSearch() {
+      const q = search.value.trim().toLowerCase();
+      let shown = 0;
+      $$('.searchable').forEach(section => {
+        const visible = !q || section.innerText.toLowerCase().includes(q);
+        section.classList.toggle('hidden-by-search', !visible);
+        if (visible) shown++;
+      });
+      $('#noResults').style.display = shown ? 'none' : 'block';
+    }
+    search.addEventListener('input', runSearch);
+    document.addEventListener('keydown', e => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        search.focus();
+        search.select();
+      }
+      if (e.key === 'Escape') {
+        search.value = '';
+        runSearch();
+        search.blur();
+      }
+    });
+
+    const navLinks = $$('.nav-link');
+    const observed = $$('header[id], section[id]');
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries.filter(e => e.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + visible.target.id));
+    }, {rootMargin:'-18% 0px -65% 0px', threshold:[0,.2,.5]});
+    observed.forEach(s => observer.observe(s));
+
+    function digitValue(ch) {
+      const c = ch.toUpperCase();
+      if (c >= '0' && c <= '9') return c.charCodeAt(0) - 48;
+      if (c >= 'A' && c <= 'F') return c.charCodeAt(0) - 55;
+      return -1;
+    }
+    function parseBase(str, base) {
+      const s = str.trim().replace(/\s+/g,'').toUpperCase();
+      if (!s) throw new Error('請輸入一個數字');
+      let n = 0n;
+      for (const ch of s) {
+        const d = digitValue(ch);
+        if (d < 0 || d >= base) throw new Error('「' + ch + '」不是 base ' + base + ' 可使用的數字');
+        n = n * BigInt(base) + BigInt(d);
+      }
+      return n;
+    }
+    function convert() {
+      const value = $('#convertValue').value;
+      const base = Number($('#convertBase').value);
+      const error = $('#convertError');
+      try {
+        const n = parseBase(value, base);
+        $('#r2').textContent = n.toString(2).toUpperCase();
+        $('#r8').textContent = n.toString(8).toUpperCase();
+        $('#r10').textContent = n.toString(10);
+        $('#r16').textContent = n.toString(16).toUpperCase();
+        error.style.display = 'none';
+      } catch (e) {
+        error.textContent = e.message;
+        error.style.display = 'block';
+      }
+    }
+    $('#convertValue').addEventListener('input', convert);
+    $('#convertBase').addEventListener('change', convert);
+    convert();
+
+    const bases = [2,8,10,16];
+    const baseName = {2:'₂',8:'₈',10:'₁₀',16:'₁₆'};
+    function newPractice(focusAnswer = false) {
+      const value = Math.floor(Math.random() * 240) + 16;
+      let from = bases[Math.floor(Math.random() * bases.length)];
+      let to = bases[Math.floor(Math.random() * bases.length)];
+      while (to === from) to = bases[Math.floor(Math.random() * bases.length)];
+      const source = BigInt(value).toString(from).toUpperCase();
+      const answer = BigInt(value).toString(to).toUpperCase();
+      state.practice = {value,from,to,source,answer};
+      $('#practiceQuestion').textContent = '(' + source + ')' + baseName[from] + ' → (?)' + baseName[to];
+      $('#practiceAnswer').value = '';
+      $('#practiceFeedback').textContent = '';
+      $('#practiceFeedback').className = 'feedback';
+      if (focusAnswer) $('#practiceAnswer').focus();
+    }
+    function checkPractice() {
+      if (!state.practice) return;
+      const got = $('#practiceAnswer').value.trim().replace(/\s+/g,'').toUpperCase();
+      const box = $('#practiceFeedback');
+      if (got === state.practice.answer) {
+        box.className = 'feedback ok';
+        box.textContent = '✓ 正確！' + state.practice.source + ' (base ' + state.practice.from + ') = ' + state.practice.answer + ' (base ' + state.practice.to + ')';
+      } else {
+        box.className = 'feedback bad';
+        box.textContent = '再算一次。提示：可以先轉成 Decimal，再轉到目標進位。';
+      }
+    }
+    $('#newQuestion').addEventListener('click', () => newPractice(true));
+    $('#checkAnswer').addEventListener('click', checkPractice);
+    $('#practiceAnswer').addEventListener('keydown', e => { if (e.key === 'Enter') checkPractice(); });
+    newPractice();
+
+    $$('#examChecklist input[data-check]').forEach(input => {
+      input.checked = !!state.checks[input.dataset.check];
+      input.addEventListener('change', () => {
+        state.checks[input.dataset.check] = input.checked;
+        localStorage.setItem('cs-checks', JSON.stringify(state.checks));
+      });
+    });
+
+    // Chapter 01 teaching activities. Examples are labelled as learning illustrations.
+    const LAYER_INFO = {
+      information:{
+        level:'第 1 層 · 最內側', name:'Information（資訊）',
+        meaning:'這一層關心要處理的資訊與它的表示方式。文字、數字等資訊，需要有能讓系統處理的表示形式。',
+        example:'你要傳送的「你好」是資訊；系統需要把它表示成能儲存與處理的資料。',
+        reminder:'辨認重點：Information 是被表示、儲存和處理的內容。'
+      },
+      hardware:{
+        level:'第 2 層', name:'Hardware（硬體）',
+        meaning:'實體設備與電路執行操作、儲存資料、接收輸入並產生輸出。',
+        example:'處理器、記憶體、鍵盤或螢幕，支援你輸入與顯示訊息的動作。',
+        reminder:'辨認重點：Hardware 是 physical elements。'
+      },
+      programming:{
+        level:'第 3 層', name:'Programming（程式設計）',
+        meaning:'把計算步驟表達成程式與指令，讓硬體按規則完成工作。',
+        example:'程式中的步驟描述如何取得文字、處理文字並要求傳送。',
+        reminder:'辨認重點：這一層關心如何描述與實作計算步驟。'
+      },
+      os:{
+        level:'第 4 層', name:'Operating systems（作業系統）',
+        meaning:'管理記憶體、工作執行與其他資源，安排程式何時使用它們。',
+        example:'聊天程式要執行時，OS 安排工作並管理它使用的資源。',
+        reminder:'辨認重點：OS 的角色是管理與排程。'
+      },
+      applications:{
+        level:'第 5 層', name:'Applications（應用程式）',
+        meaning:'提供使用者完成具體任務的功能，例如文字處理、試算表或通訊。',
+        example:'你使用聊天程式的輸入框與送出功能，完成傳送訊息這項任務。',
+        reminder:'辨認重點：看使用者要完成什麼任務。'
+      },
+      communications:{
+        level:'第 6 層 · 最外側', name:'Communications（通訊）',
+        meaning:'讓不同電腦透過連線交換資料並共享資源。',
+        example:'訊息透過網路送往接收方的電腦，兩端才能交換資料。',
+        reminder:'辨認重點：資料交換發生在互相連線的系統之間。'
+      }
+    };
+    function showLayer(id) {
+      const layer=LAYER_INFO[id];
+      if (!layer) return;
+      $$('[data-layer]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.layer===id)));
+      $('#layerLevel').textContent=layer.level;
+      $('#layerName').textContent=layer.name;
+      $('#layerMeaning').textContent=layer.meaning;
+      $('#layerExample').textContent=layer.example;
+      $('#layerReminder').textContent=layer.reminder;
+    }
+    $$('[data-layer]').forEach(button=>button.addEventListener('click',()=>showLayer(button.dataset.layer)));
+    showLayer('information');
+
+    const ERA_INFO=[
+      {
+        years:'第一代 · 1951–1959 · PDF p.9', title:'Vacuum Tube（真空管）',
+        summary:'先記住當時元件體積大、可靠度較低、發熱多，後面的演進就在改善這些限制。',
+        component:'Vacuum Tubes 是代表元件。講義列出的特性是 large、not very reliable、generated a lot of heat。',
+        devices:'Magnetic Drum 在讀寫頭下旋轉，是記憶體設備；Card Readers 走向 Magnetic Tape Drives，輔助儲存採循序存取。',
+        key:'真空管＝代表元件；磁鼓＝記憶體；磁帶＝循序的輔助儲存。'
+      },
+      {
+        years:'第二代 · 1959–1965 · PDF p.10', title:'Transistor（電晶體）',
+        summary:'電晶體取代真空管，記憶體與儲存設備也一起進步。這一頁要記三組「取代關係」。',
+        component:'Transistor 取代 Vacuum Tube。優點是 fast、small、durable、cheap：快、小、耐用、便宜。',
+        devices:'Magnetic Cores 取代 Magnetic Drums；Magnetic Disks 取代 Magnetic Tape，讓資料可直接存取。',
+        key:'電晶體→真空管；磁芯→磁鼓；磁碟→磁帶。先看它是在講元件、記憶體，還是儲存。'
+      },
+      {
+        years:'第三代 · 1965–1971 · PDF p.11', title:'Integrated Circuit（IC，積體電路）',
+        summary:'將電路整合到晶片，能做得更小、更便宜、更快、更可靠。',
+        component:'IC 整合原本分散在印刷電路板上的電路功能；講義以它作為第三代的代表。',
+        devices:'電晶體也用於記憶體；Terminal（終端機）是有鍵盤和螢幕的輸入／輸出設備。',
+        key:'第三代記 IC、Terminal，以及這一頁介紹的早期 Moore’s Law。'
+      },
+      {
+        years:'第四代 · 1971 起 · PDF p.12', title:'LSI／VLSI（大型／超大型積體電路）',
+        summary:'晶片整合技術進步，帶動 PC、工作站與可攜式電腦的發展。',
+        component:'LSI＝Large-scale Integration；VLSI＝Very-large-scale Integration。',
+        devices:'講義列有 Personal computer、Workstations、Notebook、Laptops、Tablets、Smart phones，以及 IBM、HP、Apple、Sun。',
+        key:'代表元件記 LSI／VLSI；另外認得 CISC／RISC，以及每 18 個月加倍的修訂版 Moore’s Law。'
+      }
+    ];
+    function showEra(index) {
+      const era=ERA_INFO[index];
+      if (!era) return;
+      $$('[data-era]').forEach(button=>button.setAttribute('aria-pressed',String(Number(button.dataset.era)===index)));
+      $('#eraYears').textContent=era.years;
+      $('#eraTitle').textContent=era.title;
+      $('#eraSummary').textContent=era.summary;
+      $('#eraComponent').textContent=era.component;
+      $('#eraDevices').textContent=era.devices;
+      $('#eraKey').textContent=era.key;
+    }
+    $$('[data-era]').forEach(button=>button.addEventListener('click',()=>showEra(Number(button.dataset.era))));
+    showEra(0);
+
+    function showMoore() {
+      const months=Number($('#mooreMonths').value);
+      const cycles=months/18, factor=2**cycles;
+      $('#mooreTime').textContent=months+' 個月';
+      $('#mooreDensity').textContent=factor+' 倍';
+      $('#moorePower').textContent=factor+' 倍';
+      $('#mooreCost').textContent=(100/factor)+'%';
+      $('#mooreExplanation').textContent=cycles===0 ? '起點：密度與能力皆設為 1 倍，成本設為 100%。' :
+        months+' 個月包含 '+cycles+' 次 18 個月。每次加倍，所以 1 × 2 的 '+cycles+' 次方 = '+factor+' 倍；同能力成本則為原來的 '+(100/factor)+'%。';
+    }
+    $('#mooreMonths').addEventListener('input',showMoore);
+    showMoore();
+
+    const HISTORY_PAIRS=[
+      {id:'abacus',name:'Abacus（算盤）',contribution:'早期記錄數值的裝置',reason:'算盤用於記錄 numeric values。'},
+      {id:'pascal',name:'Blaise Pascal',contribution:'機械式加法與減法',reason:'Pascal 對應 mechanical device to add and subtract。'},
+      {id:'jacquard',name:'Joseph Jacquard',contribution:'織布機與 Punched card',reason:'Jacquard 對應織布機與打孔卡。'},
+      {id:'babbage',name:'Charles Babbage',contribution:'Analytical Engine（分析引擎）',reason:'Babbage 對應計算機的設計。'},
+      {id:'ada',name:'Ada Lovelace',contribution:'First programmer／Loop',reason:'Ada 對應第一位程式設計師與迴圈概念。'},
+      {id:'turing',name:'Alan Turing',contribution:'Turing machine／計算理論',reason:'Turing 對應圖靈機與計算理論。'}
+    ];
+    function shuffleStudy(items) {
+      const shuffled=items.slice();
+      for (let i=shuffled.length-1;i>0;i--) {
+        const j=Math.floor(Math.random()*(i+1));
+        [shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]];
+      }
+      return shuffled;
+    }
+    let selectedHistory=null, matchedHistory=new Set(), contributionOrder=shuffleStudy(HISTORY_PAIRS);
+    function renderHistory() {
+      const people=$('#historyPeople'), contributions=$('#historyContributions');
+      people.replaceChildren(); contributions.replaceChildren();
+      HISTORY_PAIRS.forEach(pair=>{
+        const button=document.createElement('button');
+        button.type='button'; button.textContent=(matchedHistory.has(pair.id)?'✓ ':'')+pair.name;
+        button.disabled=matchedHistory.has(pair.id);
+        button.setAttribute('aria-pressed',String(selectedHistory===pair.id));
+        button.classList.toggle('matched',matchedHistory.has(pair.id));
+        button.addEventListener('click',()=>{
+          selectedHistory=pair.id;
+          $('#historyMatchFeedback').className='lab-output';
+          $('#historyMatchFeedback').textContent='已選 '+pair.name+'，再點它對應的貢獻。';
+          renderHistory();
+        });
+        people.append(button);
+      });
+      contributionOrder.forEach(pair=>{
+        const button=document.createElement('button');
+        button.type='button'; button.textContent=(matchedHistory.has(pair.id)?'✓ ':'')+pair.contribution;
+        button.disabled=matchedHistory.has(pair.id);
+        button.classList.toggle('matched',matchedHistory.has(pair.id));
+        button.addEventListener('click',()=>{
+          const feedback=$('#historyMatchFeedback');
+          if (!selectedHistory) {
+            feedback.className='lab-output';
+            feedback.textContent='先點左邊的人物或裝置，再選貢獻。';
+            return;
+          }
+          if (selectedHistory===pair.id) {
+            matchedHistory.add(pair.id); selectedHistory=null;
+            feedback.className='lab-output ok';
+            feedback.textContent='配對正確：'+pair.name+' → '+pair.contribution+'。'+pair.reason+
+              (matchedHistory.size===HISTORY_PAIRS.length?' 六組都完成了！':' 接著選下一組。');
+          } else {
+            const selected=HISTORY_PAIRS.find(item=>item.id===selectedHistory);
+            feedback.className='lab-output bad';
+            feedback.textContent='這項貢獻對應 '+pair.name+'。'+pair.reason+' 再找找 '+selected.name+' 的貢獻。';
+          }
+          renderHistory();
+        });
+        contributions.append(button);
+      });
+      $('#historyMatchScore').textContent='已配對 '+matchedHistory.size+' / '+HISTORY_PAIRS.length+' 組';
+    }
+    $('#historyMatchReset').addEventListener('click',()=>{
+      selectedHistory=null; matchedHistory=new Set(); contributionOrder=shuffleStudy(HISTORY_PAIRS);
+      $('#historyMatchFeedback').className='lab-output';
+      $('#historyMatchFeedback').textContent='先選左邊，再選右邊。';
+      renderHistory();
+    });
+    $('#historyMatchFeedback').textContent='先選左邊，再選右邊。';
+    renderHistory();
+
+    let parallelMode='simd', parallelExecuted=false;
+    const parallelInputs=[2,4,6,8];
+    const mimdOperations=[
+      {label:'加 1',run:n=>n+1},
+      {label:'乘 2',run:n=>n*2},
+      {label:'減 1',run:n=>n-1},
+      {label:'平方',run:n=>n*n}
+    ];
+    function renderParallel() {
+      $$('[data-parallel]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.parallel===parallelMode)));
+      const workers=$('#parallelWorkers');
+      workers.replaceChildren();
+      parallelInputs.forEach((value,index)=>{
+        const operation=parallelMode==='simd'?mimdOperations[0]:mimdOperations[index];
+        const card=document.createElement('div'); card.className='worker';
+        const name=document.createElement('small'); name.textContent='處理單元 '+(index+1);
+        const instruction=document.createElement('div'); instruction.className='instruction'; instruction.textContent='指令：'+operation.label;
+        const input=document.createElement('span'); input.className='input-value'; input.textContent=String(value);
+        const arrow=document.createElement('div'); arrow.className='work-arrow'; arrow.textContent='↓';
+        const output=document.createElement('span'); output.className='output-value'; output.textContent=parallelExecuted?String(operation.run(value)):'？';
+        card.append(name,instruction,input,arrow,output);
+        workers.append(card);
+      });
+      $('#parallelFeedback').textContent=parallelMode==='simd' ?
+        (parallelExecuted?'SIMD 執行結果為 3、5、7、9。四個單元共用「加 1」的指令，各自處理不同資料。':'SIMD：每個單元都收到「加 1」。先預測四個結果，再按執行。') :
+        (parallelExecuted?'MIMD 執行結果為 3、8、5、64。四個單元分別做加、乘、減、平方，指令與資料都可不同。':'MIMD：四個單元的指令各不同。先看每張卡的操作，再按執行。');
+    }
+    $$('[data-parallel]').forEach(button=>button.addEventListener('click',()=>{
+      parallelMode=button.dataset.parallel; parallelExecuted=false; renderParallel();
+    }));
+    $('#parallelRun').addEventListener('click',()=>{parallelExecuted=true;renderParallel();});
+    $('#parallelReset').addEventListener('click',()=>{parallelExecuted=false;renderParallel();});
+    renderParallel();
+
+    function renderStudySteps(container,labels,active) {
+      container.replaceChildren();
+      labels.forEach((label,index)=>{
+        const chip=document.createElement('span');
+        chip.className='step-chip'+(index===active?' active':'');
+        chip.textContent=(index+1)+'. '+label;
+        if (index===active) chip.setAttribute('aria-current','step');
+        container.append(chip);
+      });
+    }
+    const PACKET_STEPS=[
+      {title:'發送端：原本的資料是 HELLO',chunks:[{label:'原始資料',text:'HELLO'}],reason:'先有要傳送的內容。下一步將它拆成三段，觀察資料如何被標記和整理。'},
+      {title:'分塊：加上能辨認順序的標記',chunks:[{label:'第 1 段',text:'HE'},{label:'第 2 段',text:'LL'},{label:'第 3 段',text:'O'}],reason:'封包交換的核心是將資料分成封包來傳送。這個示意用第 1、2、3 段標記原本的資料順序。'},
+      {title:'傳輸：示意抵達順序為 3 → 1 → 2',chunks:[{label:'第 3 段先到',text:'O'},{label:'第 1 段接著到',text:'HE'},{label:'第 2 段最後到',text:'LL'}],reason:'IP 處理封包的定址與網路間傳遞。這裡刻意用不同的抵達順序，讓你看到接收端為什麼需要順序資訊。'},
+      {title:'接收端：依原本順序還原 HELLO',chunks:[{label:'重組後的資料',text:'HELLO'}],reason:'TCP 可提供有序、可靠的資料傳送。這個示意把三段依 1 → 2 → 3 整理後，接收方取得原本的 HELLO。'}
+    ];
+    let packetStep=0;
+    function renderPacket() {
+      const step=PACKET_STEPS[packetStep];
+      renderStudySteps($('#packetStages'),['原始資料','分塊標記','傳輸抵達','接收重組'],packetStep);
+      $('#packetTitle').textContent=step.title;
+      $('#packetExplanation').textContent=step.reason;
+      const visual=$('#packetVisual'); visual.replaceChildren();
+      step.chunks.forEach(chunk=>{
+        const tile=document.createElement('div'); tile.className='packet';
+        const label=document.createElement('small'); label.textContent=chunk.label;
+        const text=document.createElement('code'); text.textContent=chunk.text;
+        tile.append(label,text); visual.append(tile);
+      });
+      $('#packetNext').disabled=packetStep===PACKET_STEPS.length-1;
+      $('#packetNext').textContent=packetStep===PACKET_STEPS.length-1?'這輪示意完成':'下一步 →';
+    }
+    $('#packetNext').addEventListener('click',()=>{if(packetStep<PACKET_STEPS.length-1){packetStep++;renderPacket();}});
+    $('#packetReset').addEventListener('click',()=>{packetStep=0;renderPacket();});
+    renderPacket();
+
+    let pipelineMode='high', pipelineStep=0;
+    function pipelineSteps() {
+      const high=pipelineMode==='high';
+      return [
+        {label:high?'高階語言程式':'組合語言程式',reason:high?'從較接近英文或人類想法的敘述開始。講義列 Fortran、COBOL、Lisp 為早期高階語言的例子。':'從 mnemonic codes（助記碼）表示的指令開始。組合語言需要翻譯成機器語言。'},
+        {label:high?'Compiler（編譯器）':'Assembler（組譯器）',reason:high?'Compiler 將高階語言翻譯為機器可執行的指令。先抓動詞「翻譯」。':'Assembler 將 Assembly Language 翻譯成 Machine Language。Assembly 配 Assembler。'},
+        {label:'Linker（連結器）',reason:'大型程式可由多個片段組成；Linker 把各片段連結起來。這一步的工作是連結。'},
+        {label:'Loader（載入器）',reason:'Loader 將程式載入 Memory（記憶體），讓系統可以執行它。這一步的工作是載入。'},
+        {label:'OS 安排執行',reason:'Operating System 管理資源並決定程式何時執行。CPU 按程式指令工作；OS 的重點是管理與排程。'}
+      ];
+    }
+    function renderPipeline() {
+      const steps=pipelineSteps();
+      $$('[data-pipeline]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.pipeline===pipelineMode)));
+      renderStudySteps($('#pipelineStages'),steps.map(step=>step.label),pipelineStep);
+      $('#pipelineTitle').textContent=steps[pipelineStep].label;
+      $('#pipelineExplanation').textContent=steps[pipelineStep].reason;
+      $('#pipelineNext').disabled=pipelineStep===steps.length-1;
+      $('#pipelineNext').textContent=pipelineStep===steps.length-1?'這條路線完成':'下一步 →';
+    }
+    $$('[data-pipeline]').forEach(button=>button.addEventListener('click',()=>{pipelineMode=button.dataset.pipeline;pipelineStep=0;renderPipeline();}));
+    $('#pipelineNext').addEventListener('click',()=>{if(pipelineStep<4){pipelineStep++;renderPipeline();}});
+    $('#pipelineReset').addEventListener('click',()=>{pipelineStep=0;renderPipeline();});
+    renderPipeline();
+
+    let timeTick=0;
+    function renderTimeSharing() {
+      const counts=[0,0,0];
+      for (let tick=0;tick<timeTick;tick++) counts[tick%3]++;
+      const active=timeTick>0?(timeTick-1)%3:-1;
+      const tasks=$('#timeTasks'); tasks.replaceChildren();
+      counts.forEach((count,index)=>{
+        const task=document.createElement('div'); task.className='cpu-task'+(active===index?' active':'')+(count===3?' done':'');
+        const title=document.createElement('h4'); title.textContent='使用者 '+['A','B','C'][index];
+        const status=document.createElement('span');
+        status.textContent=count===3?'工作完成 · 3 / 3':(active===index?'剛取得 CPU 時間':'等待下一片時間')+' · '+count+' / 3';
+        const bar=document.createElement('div'); bar.className='bar';
+        const fill=document.createElement('i'); fill.style.width=(count/3*100)+'%'; bar.append(fill);
+        task.append(title,status,bar); tasks.append(task);
+      });
+      $('#timeNext').disabled=timeTick===9;
+      $('#timeNext').textContent=timeTick===9?'三項工作完成':'下一個時間片 →';
+      $('#timeExplanation').textContent=timeTick===0?'目前還沒分配 CPU 時間。下一片先給使用者 A。':
+        '第 '+timeTick+' 個時間片：OS 把 CPU 分配給使用者 '+['A','B','C'][active]+'。'+
+        (timeTick===9?'三項工作都完成了。這個例子是透過時間安排共享一個 CPU。':'接下來再輪到下一位使用者；其他工作保留進度，等待下一片時間。');
+    }
+    $('#timeNext').addEventListener('click',()=>{if(timeTick<9){timeTick++;renderTimeSharing();}});
+    $('#timeReset').addEventListener('click',()=>{timeTick=0;renderTimeSharing();});
+    renderTimeSharing();
+
+    const MINI_EXERCISES={
+      hardware:{
+        options:['Hardware（硬體）','Software（軟體）'],
+        cases:[
+          {prompt:'Keyboard（鍵盤）屬於哪一類？',answer:0,why:'鍵盤是實體輸入設備，屬於 Hardware。'},
+          {prompt:'Operating System（作業系統）屬於哪一類？',answer:1,why:'OS 是管理資源與工作的程式，屬於 Software。'},
+          {prompt:'連接電路的 Wires（線路）屬於哪一類？',answer:0,why:'線路是實體元件；講義把 wires 列在 Hardware 的例子中。'},
+          {prompt:'Compiler（編譯器）屬於哪一類？',answer:1,why:'Compiler 是提供翻譯功能的程式，屬於 Software。'}
+        ]
+      },
+      generations:{
+        options:['第一代','第二代','第三代','第四代'],
+        cases:[
+          {prompt:'使用真空管，並以 Magnetic Drum 作為記憶體，對應哪一代？',answer:0,why:'第一代：代表元件是 Vacuum Tube，記憶體是 Magnetic Drum。'},
+          {prompt:'Magnetic Cores 取代 Magnetic Drums，出現在哪一代？',answer:1,why:'第二代。這是記憶體的演進；同代另有電晶體取代真空管。'},
+          {prompt:'IC 與有鍵盤、螢幕的 Terminal，對應哪一代？',answer:2,why:'第三代。講義同頁列 IC、Terminal 和早期 Moore’s Law。'},
+          {prompt:'LSI／VLSI、PC、Workstations，對應哪一代？',answer:3,why:'第四代。晶片整合進步帶動 PC、工作站與可攜式電腦。'}
+        ]
+      },
+      parallel:{
+        options:['SIMD','MIMD'],
+        cases:[
+          {prompt:'多個處理單元，對不同資料都執行「加 1」。',answer:0,why:'SIMD：Single Instruction（相同指令）作用在 Multiple Data（多份資料）上。'},
+          {prompt:'不同單元分別做加法、乘法、減法，並處理各自的資料。',answer:1,why:'MIMD：多種指令與多份資料。抓住 Multiple Instruction 這個差異。'},
+          {prompt:'大量像素都套用相同的亮度調整操作。',answer:0,why:'這個理解用例符合 SIMD：操作相同，處理的像素資料不同。'}
+        ]
+      },
+      network:{
+        options:['LAN','TCP/IP','Cloud Computing','File server'],
+        cases:[
+          {prompt:'同一個教室裡的電腦組成區域網路，對應哪個名詞？',answer:0,why:'LAN＝Local Area Network（區域網路）。Local 是這題的關鍵字。'},
+          {prompt:'Transmission Control Protocol／Internet Protocol 的縮寫是什麼？',answer:1,why:'TCP/IP；P 代表 Protocol（協定）。'},
+          {prompt:'透過 Internet 使用遠端電腦的計算資源，主要在說哪個概念？',answer:2,why:'Cloud Computing。講義的核心是使用 Internet 中的電腦資源。'},
+          {prompt:'多台 PC 存取集中提供的檔案服務，哪個名詞最直接對應提供服務的角色？',answer:3,why:'File server（檔案伺服器）提供其他電腦存取檔案的服務。'}
+        ]
+      },
+      software:{
+        options:['Assembler','Compiler','Linker','Loader','OS'],
+        cases:[
+          {prompt:'把組合語言翻成機器語言。',answer:0,why:'Assembler（組譯器）。Assembly Language 配 Assembler。'},
+          {prompt:'把高階語言翻成機器可執行的指令。',answer:1,why:'Compiler（編譯器）。這份講義將它與高階語言配對。'},
+          {prompt:'將大型程式的不同片段連結起來。',answer:2,why:'Linker（連結器），關鍵動詞是 link。'},
+          {prompt:'將程式載入記憶體。',answer:3,why:'Loader（載入器），關鍵動詞是 load，目的地是 Memory。'},
+          {prompt:'安排不同使用者的工作何時取得資源。',answer:4,why:'OS（作業系統）負責管理資源並排程 jobs。'}
+        ]
+      },
+      skills:{
+        options:['Algorithmic thinking','Representation','Programming','Design'],
+        cases:[
+          {prompt:'寫出「逐筆相加，再除以人數」的解題步驟，主要強調哪項能力？',answer:0,why:'Algorithmic thinking：把問題變成清楚、可執行的步驟。'},
+          {prompt:'決定以表格儲存學生姓名與成績，主要強調哪項能力？',answer:1,why:'Representation：選擇資料的表示形式。'},
+          {prompt:'將加總的步驟寫成能執行的迴圈程式，主要強調哪項能力？',answer:2,why:'Programming：用程式語言實作計算步驟。'},
+          {prompt:'規劃輸入、檢查、計算與結果呈現的完整流程，主要強調哪項能力？',answer:3,why:'Design：安排整體流程和各部分的關係。'}
+        ]
+      }
+    };
+    $$('[data-mini]').forEach(host=>{
+      const exercise=MINI_EXERCISES[host.dataset.mini], mount=$('[data-mini-mount]',host);
+      let index=0, answers=[], finished=false;
+      function renderMini(focusPrompt=false) {
+        mount.replaceChildren();
+        const status=document.createElement('div'); status.className='mini-position';
+        const score=answers.filter((answer,i)=>answer===exercise.cases[i].answer).length;
+        status.textContent='已答 '+answers.length+' / '+exercise.cases.length+' · 答對 '+score+' 題';
+        mount.append(status);
+        const reset=document.createElement('button'); reset.type='button'; reset.className='ghost-btn'; reset.textContent='重練本節';
+        reset.addEventListener('click',()=>{index=0;answers=[];finished=false;renderMini(true);});
+        if (finished) {
+          const summary=document.createElement('div'); summary.className='lab-output'; summary.setAttribute('role','status');
+          summary.textContent='本節練習完成：'+score+' / '+exercise.cases.length+' 題答對。'+(score===exercise.cases.length?'可以前往下一節。':'讀一下解析，再重練本節。');
+          const controls=document.createElement('div'); controls.className='lab-controls'; controls.append(reset);
+          mount.append(summary,controls); return;
+        }
+        const item=exercise.cases[index], hasAnswer=Number.isInteger(answers[index]);
+        const prompt=document.createElement('p'); prompt.className='mini-question'; prompt.tabIndex=-1;
+        prompt.textContent='第 '+(index+1)+' 題：'+item.prompt; mount.append(prompt);
+        const choices=document.createElement('div'); choices.className='mini-options';
+        choices.setAttribute('role','group'); choices.setAttribute('aria-label',item.prompt);
+        const next=document.createElement('button'); next.type='button'; next.className='primary-btn';
+        next.textContent=index===exercise.cases.length-1?'看本節結果':'下一個情境 →'; next.disabled=!hasAnswer;
+        exercise.options.forEach((label,choice)=>{
+          const button=document.createElement('button'); button.type='button'; button.className='ghost-btn';
+          button.textContent=label; button.disabled=hasAnswer;
+          if (hasAnswer && choice===item.answer) {button.classList.add('correct');button.textContent+=' · 正確';}
+          else if (hasAnswer && choice===answers[index]) {button.classList.add('incorrect');button.textContent+=' · 你的答案';}
+          button.addEventListener('click',()=>{
+            if (Number.isInteger(answers[index])) return;
+            answers[index]=choice; renderMini();
+            $('[data-mini-next]',mount).focus({preventScroll:true});
+          });
+          choices.append(button);
+        });
+        mount.append(choices);
+        if (hasAnswer) {
+          const feedback=document.createElement('div');
+          feedback.className='lab-output '+(answers[index]===item.answer?'ok':'bad');
+          feedback.setAttribute('role','status'); feedback.setAttribute('aria-live','polite');
+          feedback.textContent=(answers[index]===item.answer?'✓ 答對了。':'這題選 '+exercise.options[item.answer]+'。')+' '+item.why;
+          mount.append(feedback);
+        }
+        next.dataset.miniNext='';
+        next.addEventListener('click',()=>{
+          if (!Number.isInteger(answers[index])) return;
+          if (index===exercise.cases.length-1) finished=true; else index++;
+          renderMini(true);
+        });
+        const controls=document.createElement('div'); controls.className='lab-controls'; controls.append(next,reset);
+        mount.append(controls);
+        if(focusPrompt) prompt.focus({preventScroll:true});
+      }
+      renderMini();
+    });
+
+    // Source: ch01.pdf, PDF pages 3–22. Each choice has its own explanation.
+    const CH1_QUESTIONS = [
+      {
+        id:'hw-transistor', topic:'硬體世代', page:10,
+        question:'第二代電腦使用哪種元件取代真空管？',
+        options:['Integrated Circuit（積體電路）','Transistor（電晶體）','Magnetic Tape（磁帶）','VLSI（超大型積體電路）'], answer:1,
+        explanations:['IC 是第三代的代表元件。','第二代用電晶體取代真空管；講義列出的優點是快、小、耐用、便宜。','磁帶是儲存設備；第一代講義將它列為循序存取的輔助儲存。','LSI／VLSI 是第四代的重點。']
+      },
+      {
+        id:'hw-match', topic:'硬體世代', page:[9,10,11,12],
+        question:'下列哪個「硬體世代與元件」配對錯誤？',
+        options:['第一代 → Vacuum Tube（真空管）','第二代 → Transistor（電晶體）','第三代 → VLSI（超大型積體電路）','第四代 → LSI／VLSI'], answer:2,
+        explanations:['配對正確。第一代（1951–1959）使用真空管。','配對正確。第二代（1959–1965）使用電晶體。','這是錯誤配對：第三代（1965–1971）是 IC；VLSI 屬於第四代。','配對正確。第四代（1971 起）的重點是 LSI／VLSI。']
+      },
+      {
+        id:'system-definition', topic:'電腦系統', page:3,
+        question:'依講義，Computing system 最合適的描述是什麼？',
+        options:['用來解決問題，並與環境互動的動態實體','只有 CPU 的靜態零件清單','僅指電腦裡的應用程式','只是一種儲存資料的磁帶'], answer:0,
+        explanations:['講義的關鍵字是 dynamic entity、solve problems、interact with its environment。','系統的概念包含互動與解決問題，範圍超過 CPU。','軟體是系統的一部分，不能單獨代表整個 computing system。','磁帶是儲存設備，不是整個系統的定義。']
+      },
+      {
+        id:'software-definition', topic:'電腦系統', page:4,
+        question:'下列哪一項最符合 Software（軟體）的定義？',
+        options:['Keyboard（鍵盤）','Circuit board（電路板）','Printer（印表機）','提供電腦執行指令的程式'], answer:3,
+        explanations:['鍵盤是實體元件，屬於硬體。','電路板是實體元件，屬於硬體。','印表機是實體元件，屬於硬體。','軟體是提供 instructions，讓電腦執行的 programs。']
+      },
+      {
+        id:'system-layers', topic:'電腦系統', page:5,
+        question:'講義的系統分層圖，由內向外排列，哪一組正確？',
+        options:['Hardware → Information → Applications → Programming → Communications → OS','Information → Hardware → Programming → Operating systems → Applications → Communications','Applications → Operating systems → Programming → Hardware → Information → Communications','Communications → Applications → Operating systems → Programming → Hardware → Information'], answer:1,
+        explanations:['最內層是 Information；Hardware 在它的外側。這組也打亂了程式設計與應用層。','這就是第 5 頁圖中由內到外的六層順序。','應用程式在作業系統外側，不是最內層。','這一組是由外到內；題目問的是由內到外。']
+      },
+      {
+        id:'history-jacquard', topic:'歷史人物', page:7,
+        question:'哪位人物與織布機、Punched card（打孔卡）有關？',
+        options:['Joseph Jacquard','Alan Turing','Ada Lovelace','Charles Babbage'], answer:0,
+        explanations:['Jacquard 的織布機與打孔卡是講義列出的配對。','Turing 對應 Turing machine 與計算理論。','Ada 對應第一位程式設計師與 loop。','Babbage 對應 Analytical Engine。']
+      },
+      {
+        id:'history-babbage', topic:'歷史人物', page:7,
+        question:'Analytical Engine（分析引擎）對應哪位人物？',
+        options:['Blaise Pascal','Joseph Jacquard','Charles Babbage','Alan Turing'], answer:2,
+        explanations:['Pascal 對應能做加減法的早期機械計算裝置。','Jacquard 對應織布機與打孔卡。','講義將 Analytical Engine 與 Charles Babbage 配對。','Turing 對應 Turing machine。']
+      },
+      {
+        id:'history-ada', topic:'歷史人物', page:8,
+        question:'講義中哪位人物被稱為 First programmer，並提出 Loop（迴圈）概念？',
+        options:['Charles Babbage','Joseph Jacquard','Blaise Pascal','Ada Lovelace'], answer:3,
+        explanations:['Babbage 是分析引擎的配對人物。','Jacquard 是打孔卡的配對人物。','Pascal 是機械計算裝置的配對人物。','Ada Lovelace 對應 First programmer 和 loop；記成「Ada＝程式＋迴圈」。']
+      },
+      {
+        id:'history-turing', topic:'歷史人物', page:8,
+        question:'哪個概念與 Alan Turing 有關？',
+        options:['Jacquard loom','Turing machine','Analytical Engine','Magnetic drum'], answer:1,
+        explanations:['Jacquard loom 是 Jacquard 的織布機。','Turing machine 是圖靈機；講義強調它奠定計算理論的重要基礎。','分析引擎對應 Babbage。','磁鼓是第一代的記憶體設備。']
+      },
+      {
+        id:'history-pascal', topic:'歷史人物', page:7,
+        question:'Blaise Pascal 的早期機械裝置主要能做哪些運算？',
+        options:['只處理網路封包','只顯示網頁','加法與減法','編譯高階程式語言'], answer:2,
+        explanations:['網路封包屬於後面的網路主題。','網頁屬於 World Wide Web 主題。','講義先列 add、subtract；後來的裝置再擴展到乘除。','Compiler 是軟體翻譯器，不是 Pascal 的機械裝置。']
+      },
+      {
+        id:'history-computers', topic:'歷史人物', page:8,
+        question:'哪一組是講義列出的早期電腦名稱？',
+        options:['Harvard Mark I、ENIAC、UNIVAC I','Fortran、COBOL、Lisp','Assembler、Compiler、Linker','Mosaic、Netscape、Firefox'], answer:0,
+        explanations:['這三個都是第 8 頁列出的早期電腦。','這三個是高階程式語言。','這些是程式翻譯或連結工具。','這些是瀏覽器。']
+      },
+      {
+        id:'hardware-drum', topic:'硬體世代', page:9,
+        question:'第一代講義中的 Magnetic Drum（磁鼓）是什麼設備？',
+        options:['網路通訊協定','高階程式語言','記憶體設備','作業系統'], answer:2,
+        explanations:['TCP/IP 才是此章列出的網路協定。','Fortran、COBOL、Lisp 是語言；磁鼓是硬體。','磁鼓在讀寫頭下旋轉，用來儲存資訊，是第一代的記憶體設備。','OS 是系統軟體。']
+      },
+      {
+        id:'hardware-storage', topic:'硬體世代', page:[9,10],
+        question:'依講義，比較 Magnetic Tape（磁帶）與 Magnetic Disk（磁碟），何者正確？',
+        options:['磁帶直接存取，磁碟只能循序存取','兩者都是程式翻譯器','磁碟用來取代電晶體','磁帶循序存取，磁碟可直接存取'], answer:3,
+        explanations:['這把兩者的特性反過來了。','磁帶與磁碟是儲存設備；Assembler／Compiler 才是翻譯器。','磁碟取代的是磁帶在這段講義中的角色；電晶體取代真空管。','Sequential 是循序；Direct 是直接。第二代磁碟讓資料可以直接存取。']
+      },
+      {
+        id:'hardware-core', topic:'硬體世代', page:10,
+        question:'第二代的 Magnetic Cores（磁芯）取代了什麼？',
+        options:['Keyboard（鍵盤）','Magnetic Drums（磁鼓）','Compiler（編譯器）','Ethernet（乙太網路）'], answer:1,
+        explanations:['鍵盤是輸入設備。','磁芯取代磁鼓；講義強調資訊可即時取得。','編譯器是軟體，與這個記憶體替換無關。','Ethernet 屬於網路連線技術。']
+      },
+      {
+        id:'hardware-moore', topic:'硬體世代', page:[11,12],
+        question:'依講義第 12 頁修訂版 Moore’s Law，晶片密度約多久加倍一次？',
+        options:['每 10 年','每 10 天','每 6 個月','每 18 個月'], answer:3,
+        explanations:['第 12 頁列的是 18 個月。','第 12 頁列的是 18 個月。','第 12 頁列的是 18 個月。','修訂版是 18 個月；第 11 頁的早期版本另列每年加倍，做題時注意題目指定的版本。']
+      },
+      {
+        id:'hardware-risc', topic:'硬體世代', page:12,
+        question:'CISC 與 RISC 的意思，哪一項配對正確？',
+        options:['CISC＝複雜指令集；RISC＝精簡指令集','CISC＝精簡指令集；RISC＝複雜指令集','CISC＝磁鼓；RISC＝磁芯','CISC＝機器語言；RISC＝組合語言'], answer:0,
+        explanations:['Complex 對應複雜，Reduced 對應精簡；兩者都出現在第四代的 Workstations 主題。','這把 Complex 與 Reduced 的意思對調了。','磁鼓和磁芯是記憶體設備。','機器語言與組合語言屬於軟體世代主題。']
+      },
+      {
+        id:'parallel-simd', topic:'平行計算', page:13,
+        question:'SIMD 的意思是什麼？',
+        options:['Single Instruction, Single Data','Multiple Instruction, Multiple Data','Single Instruction, Multiple Data','Multiple Instruction, Single Data'], answer:2,
+        explanations:['SIMD 的 MD 代表 Multiple Data。','這是 MIMD 的意思。','SI＝單一指令，MD＝多筆資料；同一指令處理多份資料。講義用 data-stream 表達資料流。','SIMD 的 SI 不是 Multiple Instruction。']
+      },
+      {
+        id:'parallel-mimd', topic:'平行計算', page:13,
+        question:'哪一項最符合 MIMD？',
+        options:['所有資料只能做同一個指令','多種指令同時處理多份資料','用打孔卡記錄指令','每次只能使用一筆資料'], answer:1,
+        explanations:['同一指令處理多份資料較符合 SIMD。','MI＝Multiple Instruction，MD＝Multiple Data；平行架構利用相連的處理或記憶單元增加速度。','打孔卡是早期歷史的主題。','MIMD 的 MD 代表多份資料。']
+      },
+      {
+        id:'network-ethernet', topic:'網路', page:14,
+        question:'依講義，Ethernet（乙太網路）的用途是什麼？',
+        options:['把組合語言翻譯成機器碼','把程式載入記憶體','取代真空管','連接電腦以共享資源'], answer:3,
+        explanations:['這是 Assembler 的工作。','這是 Loader 的工作。','電晶體取代真空管。','Ethernet 連接電腦共享資源；同頁的 LAN 是 Local Area Network（區域網路）。']
+      },
+      {
+        id:'network-tcpip', topic:'網路', page:14,
+        question:'TCP/IP 的完整名稱是哪一項？',
+        options:['Time Control Program / Input Program','Transmission Control Protocol / Internet Protocol','Terminal Computer Processor / Internal Processor','Tape Compiler Protocol / Instruction Protocol'], answer:1,
+        explanations:['TCP/IP 的 P 指的是 Protocol（協定），不是 Program。','這是講義列出的完整名稱；同頁也列有 Packet switching（封包交換）和 Internet。','TCP/IP 不是處理器名稱。','TCP/IP 不是磁帶或編譯器的名詞。']
+      },
+      {
+        id:'network-cloud', topic:'網路', page:14,
+        question:'Cloud Computing（雲端運算）的核心意思是什麼？',
+        options:['使用 Internet 上的電腦資源','所有工作只能依靠所在地的單一裝置','利用磁鼓執行減法','把每個程式改寫成打孔卡'], answer:0,
+        explanations:['講義強調使用 Internet 中的電腦資源，而不是全部依賴實體所在地的裝置。','這和講義的雲端概念相反。','磁鼓是第一代的記憶體設備。','打孔卡屬於早期計算歷史。']
+      },
+      {
+        id:'software-machine', topic:'軟體世代', page:15,
+        question:'第一代軟體中，Machine Language 與 Assembly Language 的差別，何者正確？',
+        options:['兩者都只使用英文句子','機器語言用助記碼，組合語言只用 0、1','機器語言用 0、1；組合語言用助記碼表示指令','組合語言不需要翻譯就能直接取代所有機器指令'], answer:2,
+        explanations:['較接近英文敘述的是後面的高階語言。','這把兩者的表示方法反過來了。','Machine Language 使用二進位；Assembly Language 使用 mnemonic codes（助記碼）。','組合語言仍須由 Assembler 翻譯為機器語言。']
+      },
+      {
+        id:'software-assembler', topic:'軟體世代', page:15,
+        question:'Assembler（組譯器）做什麼？',
+        options:['Assembly Language → Machine Language','High-level Language → Assembly Language，且只做這一種翻譯','把大型程式的片段連結起來','管理各使用者的 CPU 工作排程'], answer:0,
+        explanations:['組譯器將組合語言翻譯成機器語言。','講義中高階語言的翻譯器是 Compiler。','這是 Linker 的工作。','這屬於 OS 的排程工作。']
+      },
+      {
+        id:'software-compiler', topic:'軟體世代', page:16,
+        question:'依這份講義，Compiler（編譯器）的主要角色是什麼？',
+        options:['只負責共享印表機','把磁帶改成磁碟','只把組合語言翻成機器語言','把高階語言翻成機器可執行的指令'], answer:3,
+        explanations:['Compiler 是程式翻譯工具。','磁帶／磁碟是硬體儲存設備。','講義把組合語言的翻譯交給 Assembler。','高階語言需要翻成 machine instructions 才能在機器上執行。']
+      },
+      {
+        id:'software-high-level', topic:'軟體世代', page:16,
+        question:'哪一組是講義第二代軟體列出的高階語言？',
+        options:['Mosaic、Netscape、IE','Fortran、COBOL、Lisp','ENIAC、UNIVAC I、Mark I','Ethernet、LAN、TCP/IP'], answer:1,
+        explanations:['這些是瀏覽器。','第二代軟體列出 Fortran、COBOL、Lisp；指令比機器碼更接近英文敘述。','這些是早期電腦。','這些是網路相關名詞。']
+      },
+      {
+        id:'software-loader-linker', topic:'軟體世代', page:17,
+        question:'Loader 與 Linker 的工作，哪一項配對正確？',
+        options:['Loader 連結程式；Linker 載入記憶體','Loader 翻譯組合語言；Linker 管理網路','Loader 載入程式到記憶體；Linker 連結程式片段','兩者都只負責文字排版'], answer:2,
+        explanations:['這把兩者的工作反過來了。','翻譯組合語言是 Assembler；網路不是此處 Linker 的意思。','Load＝載入；Link＝連結。兩者都列在第三代的 Systems Software 下。','文字排版屬於應用軟體的工作。']
+      },
+      {
+        id:'software-time-sharing', topic:'軟體世代', page:[17,18],
+        question:'Time-sharing（分時技術）讓多位使用者共享一台電腦時，誰組織並排程各工作？',
+        options:['磁鼓','打孔卡','只有每位使用者自己','Operating System（作業系統）'], answer:3,
+        explanations:['磁鼓是記憶體設備。','打孔卡不能代替作業系統的排程功能。','講義指出是 OS 組織並排程不同的 jobs。','多位使用者透過 terminal 與單一電腦互動，OS 排程工作並控制資源。']
+      },
+      {
+        id:'software-fourth', topic:'軟體世代', page:19,
+        question:'第四代軟體（1971–1989）的重點是哪一項？',
+        options:['Structured Programming（結構化程式設計）與應用軟體發展','首次出現真空管','只允許使用機器語言','只有磁芯記憶體'], answer:0,
+        explanations:['講義列出結構化程式設計，以及試算表、文書處理、資料庫等應用軟體。','真空管是第一代硬體的重點。','第四代已列有 Pascal、BASIC、C、C++ 等語言。','磁芯是第二代硬體的記憶體主題。']
+      },
+      {
+        id:'software-fifth', topic:'軟體世代', page:20,
+        question:'講義第五代軟體列出的重點，哪一組正確？',
+        options:['只有真空管與磁鼓','Object-Oriented Design、World Wide Web、Embedded System','打孔卡、織布機、分析引擎','只使用組合語言而沒有瀏覽器'], answer:1,
+        explanations:['真空管與磁鼓屬於第一代硬體。','第五代列有物件導向、WWW 和嵌入式系統；例子包括 C++／Java、瀏覽器，以及控制設備的晶片。','這些是早期歷史主題。','此頁列有 Mosaic、Netscape、IE、Firefox 等瀏覽器。']
+      },
+      {
+        id:'discipline-skills', topic:'工具與學科', page:22,
+        question:'最後一頁列出的四項必要能力，哪一組正確？',
+        options:['Typing、Printing、Browsing、Shopping','Vacuum Tube、Transistor、IC、VLSI','Algorithmic thinking、Representation、Programming、Design','Fortran、COBOL、Lisp、Pascal'], answer:2,
+        explanations:['這不是講義的四項必要能力。','這是硬體四世代的代表元件。','分別是演算思考、表示、程式設計、設計；同頁的根本問題是「哪些事情能有效率地自動化？」。','這些是程式語言名稱，不是此頁列出的能力。']
+      }
+    ];
+
+    const ch1ById = new Map(CH1_QUESTIONS.map(q => [q.id, q]));
+    const ch1StorageKey = 'cs-ch1-choice-v1';
+    const ch1Letters = ['A', 'B', 'C', 'D'];
+    function freshCh1Run(continueChat = false) {
+      return {
+        version:1, order:CH1_QUESTIONS.map(q => q.id), index:continueChat ? 1 : 0,
+        answers:continueChat ? {'hw-transistor':1} : {}, review:false, finished:false
+      };
+    }
+    function loadCh1Run() {
+      try {
+        const raw = localStorage.getItem(ch1StorageKey);
+        if (!raw) return freshCh1Run(true);
+        const run = JSON.parse(raw);
+        if (!run || run.version !== 1 || !Array.isArray(run.order) || !run.order.length ||
+            new Set(run.order).size !== run.order.length || run.order.some(id => !ch1ById.has(id))) return freshCh1Run(true);
+        if (!run.review && (run.order.length !== CH1_QUESTIONS.length || run.order.some((id, i) => id !== CH1_QUESTIONS[i].id))) return freshCh1Run(true);
+        const answers = {};
+        for (const id of run.order) {
+          const answer = run.answers && run.answers[id];
+          if (Number.isInteger(answer) && answer >= 0 && answer < 4) answers[id] = answer;
+        }
+        return {
+          version:1, order:run.order, answers, review:!!run.review,
+          index:Number.isInteger(run.index) ? Math.max(0, Math.min(run.index, run.order.length - 1)) : 0,
+          finished:!!run.finished && Object.keys(answers).length === run.order.length
+        };
+      } catch { return freshCh1Run(true); }
+    }
+    let ch1Run = loadCh1Run();
+    function saveCh1Run() {
+      try { localStorage.setItem(ch1StorageKey, JSON.stringify(ch1Run)); } catch { /* Answers still work without persistent storage. */ }
+    }
+    function ch1HasAnswer(id) { return Object.prototype.hasOwnProperty.call(ch1Run.answers, id); }
+    function ch1WrongIds() {
+      return ch1Run.order.filter(id => ch1HasAnswer(id) && ch1Run.answers[id] !== ch1ById.get(id).answer);
+    }
+    function renderCh1Quiz(focusQuestion = false) {
+      const answered = ch1Run.order.filter(ch1HasAnswer).length;
+      const wrongIds = ch1WrongIds();
+      const correct = answered - wrongIds.length;
+      const total = ch1Run.order.length;
+      $('#ch1QuizScope').textContent = ch1Run.review ? '錯題複習 · ' + total + ' 題' : '全部 ' + total + ' 題';
+      $('#ch1QuizScore').textContent = '已答 ' + answered + ' / ' + total + ' · 答對 ' + correct + ' 題';
+      $('#ch1QuizProgress').style.width = (answered / total * 100) + '%';
+      $('#ch1QuizRetry').disabled = wrongIds.length === 0;
+      $('#ch1QuizCard').hidden = ch1Run.finished;
+      $('#ch1QuizSummary').hidden = !ch1Run.finished;
+      if (ch1Run.finished) {
+        $('#ch1QuizPosition').textContent = '本輪完成';
+        $('#ch1QuizSummaryScore').textContent = correct + ' / ' + total + ' 題答對';
+        $('#ch1QuizSummaryText').textContent = wrongIds.length ? '還有 ' + wrongIds.length + ' 題可加強，按「只重練錯題」再練一次。' : '這輪全部答對！可以按「完整重練」再次檢查記憶。';
+        const topics = new Map();
+        wrongIds.forEach(id => {
+          const topic = ch1ById.get(id).topic;
+          topics.set(topic, (topics.get(topic) || 0) + 1);
+        });
+        const list = $('#ch1QuizWeakTopics');
+        list.replaceChildren();
+        topics.forEach((count, topic) => {
+          const li = document.createElement('li');
+          li.textContent = topic + '：' + count + ' 題待加強';
+          list.append(li);
+        });
+        if (focusQuestion) {
+          $('#ch1QuizSummaryTitle').focus({preventScroll:true});
+          $('#ch1-test').scrollIntoView({block:'start', behavior:'instant'});
+        }
+        return;
+      }
+      const question = ch1ById.get(ch1Run.order[ch1Run.index]);
+      const hasAnswer = ch1HasAnswer(question.id);
+      const selected = ch1Run.answers[question.id];
+      $('#ch1QuizPosition').textContent = '第 ' + (ch1Run.index + 1) + ' / ' + total + ' 題 · ' + question.topic;
+      $('#ch1QuizQuestion').textContent = question.question;
+      $('#ch1QuizSource').textContent = '對照 ch01.pdf 第 ' + (Array.isArray(question.page) ? question.page.join('、') : question.page) + ' 頁';
+      const options = $('#ch1QuizOptions');
+      options.replaceChildren();
+      question.options.forEach((text, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'quiz-option';
+        button.disabled = hasAnswer;
+        button.setAttribute('aria-pressed', String(hasAnswer && selected === index));
+        const letter = document.createElement('span');
+        letter.className = 'quiz-letter';
+        letter.textContent = ch1Letters[index];
+        const label = document.createElement('span');
+        label.textContent = text;
+        if (hasAnswer && index === question.answer) {
+          button.classList.add('correct');
+          label.textContent += ' · 正確答案';
+        } else if (hasAnswer && index === selected) {
+          button.classList.add('incorrect');
+          label.textContent += ' · 你的答案';
+        }
+        button.append(letter, label);
+        button.addEventListener('click', () => answerCh1Quiz(index));
+        options.append(button);
+      });
+      const feedback = $('#ch1QuizFeedback');
+      feedback.hidden = !hasAnswer;
+      feedback.replaceChildren();
+      if (hasAnswer) {
+        const isCorrect = selected === question.answer;
+        feedback.className = 'quiz-feedback ' + (isCorrect ? 'correct' : 'incorrect');
+        const heading = document.createElement('strong');
+        heading.textContent = isCorrect ? '✓ 答對了！' : '這題的正確答案是 ' + ch1Letters[question.answer];
+        const note = document.createElement('p');
+        note.textContent = '你選 ' + ch1Letters[selected] + '；正確答案 ' + ch1Letters[question.answer] + '。';
+        const explanationList = document.createElement('ul');
+        question.explanations.forEach((explanation, index) => {
+          const li = document.createElement('li');
+          li.textContent = ch1Letters[index] + '：' + explanation;
+          explanationList.append(li);
+        });
+        feedback.append(heading, note, explanationList);
+      }
+      $('#ch1QuizPrev').disabled = ch1Run.index === 0;
+      $('#ch1QuizNext').disabled = !hasAnswer;
+      $('#ch1QuizNext').textContent = ch1Run.index === total - 1 ? '查看結果 →' : '下一題 →';
+      if (focusQuestion) {
+        $('#ch1QuizQuestion').focus({preventScroll:true});
+        $('#ch1-test').scrollIntoView({block:'start', behavior:'instant'});
+      }
+    }
+    function answerCh1Quiz(choice) {
+      if (ch1Run.finished || !Number.isInteger(choice) || choice < 0 || choice > 3) return;
+      const id = ch1Run.order[ch1Run.index];
+      if (ch1HasAnswer(id)) return;
+      ch1Run.answers[id] = choice;
+      saveCh1Run();
+      renderCh1Quiz();
+      $('#ch1QuizNext').focus({preventScroll:true});
+    }
+    function nextCh1Question() {
+      if (ch1Run.finished || !ch1HasAnswer(ch1Run.order[ch1Run.index])) return;
+      if (ch1Run.index === ch1Run.order.length - 1) ch1Run.finished = true;
+      else ch1Run.index++;
+      saveCh1Run();
+      renderCh1Quiz(true);
+    }
+    $('#ch1QuizNext').addEventListener('click', nextCh1Question);
+    $('#ch1QuizPrev').addEventListener('click', () => {
+      if (ch1Run.index === 0) return;
+      ch1Run.index--;
+      saveCh1Run();
+      renderCh1Quiz(true);
+    });
+    $('#ch1QuizRetry').addEventListener('click', () => {
+      const wrongIds = ch1WrongIds();
+      if (!wrongIds.length) return;
+      ch1Run = {version:1, order:wrongIds, index:0, answers:{}, review:true, finished:false};
+      saveCh1Run();
+      renderCh1Quiz(true);
+    });
+    $('#ch1QuizRestart').addEventListener('click', () => {
+      ch1Run = freshCh1Run();
+      saveCh1Run();
+      renderCh1Quiz(true);
+    });
+    document.addEventListener('keydown', event => {
+      const editing = event.target.closest('input, textarea, select, [contenteditable="true"]');
+      const quiz = $('#ch1-test');
+      if (editing || event.metaKey || event.ctrlKey || event.altKey || quiz.classList.contains('hidden-by-search') ||
+          (location.hash !== '#ch1-test' && !quiz.contains(document.activeElement))) return;
+      const choice = ch1Letters.indexOf(event.key.toUpperCase());
+      if (choice !== -1 && !ch1Run.finished) {
+        event.preventDefault();
+        answerCh1Quiz(choice);
+      } else if (event.key === 'Enter' && event.target === $('#ch1QuizQuestion')) {
+        event.preventDefault();
+        nextCh1Question();
+      }
+    });
+    $('a[href="#ch1-test"]').addEventListener('click', () => {
+      search.value = '';
+      runSearch();
+    });
+    saveCh1Run();
+    renderCh1Quiz();
+
+    function revealStudyTarget(id) {
+      const target=document.getElementById(id);
+      if (!target) return;
+      if ((target.hasAttribute('data-study-only') && state.mode==='practice') ||
+          (target.hasAttribute('data-practice-only') && state.mode==='study')) setMode('all');
+      search.value='';
+      runSearch();
+    }
+    $$('a[href^="#"]').forEach(link=>link.addEventListener('click',()=>{
+      revealStudyTarget(link.getAttribute('href').slice(1));
+    }));
+    window.addEventListener('hashchange',()=>revealStudyTarget(location.hash.slice(1)));
+    revealStudyTarget(location.hash.slice(1));
+  })();
+</script>
+</body>
+</html>
