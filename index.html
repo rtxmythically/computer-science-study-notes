@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark light">
-  <title>計算機概論｜Ch01–Ch02 互動筆記</title>
+  <title>計算機概論｜Ch01–Ch03 互動筆記</title>
   <style>
     :root{
       --bg:#07111f;
@@ -552,6 +552,29 @@
       .practice{grid-template-columns:1fr}
       .compare{display:block;overflow:auto}
     }
+
+    .ch3-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:15px 0}
+    .ch3-fields label{display:grid;gap:6px;font-size:13px;color:var(--muted);min-width:0}
+    .ch3-fields input,.ch3-fields select{width:100%;min-width:0;padding:10px 12px;color:var(--text);background:var(--panel-strong);border:1px solid var(--border);border-radius:11px}
+    .ch3-fields input:focus,.ch3-fields select:focus{outline:2px solid var(--cyan);outline-offset:2px}
+    .lab-output[id^="ch3"]{white-space:pre-wrap;overflow-wrap:anywhere}
+    .bit-combinations{display:flex;flex-wrap:wrap;gap:7px;margin:15px 0}
+    .bit-combinations code{padding:4px 8px;border:1px solid var(--border);border-radius:7px;color:var(--cyan);background:var(--panel-soft)}
+    .bit-combinations span{width:100%;color:var(--muted);font-size:12px}
+    .bit-switches{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px;margin:17px 0}
+    .bit-switches button{padding:10px 0;min-width:0;font-family:monospace;font-size:20px}
+    .bit-switches button[aria-pressed="true"]{color:var(--cyan);border-color:var(--cyan);background:rgba(86,214,255,.1)}
+    .wave-canvas{display:block;width:100%;height:auto;border:1px solid var(--border);border-radius:13px;background:var(--panel-soft)}
+    .rgb-layout{display:grid;grid-template-columns:1.3fr 1fr;gap:25px;align-items:stretch}
+    .color-swatch{min-height:180px;border-radius:16px;border:1px solid var(--border)}
+    .video-pixels{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:4px;margin:12px 0}
+    .video-cell{aspect-ratio:1;display:grid;place-items:center;border:1px solid var(--border);border-radius:4px;background:var(--panel-soft);font-size:12px}
+    .video-cell.lit{background:var(--cyan);color:var(--bg);border-color:var(--cyan)}
+    .video-cell.removed{border:2px solid var(--purple);color:var(--purple)}
+    .video-cell.initial{border-color:var(--muted)}
+    #ch3-test .lab{margin-top:18px}
+    @media (max-width:680px){.ch3-fields,.rgb-layout{grid-template-columns:1fr}.color-swatch{min-height:110px}.bit-switches{gap:4px}.bit-switches button{font-size:17px}}
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
   </style>
 </head>
 <body>
@@ -561,7 +584,7 @@
       <div class="brand-mark">CS</div>
       <div>
         <strong>計算機概論</strong>
-        <small>Ch01–Ch02 Study Lab</small>
+        <small>Ch01–Ch03 Study Lab</small>
       </div>
     </div>
 
@@ -584,6 +607,18 @@
     <a class="nav-link" href="#ch2-conversion"><span class="nav-dot"></span>進位轉換</a>
     <a class="nav-link" href="#ch2-binary"><span class="nav-dot"></span>Binary Arithmetic</a>
     <a class="nav-link" href="#ch2-data"><span class="nav-dot"></span>Bit / Byte / Word</a>
+
+    <div class="side-label">Chapter 03</div>
+    <a class="nav-link" href="#ch3-start"><span class="nav-dot"></span>第三章學習路線 · NEW</a>
+    <a class="nav-link" href="#ch3-data"><span class="nav-dot"></span>資料與數位化</a>
+    <a class="nav-link" href="#ch3-integer"><span class="nav-dot"></span>負數 · 補數 · 溢位</a>
+    <a class="nav-link" href="#ch3-fraction"><span class="nav-dot"></span>小數換算與浮點數</a>
+    <a class="nav-link" href="#ch3-text"><span class="nav-dot"></span>ASCII／Unicode</a>
+    <a class="nav-link" href="#ch3-compression"><span class="nav-dot"></span>文字壓縮 · Huffman</a>
+    <a class="nav-link" href="#ch3-audio"><span class="nav-dot"></span>聲音 · 取樣與量化</a>
+    <a class="nav-link" href="#ch3-image"><span class="nav-dot"></span>影像 · RGB · 圖形</a>
+    <a class="nav-link" href="#ch3-video"><span class="nav-dot"></span>影片 · 空間／時間壓縮</a>
+    <a class="nav-link" href="#ch3-test"><span class="nav-dot"></span>第三章練習 · 18 題</a>
 
     <div class="side-label">Review</div>
     <a class="nav-link" href="#practice"><span class="nav-dot"></span>互動練習</a>
@@ -614,15 +649,16 @@
     <div class="content">
       <header class="hero" id="overview" data-study-only>
         <div class="eyebrow">Introduction to Computers</div>
-        <h1>把 Ch01–Ch02<br>變成真的會用的知識</h1>
+        <h1>把 Ch01–Ch03<br>變成真的會用的知識</h1>
         <p>
-          第一章先讀概念，再動手配對、探索分層、執行模擬，最後用選擇題檢查理解。第二章接著學進位換算與二進位運算。
+          第一章先讀概念，再動手配對、探索分層、執行模擬，最後用選擇題檢查理解。第二章接著學進位換算與二進位運算；第三章學補數、小數、文字與多媒體的資料表示。
           每讀完一節就按「標記已學」，進度會自動存在這台電腦。
         </p>
+        <div class="study-path"><a href="#ch3-start">最新：第三章資料表示 →</a></div>
         <div class="hero-stats">
           <div class="stat"><strong>Ch01</strong><span>Computer Science Basics</span></div>
           <div class="stat"><strong>Ch02</strong><span>Binary Values & Number Systems</span></div>
-          <div class="stat"><strong>7 大主題</strong><span>第一章完整學習路線</span></div>
+          <div class="stat"><strong>Ch03</strong><span>Data Representation</span></div>
           <div class="stat"><strong>Offline</strong><span>可離線直接開啟</span></div>
         </div>
       </header>
@@ -1373,6 +1409,166 @@
         </div>
       </section>
 
+      <section class="section searchable study-section" id="ch3-start" data-study-only>
+        <div class="section-kicker">Chapter 03 · Data Representation · PDF 全 57 頁</div>
+        <h2>第三章：同樣是 bits，為什麼能表示不同資料？</h2>
+        <p class="intro">第二章教你讀二進位的「數值」，第三章再問：<strong>同一串 bits 要怎麼代表負數、小數、文字、聲音和影像？</strong>答案在於表示規則。先知道編碼方式，再解讀 bits，才不會把負數當成正數。</p>
+        <div class="study-path">
+          <a href="#ch3-data">01 資料與數位化</a><a href="#ch3-integer">02 負數、補數、溢位</a><a href="#ch3-fraction">03 小數與浮點數</a><a href="#ch3-text">04 ASCII／Unicode</a><a href="#ch3-compression">05 三種文字壓縮</a><a href="#ch3-audio">06 聲音取樣</a><a href="#ch3-image">07 像素、RGB、圖形</a><a href="#ch3-video">08 影片壓縮</a><a href="#ch3-test">章末 18 題練習 →</a>
+        </div>
+        <div class="callout"><strong>建議順序：</strong>先練補數與小數換算，再學壓縮。讀完每節都操作一次互動區；先預測結果，按按鈕後再核對。</div>
+        <p class="source-note">來源：ch03.pdf 第 1–57 頁。頁碼為 PDF 頁碼；額外練習與模型標為「理解用例／示意」。第 29、44 頁的簡化描述另附補充來源。</p>
+      </section>
+
+      <section class="section searchable study-section" id="ch3-data" data-study-only data-learn-id="ch3-data">
+        <div class="section-head"><div><div class="section-kicker">Chapter 03 · 01 · PDF P.3–9</div><h2>資料與數位化：把連續世界變成可表示的數值</h2><p class="section-desc">所有資料最後都以 bits 儲存；解讀方式由表示規則決定。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <p class="intro">電腦處理 Numbers、Text、Audio、Images／Graphics、Video。它們的內容不同，但儲存時都用 <strong>binary digits（bits）</strong>。例如同樣的 <code>01000001</code>，當成無號整數是 65；以 ASCII 解讀則是字母 A。</p>
+        <div class="grid two">
+          <div class="card"><div class="tag">ANALOG · 類比</div><h4>Continuous：連續變動</h4><p>類比資料以連續方式表示，例如水銀溫度計的液柱、聲波或持續改變的電壓。相鄰數值之間還能有更多細小變化。</p></div>
+          <div class="card"><div class="tag">DIGITAL · 數位</div><h4>Discrete：離散的元素</h4><p>數位資料分成獨立元素，用有限的數值表示。數位電子訊號以高／低兩個狀態對應 1／0。</p></div>
+        </div>
+        <h3>Digitize 與 Degradation</h3>
+        <p><strong>Digitize（數位化）</strong>是將類比資料分成部分，再分別表示；聲音的取樣與量化就是後面的實例。類比和數位訊號都會受到環境干擾而劣化（Degradation）。講義指出數位訊號可定期重新定時（reclock）恢復波形；辨認高低狀態仍有條件，不能推成「數位訊號永遠不會出錯」。</p>
+        <h3>n 個 bits，為什麼有 2ⁿ 種組合？</h3>
+        <p>每一位有 0、1 兩種選擇。2 bits：2 × 2＝4 種；3 bits：2 × 2 × 2＝8 種。<strong>8 bits 有 256 種組合；若表示無號整數，範圍是 0–255。</strong>「種類數」和「最大數值」差 1，因為包含 0。</p>
+        <div class="lab"><div class="lab-kicker">TRY IT · 每多一位，就多一倍</div><h4>調整位數，看組合數</h4><div class="range-label"><label for="ch3BitCount">位數</label><output id="ch3BitLabel" for="ch3BitCount"></output></div><input class="study-range" id="ch3BitCount" type="range" min="1" max="8" value="3"><div class="formula" id="ch3BitFormula" aria-live="polite"></div><div class="bit-combinations" id="ch3BitPatterns" aria-label="所有位元組合"></div></div>
+        <h3>Compression：為何要壓縮？</h3>
+        <p>儲存空間和傳輸頻寬有限，所以希望用較少資料表示內容。<strong>Lossless（無失真）</strong>能還原原始資料；<strong>Lossy（失真）</strong>會捨棄部分原始資訊。</p>
+        <div class="formula">講義的 Compression ratio＝壓縮後大小 ÷ 原始大小</div>
+        <p>例如 100 Bytes 變成 60 Bytes：壓縮率是 0.6＝60%，省下的是 40%。依這個定義，比例越小，檔案縮得越多；計算時分子分母必須用相同單位。</p>
+        <div class="lab" data-mini="ch3basics"><div class="lab-kicker">TRY IT · 先分清基本概念</div><div data-mini-mount></div></div>
+        <div class="study-actions"><a href="#ch3-integer">下一節：補數與溢位 →</a></div>
+      </section>
+
+      <section class="section searchable study-section" id="ch3-integer" data-study-only data-learn-id="ch3-integer">
+        <div class="section-head"><div><div class="section-kicker">Chapter 03 · 02 · PDF P.11–20</div><h2>負數：固定的 bits，要用什麼規則解讀？</h2><p class="section-desc">先固定寬度，再表示負數；同一個位元圖樣可以有不同意思。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <h3>① Signed-magnitude：符號與數量分開</h3>
+        <p>帶號–數量表示法用最左位表示正負（0 正、1 負），其餘位表示絕對值。8-bit 的 +2 是 <code>00000010</code>，−2 是 <code>10000010</code>。</p>
+        <div class="callout"><strong>問題：有兩個零。</strong><code>00000000</code> 是 +0，<code>10000000</code> 是 −0。8-bit 帶號–數量的範圍是 −127 到 +127；下面的二補數則只有一個 0。</div>
+        <h3>② 先用兩位十進位，理解 Ten’s Complement（10 補數）</h3>
+        <p>講義將 00–49 解讀為 0–49，50–99 解讀為 −50–−1。因此 97 表示 −3。<strong>位數要固定：</strong>兩位數用 10²−3＝97；三位數用 10³−3＝997。</p>
+        <div class="table-scroll"><table class="compare"><thead><tr><th>原本算式</th><th>固定兩位數的計算</th><th>解讀</th></tr></thead><tbody>
+          <tr><td>5＋(−6)</td><td>05＋94＝99</td><td>99 表示 −1</td></tr>
+          <tr><td>−4＋6</td><td>96＋06＝102 → 保留 02</td><td>2；丟掉超出兩位的百位</td></tr>
+          <tr><td>−2＋(−4)</td><td>98＋96＝194 → 保留 94</td><td>−6</td></tr>
+          <tr><td>−5−3</td><td>95＋97＝192 → 保留 92</td><td>−8；把減法改成加負數</td></tr>
+        </tbody></table></div>
+        <p>為什麼可丟掉百位？我們只保留固定兩位，相當於保留除以 100 的餘數；100 在這套表示法中回到 00。前提是最後的正負數結果仍在可表示範圍內。</p>
+        <h3>③ Two’s Complement（2 補數）：反轉，再加 1</h3>
+        <p>用 k bits 表示 −I（I &gt; 0）時，其位元圖樣對應無號值 <strong>2ᵏ−I</strong>。8-bit 的 −2：256−2＝254＝<code>11111110</code>。計算捷徑如下：</p>
+        <div class="formula">+2：00000010 → 反轉：11111101 → 加 1：11111110 → 解讀為 −2</div>
+        <p><strong>為什麼反轉再加 1？</strong>k bits 全部是 1 的值為 2ᵏ−1。反轉 I 得到 (2ᵏ−1)−I，再加 1，剛好是 2ᵏ−I。這是在固定寬度內計算，不是在左邊寫一個負號。</p>
+        <div class="lab"><div class="lab-kicker">TRY IT · 負數逐步換算</div><h4>把一個負數表示成 8-bit 二補數</h4><div class="ch3-fields"><label>要表示的負數<input id="ch3Negative" type="number" min="-128" max="-1" step="1" value="-2"></label></div><div class="lab-controls"><button type="button" class="primary-btn" id="ch3NegativeNext">下一步 →</button><button type="button" class="ghost-btn" id="ch3NegativeReset">從頭看一次</button></div><div class="lab-output" id="ch3NegativeOutput" aria-live="polite"></div></div>
+        <h3>④ 讀回十進位：最高位是 1，就減去 2ᵏ</h3>
+        <p>8-bit 二補數中，最高位 0 表示非負；最高位 1 表示負。<code>10000010</code> 當無號整數是 130，當二補數是 130−256＝−126。也可直接用位權：<strong>−128, 64, 32, 16, 8, 4, 2, 1</strong>，最左位的權重為負。</p>
+        <div class="lab"><div class="lab-kicker">TRY IT · 同樣的圖樣，不同解讀</div><h4>點任一位切換 0／1</h4><div class="bit-switches" id="ch3SignedBits" role="group" aria-label="8-bit 位元圖樣"></div><div class="lab-output" id="ch3SignedOutput" aria-live="polite"></div></div>
+        <div class="table-scroll"><table class="compare"><thead><tr><th>型態（講義 p.20）</th><th>意義</th><th>範圍</th></tr></thead><tbody><tr><td>int8</td><td>8-bit 有號整數（二補數）</td><td>−128–127</td></tr><tr><td>uint8</td><td>8-bit 無號整數</td><td>0–255</td></tr><tr><td>int16</td><td>16-bit 有號整數</td><td>−32768–32767</td></tr><tr><td>uint16</td><td>16-bit 無號整數</td><td>0–65535</td></tr><tr><td>double</td><td>雙精度浮點數</td><td>依實際表示格式；有精度與範圍限制</td></tr></tbody></table></div>
+        <div class="callout"><strong>公式：</strong>k-bit 無號：0 到 2ᵏ−1；k-bit 二補數：−2ᵏ⁻¹ 到 2ᵏ⁻¹−1。負數比正數多一個，因為非負的一半包含 0。−128 在 8-bit 二補數內，+128 則不在。</div>
+        <h3>⑤ 補數加減與 Number Overflow（溢位）</h3>
+        <p>減法先改為 <strong>A−B＝A＋(−B)</strong>，再做固定寬度的加法。講義例：−127＋1：<code>10000001＋00000001＝10000010</code>，解讀為 −126。</p>
+        <div class="formula">127＋3：01111111＋00000011＝10000010 → 8-bit 有號解讀為 −126</div>
+        <p>數學答案 130 超過 int8 的上限 127，所以發生溢位。<strong>「有進位」和「有號溢位」不同：</strong>−1＋1 有超出 8 bits 的進位，但保留低 8 位得到 0，結果正確；127＋3 沒有第 9 位進位，卻有號溢位。</p>
+        <div class="lab"><div class="lab-kicker">TRY IT · 先算數學答案，再檢查範圍</div><h4>8-bit 有號加減法</h4><div class="ch3-fields"><label>A<input id="ch3IntA" type="number" min="-128" max="127" value="127" step="1"></label><label>運算<select id="ch3IntOperation"><option value="add">＋ 加法</option><option value="sub">− 減法</option></select></label><label>B<input id="ch3IntB" type="number" min="-128" max="127" value="3" step="1"></label></div><button type="button" class="primary-btn" id="ch3IntRun">計算並看位元</button><div class="lab-output" id="ch3IntOutput" aria-live="polite"></div><p class="source-note">此工具模擬固定 8-bit 保留低位的結果，用於理解講義；實際程式語言對溢位的處理可能不同。</p></div>
+        <div class="lab" data-mini="ch3integers"><div class="lab-kicker">TRY IT · 不只背公式</div><div data-mini-mount></div></div>
+        <div class="study-actions"><a href="#ch3-fraction">下一節：小數與浮點數 →</a></div>
+      </section>
+
+      <section class="section searchable study-section" id="ch3-fraction" data-study-only data-learn-id="ch3-fraction">
+        <div class="section-head"><div><div class="section-kicker">Chapter 03 · 03 · PDF P.21–24</div><h2>小數換算：整數一直除，小數一直乘</h2><p class="section-desc">小數點右邊的位權是負次方；浮點數再用指數調整尺度。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <p>二進位 radix point（基數點）右邊的位權依序是 <strong>2⁻¹＝1/2、2⁻²＝1/4、2⁻³＝1/8……</strong>。因此 <code>0.11₂</code>＝1/2＋1/4＝0.75₁₀；<code>10.101₂</code>＝2＋1/2＋1/8＝2.625₁₀。</p>
+        <h3>十進位小數 → 二進位：乘 2，取整數，留下小數</h3>
+        <ol><li>將「目前的小數部分」乘 2。</li><li>記下結果的整數部分（0 或 1），這是下一個 bit。</li><li>留下結果的小數部分，再乘 2；直到小數為 0 或到指定精度。</li><li><strong>bits 按取得順序由上往下讀</strong>，放在基數點後面。</li></ol>
+        <div class="table-scroll"><table class="compare"><thead><tr><th>0.75 的步驟</th><th>取出 bit</th><th>留下的小數</th></tr></thead><tbody><tr><td>0.75 × 2＝1.50</td><td>1</td><td>0.50</td></tr><tr><td>0.50 × 2＝1.00</td><td>1</td><td>0；結束</td></tr></tbody></table></div>
+        <div class="formula">0.75₁₀＝0.11₂；核對：1 × 2⁻¹＋1 × 2⁻²＝0.75</div>
+        <div class="callout"><strong>不要混用讀法：</strong>整數部分「除 2，餘數由下往上讀」；小數部分「乘 2，整數位由上往下讀」。例如 5.75：5→101；0.75→.11；合起來是 <code>101.11₂</code>。</div>
+        <h3>有些小數只會得到近似值</h3>
+        <p>講義的 0.435：依序乘 2 得到 0.870、1.740、1.480、0.960、1.920、1.840；整數位是 0、1、1、0、1、1。因此保留六位得到 <code>0.011011₂</code>＝0.421875，剩餘小數尚未是 0，所以用 <strong>≈</strong>，不能寫成精確相等。</p>
+        <div class="lab"><div class="lab-kicker">TRY IT · 一次看一個乘 2 步驟</div><h4>小數換算教練</h4><div class="ch3-fields"><label>0–1 之間的十進位小數<input id="ch3FractionValue" type="text" inputmode="decimal" value="0.435" maxlength="16"></label><label>最多保留 bits<select id="ch3FractionLimit"><option value="6">6</option><option value="8">8</option><option value="12">12</option><option value="16">16</option></select></label></div><div class="lab-controls"><button type="button" class="primary-btn" id="ch3FractionNext">做下一次乘 2</button><button type="button" class="ghost-btn" id="ch3FractionReset">重新開始</button></div><div class="table-scroll"><table class="compare"><thead><tr><th>步驟</th><th>乘 2</th><th>整數位</th><th>留下的小數</th></tr></thead><tbody id="ch3FractionRows"></tbody></table></div><div class="lab-output" id="ch3FractionOutput" aria-live="polite"></div><p class="source-note">此處取前 n 位，採截取示範；實際浮點格式另有捨入規則。</p></div>
+        <h3>Floating point（浮點數）與 Scientific notation（科學記號）</h3>
+        <p>講義用 <strong>sign × mantissa × base<sup>exp</sup></strong> 表示數值。Sign 決定正負、mantissa（尾數）保存有效數字、exponent（指數）決定尺度；十進位用 10，二進位用 2。固定可保存的位數，改變指數來移動基數點。</p>
+        <div class="formula">12001.32708＝1.200132708 × 10⁴＝1.200132708E+4</div>
+        <p>科學記號把非零數的十進位點留在第一個非零數字右邊。例如 0.0012＝1.2 × 10⁻³，正指數使數值變大，負指數使數值變小。浮點數仍只有有限的 bits，所以能表示的精度與範圍都有上限。</p>
+        <p class="source-note">講義 p.22 的一般形式將 mantissa 視為整數；p.24 科學記號則使用 1.200132708 這種有效數字形式。兩者調整尾數與指數後可以代表同一數值；此處未展開 IEEE 754 欄位。</p>
+        <div class="study-actions"><a href="#ch3-text">下一節：文字編碼 →</a></div>
+      </section>
+
+      <section class="section searchable study-section" id="ch3-text" data-study-only data-learn-id="ch3-text">
+        <div class="section-head"><div><div class="section-kicker">Chapter 03 · 04 · PDF P.26–30</div><h2>文字：為每個字元指定代碼</h2><p class="section-desc">字元集告訴你有哪些字，編碼形式告訴你如何存成 bits。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <p><strong>Character set（字元集）</strong>列出字元及對應代碼。文字不是以「字的形狀」逐像素儲存，而是用代碼指定字元，再由顯示系統呈現。</p>
+        <div class="grid two"><div class="card"><div class="tag">ASCII</div><h4>7 bits → 128 種代碼</h4><p>American Standard Code for Information Interchange。原始 ASCII 用 7 bits，所以 2⁷＝128；A＝65、a＝97、數字字元「0」＝48。大小寫的代碼不同，文字「0」也不同於數值 0。</p><p>講義的 Extended ASCII 使用 8 bits，共 256 種代碼。所謂延伸 ASCII 有不同表格，解讀時仍需知道是哪一種。</p></div><div class="card"><div class="tag">UNICODE</div><h4>國際化字元，須分清字元與儲存形式</h4><p>講義 p.29–30 問 16-bit mapping 的容量：2¹⁶＝65536 種可能代碼。這是固定位數的容量題。</p><p>實際 Unicode 可用 UTF-8、UTF-16、UTF-32 表示；不能把 Unicode 的所有字元都說成固定 16 bits。UTF-16 的一個 code point 可能用一個或兩個 16-bit 單位。</p></div></div>
+        <details><summary>補充：講義的「前 256 個字元」要怎麼讀？</summary><div class="answer">講義用早期／簡化的 Unicode mapping 與 Extended ASCII 對照；實際上各延伸 ASCII 表不同，不能概括為都相同。ASCII 的 0–127 對應保留在 Unicode；UTF-8 對 ASCII 使用相同的單一位元組。<a href="https://www.unicode.org/faq/utf_bom.html" target="_blank" rel="noopener">來源：Unicode 官方 FAQ</a>。</div></details>
+        <div class="lab"><div class="lab-kicker">TRY IT · 把字元和實際編碼連起來</div><h4>文字代碼觀察器</h4><div class="ch3-fields"><label>輸入最多 6 個 Unicode code points<input id="ch3TextValue" type="text" value="Aa0中😀" maxlength="24"></label></div><div class="table-scroll"><table class="compare"><thead><tr><th>字元</th><th>Unicode code point</th><th>ASCII 十進位</th><th>UTF-8 bytes（十六進位）</th><th>UTF-8 bits</th></tr></thead><tbody id="ch3TextRows"></tbody></table></div><p class="source-note" id="ch3TextSummary" aria-live="polite"></p><p class="hint">理解用例：觀察 A、中文和 emoji 的位元組數。此表逐 code point 顯示；使用者看見的一個字形有時由多個 code points 組成。</p></div>
+        <div class="study-actions"><a href="#ch3-compression">下一節：文字壓縮 →</a></div>
+      </section>
+
+      <section class="section searchable study-section" id="ch3-compression" data-study-only data-learn-id="ch3-compression">
+        <div class="section-head"><div><div class="section-kicker">Chapter 03 · 05 · PDF P.31–39</div><h2>文字壓縮：重複的字串、連續的字、常見的字</h2><p class="section-desc">三種方法找的是不同的重複；都要能依規則解回原文。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <div class="table-scroll"><table class="compare"><thead><tr><th>方法</th><th>找什麼？</th><th>表示方式</th></tr></thead><tbody><tr><td>Keyword encoding</td><td>常見文字片段</td><td>用保留的特殊符號代替</td></tr><tr><td>Run-length encoding（RLE）</td><td>連續重複的同一值</td><td>旗標＋值＋次數</td></tr><tr><td>Huffman encoding</td><td>出現頻率</td><td>常見字用短碼，少見字用長碼</td></tr></tbody></table></div>
+        <h3>① Keyword encoding（關鍵字編碼）</h3>
+        <p>講義的替代表：<code>as→^</code>、<code>the→~</code>、<code>and→+</code>、<code>that→$</code>、<code>must→&amp;</code>、<code>well→%</code>、<code>these→#</code>。理解用例：<code>the cat and the dog</code> 可寫成 <code>~ cat + ~ dog</code>，讀取端使用相同替代表解回。</p>
+        <p>講義範例 352 字元變成 317 字元：省 35 字元；壓縮率 317/352≈0.90。<strong>不適合所有文字：</strong>如果沒有那些常見片段，就省不了多少；特殊符號若原本也出現，需要額外的區分或跳脫規則，替代表本身也有成本。</p>
+        <h3>② Run-length encoding（遊程長度編碼）</h3>
+        <p><code>*n8</code> 表示 n 連續 8 次；* 是 flag（旗標），n 是 value（值），8 是 repetitions（次數）。講義的 <code>*x4*p4c*k7</code> 解回 <code>xxxxppppckkkkkkk</code>。</p>
+        <div class="formula">bbbbbbbbjjjkaaqqqqqq+++++ → *b8jjjkaa*q6*+5<br>25 字元 → 15 字元；壓縮率 15/25＝0.6</div>
+        <p><strong>為什麼 j、a 不編碼？</strong><code>jjj</code> 已經只有 3 字元，改成 <code>*j3</code> 仍是 3 字元；<code>aa</code> 若改成 <code>*a2</code> 反而變長。旗標和次數也佔空間，所以短重複不一定值得編碼。</p>
+        <div class="lab"><div class="lab-kicker">TRY IT · 壓縮後能否還原？</div><h4>RLE 壓縮與還原</h4><div class="ch3-fields"><label>英文、空格或 +（最多 120 字元）<input id="ch3RleValue" type="text" value="bbbbbbbbjjjkaaqqqqqq+++++" maxlength="120"></label></div><button type="button" class="primary-btn" id="ch3RleRun">壓縮，再解回</button><div class="lab-output" id="ch3RleOutput" aria-live="polite"></div><p class="source-note">教學規則：只編碼長度大於 3 的連續值，* 保留作旗標；輸入限制避免旗標與數字次數的歧義。比例只比較字串，未計額外格式資料。</p></div>
+        <h3>③ Huffman encoding：不同字元用不同長度</h3>
+        <p>常見的字元用較短 bits，少見的用較長 bits，這是 <strong>variable-length encoding（變長編碼）</strong>。解碼時不能固定每 3 或 4 bits 分一組；要沿著碼表／樹找完整代碼。</p>
+        <div class="table-scroll"><table class="compare"><caption>以下使用講義 p.37–38 的碼表。</caption><thead><tr><th>字元</th><th>A</th><th>E</th><th>L</th><th>O</th><th>R</th><th>B</th><th>D</th></tr></thead><tbody><tr><td>Huffman code</td><td>00</td><td>01</td><td>100</td><td>110</td><td>111</td><td>1010</td><td>1011</td></tr></tbody></table></div>
+        <div class="formula">DOORBELL → 1011 | 110 | 110 | 111 | 1010 | 01 | 100 | 100<br>共 25 bits；原本 8 字元 × 8 bits＝64 bits；25/64≈0.39</div>
+        <p>解碼 <code>1010110001111011</code>：<code>1010 | 110 | 00 | 111 | 1011</code> → B O A R D＝BOARD。這組碼具有 <strong>prefix-free（無前綴歧義）</strong>：任何完整碼都不是另一個完整碼的開頭，所以找到完整碼就能解出一字。</p>
+        <div class="lab"><div class="lab-kicker">TRY IT · 用講義碼表逐字核對</div><h4>Huffman 編解碼</h4><div class="ch3-fields"><label>文字（只用 A、E、L、O、R、B、D）<input id="ch3HuffmanText" type="text" value="DOORBELL" maxlength="40"></label><label>二進位字串<input id="ch3HuffmanBits" type="text" value="1010110001111011" maxlength="160" inputmode="numeric"></label></div><div class="lab-controls"><button type="button" class="primary-btn" id="ch3HuffmanEncode">文字 → bits</button><button type="button" class="ghost-btn" id="ch3HuffmanDecode">bits → 文字</button></div><div class="lab-output" id="ch3HuffmanOutput" aria-live="polite"></div></div>
+        <h3>Huffman tree 怎麼建立？（講義 p.39）</h3>
+        <p>例：A 出現 3 次，B、C、D 各 1 次。<strong>反覆合併權重最小的兩個節點</strong>：B1＋C1→2；D1＋2→3；A3＋3→6。最後從根向下，左邊標 0、右邊標 1，沿路串起就是代碼。</p>
+        <div class="arrow-flow"><span class="pill">根 6 → 左 0 → A：0</span><span class="pill">根 → 右 1 → 左 0 → D：10</span><span class="pill">根 → 右 1 → 右 1 → 左 0 → B：110</span><span class="pill">根 → 右 1 → 右 1 → 右 1 → C：111</span></div>
+        <p class="source-note">同權重時選擇及左右標記可能不同，因此可以有不同的有效 Huffman 碼。p.39 的 A–D 樹與 p.37 的 DOORBELL 碼表是兩個例子，不能混著用。以上例題比例依講義，不包含儲存碼表的額外成本。</p>
+        <div class="lab" data-mini="ch3compression"><div class="lab-kicker">TRY IT · 找對壓縮方法</div><div data-mini-mount></div></div>
+        <div class="study-actions"><a href="#ch3-audio">下一節：聲音表示 →</a></div>
+      </section>
+
+      <section class="section searchable study-section" id="ch3-audio" data-study-only data-learn-id="ch3-audio">
+        <div class="section-head"><div><div class="section-kicker">Chapter 03 · 06 · PDF P.41–44</div><h2>聲音：取樣決定「何時量」，量化決定「分多細」</h2><p class="section-desc">兩者分別處理時間與振幅，不要混成同一件事。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <div class="grid two"><div class="card"><div class="tag">Sampling · 取樣</div><h4>週期性測量訊號</h4><p>每隔一段時間測量電壓。樣本更多，時間上觀察得更密；樣本太稀，可能錯過中間的波峰和變化。</p></div><div class="card"><div class="tag">Quantization · 量化</div><h4>把測得的值放到有限等級</h4><p>用有限 bits 表示電壓。b bits 提供 2ᵇ 個可能等級；值須對應到可表示的等級，會有量化誤差。</p></div></div>
+        <div class="lab"><div class="lab-kicker">TRY IT · 同一段波形，兩種控制</div><h4>取樣與量化觀察器</h4><div class="range-label"><label for="ch3AudioSamples">每段的取樣數</label><output id="ch3AudioSamplesLabel"></output></div><input class="study-range" id="ch3AudioSamples" type="range" min="4" max="48" step="4" value="12"><div class="range-label"><label for="ch3AudioBits">每個樣本的量化 bits</label><output id="ch3AudioBitsLabel"></output></div><input class="study-range" id="ch3AudioBits" type="range" min="1" max="6" value="2"><canvas class="wave-canvas" id="ch3AudioCanvas" width="800" height="240" role="img" aria-label="連續訊號、取樣點與量化後階梯波形">聲音取樣示意圖</canvas><p class="source-note">灰線＝原始連續波形；青色點＝取樣值；紫色階梯＝量化值。理解模型，時間單位為「這一段」，不是實際 Hz；不會播放聲音。</p><div class="lab-output" id="ch3AudioSummary" aria-live="polite"></div></div>
+        <h3>CD 與音訊格式</h3>
+        <p>CD（Compact disc）以數位方式儲存音訊，低強度雷射讀取表面反射，由接收器轉換成二進位資料。講義列出的格式有 WAV、AU、AIFF、VQF、MP3；不同格式可採不同表示與壓縮方式。</p>
+        <div class="callout"><strong>MP3 與 Huffman：</strong>MPEG＝Moving Picture Experts Group。MP3 是 MPEG Audio Layer III，整體屬失真音訊編碼；內部可用 Huffman 這種無失真編碼步驟，並不表示捨棄的聲音資訊能恢復。講義 p.44 列 MPEG-2，MP3 也涵蓋 MPEG-1 Layer III。<a href="https://www.loc.gov/preservation/digital/formats/fdd/fdd000012.shtml" target="_blank" rel="noopener">來源：美國國會圖書館 MP3 格式說明</a>。</div>
+        <details><summary>理解延伸：未壓縮音訊的大小怎麼算？</summary><div class="answer">取樣率 × 每樣本 bits × 聲道數 × 秒數＝bits；再除以 8 得 Bytes。例如教學設定每秒 8000 樣本、8 bits、單聲道、10 秒：8000×8×1×10/8＝80000 Bytes。這不含檔頭、壓縮或額外資料。</div></details>
+        <div class="study-actions"><a href="#ch3-image">下一節：影像與圖形 →</a></div>
+      </section>
+
+      <section class="section searchable study-section" id="ch3-image" data-study-only data-learn-id="ch3-image">
+        <div class="section-head"><div><div class="section-kicker">Chapter 03 · 07 · PDF P.46–54</div><h2>影像與圖形：像素記顏色，向量記幾何</h2><p class="section-desc">分清解析度、色彩深度，以及兩種圖形的儲存方式。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <p><strong>Pixel（像素）</strong>是 picture element，每個像素表示一個顏色。<strong>Resolution（解析度）</strong>與用來表示影像／裝置的像素數相關；800×600 表示橫向 800、縱向 600，共 480000 個像素。</p>
+        <h3>RGB 與 Color depth</h3>
+        <p>講義用 RGB（Red、Green、Blue）表示顏色，每個分量 0–255，例 (155, 205, 83)。<strong>True color（全彩）24 bits＝R8＋G8＋B8</strong>；每分量有 256 種，合計 256³＝2²⁴＝16777216 種 RGB 組合。</p>
+        <p>講義的 <strong>High color（高彩）16-bit</strong>例子把 R/G/B 各用 5 bits，剩一位有時用於透明度。色彩深度看「每像素用幾 bits 表示顏色」，解析度看「有幾個像素」，是不同概念。</p>
+        <div class="lab"><div class="lab-kicker">TRY IT · 調整三個分量</div><h4>RGB 調色</h4><div class="rgb-layout"><div><div class="range-label"><label for="ch3Red">R · 紅</label><output id="ch3RedLabel"></output></div><input class="study-range" type="range" id="ch3Red" min="0" max="255" value="155"><div class="range-label"><label for="ch3Green">G · 綠</label><output id="ch3GreenLabel"></output></div><input class="study-range" type="range" id="ch3Green" min="0" max="255" value="205"><div class="range-label"><label for="ch3Blue">B · 藍</label><output id="ch3BlueLabel"></output></div><input class="study-range" type="range" id="ch3Blue" min="0" max="255" value="83"></div><div class="color-swatch" id="ch3ColorSwatch" role="img" aria-label="RGB 色彩預覽"></div></div><div class="lab-output" id="ch3ColorOutput" aria-live="polite"></div></div>
+        <div class="lab"><div class="lab-kicker">TRY IT · 像素數 × 每像素 bits</div><h4>未壓縮影像大小</h4><div class="ch3-fields"><label>寬（pixels）<input id="ch3ImageWidth" type="number" min="1" max="10000" value="100" step="1"></label><label>高（pixels）<input id="ch3ImageHeight" type="number" min="1" max="10000" value="100" step="1"></label><label>每像素 bits<select id="ch3ImageDepth"><option value="8">8 · 索引色示意</option><option value="16">16 · 高彩示意</option><option value="24" selected>24 · True color</option></select></label></div><button type="button" class="primary-btn" id="ch3ImageRun">計算理論資料量</button><div class="lab-output" id="ch3ImageOutput" aria-live="polite"></div><p class="source-note">理解延伸：連續像素資料的理論大小；不含檔頭、色盤、metadata、行對齊或壓縮。此處 Bytes 是位元組，未換成 KB／KiB。</p></div>
+        <div class="table-scroll"><table class="compare"><thead><tr><th></th><th>Raster graphics（光柵／點陣）</th><th>Vector graphics（向量）</th></tr></thead><tbody><tr><td>記錄什麼？</td><td>逐像素的顏色</td><td>線條與幾何形狀的描述、方向、粗細與顏色</td></tr><tr><td>縮放</td><td>固定像素格，放大可能看見格子</td><td>以數學方式重算幾何，適合縮放</td></tr><tr><td>適合</td><td>照片、真實影像</td><td>線條圖、標誌、卡通式繪圖</td></tr><tr><td>講義例子</td><td>BMP、GIF、PNG、JPEG</td><td>SVG、Flash（講義歷史例）</td></tr><tr><td>大小</td><td>受像素、色深與壓縮影響</td><td>簡單形狀可能較小；不是每張向量都一定比較小</td></tr></tbody></table></div>
+        <h3>格式辨認</h3>
+        <ul><li><strong>BMP（Bitmap）：</strong>講義列 24-bit true color，並介紹可用 RLE 壓縮的情況。</li><li><strong>GIF（Graphics Interchange Format）：</strong>索引色，講義列 256 色或更少；每像素用 8 bits 或更少指定色盤索引，可有簡單動畫。</li><li><strong>PNG（Portable Network Graphics）：</strong>支援較廣的色彩深度與無失真壓縮；講義區分靜態 PNG 和 APNG（Animated PNG）動畫。</li><li><strong>JPEG（Joint Photographic Experts Group）：</strong>利用人眼感知特性壓縮，常見照片 JPEG 使用失真方式；講義也提到 JPEG 家族中的無失真方法。</li><li><strong>SVG（Scalable Vector Graphics）：</strong>以純文字描述圖形，講義強調瀏覽器支援。Flash 為講義中的二進位格式歷史例。</li></ul>
+        <h3>Metadata：data about data</h3>
+        <p>描述資料的資料，例如影像建立日期與時間、尺寸和解析度、拍攝位置、作者、版權資訊。像素描述「畫面是什麼」，metadata 描述「這份影像的屬性」。</p>
+        <div class="lab" data-mini="ch3media"><div class="lab-kicker">TRY IT · 聲音與影像分清楚</div><div data-mini-mount></div></div>
+        <div class="study-actions"><a href="#ch3-video">下一節：影片壓縮 →</a></div>
+      </section>
+
+      <section class="section searchable study-section" id="ch3-video" data-study-only data-learn-id="ch3-video">
+        <div class="section-head"><div><div class="section-kicker">Chapter 03 · 08 · PDF P.56–57</div><h2>影片壓縮：一張畫面內，與畫面之間</h2><p class="section-desc">Spatial 看空間上的重複，Temporal 看時間上的變化。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <p><strong>Video codec（COmpressor／DECompressor）</strong>負責壓縮和解壓縮，降低影片的龐大資料量，方便電腦播放或網路傳輸。講義介紹常用失真壓縮減少內容量。</p>
+        <div class="grid two"><div class="card"><div class="tag">TEMPORAL · 時間壓縮</div><h4>比較前後 frames 的差異</h4><p>選 keyframe（關鍵影格）作比較基礎；delta frames 記錄改變的部分。相同背景不必每次完整重複保存。</p></div><div class="card"><div class="tag">SPATIAL · 空間壓縮</div><h4>減少同一 frame 內的重複</h4><p>講義例：對同色區域記錄顏色與座標，減少逐像素重複保存。這是在單張畫面內找規則。</p></div></div>
+        <div class="lab"><div class="lab-kicker">TRY IT · 移動的亮格子</div><h4>看完整畫面，再看改變的部分</h4><div class="lab-controls"><button class="primary-btn" type="button" id="ch3VideoNext">下一張影格 →</button><button class="ghost-btn" type="button" id="ch3VideoReset">回到 keyframe</button></div><div class="grid two"><div><h4 id="ch3VideoFrameTitle">目前畫面</h4><div class="video-pixels" id="ch3VideoFrame" role="img" aria-label="目前的完整影格"></div></div><div><h4>相對前一張的改變</h4><div class="video-pixels" id="ch3VideoDelta" role="img" aria-label="有變化的格子"></div></div></div><div class="lab-output" id="ch3VideoOutput" aria-live="polite"></div><p class="source-note">理解示意：8×4 格子的亮點逐格移動。只以亮度值示範 delta，不是實際影片檔案大小，也未模擬動作預測等編碼工具。</p></div>
+        <div class="callout"><strong>選擇題抓關鍵字：</strong>consecutive frames、keyframe、delta → Temporal；within a frame、同色區域 → Spatial。兩種方法可在同一個影片編碼流程中使用。</div>
+        <div class="study-actions"><a href="#ch3-test">讀完了，開始第三章練習 →</a><a href="#ch3-start">回到第三章學習路線</a></div>
+      </section>
+
+      <section class="section searchable study-section" id="ch3-test" data-practice-only>
+        <div class="section-kicker">Chapter 03 · Review · 18 Questions</div><h2>第三章選擇題：確認概念與計算</h2><p class="section-desc">題目依講義概念整理，含補數、小數、編碼、壓縮及多媒體。回答後立即看原因；此組練習重新整理頁面會重設。</p>
+        <div class="lab" data-mini="ch3review"><div data-mini-mount></div></div>
+        <div class="study-actions"><a href="#ch3-start">回到第三章學習路線</a><a href="#exam">考前必會清單 →</a></div>
+      </section>
+
       <section class="section searchable" id="practice" data-practice-only data-learn-id="practice">
         <div class="section-head">
           <div>
@@ -1448,6 +1644,14 @@
           <label class="check"><input type="checkbox" data-check="binaryhex"><span><strong>Binary ↔ Octal / Hex 快速轉換</strong><span>3 bits 一組 / 4 bits 一組。</span></span></label>
           <label class="check"><input type="checkbox" data-check="binarymath"><span><strong>二進位加減法會處理 carry / borrow</strong><span>加法 1+1=10₂；減法遇到 0−1 要向左借位。</span></span></label>
           <label class="check"><input type="checkbox" data-check="word"><span><strong>Bit / Byte / Word 關係會背</strong><span>1 Byte=8 bits；16/32/64-bit 對應 Half/Full/Double Word。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="ch3-bits"><span><strong>能解釋 n bits 的容量與類比／數位的差異</strong><span>2ⁿ 種組合；無號最大值 2ⁿ−1；類比連續、數位離散。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="ch3-complement"><span><strong>會用固定 8-bit 二補數表示及解讀負數</strong><span>反轉再加 1；負數圖樣的無號值減 256；int8 −128–127。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="ch3-overflow"><span><strong>能區分進位與有號溢位</strong><span>先算數學答案是否超出範圍；127＋3 是溢位，−1＋1 沒有有號溢位。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="ch3-fraction"><span><strong>會算小數與讀浮點形式</strong><span>乘 2、整數位由上往下讀；0.75＝0.11₂；sign × mantissa × base^exp。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="ch3-text"><span><strong>能計算碼表容量，辨認 ASCII 與 Unicode</strong><span>原始 ASCII 7 bits；固定 16-bit mapping 有 65536 種代碼；Unicode 實際位數依編碼。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="ch3-compression"><span><strong>會算壓縮率、RLE 和 Huffman 編解碼</strong><span>壓縮後÷原始；25→15 的比例是 0.6；使用題目指定碼表。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="ch3-media"><span><strong>能比較取樣／量化、解析度／色彩深度</strong><span>取樣看時間；量化看振幅等級；像素數 × 每像素 bits ÷ 8＝理論 Bytes。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="ch3-video"><span><strong>能比較點陣／向量、空間／時間壓縮</strong><span>點陣記像素、向量記幾何；Spatial 看一張、Temporal 看前後影格。</span></span></label>
         </div>
       </section>
 
@@ -1512,10 +1716,17 @@
           <summary>13. 計算平均成績時，如何使用最後一頁的四項能力？</summary>
           <div class="answer">Algorithmic thinking：想出逐筆加總再除以人數的步驟；Representation：決定如何表示名字與成績；Programming：把步驟寫成程式；Design：安排輸入、檢查、計算、呈現結果的整體流程。它們共同支援有效率地自動化。</div>
         </details>
+        <details><summary>14. 同一個 10000010，無號整數與二補數各是多少？</summary><div class="answer">無號值 130；8-bit 二補數因最高位是 1，所以 130−256＝−126。表示規則決定解讀方式。</div></details>
+        <details><summary>15. 為什麼補數要先固定位數？</summary><div class="answer">負 I 的 k-bit 圖樣對應 2ᵏ−I；改變 k 就改變表示法。−2 的 8-bit 是 11111110，不能任意省去前面的 1。</div></details>
+        <details><summary>16. 0.435≈0.011011₂，為什麼是近似？</summary><div class="answer">乘 2 取到六個 bits 後仍有剩餘小數；0.011011₂＝0.421875，所以不是精確相等。</div></details>
+        <details><summary>17. 壓縮率 0.39，是省下 39% 嗎？</summary><div class="answer">依講義定義，壓縮後約為原來的 39%；省下約 61%。公式與單位要先看清楚。</div></details>
+        <details><summary>18. Huffman 碼為什麼不能固定每 4 bits 分組？</summary><div class="answer">它是變長編碼。需使用同一張碼表，按完整碼解出字元；無前綴歧義可使解碼明確。</div></details>
+        <details><summary>19. 取樣更多與量化 bits 更多，分別改變什麼？</summary><div class="answer">前者增加時間上量測的密度；後者增加可用振幅等級（2ᵇ）。兩者也會影響未壓縮樣本資料量。</div></details>
+        <details><summary>20. 影片的 Temporal 與 Spatial 差在哪？</summary><div class="answer">Temporal 比較連續影格與變化，包含 keyframe／delta 的概念；Spatial 在同一張影格內減少冗餘。</div></details>
       </section>
 
       <div class="no-results" id="noResults">找不到符合的內容。可以試試「SIMD」、「Babbage」、「Hex」或「Byte」。</div>
-      <footer>計算機概論 Ch01–Ch02 · Interactive Study Notes · Progress saved locally</footer>
+      <footer>計算機概論 Ch01–Ch03 · Interactive Study Notes · Progress saved locally</footer>
     </div>
   </main>
 </div>
@@ -2001,6 +2212,201 @@
     $('#timeReset').addEventListener('click',()=>{timeTick=0;renderTimeSharing();});
     renderTimeSharing();
 
+    // Chapter 3: source-aligned data representation demonstrations.
+    const ch3Byte = value => value.toString(2).padStart(8,'0');
+    const ch3Unsigned = value => ((value % 256) + 256) % 256;
+    const ch3Signed = value => value >= 128 ? value - 256 : value;
+    function ch3IntegerInput(selector,min,max) {
+      const raw=$(selector).value.trim(), value=Number(raw);
+      if (!raw || !Number.isInteger(value) || value<min || value>max) throw new Error('請輸入 '+min+' 到 '+max+' 之間的整數。');
+      return value;
+    }
+    function ch3Show(selector,message,bad=false) {
+      const output=$(selector); output.textContent=message;
+      output.classList.toggle('bad',bad); output.classList.toggle('ok',!bad);
+    }
+    function ch3Arithmetic(a,operation,b) {
+      const mathematical=operation==='sub'?a-b:a+b;
+      const rawA=ch3Unsigned(a), rawB=ch3Unsigned(operation==='sub'?-b:b);
+      const sum=rawA+rawB, stored=sum%256;
+      return {mathematical,rawA,rawB,sum,stored,signed:ch3Signed(stored),overflow:mathematical< -128 || mathematical>127,carry:sum>=256};
+    }
+    function renderCh3Bits() {
+      const n=Number($('#ch3BitCount').value), combinations=2**n;
+      $('#ch3BitLabel').textContent=n+' bits';
+      $('#ch3BitFormula').textContent='2^'+n+'＝'+combinations+' 種組合；無號數值 0–'+(combinations-1);
+      const list=$('#ch3BitPatterns');list.replaceChildren();
+      for(let i=0;i<Math.min(combinations,32);i++) {
+        const chip=document.createElement('code');chip.textContent=i.toString(2).padStart(n,'0');list.append(chip);
+      }
+      if(combinations>32){const more=document.createElement('span');more.textContent='…以上列出前 32 種，其餘依序到 '+('1'.repeat(n))+'。';list.append(more);}
+    }
+    $('#ch3BitCount').addEventListener('input',renderCh3Bits);renderCh3Bits();
+
+    let ch3NegativeStep=0;
+    function renderCh3Negative() {
+      try {
+        const n=ch3IntegerInput('#ch3Negative',-128,-1), magnitude=-n;
+        const raw=ch3Byte(magnitude), inverted=ch3Byte(255-magnitude), encoded=ch3Byte(256-magnitude);
+        const steps=[
+          '第 1 步 · 固定為 8 bits，先寫絕對值 '+magnitude+' 的無號圖樣：'+raw+(magnitude===128?'\n注意：128 的圖樣是 10000000；+128 超出 int8 範圍，這裡只是用無號圖樣推導 −128。':''),
+          '第 2 步 · 每一個 bit 反轉，0↔1：\n'+raw+' → '+inverted+'\n反轉後的無號值是 255−'+magnitude+'＝'+(255-magnitude)+'。',
+          '第 3 步 · 反轉的結果加 1：\n'+inverted+'＋00000001＝'+encoded+'\n256−'+magnitude+'＝'+(256-magnitude)+'；以 8-bit 二補數解讀為 '+n+'。'
+        ];
+        ch3Show('#ch3NegativeOutput',steps[ch3NegativeStep]);
+        $('#ch3NegativeNext').disabled=ch3NegativeStep===2;
+        $('#ch3NegativeNext').textContent=ch3NegativeStep===2?'三步完成':'下一步 →';
+      }catch(error){ch3Show('#ch3NegativeOutput',error.message,true);$('#ch3NegativeNext').disabled=true;}
+    }
+    $('#ch3Negative').addEventListener('input',()=>{ch3NegativeStep=0;renderCh3Negative();});
+    $('#ch3NegativeNext').addEventListener('click',()=>{ch3NegativeStep=Math.min(2,ch3NegativeStep+1);renderCh3Negative();});
+    $('#ch3NegativeReset').addEventListener('click',()=>{ch3NegativeStep=0;renderCh3Negative();});renderCh3Negative();
+    let ch3Pattern=130;
+    function renderCh3Signed() {
+      const host=$('#ch3SignedBits');host.replaceChildren();
+      for(let i=7;i>=0;i--) {
+        const b=document.createElement('button');b.type='button';b.className='ghost-btn';b.textContent=String((ch3Pattern>>i)&1);
+        b.setAttribute('aria-label','第 '+(8-i)+' 位，二補數權重 '+(i===7?-128:2**i));
+        b.setAttribute('aria-pressed',String(Boolean((ch3Pattern>>i)&1)));
+        b.addEventListener('click',()=>{ch3Pattern^=1<<i;renderCh3Signed();});host.append(b);
+      }
+      const magnitude=ch3Pattern&127, signMagnitude=ch3Pattern>=128?(magnitude===0?'−0':String(-magnitude)):String(magnitude);
+      ch3Show('#ch3SignedOutput','圖樣：'+ch3Byte(ch3Pattern)+'\n無號整數：'+ch3Pattern+'\n二補數：'+ch3Signed(ch3Pattern)+'\n帶號–數量：'+signMagnitude+'\n'+(ch3Pattern>=128?'二補數最高位是 1 → '+ch3Pattern+'−256＝'+ch3Signed(ch3Pattern)+'。':'二補數最高位是 0，直接讀非負值。'));
+    }
+    renderCh3Signed();
+    function renderCh3Arithmetic() {
+      try{
+        const a=ch3IntegerInput('#ch3IntA',-128,127),b=ch3IntegerInput('#ch3IntB',-128,127),op=$('#ch3IntOperation').value;
+        const r=ch3Arithmetic(a,op,b);
+        const message='數學答案：'+a+(op==='sub'?' − ':' ＋ ')+(b<0?'('+b+')':b)+'＝'+r.mathematical+'\n'+
+          (op==='sub'?'先改為 A＋(−B)；以下第二行是 −B 的固定 8-bit 圖樣。\n'+(b===-128?'注意：+128 本身超出 int8；中間取負保留低 8 位，仍以完整數學答案判斷最後減法是否溢位。\n':''):'')+
+          '  '+ch3Byte(r.rawA)+'\n＋'+ch3Byte(r.rawB)+'\n＝'+r.sum.toString(2).padStart(8,'0')+'\n保留低 8 bits：'+ch3Byte(r.stored)+' → 有號解讀 '+r.signed+'\n'+
+          '超出 8 位的進位：'+(r.carry?'有':'沒有')+'；有號溢位：'+(r.overflow?'有，數學答案超出 −128–127。':'沒有，結果仍在 −128–127。');
+        ch3Show('#ch3IntOutput',message,r.overflow);
+      }catch(error){ch3Show('#ch3IntOutput',error.message,true);}
+    }
+    $('#ch3IntRun').addEventListener('click',renderCh3Arithmetic);renderCh3Arithmetic();
+
+    function ch3ParseFraction(text) {
+      const s=text.trim();
+      if(!/^(?:0(?:\.[0-9]{1,12})?|\.[0-9]{1,12})$/.test(s))throw new Error('請輸入 0（含）到 1（不含）的小數，最多 12 位，例如 0.75 或 0.435。');
+      const digits=s.includes('.')?s.split('.')[1]:'0';
+      return {num:BigInt(digits),den:10n**BigInt(digits.length)};
+    }
+    function ch3FractionString(num,den) {
+      const places=den.toString().length-1,whole=num/den,rest=num%den;
+      if(rest===0n)return whole.toString();
+      return whole+'.'+rest.toString().padStart(places,'0').replace(/0+$/,'');
+    }
+    function ch3FractionStep(num,den) {const doubled=num*2n;return {doubled,bit:Number(doubled/den),rest:doubled%den};}
+    let ch3Fraction=null;
+    function renderCh3Fraction() {
+      const rows=$('#ch3FractionRows');rows.replaceChildren();
+      if(!ch3Fraction)return;
+      let bits='',approximation=0;
+      ch3Fraction.rows.forEach((r,i)=>{
+        bits+=r.bit;approximation+=r.bit*2**(-i-1);
+        const tr=document.createElement('tr');
+        [i+1,ch3FractionString(r.before,ch3Fraction.den)+' × 2＝'+ch3FractionString(r.doubled,ch3Fraction.den),r.bit,ch3FractionString(r.rest,ch3Fraction.den)].forEach(v=>{const td=document.createElement('td');td.textContent=String(v);tr.append(td);});rows.append(tr);
+      });
+      const done=ch3Fraction.num===0n || bits.length>=ch3Fraction.limit;
+      $('#ch3FractionNext').disabled=done;
+      ch3Show('#ch3FractionOutput',bits.length===0?'尚未乘 2，先預測第一個 bit。'+(done?'輸入就是 0；二進位也為 0。':''):
+        '取得的 bits：'+bits+' → 0.'+bits+'₂\n'+
+        '這些 bits 的十進位值：'+approximation+'\n'+
+        (ch3Fraction.num===0n?'餘下小數為 0，這是精確值，可以寫＝。':done?'已達 '+ch3Fraction.limit+' bits，餘下小數尚非 0；此結果是截取近似值，要寫≈。':'餘下小數尚非 0，繼續對它乘 2。'));
+    }
+    function resetCh3Fraction(){try{
+      const parsed=ch3ParseFraction($('#ch3FractionValue').value);
+      ch3Fraction={...parsed,rows:[],limit:Number($('#ch3FractionLimit').value)};renderCh3Fraction();
+    }catch(error){ch3Fraction=null;$('#ch3FractionRows').replaceChildren();$('#ch3FractionNext').disabled=true;ch3Show('#ch3FractionOutput',error.message,true);}}
+    $('#ch3FractionNext').addEventListener('click',()=>{if(!ch3Fraction || ch3Fraction.num===0n || ch3Fraction.rows.length>=ch3Fraction.limit)return;
+      const before=ch3Fraction.num,r=ch3FractionStep(before,ch3Fraction.den);ch3Fraction.rows.push({before,...r});ch3Fraction.num=r.rest;renderCh3Fraction();});
+    $('#ch3FractionReset').addEventListener('click',resetCh3Fraction);
+    $('#ch3FractionValue').addEventListener('input',resetCh3Fraction);$('#ch3FractionLimit').addEventListener('change',resetCh3Fraction);resetCh3Fraction();
+
+    function renderCh3Text(){
+      const all=Array.from($('#ch3TextValue').value),characters=all.slice(0,6),rows=$('#ch3TextRows');rows.replaceChildren();
+      let bytesTotal=0;
+      characters.forEach(ch=>{const cp=ch.codePointAt(0),bytes=[...new TextEncoder().encode(ch)];bytesTotal+=bytes.length;
+        const tr=document.createElement('tr');
+        [ch===' '?'（空格）':ch,'U+'+cp.toString(16).toUpperCase().padStart(4,'0'),cp<=127?String(cp):'不在 ASCII',bytes.map(b=>b.toString(16).toUpperCase().padStart(2,'0')).join(' '),bytes.map(b=>ch3Byte(b)).join(' ')].forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.append(td);});rows.append(tr);});
+      $('#ch3TextSummary').textContent='顯示 '+characters.length+' 個 code points，共 '+bytesTotal+' UTF-8 Bytes。'+(all.length>6?'輸入較長，只顯示前 6 個。':'');
+    }
+    $('#ch3TextValue').addEventListener('input',renderCh3Text);renderCh3Text();
+    function ch3RleEncode(text){
+      if(!text || text.length>120 || !/^[A-Za-z +]+$/.test(text))throw new Error('請輸入 1–120 個英文字母、空格或 +；數字和 * 在本示意中保留給編碼規則。');
+      let encoded='';
+      for(let i=0;i<text.length;){let end=i+1;while(end<text.length && text[end]===text[i])end++;const n=end-i;encoded+=n>3?'*'+text[i]+n:text.slice(i,end);i=end;}
+      return encoded;
+    }
+    function ch3RleDecode(encoded){
+      let decoded='';
+      for(let i=0;i<encoded.length;){if(encoded[i]!=='*'){decoded+=encoded[i++];continue;}
+        const value=encoded[i+1];let j=i+2;while(j<encoded.length && /[0-9]/.test(encoded[j]))j++;
+        const count=Number(encoded.slice(i+2,j));if(!value || !Number.isInteger(count) || count<1 || count>120)throw new Error('RLE 編碼不完整。');decoded+=value.repeat(count);i=j;}
+      return decoded;
+    }
+    function renderCh3Rle(){try{
+      const original=$('#ch3RleValue').value,encoded=ch3RleEncode(original),decoded=ch3RleDecode(encoded);
+      ch3Show('#ch3RleOutput','壓縮：'+encoded+'\n還原：'+decoded+'\n'+original.length+' 字元 → '+encoded.length+' 字元\n壓縮率＝'+encoded.length+'/'+original.length+'＝'+(encoded.length/original.length).toFixed(3)+'\n還原與原文一致：'+(decoded===original?'是':'否'));
+    }catch(error){ch3Show('#ch3RleOutput',error.message,true);}}
+    $('#ch3RleRun').addEventListener('click',renderCh3Rle);renderCh3Rle();
+    const CH3_HUFFMAN={A:'00',E:'01',L:'100',O:'110',R:'111',B:'1010',D:'1011'};
+    function ch3HuffmanEncode(text){const s=text.trim().toUpperCase();if(!s || s.length>40 || !/^[AELORBD]+$/.test(s))throw new Error('這張講義碼表只包含 A、E、L、O、R、B、D；請輸入 1–40 個這些字母。');return {text:s,groups:Array.from(s).map(ch=>CH3_HUFFMAN[ch])};}
+    function ch3HuffmanDecode(bits){const s=bits.replace(/\s/g,'');if(!s || s.length>160 || !/^[01]+$/.test(s))throw new Error('請輸入 1–160 個 0／1，空白可用來分組。');
+      const inverse=Object.fromEntries(Object.entries(CH3_HUFFMAN).map(([ch,code])=>[code,ch]));let prefix='',text='',groups=[];
+      for(const bit of s){prefix+=bit;if(inverse[prefix]){text+=inverse[prefix];groups.push(prefix);prefix='';}else if(!Object.keys(inverse).some(code=>code.startsWith(prefix)))throw new Error('此字串含有碼表沒有的前綴：'+prefix+'。');}
+      if(prefix)throw new Error('尾端 '+prefix+' 尚未形成完整字元代碼，不能解回完整文字。');return {text,groups};
+    }
+    function renderCh3Huffman(encode){try{
+      const r=encode?ch3HuffmanEncode($('#ch3HuffmanText').value):ch3HuffmanDecode($('#ch3HuffmanBits').value);
+      const count=r.groups.join('').length;
+      ch3Show('#ch3HuffmanOutput',(encode?'編碼':'解碼')+'：'+r.text+'\n分組：'+r.groups.join(' | ')+'\n完整 bits：'+r.groups.join('')+'\n'+count+' bits ÷ ('+r.text.length+' 字元 × 8 bits)＝'+(count/(r.text.length*8)).toFixed(3)+'（不含碼表）');
+    }catch(error){ch3Show('#ch3HuffmanOutput',error.message,true);}}
+    $('#ch3HuffmanEncode').addEventListener('click',()=>renderCh3Huffman(true));$('#ch3HuffmanDecode').addEventListener('click',()=>renderCh3Huffman(false));renderCh3Huffman(true);
+
+    function renderCh3Audio(){
+      const samples=Number($('#ch3AudioSamples').value),bits=Number($('#ch3AudioBits').value),levels=2**bits;
+      $('#ch3AudioSamplesLabel').textContent=samples+' 個樣本';$('#ch3AudioBitsLabel').textContent=bits+' bits → '+levels+' 等級';
+      const canvas=$('#ch3AudioCanvas'),ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height,pad=24;
+      const style=getComputedStyle(document.documentElement),muted=style.getPropertyValue('--muted').trim(),cyan=style.getPropertyValue('--cyan').trim(),purple=style.getPropertyValue('--purple').trim();
+      const signal=x=>0.5+0.31*Math.sin(x*6*Math.PI)+0.12*Math.cos(x*14*Math.PI),px=x=>pad+x*(w-pad*2),py=y=>h-pad-y*(h-pad*2);
+      ctx.clearRect(0,0,w,h);ctx.strokeStyle=muted;ctx.lineWidth=1;ctx.globalAlpha=.3;
+      for(let i=0;i<=4;i++){ctx.beginPath();ctx.moveTo(pad,py(i/4));ctx.lineTo(w-pad,py(i/4));ctx.stroke();}
+      ctx.globalAlpha=1;ctx.strokeStyle=muted;ctx.lineWidth=2;ctx.beginPath();
+      for(let i=0;i<=500;i++){const x=i/500,y=signal(x);if(i===0)ctx.moveTo(px(x),py(y));else ctx.lineTo(px(x),py(y));}ctx.stroke();
+      const points=Array.from({length:samples},(_,i)=>{const x=i/(samples-1),y=signal(x);return {x,y,q:Math.round(y*(levels-1))/(levels-1)};});
+      ctx.strokeStyle=purple;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(px(points[0].x),py(points[0].q));
+      points.forEach((p,i)=>{if(i){ctx.lineTo(px(p.x),py(points[i-1].q));ctx.lineTo(px(p.x),py(p.q));}});ctx.stroke();
+      ctx.fillStyle=cyan;for(const p of points){ctx.beginPath();ctx.arc(px(p.x),py(p.y),4,0,Math.PI*2);ctx.fill();}
+      ch3Show('#ch3AudioSummary',samples+' 個樣本，每個用 '+bits+' bits 表示，這段樣本共 '+(samples*bits)+' bits。\n取樣數控制時間上的密度；'+levels+' 個量化等級控制振幅表示的細緻程度。');
+    }
+    $('#ch3AudioSamples').addEventListener('input',renderCh3Audio);$('#ch3AudioBits').addEventListener('input',renderCh3Audio);
+    new MutationObserver(renderCh3Audio).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});renderCh3Audio();
+    function renderCh3Color(){const values=['Red','Green','Blue'].map(name=>{const v=Number($('#ch3'+name).value);$('#ch3'+name+'Label').textContent=v;return v;});
+      $('#ch3ColorSwatch').style.backgroundColor='rgb('+values.join(',')+')';$('#ch3ColorSwatch').setAttribute('aria-label','RGB '+values.join(', '));
+      ch3Show('#ch3ColorOutput','RGB：('+values.join(', ')+')\n每分量 8 bits：'+values.map(ch3Byte).join(' | ')+'\n十六進位色碼：#'+values.map(n=>n.toString(16).toUpperCase().padStart(2,'0')).join('')+'\n三個分量合計 24 bits。');}
+    ['Red','Green','Blue'].forEach(name=>$('#ch3'+name).addEventListener('input',renderCh3Color));renderCh3Color();
+    function renderCh3Image(){try{const w=ch3IntegerInput('#ch3ImageWidth',1,10000),h=ch3IntegerInput('#ch3ImageHeight',1,10000),depth=Number($('#ch3ImageDepth').value),pixels=w*h,bits=pixels*depth;
+      ch3Show('#ch3ImageOutput',w+' × '+h+'＝'+pixels.toLocaleString()+' pixels\n'+pixels.toLocaleString()+' × '+depth+'＝'+bits.toLocaleString()+' bits\n'+bits.toLocaleString()+' ÷ 8＝'+(bits/8).toLocaleString()+' Bytes（不含額外格式資料）');
+    }catch(error){ch3Show('#ch3ImageOutput',error.message,true);}}
+    $('#ch3ImageRun').addEventListener('click',renderCh3Image);renderCh3Image();
+    let ch3VideoStep=0;
+    function renderCh3Video(){
+      $('#ch3VideoFrameTitle').textContent=ch3VideoStep===0?'第 0 張 · Keyframe':'第 '+ch3VideoStep+' 張 · 完整畫面';
+      const current=9+ch3VideoStep,previous=current-1;
+      const full=$('#ch3VideoFrame'),delta=$('#ch3VideoDelta');full.replaceChildren();delta.replaceChildren();
+      for(let i=0;i<32;i++){
+        const cell=document.createElement('span');cell.className='video-cell'+(i===current?' lit':'');cell.setAttribute('aria-hidden','true');full.append(cell);
+        const change=document.createElement('span');change.setAttribute('aria-hidden','true');change.className='video-cell'+(ch3VideoStep===0?' initial':i===current?' lit':i===previous?' removed':'');
+        change.textContent=ch3VideoStep===0?'':i===current?'1':i===previous?'0':'';delta.append(change);
+      }
+      ch3Show('#ch3VideoOutput',ch3VideoStep===0?'第一張作為 keyframe，先保存完整的 32 格資料；後面才能比較改變。':'亮點往右移一格：舊位置改成 0，新位置改成 1；只有 2 格改變，30 格相同。\n若保存改變的位置與值，可利用前面已還原的畫面重建這張影格。\nSpatial 則看同一張畫面內的大片同色背景，是另一個方向。');
+      $('#ch3VideoNext').disabled=ch3VideoStep===5;
+    }
+    $('#ch3VideoNext').addEventListener('click',()=>{ch3VideoStep=Math.min(5,ch3VideoStep+1);renderCh3Video();});$('#ch3VideoReset').addEventListener('click',()=>{ch3VideoStep=0;renderCh3Video();});renderCh3Video();
+
     const MINI_EXERCISES={
       hardware:{
         options:['Hardware（硬體）','Software（軟體）'],
@@ -2057,6 +2463,44 @@
         ]
       }
     };
+    Object.assign(MINI_EXERCISES,{
+      ch3basics:{options:['類比（Analog）','數位（Digital）','無失真（Lossless）','失真（Lossy）'],cases:[
+        {prompt:'水銀溫度計以連續的液柱高度表示溫度，屬於哪種表示？',answer:0,why:'類比＝Continuous，資訊連續改變。'},
+        {prompt:'電壓以高／低狀態對應 1／0，屬於哪種訊號？',answer:1,why:'數位訊號以離散狀態表示資訊。'},
+        {prompt:'壓縮後能完全還原原始資訊，屬於哪一類？',answer:2,why:'Lossless 可以無損還原；Lossy 會捨棄部分資訊。'}]},
+      ch3integers:{options:['−128–127','0–255','−127–127','0–256'],cases:[
+        {prompt:'8-bit 二補數有號整數的範圍？',answer:0,why:'−2⁷ 到 2⁷−1；非負的一半包含 0。'},
+        {prompt:'8-bit 無號整數的範圍？',answer:1,why:'共有 256 種圖樣，從 0 到 255。'},
+        {prompt:'8-bit 帶號–數量表示法的範圍？',answer:2,why:'1 位符號＋7 位絕對值；另有 +0、−0 兩種圖樣。'}]},
+      ch3compression:{options:['Keyword encoding','Run-length encoding','Huffman encoding','不是這三種方法'],cases:[
+        {prompt:'將 frequently used 的文字片段替換成一個保留符號，屬於哪種方法？',answer:0,why:'Keyword encoding 用替代表將常見文字片段改成特殊符號。'},
+        {prompt:'把 nnnnnnnn 改成 *n8，屬於哪種方法？',answer:1,why:'RLE 記旗標、重複值、重複次數，適合連續重複。'},
+        {prompt:'用短碼給常見字、長碼給少見字，屬於哪種方法？',answer:2,why:'Huffman 是變長編碼，依頻率建立碼表或樹。'}]},
+      ch3media:{cases:[
+        {prompt:'定期測量電壓，決定「何時量」，叫什麼？',options:['Sampling','Quantization','Metadata','Color depth'],answer:0,why:'Sampling 是取樣，處理時間上的測量密度。'},
+        {prompt:'把電壓值對應到有限 bits 的數值等級，叫什麼？',options:['Sampling','Quantization','Resolution','Temporal compression'],answer:1,why:'Quantization 是量化，處理振幅如何以有限值表示。'},
+        {prompt:'記錄線條與幾何形狀，適合數學縮放，屬於哪一種？',options:['Raster graphics','Metadata','Vector graphics','Audio codec'],answer:2,why:'向量記錄幾何描述；點陣逐像素記顏色。'}]},
+      ch3review:{cases:[
+        {prompt:'5 bits 可以表示多少種不同圖樣？',options:['5','10','32','31'],answer:2,why:'2⁵＝32 種；若表示無號整數，最大值是 31。'},
+        {prompt:'檔案從 200 Bytes 壓縮成 50 Bytes，依講義的壓縮率是多少？',options:['4','0.25','0.75','150'],answer:1,why:'壓縮後÷原始＝50/200＝0.25；省下的比例才是 0.75。'},
+        {prompt:'8-bit 二補數的 −2 是哪個圖樣？',options:['10000010','00000010','11111101','11111110'],answer:3,why:'00000010 反轉成 11111101，再加 1 得 11111110。10000010 是帶號–數量的 −2。'},
+        {prompt:'11111110 當成 8-bit 二補數，值是多少？',options:['254','−2','−126','126'],answer:1,why:'最高位為 1；無號值 254 減 256 得 −2。'},
+        {prompt:'8-bit 有號整數計算 127＋3，哪個說法正確？',options:['130 可精確存入 int8','只有有第 9 位進位才會溢位','結果超出範圍，低 8 位解讀成 −126','增加到 64 bits 就能表示所有整數'],answer:2,why:'int8 最大 127，數學答案 130 超出；10000010 解讀成 −126。有限 bits 都有範圍上限。'},
+        {prompt:'0.75₁₀ 的精確二進位表示？',options:['0.01₂','0.10₂','0.11₂','0.111₂'],answer:2,why:'1/2＋1/4＝0.75；乘 2 取得整數位 1、1。'},
+        {prompt:'十進位「小數部分」轉二進位，應用哪個方法？',options:['一直除 2，餘數倒讀','一直乘 2，整數位按順序讀','每 3 位分組','加上符號位'],answer:1,why:'乘 2、取整數部分、保留小數再乘。反覆除法是整數部分的方法。'},
+        {prompt:'1.200132708E+4 代表什麼？',options:['1.200132708＋4','1.200132708 × 10⁴','1.200132708 × 2⁴','1.200132708 / 10⁴'],answer:1,why:'十進位科學記號 E+4 表示乘 10 的 4 次方。'},
+        {prompt:'原始 ASCII 使用 7 bits，可表示多少種代碼？',options:['7','64','128','256'],answer:2,why:'2⁷＝128；256 是 8 bits 的容量。'},
+        {prompt:'題目指定一個固定 16-bit mapping，它有多少種可能代碼？',options:['16','256','32768','65536'],answer:3,why:'2¹⁶＝65536。這是固定位數的容量，不能推成所有 Unicode 字元都固定佔 16 bits。'},
+        {prompt:'RLE 中，為何 jjj 不一定改成 *j3？',options:['j 不可編碼','Huffman 禁止 j','兩者都是 3 字元，沒有節省','只有數字能壓縮'],answer:2,why:'旗標和值與次數也佔空間，短重複不一定比較省。'},
+        {prompt:'講義 p.37 碼表中，DOORBELL 用 25 bits；原來 8 個 8-bit 字元。壓縮率約為？',options:['0.39','0.61','3.125','8'],answer:0,why:'25/(8×8)＝25/64≈0.39；未包含碼表成本。'},
+        {prompt:'Huffman 編碼時，通常哪種字元用較短碼？',options:['字母排得較前面','出現頻率較高','字形比較簡單','ASCII 值較小'],answer:1,why:'依出現頻率分配碼長，以降低總 bits；解碼需要同一張碼表。'},
+        {prompt:'每個聲音樣本用 3 bits 量化，有多少個可能等級？',options:['3','6','8','24'],answer:2,why:'2³＝8 個等級；這是振幅表示能力，不是每秒取樣數。'},
+        {prompt:'24-bit RGB True color 的 R、G、B 分別用幾 bits？',options:['24、24、24','5、5、5','8、8、8','1、1、1'],answer:2,why:'每分量 8 bits，三分量共 24 bits。'},
+        {prompt:'100×100 像素、24 bits／像素，不含檔頭或壓縮，需多少 Bytes？',options:['10000','240000','30000','24000'],answer:2,why:'100×100×24＝240000 bits，再除 8＝30000 Bytes。'},
+        {prompt:'照片的拍攝時間、位置、作者資訊屬於什麼？',options:['Pixel','Metadata','RGB','Sampling'],answer:1,why:'Metadata 是描述資料的資料，不是每個像素的顏色。'},
+        {prompt:'比較連續 frames，只保存改變，屬於哪一類？',options:['Spatial compression','Temporal compression','Signed-magnitude','Character set'],answer:1,why:'Temporal 在時間上比較影格；Spatial 在同一影格內找冗餘。'}]}
+    });
+
     $$('[data-mini]').forEach(host=>{
       const exercise=MINI_EXERCISES[host.dataset.mini], mount=$('[data-mini-mount]',host);
       let index=0, answers=[], finished=false;
@@ -2074,14 +2518,14 @@
           const controls=document.createElement('div'); controls.className='lab-controls'; controls.append(reset);
           mount.append(summary,controls); return;
         }
-        const item=exercise.cases[index], hasAnswer=Number.isInteger(answers[index]);
+        const item=exercise.cases[index], options=item.options || exercise.options, hasAnswer=Number.isInteger(answers[index]);
         const prompt=document.createElement('p'); prompt.className='mini-question'; prompt.tabIndex=-1;
         prompt.textContent='第 '+(index+1)+' 題：'+item.prompt; mount.append(prompt);
         const choices=document.createElement('div'); choices.className='mini-options';
         choices.setAttribute('role','group'); choices.setAttribute('aria-label',item.prompt);
         const next=document.createElement('button'); next.type='button'; next.className='primary-btn';
         next.textContent=index===exercise.cases.length-1?'看本節結果':'下一個情境 →'; next.disabled=!hasAnswer;
-        exercise.options.forEach((label,choice)=>{
+        options.forEach((label,choice)=>{
           const button=document.createElement('button'); button.type='button'; button.className='ghost-btn';
           button.textContent=label; button.disabled=hasAnswer;
           if (hasAnswer && choice===item.answer) {button.classList.add('correct');button.textContent+=' · 正確';}
@@ -2098,7 +2542,7 @@
           const feedback=document.createElement('div');
           feedback.className='lab-output '+(answers[index]===item.answer?'ok':'bad');
           feedback.setAttribute('role','status'); feedback.setAttribute('aria-live','polite');
-          feedback.textContent=(answers[index]===item.answer?'✓ 答對了。':'這題選 '+exercise.options[item.answer]+'。')+' '+item.why;
+          feedback.textContent=(answers[index]===item.answer?'✓ 答對了。':'這題選 '+options[item.answer]+'。')+' '+item.why;
           mount.append(feedback);
         }
         next.dataset.miniNext='';
