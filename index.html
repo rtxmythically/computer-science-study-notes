@@ -445,6 +445,11 @@
     .mini-options button.incorrect{border-color:var(--red);background:rgba(255,125,140,.1);opacity:1}
     .mini-position{font-size:12px;color:var(--muted)}
     .mini-question{font-size:17px;font-weight:750;line-height:1.7;margin:12px 0}
+    #conversion-test .mini-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+    #conversion-test .mini-options button{text-align:left;min-height:52px;font-family:monospace;font-size:16px;overflow-wrap:anywhere}
+    #conversion-test .lab-output,#conversion-test .conversion-review p{white-space:pre-wrap;overflow-wrap:anywhere}
+    #conversion-test .conversion-review{margin-top:16px}
+    @media(max-width:420px){#conversion-test .mini-options{grid-template-columns:1fr}}
     .match-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:14px;margin:17px 0}
     .match-column{display:grid;gap:8px}
     .match-column button{padding:13px;text-align:left;border:1px solid var(--border);border-radius:12px;background:var(--panel-soft);color:var(--text);cursor:pointer;font-size:13px;line-height:1.6}
@@ -605,6 +610,7 @@
     <div class="side-label">Chapter 02</div>
     <a class="nav-link" href="#ch2-number"><span class="nav-dot"></span>進位與位置記數法</a>
     <a class="nav-link" href="#ch2-conversion"><span class="nav-dot"></span>進位轉換</a>
+    <a class="nav-link" href="#conversion-test"><span class="nav-dot"></span>進位轉換測驗 · 20 題</a>
     <a class="nav-link" href="#ch2-binary"><span class="nav-dot"></span>Binary Arithmetic</a>
     <a class="nav-link" href="#ch2-data"><span class="nav-dot"></span>Bit / Byte / Word</a>
 
@@ -654,7 +660,7 @@
           第一章先讀概念，再動手配對、探索分層、執行模擬，最後用選擇題檢查理解。第二章接著學進位換算與二進位運算；第三章學補數、小數、文字與多媒體的資料表示。
           每讀完一節就按「標記已學」，進度會自動存在這台電腦。
         </p>
-        <div class="study-path"><a href="#ch3-start">最新：第三章資料表示 →</a></div>
+        <div class="study-path"><a href="#conversion-test">最新：進位轉換測驗 · 20 題 →</a><a href="#ch3-start">第三章資料表示 →</a></div>
         <div class="hero-stats">
           <div class="stat"><strong>Ch01</strong><span>Computer Science Basics</span></div>
           <div class="stat"><strong>Ch02</strong><span>Binary Values & Number Systems</span></div>
@@ -1263,6 +1269,16 @@
         <div class="callout">
           <strong>超重要：</strong> Binary ↔ Octal：每 <b>3 bits</b> 分一組。Binary ↔ Hex：每 <b>4 bits</b> 分一組。
         </div>
+        <div class="study-path"><a href="#conversion-test">換算方法讀完了，開始 20 題測驗 →</a></div>
+      </section>
+
+      <section class="section searchable study-section" id="conversion-test" data-practice-only aria-labelledby="conversionQuizTitle">
+        <div class="section-kicker">Number Systems · Choice Quiz</div>
+        <h2 id="conversionQuizTitle">進位轉換測驗</h2>
+        <p class="intro">共 20 題：前 16 題練 2／8／10／16 進位的整數換算，最後 4 題練小數。先自己算，再直接點 A／B／C／D；答完會出現方法與步驟。</p>
+        <div class="lab" data-mini="conversion"><div data-mini-mount></div></div>
+        <p class="source-note">自製理解練習，依第二章進位換算與第三章小數表示的方法設計，並非老師的考試原題。本輪答題在重新整理頁面後會重置；完成後可展開錯題解析或完整重練。</p>
+        <div class="study-path"><a href="#ch2-conversion">複習整數換算方法 →</a><a href="#ch3-fraction">複習小數乘 2 →</a><a href="#practice">用轉換器核對 →</a></div>
       </section>
 
       <section class="section searchable" id="ch2-binary" data-study-only data-learn-id="ch2-binary">
@@ -2501,6 +2517,50 @@
         {prompt:'比較連續 frames，只保存改變，屬於哪一類？',options:['Spatial compression','Temporal compression','Signed-magnitude','Character set'],answer:1,why:'Temporal 在時間上比較影格；Spatial 在同一影格內找冗餘。'}]}
     });
 
+    // Original practice questions. Bases and fractional values are explicit in every option.
+    MINI_EXERCISES.conversion={letters:true,nextLabel:'下一題 →',reviewMistakes:true,cases:[
+      {prompt:'(10110)₂＝(?)₁₀',options:['(20)₁₀','(22)₁₀','(24)₁₀','(26)₁₀'],answer:1,
+       why:'方法：乘位置權重。\n10110₂＝1×16＋0×8＋1×4＋1×2＋0×1＝22。\n最右邊的權重是 2⁰＝1，再往左是 2、4、8、16。'},
+      {prompt:'(37)₁₀＝(?)₂',options:['(100011)₂','(101001)₂','(100101)₂','(101101)₂'],answer:2,
+       why:'方法：一直除 2，餘數倒著讀。\n37÷2＝18 餘 1；18÷2＝9 餘 0；9÷2＝4 餘 1；4÷2＝2 餘 0；2÷2＝1 餘 0；1÷2＝0 餘 1。\n由最後一個餘數往回讀：100101₂。核對：32＋4＋1＝37。'},
+      {prompt:'(73)₈＝(?)₁₀',options:['(59)₁₀','(73)₁₀','(56)₁₀','(63)₁₀'],answer:0,
+       why:'方法：八進位乘 8 的次方。\n73₈＝7×8¹＋3×8⁰＝56＋3＝59₁₀。\n左邊的 7 表示七個 8，不是七個 10。'},
+      {prompt:'(59)₁₀＝(?)₈',options:['(63)₈','(71)₈','(75)₈','(73)₈'],answer:3,
+       why:'方法：一直除 8，餘數倒著讀。\n59÷8＝7 餘 3；7÷8＝0 餘 7。\n由下往上讀成 73₈。核對：7×8＋3＝59。'},
+      {prompt:'(2F)₁₆＝(?)₁₀',options:['(31)₁₀','(45)₁₀','(47)₁₀','(32)₁₀'],answer:2,
+       why:'方法：十六進位乘 16 的次方。\nF＝15，所以 2F₁₆＝2×16＋15＝47₁₀。\nA、B、C、D、E、F 分別是 10、11、12、13、14、15。'},
+      {prompt:'(255)₁₀＝(?)₁₆',options:['(F0)₁₆','(FF)₁₆','(100)₁₆','(FE)₁₆'],answer:1,
+       why:'方法：一直除 16，餘數倒著讀。\n255÷16＝15 餘 15；15÷16＝0 餘 15。\n兩個餘數都是 15＝F，所以是 FF₁₆。100₁₆ 才是 256₁₀。'},
+      {prompt:'(11011000)₂＝(?)₈',options:['(310)₈','(330)₈','(660)₈','(216)₈'],answer:1,
+       why:'方法：從右邊每 3 bits 分一組。\n11 | 011 | 000 → 011 | 011 | 000 → 3 | 3 | 0。\n所以 11011000₂＝330₈。最左邊補 0 只是補齊一組，0 的貢獻仍是 0，原數值不變；不要在整數右邊補 0。'},
+      {prompt:'(101101)₂＝(?)₈',options:['(45)₈','(51)₈','(55)₈','(65)₈'],answer:2,
+       why:'方法：從右邊每 3 bits 分組。\n101 | 101 → 5 | 5，所以是 55₈。\n每組都用 4、2、1 的權重：101₂＝4＋1＝5。'},
+      {prompt:'(157)₈＝(?)₂',options:['(1011111)₂','(1101011)₂','(1110111)₂','(1101111)₂'],answer:3,
+       why:'方法：每個八進位 digit 都換成 3 bits。\n1→001；5→101；7→111。\n接起來是 001 101 111，省略整串最左邊的 0 後是 1101111₂。中間組的前導 0 不能任意刪掉。'},
+      {prompt:'(10010110)₂＝(?)₁₆',options:['(96)₁₆','(69)₁₆','(9A)₁₆','(66)₁₆'],answer:0,
+       why:'方法：從右邊每 4 bits 分組。\n1001 | 0110 → 9 | 6，所以是 96₁₆。\n因為 16＝2⁴，一個 Hex digit 正好表示四個二進位位數。'},
+      {prompt:'(A3)₁₆＝(?)₂',options:['(10110011)₂','(10100011)₂','(11000011)₂','(10010011)₂'],answer:1,
+       why:'方法：每個十六進位 digit 都換成 4 bits。\nA＝10→1010；3→0011。\n接起來是 1010 0011，也就是 10100011₂。3 必須在自己的組裡保留四位。'},
+      {prompt:'(725)₈＝(?)₁₆',options:['(1D5)₁₆','(725)₁₆','(1E5)₁₆','(2D5)₁₆'],answer:0,
+       why:'方法：先借二進位當橋梁。\n7→111；2→010；5→101，接成 111010101₂。\n再從右每 4 bits 分組：0001 | 1101 | 0101 → 1 | D | 5。\n所以是 1D5₁₆。前一段每組 3 位，後一段每組 4 位。'},
+      {prompt:'(2C)₁₆＝(?)₈',options:['(44)₈','(52)₈','(54)₈','(64)₈'],answer:2,
+       why:'方法：先轉二進位，再每 3 bits 分組。\n2→0010；C＝12→1100，所以是 00101100₂。\n從右分組並在左補 0：000 | 101 | 100 → 0 | 5 | 4。\n最左邊的 0 可省略，結果是 54₈。'},
+      {prompt:'(2748)₁₀＝(?)₁₆',options:['(CBA)₁₆','(ACB)₁₆','(BAC)₁₆','(ABC)₁₆'],answer:3,
+       why:'方法：一直除 16，餘數倒著讀。\n2748÷16＝171 餘 12（C）；171÷16＝10 餘 11（B）；10÷16＝0 餘 10（A）。\n由下往上讀成 ABC₁₆。CBA 是把餘數讀反了。'},
+      {prompt:'(30B)₁₆＝(?)₁₀',options:['(779)₁₀','(491)₁₀','(768)₁₀','(795)₁₀'],answer:0,
+       why:'方法：每位乘位置權重，再加總。\nB＝11；30B₁₆＝3×16²＋0×16¹＋11×16⁰＝768＋0＋11＝779₁₀。\n中間的 0 仍佔一個位置，左邊的 3 因此乘 16²。'},
+      {prompt:'(216)₁₀＝(?)₂',options:['(11001000)₂','(11011000)₂','(11011010)₂','(11101000)₂'],answer:1,
+       why:'方法：用 2 的次方拆出數值，也可反覆除 2。\n216＝128＋64＋16＋8。\n依 128、64、32、16、8、4、2、1 標出是否使用：1、1、0、1、1、0、0、0。\n所以是 11011000₂；也能回頭核對第 7 題的 330₈＝216₁₀。'},
+      {prompt:'(0.75)₁₀＝(?)₂',options:['(0.01)₂','(0.10)₂','(0.11)₂','(0.111)₂'],answer:2,
+       why:'方法：小數部分一直乘 2，整數位按產生順序讀。\n0.75×2＝1.5，取 1、留 0.5；0.5×2＝1.0，取 1、剩 0。\n所以是 0.11₂；核對：1/2＋1/4＝0.75。小數的整數位不用倒著讀。'},
+      {prompt:'(101.101)₂＝(?)₁₀',options:['(5.5)₁₀','(5.75)₁₀','(5.125)₁₀','(5.625)₁₀'],answer:3,
+       why:'方法：小數點左右都乘位置權重。\n整數：101₂＝4＋1＝5。\n小數：.101₂＝1×2⁻¹＋0×2⁻²＋1×2⁻³＝0.5＋0.125＝0.625。\n合起來是 5.625₁₀。小數權重依序是 1/2、1/4、1/8。'},
+      {prompt:'(13.375)₁₀＝(?)₂',options:['(1101.011)₂','(1101.101)₂','(1011.011)₂','(1101.11)₂'],answer:0,
+       why:'方法：整數與小數分開換算，最後接起來。\n13＝8＋4＋1→1101₂。\n0.375×2＝0.75（取 0）；0.75×2＝1.5（取 1、留 0.5）；0.5×2＝1（取 1）。\n小數按順序讀成 .011，因此答案是 1101.011₂。'},
+      {prompt:'(D.8)₁₆＝(?)₂',options:['(1101.0100)₂','(1101.1000)₂','(1011.1000)₂','(1101.0010)₂'],answer:1,
+       why:'方法：小數點保留，每個 Hex digit 各換成 4 bits。\nD＝13→1101；8→1000，所以 D.8₁₆＝1101.1000₂。\n核對：.8₁₆＝8/16＝0.5；.1000₂＝1/2。小數末端的 0 可省略，所以 1101.1₂ 也等值。'}
+    ]};
+
     $$('[data-mini]').forEach(host=>{
       const exercise=MINI_EXERCISES[host.dataset.mini], mount=$('[data-mini-mount]',host);
       let index=0, answers=[], finished=false;
@@ -2516,7 +2576,19 @@
           const summary=document.createElement('div'); summary.className='lab-output'; summary.setAttribute('role','status');
           summary.textContent='本節練習完成：'+score+' / '+exercise.cases.length+' 題答對。'+(score===exercise.cases.length?'可以前往下一節。':'讀一下解析，再重練本節。');
           const controls=document.createElement('div'); controls.className='lab-controls'; controls.append(reset);
-          mount.append(summary,controls); return;
+          mount.append(summary);
+          if(exercise.reviewMistakes){
+            answers.forEach((answer,i)=>{
+              const question=exercise.cases[i];if(answer===question.answer)return;
+              const review=document.createElement('details');review.className='conversion-review';
+              const title=document.createElement('summary');title.textContent='錯題 '+(i+1)+'：'+question.prompt;
+              const note=document.createElement('p');note.textContent='你選 '+String.fromCharCode(65+answer)+' '+question.options[answer]+'；正確答案是 '+String.fromCharCode(65+question.answer)+' '+question.options[question.answer]+'。\n'+question.why;
+              review.append(title,note);mount.append(review);
+            });
+          }
+          mount.append(controls);
+          if(focusPrompt && exercise.letters){summary.tabIndex=-1;summary.focus({preventScroll:true});host.closest('.section').scrollIntoView({block:'start',behavior:'instant'});}
+          return;
         }
         const item=exercise.cases[index], options=item.options || exercise.options, hasAnswer=Number.isInteger(answers[index]);
         const prompt=document.createElement('p'); prompt.className='mini-question'; prompt.tabIndex=-1;
@@ -2524,10 +2596,11 @@
         const choices=document.createElement('div'); choices.className='mini-options';
         choices.setAttribute('role','group'); choices.setAttribute('aria-label',item.prompt);
         const next=document.createElement('button'); next.type='button'; next.className='primary-btn';
-        next.textContent=index===exercise.cases.length-1?'看本節結果':'下一個情境 →'; next.disabled=!hasAnswer;
+        next.textContent=index===exercise.cases.length-1?'看本節結果':(exercise.nextLabel||'下一個情境 →'); next.disabled=!hasAnswer;
         options.forEach((label,choice)=>{
           const button=document.createElement('button'); button.type='button'; button.className='ghost-btn';
-          button.textContent=label; button.disabled=hasAnswer;
+          const choiceLabel=exercise.letters?String.fromCharCode(65+choice)+'　'+label:label;
+          button.textContent=choiceLabel; button.disabled=hasAnswer;
           if (hasAnswer && choice===item.answer) {button.classList.add('correct');button.textContent+=' · 正確';}
           else if (hasAnswer && choice===answers[index]) {button.classList.add('incorrect');button.textContent+=' · 你的答案';}
           button.addEventListener('click',()=>{
@@ -2542,7 +2615,8 @@
           const feedback=document.createElement('div');
           feedback.className='lab-output '+(answers[index]===item.answer?'ok':'bad');
           feedback.setAttribute('role','status'); feedback.setAttribute('aria-live','polite');
-          feedback.textContent=(answers[index]===item.answer?'✓ 答對了。':'這題選 '+options[item.answer]+'。')+' '+item.why;
+          const correctLabel=(exercise.letters?String.fromCharCode(65+item.answer)+' '+options[item.answer]:options[item.answer]);
+          feedback.textContent=(answers[index]===item.answer?'✓ 答對了。':'這題選 '+correctLabel+'。')+' '+item.why;
           mount.append(feedback);
         }
         next.dataset.miniNext='';
@@ -2553,7 +2627,10 @@
         });
         const controls=document.createElement('div'); controls.className='lab-controls'; controls.append(next,reset);
         mount.append(controls);
-        if(focusPrompt) prompt.focus({preventScroll:true});
+        if(focusPrompt){
+          prompt.focus({preventScroll:true});
+          if(exercise.letters) host.closest('.section').scrollIntoView({block:'start',behavior:'instant'});
+        }
       }
       renderMini();
     });
