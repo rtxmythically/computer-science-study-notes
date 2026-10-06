@@ -445,11 +445,20 @@
     .mini-options button.incorrect{border-color:var(--red);background:rgba(255,125,140,.1);opacity:1}
     .mini-position{font-size:12px;color:var(--muted)}
     .mini-question{font-size:17px;font-weight:750;line-height:1.7;margin:12px 0}
-    #conversion-test .mini-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
-    #conversion-test .mini-options button{text-align:left;min-height:52px;font-family:monospace;font-size:16px;overflow-wrap:anywhere}
-    #conversion-test .lab-output,#conversion-test .conversion-review p{white-space:pre-wrap;overflow-wrap:anywhere}
-    #conversion-test .conversion-review{margin-top:16px}
-    @media(max-width:420px){#conversion-test .mini-options{grid-template-columns:1fr}}
+    :is(#conversion-test,#arithmetic-test) .mini-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+    :is(#conversion-test,#arithmetic-test) .mini-options button{text-align:left;min-height:52px;font-family:monospace;font-size:16px;overflow-wrap:anywhere}
+    :is(#conversion-test,#arithmetic-test) .lab-output,:is(#conversion-test,#arithmetic-test) .conversion-review p{white-space:pre-wrap;overflow-wrap:anywhere}
+    :is(#conversion-test,#arithmetic-test) .conversion-review{margin-top:16px}
+    .radix-board{overflow-x:auto;padding:18px 8px;background:var(--panel-soft);border:1px solid var(--border);border-radius:14px;margin:16px 0}
+    .radix-line{display:flex;justify-content:flex-end;gap:4px;min-width:max-content;font-family:monospace;font-size:24px;line-height:1.6}
+    .radix-line span{display:grid;place-items:center;flex:0 0 36px;border-radius:6px}
+    .radix-line .radix-current{background:rgba(255,209,102,.16);outline:2px solid var(--yellow)}
+    .radix-line .radix-known{color:var(--cyan)}
+    .radix-result{border-top:2px solid var(--muted);padding-top:5px;margin-top:4px}
+    #radixOutput{white-space:pre-wrap;overflow-wrap:anywhere}
+    #radixRows tr:last-child{background:rgba(86,214,255,.08)}
+    #radixRows td{font-size:13px}
+    @media(max-width:420px){:is(#conversion-test,#arithmetic-test) .mini-options{grid-template-columns:1fr}.radix-line{font-size:21px}.radix-line span{flex-basis:29px}}
     .match-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:14px;margin:17px 0}
     .match-column{display:grid;gap:8px}
     .match-column button{padding:13px;text-align:left;border:1px solid var(--border);border-radius:12px;background:var(--panel-soft);color:var(--text);cursor:pointer;font-size:13px;line-height:1.6}
@@ -612,6 +621,8 @@
     <a class="nav-link" href="#ch2-conversion"><span class="nav-dot"></span>進位轉換</a>
     <a class="nav-link" href="#conversion-test"><span class="nav-dot"></span>進位轉換測驗 · 20 題</a>
     <a class="nav-link" href="#ch2-binary"><span class="nav-dot"></span>Binary Arithmetic</a>
+    <a class="nav-link" href="#radix-arithmetic"><span class="nav-dot"></span>2／8／16 進位加減教練</a>
+    <a class="nav-link" href="#arithmetic-test"><span class="nav-dot"></span>加減法測驗 · 20 題</a>
     <a class="nav-link" href="#ch2-data"><span class="nav-dot"></span>Bit / Byte / Word</a>
 
     <div class="side-label">Chapter 03</div>
@@ -657,10 +668,10 @@
         <div class="eyebrow">Introduction to Computers</div>
         <h1>把 Ch01–Ch03<br>變成真的會用的知識</h1>
         <p>
-          第一章先讀概念，再動手配對、探索分層、執行模擬，最後用選擇題檢查理解。第二章接著學進位換算與二進位運算；第三章學補數、小數、文字與多媒體的資料表示。
+          第一章先讀概念，再動手配對、探索分層、執行模擬，最後用選擇題檢查理解。第二章接著學進位換算與二、八、十六進位加減；第三章學補數、小數、文字與多媒體的資料表示。
           每讀完一節就按「標記已學」，進度會自動存在這台電腦。
         </p>
-        <div class="study-path"><a href="#conversion-test">最新：進位轉換測驗 · 20 題 →</a><a href="#ch3-start">第三章資料表示 →</a></div>
+        <div class="study-path"><a href="#radix-arithmetic">最新：不同進位加減 · 逐步教練 →</a><a href="#arithmetic-test">加減法測驗 · 20 題 →</a><a href="#conversion-test">進位轉換測驗 →</a><a href="#ch3-start">第三章資料表示 →</a></div>
         <div class="hero-stats">
           <div class="stat"><strong>Ch01</strong><span>Computer Science Basics</span></div>
           <div class="stat"><strong>Ch02</strong><span>Binary Values & Number Systems</span></div>
@@ -1383,6 +1394,49 @@
         </div>
       </section>
 
+      <section class="section searchable study-section" id="radix-arithmetic" data-study-only data-learn-id="radix-arithmetic" aria-labelledby="radixTitle">
+        <div class="section-head"><div><div class="section-kicker">Chapter 02 · Arithmetic Lab</div><h2 id="radixTitle">二、八、十六進位：相加與相減</h2><p class="section-desc">先看基底，再從最右欄算。一步一步處理進位與借位。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <p class="intro">不用每次先轉成二進位。<strong>同一種進位的兩個數，可以直接直式加減。</strong>你熟悉的十進位是「滿 10 進 1、借 1 補 10」；現在只要把 10 換成題目的基底。</p>
+        <div class="table-scroll"><table class="compare"><caption>這張表裡的 2、8、16 都表示十進位的數量。</caption><thead><tr><th>進位</th><th>可用的數字</th><th>加法何時進位</th><th>減法借 1 得到多少</th></tr></thead><tbody>
+          <tr><td>二進位（base 2）</td><td>0、1</td><td>滿 2：1＋1＝10₂</td><td>本欄多 2，也就是 10₂</td></tr>
+          <tr><td>八進位（base 8）</td><td>0～7</td><td>滿 8：7＋1＝10₈</td><td>本欄多 8，也就是 10₈</td></tr>
+          <tr><td>十六進位（base 16）</td><td>0～9、A～F</td><td>滿 16：F＋1＝10₁₆</td><td>本欄多 16，也就是 10₁₆</td></tr>
+        </tbody></table></div>
+        <div class="callout"><strong>為什麼借位要補基底？</strong>左邊一欄的位權，是目前欄的 b 倍。所以左欄少 1，就能讓本欄多 b，總數值不變。八進位借 1 補 8；十六進位借 1 補 16。</div>
+        <div class="grid two">
+          <div class="card"><span class="tag">Addition · 加法</span><h4>本欄兩個數字，加上右欄的進位</h4><p>從右往左算。總和若小於基底，就直接寫下；總和若達到基底，就減掉一個基底，留下的數寫在本欄，再往左進 1。</p><p>例如八進位：7＋6＝13（十進位），13＝1×8＋5，所以<strong>本欄寫 5、往左進 1</strong>。最後最左邊還有進位，也要寫出來。</p></div>
+          <div class="card"><span class="tag">Subtraction · 減法</span><h4>先扣掉被右欄借走的 1，再看夠不夠減</h4><p>從右往左算。不夠減就向左借 1，本欄補上基底；左欄下次計算時要記得少 1。</p><p>十六進位 A−B：A＝10、B＝11，不夠減。借位後 10＋16−11＝15＝F，所以<strong>本欄寫 F，左欄少 1</strong>。</p></div>
+        </div>
+        <h3>八進位加法：57₈＋26₈＝105₈</h3>
+        <div class="card"><div class="formula" style="white-space:pre;line-height:1.5">  57
++ 26
+----
+ 105</div><ol><li>個位：7＋6＝13（十進位）。13÷8＝1 餘 5 → 寫 5、進 1。</li><li>八位：5＋2＋剛才進的 1＝8 → 寫 0、再進 1。</li><li>最左邊寫出最後的 1 → 答案 105₈。</li></ol><p>最常漏的是第二欄的「＋1」。核對：57₈＝47₁₀、26₈＝22₁₀，47＋22＝69₁₀＝105₈。</p></div>
+        <h3>十六進位減法：4A₁₆−1B₁₆＝2F₁₆</h3>
+        <div class="card"><p>A＝10、B＝11、C＝12、D＝13、E＝14、F＝15。</p><div class="formula" style="white-space:pre;line-height:1.5">  4A
+- 1B
+----
+  2F</div><ol><li>個位：A−B＝10−11，不夠。向左的 4 借 1，4 變成 3；本欄增加 16。</li><li>個位變成 10＋16−11＝15 → 寫 F。</li><li>十六位：借出去後是 3−1＝2 → 答案 2F₁₆。</li></ol><p>記住：借 1 是補 16，所以不能照十進位的習慣只補 10。</p></div>
+        <h3>連續借位：左邊也是 0，怎麼辦？</h3>
+        <div class="card"><p>以 <strong>1000₈−0001₈</strong> 為例，往左找到第一個不是 0 的數字。最左邊的 1 變成 0；中間的 0 接到 8，又把 1 借給右邊，於是剩下 7；最右欄得到 8 再減 1，也是 7。</p><div class="formula">1000₂−1₂＝111₂<br>1000₈−1₈＝777₈<br>1000₁₆−1₁₆＝FFF₁₆</div><p>中間被借位經過的 0，會留下「基底−1」：二進位是 1、八進位是 7、十六進位是 F。</p></div>
+        <div class="callout"><strong>考前避免三個錯誤：</strong>先把個位對齊；右欄的進位或借位不能漏；答案每一位都必須是該基底允許的數字（八進位不能寫 8 或 9）。兩個數若是不同進位，先轉成同一種再算。左邊補 0 只是對齊，不改變數值。</div>
+        <div class="lab" id="radixCoach"><div class="lab-kicker">TRY IT · 每按一次，只算一欄</div><h4>進位／借位逐步教練</h4><p class="hint">先猜本欄要寫什麼，再按下一欄。可以修改數字；切換進位會載入對應的例子。</p>
+          <div class="ch3-fields"><label>進位<select id="radixBase"><option value="2">二進位 · base 2</option><option value="8" selected>八進位 · base 8</option><option value="16">十六進位 · base 16</option></select></label><label>上方數字 A<input id="radixA" type="text" value="57" maxlength="8" spellcheck="false" autocomplete="off" aria-describedby="radixInputHint"></label><label>運算<select id="radixOperation"><option value="add">＋ 加法</option><option value="sub">− 減法</option></select></label><label>下方數字 B<input id="radixB" type="text" value="26" maxlength="8" spellcheck="false" autocomplete="off" aria-describedby="radixInputHint"></label></div>
+          <p class="source-note" id="radixInputHint">輸入 1～8 位非負整數，不用寫括號或基底；十六進位可用 A～F。減法先練 A≥B，負數表示另見第三章。</p>
+          <div class="lab-controls"><button type="button" class="primary-btn" id="radixNext">算下一欄 →</button><button type="button" class="ghost-btn" id="radixReset">從頭看一次</button><button type="button" class="ghost-btn" id="radixCarryPreset">載入連續進位</button><button type="button" class="ghost-btn" id="radixBorrowPreset">載入連續借位</button></div>
+          <div id="radixBoard" class="radix-board" aria-label="直式與目前已算出的答案"></div>
+          <div class="lab-output" id="radixOutput" role="status" aria-live="polite"></div>
+          <div class="table-scroll"><table class="compare"><caption>逐欄紀錄：計算中的數值以十進位說明，寫回結果時使用所選基底。</caption><thead><tr><th>欄位</th><th>上方</th><th>下方</th><th>右欄的進／借</th><th>本欄計算</th><th>寫下</th><th>往左進／借</th></tr></thead><tbody id="radixRows"></tbody></table></div>
+        </div>
+        <p class="source-note">講義 ch02.pdf 的加減範例是二進位；本節八、十六進位的教學與互動，是用同一套位置記數規則延伸的自製練習。</p>
+        <div class="study-path"><a href="#arithmetic-test">開始二、八、十六進位加減測驗 →</a><a href="#ch2-binary">複習講義二進位例題 →</a></div>
+      </section>
+
+      <section class="section searchable study-section" id="arithmetic-test" data-practice-only aria-labelledby="arithmeticQuizTitle">
+        <div class="section-kicker">Arithmetic · Choice Quiz</div><h2 id="arithmeticQuizTitle">不同進位加減法測驗</h2><p class="intro">共 20 題：二進位 6 題、八進位 7 題、十六進位 7 題；加法與減法各 10 題。先用紙筆算，再點 A／B／C／D。每題都有逐欄進位、借位解析，最後可展開錯題重看。</p>
+        <div class="lab" data-mini="arithmetic"><div data-mini-mount></div></div><p class="source-note">自製理解練習，並非老師的考試原題。本輪答題在重新整理頁面後會重置；完成後可重練。</p><div class="study-path"><a href="#radix-arithmetic">看進位／借位教學與教練 →</a><a href="#conversion-test">另外練進位轉換 →</a></div>
+      </section>
+
       <section class="section searchable" id="ch2-data" data-study-only data-learn-id="ch2-data">
         <div class="section-head">
           <div>
@@ -1659,6 +1713,7 @@
           <label class="check"><input type="checkbox" data-check="fromdecimal"><span><strong>會把 Decimal 轉成其他進位</strong><span>懂反覆除法與餘數倒讀。</span></span></label>
           <label class="check"><input type="checkbox" data-check="binaryhex"><span><strong>Binary ↔ Octal / Hex 快速轉換</strong><span>3 bits 一組 / 4 bits 一組。</span></span></label>
           <label class="check"><input type="checkbox" data-check="binarymath"><span><strong>二進位加減法會處理 carry / borrow</strong><span>加法 1+1=10₂；減法遇到 0−1 要向左借位。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="radixmath"><span><strong>二、八、十六進位會逐欄加減與連續借位</strong><span>滿基底就進位，借 1 就補基底；八進位補 8、十六進位補 16。練習 57₈＋26₈、4A₁₆−1B₁₆、1000₈−1₈。</span></span></label>
           <label class="check"><input type="checkbox" data-check="word"><span><strong>Bit / Byte / Word 關係會背</strong><span>1 Byte=8 bits；16/32/64-bit 對應 Half/Full/Double Word。</span></span></label>
           <label class="check"><input type="checkbox" data-check="ch3-bits"><span><strong>能解釋 n bits 的容量與類比／數位的差異</strong><span>2ⁿ 種組合；無號最大值 2ⁿ−1；類比連續、數位離散。</span></span></label>
           <label class="check"><input type="checkbox" data-check="ch3-complement"><span><strong>會用固定 8-bit 二補數表示及解讀負數</strong><span>反轉再加 1；負數圖樣的無號值減 256；int8 −128–127。</span></span></label>
@@ -1739,6 +1794,7 @@
         <details><summary>18. Huffman 碼為什麼不能固定每 4 bits 分組？</summary><div class="answer">它是變長編碼。需使用同一張碼表，按完整碼解出字元；無前綴歧義可使解碼明確。</div></details>
         <details><summary>19. 取樣更多與量化 bits 更多，分別改變什麼？</summary><div class="answer">前者增加時間上量測的密度；後者增加可用振幅等級（2ᵇ）。兩者也會影響未壓縮樣本資料量。</div></details>
         <details><summary>20. 影片的 Temporal 與 Spatial 差在哪？</summary><div class="answer">Temporal 比較連續影格與變化，包含 keyframe／delta 的概念；Spatial 在同一張影格內減少冗餘。</div></details>
+        <details><summary>21. 八進位與十六進位的加減法，進位、借位有什麼差別？</summary><div class="answer">加法分別滿 8、滿 16 進 1；向左借 1 時，本欄分別補 8、補 16。左欄的位權是本欄的基底倍，所以總值不變。1000₈−1₈＝777₈；1000₁₆−1₁₆＝FFF₁₆。<a href="#radix-arithmetic">用逐步教練操作 →</a></div></details>
       </section>
 
       <div class="no-results" id="noResults">找不到符合的內容。可以試試「SIMD」、「Babbage」、「Hex」或「Byte」。</div>
@@ -2423,6 +2479,112 @@
     }
     $('#ch3VideoNext').addEventListener('click',()=>{ch3VideoStep=Math.min(5,ch3VideoStep+1);renderCh3Video();});$('#ch3VideoReset').addEventListener('click',()=>{ch3VideoStep=0;renderCh3Video();});renderCh3Video();
 
+    // Radix arithmetic: pure column calculation and input validation.
+    const RADIX_DIGITS='0123456789ABCDEF', RADIX_SUFFIX={2:'₂',8:'₈',16:'₁₆'};
+    function radixDigitValue(value) {return RADIX_DIGITS[value]+(value>9?'（'+value+'）':'');}
+    function radixTrace(base,operation,a,b) {
+      const width=Math.max(a.length,b.length), rows=[];
+      let incoming=0;
+      for(let column=0;column<width;column++) {
+        const upper=RADIX_DIGITS.indexOf(a[a.length-1-column]||'0');
+        const lower=RADIX_DIGITS.indexOf(b[b.length-1-column]||'0');
+        let digit,outgoing,calculation;
+        if(operation==='add') {
+          const total=upper+lower+incoming;
+          digit=total%base;outgoing=Math.floor(total/base);
+          calculation=upper+'＋'+lower+'＋'+incoming+'＝'+total+'；'+total+'÷'+base+'＝'+outgoing+' 餘 '+digit;
+        } else {
+          outgoing=upper<lower+incoming?1:0;
+          digit=upper+outgoing*base-lower-incoming;
+          calculation=upper+(outgoing?'＋'+base:'')+'−'+lower+'−'+incoming+'＝'+digit;
+        }
+        rows.push({column,upper,lower,incoming,digit,outgoing,calculation});incoming=outgoing;
+      }
+      if(operation==='add' && incoming) rows.push({column:width,upper:0,lower:0,incoming,digit:incoming,outgoing:0,calculation:'最高欄的最後進位 '+incoming+'，要另寫出來'});
+      const result=rows.map(row=>RADIX_DIGITS[row.digit]).reverse().join('').replace(/^0+(?=.)/,'');
+      return {base,operation,a,b,rows,result};
+    }
+    function parseRadixExercise(base,operation,rawA,rawB) {
+      if(![2,8,16].includes(base)||!['add','sub'].includes(operation))return {error:'請選二、八或十六進位，以及加法或減法。'};
+      const values=[rawA.trim().toUpperCase(),rawB.trim().toUpperCase()];
+      for(let i=0;i<values.length;i++) {
+        const value=values[i],label=i===0?'A':'B';
+        if(!value||value.length>8||![...value].every(digit=>RADIX_DIGITS.slice(0,base).includes(digit)))return {error:label+' 請輸入 1～8 位有效的 '+base+' 進位數字；可用 '+RADIX_DIGITS.slice(0,base)+'。'};
+      }
+      if(operation==='sub' && parseInt(values[0],base)<parseInt(values[1],base))return {error:'這個借位教練先練 A≥B。請把較大的數放在 A；負數表示可到第三章「負數 · 補數」學習。'};
+      return radixTrace(base,operation,...values);
+    }
+    function radixStepText(trace,row) {
+      const position='第 '+(row.column+1)+' 欄（'+trace.base+'^'+row.column+' 位）';
+      if(trace.operation==='add') {
+        if(row.column>=Math.max(trace.a.length,trace.b.length))return position+'：最左邊仍有進位 '+row.incoming+'，另寫 '+RADIX_DIGITS[row.digit]+'。';
+        return position+'：上方 '+radixDigitValue(row.upper)+'，下方 '+radixDigitValue(row.lower)+'，加上右欄進位 '+row.incoming+'。\n'+row.calculation+' → 寫 '+RADIX_DIGITS[row.digit]+'，往左進 '+row.outgoing+'。';
+      }
+      return position+'：上方 '+radixDigitValue(row.upper)+'，下方 '+radixDigitValue(row.lower)+'。'+(row.incoming?'右欄剛借走 1，所以本欄也要扣掉 1。':'右欄沒有借走數字。')+'\n'+(row.outgoing?'不夠減，向左借 1，本欄補 '+trace.base+'。':'夠減，不用再向左借。')+row.calculation+' → 寫 '+RADIX_DIGITS[row.digit]+'，往左借 '+row.outgoing+'。';
+    }
+    const ARITHMETIC_QUESTIONS=[
+      {base:2,operation:'add',a:'1011',b:'101',options:['1110','10000','10001','11000'],answer:1},
+      {base:2,operation:'add',a:'111',b:'1',options:['111','1010','1000','1100'],answer:2},
+      {base:2,operation:'sub',a:'10110',b:'1011',options:['1011','1101','1111','1001'],answer:0},
+      {base:2,operation:'sub',a:'1000',b:'1',options:['1001','1000','110','111'],answer:3},
+      {base:2,operation:'add',a:'10101',b:'111',options:['11010','11110','11100','10100'],answer:2},
+      {base:2,operation:'sub',a:'11000',b:'101',options:['10011','10101','11011','1111'],answer:0},
+      {base:8,operation:'add',a:'57',b:'26',options:['103','115','75','105'],answer:3},
+      {base:8,operation:'add',a:'76',b:'5',options:['101','103','113','77'],answer:1},
+      {base:8,operation:'add',a:'777',b:'1',options:['1000','777','770','1001'],answer:0},
+      {base:8,operation:'sub',a:'72',b:'35',options:['45','37','35','25'],answer:2},
+      {base:8,operation:'sub',a:'100',b:'27',options:['61','73','41','51'],answer:3},
+      {base:8,operation:'sub',a:'1000',b:'1',options:['677','777','770','1001'],answer:1},
+      {base:8,operation:'add',a:'245',b:'167',options:['424','414','434','444'],answer:2},
+      {base:16,operation:'add',a:'2F',b:'1B',options:['4A','3A','49','5A'],answer:0},
+      {base:16,operation:'sub',a:'4A',b:'1B',options:['3F','2F','31','2E'],answer:1},
+      {base:16,operation:'add',a:'A7',b:'6D',options:['104','11D','1140','114'],answer:3},
+      {base:16,operation:'sub',a:'100',b:'2F',options:['D1','E1','D0','C1'],answer:0},
+      {base:16,operation:'add',a:'FFF',b:'1',options:['FFF','FF0','1000','1001'],answer:2},
+      {base:16,operation:'sub',a:'1000',b:'1',options:['1001','F0F','EFF','FFF'],answer:3},
+      {base:16,operation:'sub',a:'A0',b:'1C',options:['94','84','8C','74'],answer:1}
+    ];
+
+    // Radix arithmetic: browser controls.
+    const radixInputs=[$('#radixBase'),$('#radixOperation'),$('#radixA'),$('#radixB')];
+    let radixExercise=null,radixShown=0;
+    function renderRadixCoach() {
+      const output=$('#radixOutput'),board=$('#radixBoard'),body=$('#radixRows'),next=$('#radixNext');
+      board.replaceChildren();body.replaceChildren();output.className='lab-output';
+      next.disabled=Boolean(radixExercise.error)||radixShown===radixExercise.rows.length;
+      next.textContent=next.disabled&&!radixExercise.error?'全部欄位已完成':'算下一欄 →';
+      if(radixExercise.error){output.classList.add('bad');output.textContent=radixExercise.error;board.hidden=true;return;}
+      board.hidden=false;
+      const trace=radixExercise,width=trace.rows.length,active=radixShown?trace.rows[radixShown-1].column:0;
+      [['',trace.a.padStart(width,'0')], [trace.operation==='add'?'+':'−',trace.b.padStart(width,'0')], ['=',trace.rows.map((row,i)=>i<radixShown?RADIX_DIGITS[row.digit]:'?').reverse().join('')]].forEach(([sign,digits],lineIndex)=>{
+        const line=document.createElement('div');line.className='radix-line'+(lineIndex===2?' radix-result':'');
+        const symbol=document.createElement('span');symbol.textContent=sign;line.append(symbol);
+        [...digits].forEach((digit,i)=>{const cell=document.createElement('span');cell.textContent=digit;if(width-1-i===active)cell.classList.add('radix-current');if(lineIndex===2&&digit!=='?')cell.classList.add('radix-known');line.append(cell);});board.append(line);
+      });
+      trace.rows.slice(0,radixShown).forEach(row=>{
+        const tr=document.createElement('tr');
+        [(row.column+1)+'（'+trace.base+'^'+row.column+'）',radixDigitValue(row.upper),radixDigitValue(row.lower),row.incoming,row.calculation,RADIX_DIGITS[row.digit],row.outgoing].forEach(value=>{const td=document.createElement('td');td.textContent=String(value);tr.append(td);});body.append(tr);
+      });
+      if(!radixShown){output.textContent='目前是 '+trace.base+' 進位。從最右欄開始：'+radixDigitValue(trace.rows[0].upper)+(trace.operation==='add'?'＋':'−')+radixDigitValue(trace.rows[0].lower)+'。先想一下要不要'+(trace.operation==='add'?'進位':'借位')+'，再按「算下一欄」。';return;}
+      output.textContent='已算 '+radixShown+' / '+trace.rows.length+' 欄。\n'+radixStepText(trace,trace.rows[radixShown-1]);
+      if(radixShown===trace.rows.length){output.classList.add('ok');output.textContent+='\n完成：('+trace.a+')'+RADIX_SUFFIX[trace.base]+(trace.operation==='add'?'＋':'−')+'('+trace.b+')'+RADIX_SUFFIX[trace.base]+'＝('+trace.result+')'+RADIX_SUFFIX[trace.base]+'。答案最左邊多餘的 0 可以省略。';}
+    }
+    function resetRadixCoach(){radixShown=0;radixExercise=parseRadixExercise(Number($('#radixBase').value),$('#radixOperation').value,$('#radixA').value,$('#radixB').value);renderRadixCoach();}
+    function loadRadixExample(kind) {
+      const base=Number($('#radixBase').value);
+      if(kind==='carry'){$('#radixOperation').value='add';$('#radixA').value=RADIX_DIGITS[base-1].repeat(3);$('#radixB').value='1';}
+      else if(kind==='borrow'){$('#radixOperation').value='sub';$('#radixA').value='1000';$('#radixB').value='1';}
+      else {const examples={2:['1011','101'],8:['57','26'],16:['2F','1B']};$('#radixOperation').value='add';[$('#radixA').value,$('#radixB').value]=examples[base];}
+      resetRadixCoach();
+    }
+    $('#radixBase').addEventListener('change',()=>loadRadixExample('normal'));
+    radixInputs.slice(1).forEach(input=>input.addEventListener('input',resetRadixCoach));
+    $('#radixNext').addEventListener('click',()=>{if(!radixExercise.error&&radixShown<radixExercise.rows.length){radixShown++;renderRadixCoach();}});
+    $('#radixReset').addEventListener('click',resetRadixCoach);
+    $('#radixCarryPreset').addEventListener('click',()=>loadRadixExample('carry'));
+    $('#radixBorrowPreset').addEventListener('click',()=>loadRadixExample('borrow'));
+    resetRadixCoach();
+
     const MINI_EXERCISES={
       hardware:{
         options:['Hardware（硬體）','Software（軟體）'],
@@ -2560,6 +2722,13 @@
       {prompt:'(D.8)₁₆＝(?)₂',options:['(1101.0100)₂','(1101.1000)₂','(1011.1000)₂','(1101.0010)₂'],answer:1,
        why:'方法：小數點保留，每個 Hex digit 各換成 4 bits。\nD＝13→1101；8→1000，所以 D.8₁₆＝1101.1000₂。\n核對：.8₁₆＝8/16＝0.5；.1000₂＝1/2。小數末端的 0 可省略，所以 1101.1₂ 也等值。'}
     ]};
+
+    MINI_EXERCISES.arithmetic={letters:true,nextLabel:'下一題 →',reviewMistakes:true,cases:ARITHMETIC_QUESTIONS.map(question=>{
+      const trace=radixTrace(question.base,question.operation,question.a,question.b),suffix=RADIX_SUFFIX[question.base];
+      return {prompt:'('+question.a+')'+suffix+(question.operation==='add'?'＋':'−')+'('+question.b+')'+suffix+'＝(?)'+suffix,
+        options:question.options.map(value=>'('+value+')'+suffix),answer:question.answer,
+        why:'方法：從右往左逐欄'+(question.operation==='add'?'相加；滿 '+question.base+' 就進 1。':'相減；不夠減就借 1，本欄補 '+question.base+'。')+'下列中間計算用十進位數值說明。\n'+trace.rows.map(row=>radixStepText(trace,row)).join('\n')+'\n結果：('+trace.result+')'+suffix+'。'};
+    })};
 
     $$('[data-mini]').forEach(host=>{
       const exercise=MINI_EXERCISES[host.dataset.mini], mount=$('[data-mini-mount]',host);
