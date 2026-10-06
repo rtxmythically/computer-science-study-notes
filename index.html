@@ -1433,8 +1433,9 @@
       </section>
 
       <section class="section searchable study-section" id="arithmetic-test" data-practice-only aria-labelledby="arithmeticQuizTitle">
-        <div class="section-kicker">Arithmetic · Choice Quiz</div><h2 id="arithmeticQuizTitle">不同進位加減法測驗</h2><p class="intro">共 20 題：二進位 6 題、八進位 7 題、十六進位 7 題；加法與減法各 10 題。先用紙筆算，再點 A／B／C／D。每題都有逐欄進位、借位解析，最後可展開錯題重看。</p>
-        <div class="lab" data-mini="arithmetic"><div data-mini-mount></div></div><p class="source-note">自製理解練習，並非老師的考試原題。本輪答題在重新整理頁面後會重置；完成後可重練。</p><div class="study-path"><a href="#radix-arithmetic">看進位／借位教學與教練 →</a><a href="#conversion-test">另外練進位轉換 →</a></div>
+        <div class="section-kicker" lang="en">Arithmetic · Multiple-Choice Quiz</div><h2 id="arithmeticQuizTitle" lang="en">Binary, Octal &amp; Hexadecimal Arithmetic</h2><p class="intro" lang="en">20 questions: 6 binary, 7 octal, and 7 hexadecimal; 10 addition and 10 subtraction questions. Choose the correct answer, A, B, C, or D. Both operands in each question use the same base. Step-by-step explanations are provided in Chinese after you answer.</p>
+        <details><summary>Exam vocabulary · 考試用語</summary><div class="answer"><div class="table-scroll"><table class="compare"><thead><tr><th>English</th><th>中文與讀題方式</th></tr></thead><tbody><tr><td lang="en">binary / octal / hexadecimal</td><td>二進位／八進位／十六進位</td></tr><tr><td lang="en">add / addition / sum</td><td>相加／加法／和；sum 問的是相加結果。</td></tr><tr><td lang="en">subtract / subtraction / difference</td><td>相減／減法／差；difference 問的是相減結果。</td></tr><tr><td lang="en">Subtract B from A.</td><td>從 A 裡減去 B，也就是 A−B。注意不是 B−A。</td></tr><tr><td lang="en">carry / borrow</td><td>進位／借位；滿基底就 carry，不夠減就 borrow。</td></tr><tr><td lang="en">operand / base / digit</td><td>參與運算的數／基底／單一位數字。</td></tr></tbody></table></div></div></details>
+        <div class="lab" data-mini="arithmetic"><div data-mini-mount></div></div><p class="source-note">英文題目與選項，中文逐欄解析。這是自製理解練習，並非老師的考試原題。本輪答題在重新整理頁面後會重置；完成後可重練。</p><div class="study-path"><a href="#radix-arithmetic" lang="en">Review carry and borrow →</a><a href="#conversion-test" lang="en">Practice base conversions →</a></div>
       </section>
 
       <section class="section searchable" id="ch2-data" data-study-only data-learn-id="ch2-data">
@@ -2723,34 +2724,40 @@
        why:'方法：小數點保留，每個 Hex digit 各換成 4 bits。\nD＝13→1101；8→1000，所以 D.8₁₆＝1101.1000₂。\n核對：.8₁₆＝8/16＝0.5；.1000₂＝1/2。小數末端的 0 可省略，所以 1101.1₂ 也等值。'}
     ]};
 
-    MINI_EXERCISES.arithmetic={letters:true,nextLabel:'下一題 →',reviewMistakes:true,cases:ARITHMETIC_QUESTIONS.map(question=>{
-      const trace=radixTrace(question.base,question.operation,question.a,question.b),suffix=RADIX_SUFFIX[question.base];
-      return {prompt:'('+question.a+')'+suffix+(question.operation==='add'?'＋':'−')+'('+question.b+')'+suffix+'＝(?)'+suffix,
+    MINI_EXERCISES.arithmetic={language:'en',letters:true,nextLabel:'Next question →',reviewMistakes:true,cases:ARITHMETIC_QUESTIONS.map(question=>{
+      const trace=radixTrace(question.base,question.operation,question.a,question.b),suffix=RADIX_SUFFIX[question.base],baseName={2:'binary',8:'octal',16:'hexadecimal'}[question.base];
+      const upper='('+question.a+')'+suffix,lower='('+question.b+')'+suffix;
+      return {prompt:question.operation==='add'?'What is the sum of '+upper+' and '+lower+' in '+baseName+'?':'Subtract '+lower+' from '+upper+'. What is the difference in '+baseName+'?',
         options:question.options.map(value=>'('+value+')'+suffix),answer:question.answer,
-        why:'方法：從右往左逐欄'+(question.operation==='add'?'相加；滿 '+question.base+' 就進 1。':'相減；不夠減就借 1，本欄補 '+question.base+'。')+'下列中間計算用十進位數值說明。\n'+trace.rows.map(row=>radixStepText(trace,row)).join('\n')+'\n結果：('+trace.result+')'+suffix+'。'};
+        why:'英文讀題：'+(question.operation==='add'?'sum 是相加的結果，也就是 '+upper+'＋'+lower+'。':'Subtract B from A 是 A−B，所以這題算 '+upper+'−'+lower+'；difference 是相減的結果。')+'\n方法：從右往左逐欄'+(question.operation==='add'?'相加；滿 '+question.base+' 就進 1。':'相減；不夠減就借 1，本欄補 '+question.base+'。')+'下列中間計算用十進位數值說明。\n'+trace.rows.map(row=>radixStepText(trace,row)).join('\n')+'\n結果：('+trace.result+')'+suffix+'。'};
     })};
 
     $$('[data-mini]').forEach(host=>{
       const exercise=MINI_EXERCISES[host.dataset.mini], mount=$('[data-mini-mount]',host);
+      const english=exercise.language==='en';
       let index=0, answers=[], finished=false;
       function renderMini(focusPrompt=false) {
         mount.replaceChildren();
         const status=document.createElement('div'); status.className='mini-position';
         const score=answers.filter((answer,i)=>answer===exercise.cases[i].answer).length;
-        status.textContent='已答 '+answers.length+' / '+exercise.cases.length+' · 答對 '+score+' 題';
+        status.textContent=english?'Answered '+answers.length+' / '+exercise.cases.length+' · Correct '+score:'已答 '+answers.length+' / '+exercise.cases.length+' · 答對 '+score+' 題';
+        if(english)status.lang='en';
         mount.append(status);
-        const reset=document.createElement('button'); reset.type='button'; reset.className='ghost-btn'; reset.textContent='重練本節';
+        const reset=document.createElement('button'); reset.type='button'; reset.className='ghost-btn'; reset.textContent=english?'Restart quiz':'重練本節';
+        if(english)reset.lang='en';
         reset.addEventListener('click',()=>{index=0;answers=[];finished=false;renderMini(true);});
         if (finished) {
           const summary=document.createElement('div'); summary.className='lab-output'; summary.setAttribute('role','status');
-          summary.textContent='本節練習完成：'+score+' / '+exercise.cases.length+' 題答對。'+(score===exercise.cases.length?'可以前往下一節。':'讀一下解析，再重練本節。');
+          summary.textContent=english?'Quiz complete: '+score+' / '+exercise.cases.length+' correct. '+(score===exercise.cases.length?'You have completed all questions.':'Review the explanations and try again.'):'本節練習完成：'+score+' / '+exercise.cases.length+' 題答對。'+(score===exercise.cases.length?'可以前往下一節。':'讀一下解析，再重練本節。');
+          if(english)summary.lang='en';
           const controls=document.createElement('div'); controls.className='lab-controls'; controls.append(reset);
           mount.append(summary);
           if(exercise.reviewMistakes){
             answers.forEach((answer,i)=>{
               const question=exercise.cases[i];if(answer===question.answer)return;
               const review=document.createElement('details');review.className='conversion-review';
-              const title=document.createElement('summary');title.textContent='錯題 '+(i+1)+'：'+question.prompt;
+              const title=document.createElement('summary');title.textContent=(english?'Review question '+(i+1)+': ':'錯題 '+(i+1)+'：')+question.prompt;
+              if(english)title.lang='en';
               const note=document.createElement('p');note.textContent='你選 '+String.fromCharCode(65+answer)+' '+question.options[answer]+'；正確答案是 '+String.fromCharCode(65+question.answer)+' '+question.options[question.answer]+'。\n'+question.why;
               review.append(title,note);mount.append(review);
             });
@@ -2761,17 +2768,19 @@
         }
         const item=exercise.cases[index], options=item.options || exercise.options, hasAnswer=Number.isInteger(answers[index]);
         const prompt=document.createElement('p'); prompt.className='mini-question'; prompt.tabIndex=-1;
-        prompt.textContent='第 '+(index+1)+' 題：'+item.prompt; mount.append(prompt);
+        prompt.textContent=(english?'Question '+(index+1)+': ':'第 '+(index+1)+' 題：')+item.prompt; if(english)prompt.lang='en';mount.append(prompt);
         const choices=document.createElement('div'); choices.className='mini-options';
         choices.setAttribute('role','group'); choices.setAttribute('aria-label',item.prompt);
         const next=document.createElement('button'); next.type='button'; next.className='primary-btn';
-        next.textContent=index===exercise.cases.length-1?'看本節結果':(exercise.nextLabel||'下一個情境 →'); next.disabled=!hasAnswer;
+        next.textContent=index===exercise.cases.length-1?(english?'View results':'看本節結果'):(exercise.nextLabel||'下一個情境 →'); next.disabled=!hasAnswer;
+        if(english)next.lang='en';
         options.forEach((label,choice)=>{
           const button=document.createElement('button'); button.type='button'; button.className='ghost-btn';
           const choiceLabel=exercise.letters?String.fromCharCode(65+choice)+'　'+label:label;
           button.textContent=choiceLabel; button.disabled=hasAnswer;
-          if (hasAnswer && choice===item.answer) {button.classList.add('correct');button.textContent+=' · 正確';}
-          else if (hasAnswer && choice===answers[index]) {button.classList.add('incorrect');button.textContent+=' · 你的答案';}
+          if(english)button.lang='en';
+          if (hasAnswer && choice===item.answer) {button.classList.add('correct');button.textContent+=english?' · Correct':' · 正確';}
+          else if (hasAnswer && choice===answers[index]) {button.classList.add('incorrect');button.textContent+=english?' · Your answer':' · 你的答案';}
           button.addEventListener('click',()=>{
             if (Number.isInteger(answers[index])) return;
             answers[index]=choice; renderMini();
