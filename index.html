@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark light">
-  <title>計算機概論｜Ch01–Ch03 互動筆記</title>
+  <title>計算機概論｜Ch01–Ch04 互動筆記</title>
   <style>
     :root{
       --bg:#07111f;
@@ -589,6 +589,37 @@
     #ch3-test .lab{margin-top:18px}
     @media (max-width:680px){.ch3-fields,.rgb-layout{grid-template-columns:1fr}.color-swatch{min-height:110px}.bit-switches{gap:4px}.bit-switches button{font-size:17px}}
     @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+    /* Chapter 04: source-aligned logic labs. */
+    .ch4-fields{display:flex;flex-wrap:wrap;gap:12px;margin:15px 0}
+    .ch4-fields label{display:flex;flex-direction:column;gap:6px;min-width:110px;flex:1;color:var(--muted);font-size:13px}
+    .ch4-fields select{width:100%;min-height:44px;padding:8px 12px;border:1px solid var(--border);border-radius:11px;background:var(--panel-strong);color:var(--text)}
+    .ch4-fields select:disabled{opacity:.5}
+    .ch4-gate-card h3{margin:0;font-size:16px}
+    .ch4-gate-card svg{display:block;width:100%;max-width:200px;height:auto;margin:8px auto}
+    .ch4-gate-card svg text{fill:var(--text);font-size:14px;font-family:monospace}
+    .ch4-gate-shape{fill:var(--panel-strong);stroke:var(--cyan);stroke-width:2}
+    .ch4-gate-wire{fill:none;stroke:var(--text);stroke-width:2}
+    .ch4-gate-bubble{fill:var(--panel-strong);stroke:var(--cyan);stroke-width:2}
+    .ch4-gate-card code{color:var(--cyan)}
+    .ch4-signal-flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 0}
+    .ch4-signal{padding:10px 14px;border-radius:12px;background:var(--panel-soft);border:1px solid var(--border);font-family:monospace;overflow-wrap:anywhere}
+    .ch4-signal[data-value="1"]{border-color:var(--cyan);color:var(--cyan)}
+    .ch4-signal[data-value="?"]{border-color:var(--yellow);color:var(--yellow)}
+    .ch4-current td{color:var(--text);background:rgba(86,214,255,.12);font-weight:800}
+    .ch4-steps{padding-left:24px}
+    .ch4-steps li{padding:4px 0}
+    .ch4-mux-inputs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+    .ch4-mux-inputs button{padding:12px 8px;font-family:monospace}
+    .ch4-mux-inputs button[aria-pressed="true"]{color:var(--cyan)}
+    .ch4-mux-inputs button.ch4-selected{border:2px solid var(--cyan);background:rgba(86,214,255,.12)}
+    #ch4-test .mini-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+    #ch4-test .mini-options button{text-align:left;min-height:54px;overflow-wrap:anywhere}
+    #ch4-test .lab-output,#ch4-test .conversion-review p{white-space:pre-wrap;overflow-wrap:anywhere}
+    #ch4-test .conversion-review{margin-top:16px}
+    #ch4-test .mini-question{font-size:19px;line-height:1.55}
+    @media(max-width:680px){.ch4-gate-grid.grid.three{grid-template-columns:repeat(2,minmax(0,1fr))}.ch4-fields label{min-width:90px}#ch4-test .mini-options{grid-template-columns:1fr}}
+    @media(max-width:420px){.ch4-gate-grid.grid.three{grid-template-columns:1fr}.ch4-mux-inputs{grid-template-columns:repeat(2,minmax(0,1fr))}}
   </style>
 </head>
 <body>
@@ -598,7 +629,7 @@
       <div class="brand-mark">CS</div>
       <div>
         <strong>計算機概論</strong>
-        <small>Ch01–Ch03 Study Lab</small>
+        <small>Ch01–Ch04 Study Lab</small>
       </div>
     </div>
 
@@ -626,7 +657,7 @@
     <a class="nav-link" href="#ch2-data"><span class="nav-dot"></span>Bit / Byte / Word</a>
 
     <div class="side-label">Chapter 03</div>
-    <a class="nav-link" href="#ch3-start"><span class="nav-dot"></span>第三章學習路線 · NEW</a>
+    <a class="nav-link" href="#ch3-start"><span class="nav-dot"></span>第三章學習路線</a>
     <a class="nav-link" href="#ch3-data"><span class="nav-dot"></span>資料與數位化</a>
     <a class="nav-link" href="#ch3-integer"><span class="nav-dot"></span>負數 · 補數 · 溢位</a>
     <a class="nav-link" href="#ch3-fraction"><span class="nav-dot"></span>小數換算與浮點數</a>
@@ -636,6 +667,18 @@
     <a class="nav-link" href="#ch3-image"><span class="nav-dot"></span>影像 · RGB · 圖形</a>
     <a class="nav-link" href="#ch3-video"><span class="nav-dot"></span>影片 · 空間／時間壓縮</a>
     <a class="nav-link" href="#ch3-test"><span class="nav-dot"></span>第三章練習 · 18 題</a>
+
+    <div class="side-label">Chapter 04</div>
+    <a class="nav-link" href="#ch4-start"><span class="nav-dot"></span>第四章學習路線 · NEW</a>
+    <a class="nav-link" href="#ch4-gates"><span class="nav-dot"></span>六種閘 · 真值表</a>
+    <a class="nav-link" href="#ch4-transistors"><span class="nav-dot"></span>電晶體與導通路徑</a>
+    <a class="nav-link" href="#ch4-circuits"><span class="nav-dot"></span>組合／循序 · 電路比較</a>
+    <a class="nav-link" href="#ch4-boolean"><span class="nav-dot"></span>布林代數 · De Morgan</a>
+    <a class="nav-link" href="#ch4-adders"><span class="nav-dot"></span>Half／Full Adder</a>
+    <a class="nav-link" href="#ch4-mux"><span class="nav-dot"></span>MUX／DEMUX</a>
+    <a class="nav-link" href="#ch4-memory"><span class="nav-dot"></span>S-R latch 記憶實驗</a>
+    <a class="nav-link" href="#ch4-chips"><span class="nav-dot"></span>IC／CPU 晶片</a>
+    <a class="nav-link" href="#ch4-test"><span class="nav-dot"></span>第四章英文測驗 · 36 題</a>
 
     <div class="side-label">Review</div>
     <a class="nav-link" href="#practice"><span class="nav-dot"></span>互動練習</a>
@@ -656,7 +699,7 @@
       <button class="icon-btn menu-btn" id="menuBtn" aria-label="開啟章節選單">☰</button>
       <div class="search-wrap">
         <span class="search-icon">⌕</span>
-        <input id="searchInput" type="search" placeholder="搜尋：SIMD、Moore's Law、16 進位…" autocomplete="off">
+        <input id="searchInput" type="search" placeholder="搜尋：NAND、Full adder、S-R latch…" autocomplete="off">
         <span class="keycap">⌘ K</span>
       </div>
       <button class="mode-btn" id="modeBtn" title="切換學習 / 練習模式">學習模式</button>
@@ -666,17 +709,17 @@
     <div class="content">
       <header class="hero" id="overview" data-study-only>
         <div class="eyebrow">Introduction to Computers</div>
-        <h1>把 Ch01–Ch03<br>變成真的會用的知識</h1>
+        <h1>把 Ch01–Ch04<br>變成真的會用的知識</h1>
         <p>
-          第一章先讀概念，再動手配對、探索分層、執行模擬，最後用選擇題檢查理解。第二章接著學進位換算與二、八、十六進位加減；第三章學補數、小數、文字與多媒體的資料表示。
+          第一章先讀概念，再動手配對、探索分層、執行模擬，最後用選擇題檢查理解。第二章接著學進位換算與二、八、十六進位加減；第三章學補數、小數、文字與多媒體的資料表示；第四章把 bits 連到邏輯閘、計算與記憶電路。
           每讀完一節就按「標記已學」，進度會自動存在這台電腦。
         </p>
-        <div class="study-path"><a href="#radix-arithmetic">最新：不同進位加減 · 逐步教練 →</a><a href="#arithmetic-test">加減法測驗 · 20 題 →</a><a href="#conversion-test">進位轉換測驗 →</a><a href="#ch3-start">第三章資料表示 →</a></div>
+        <div class="study-path"><a href="#ch4-start">最新：第四章 Gates and Circuits →</a><a href="#ch4-test">第四章英文測驗 · 36 題 →</a><a href="#radix-arithmetic">不同進位加減 · 逐步教練 →</a><a href="#arithmetic-test">加減法測驗 · 20 題 →</a><a href="#conversion-test">進位轉換測驗 →</a><a href="#ch3-start">第三章資料表示 →</a></div>
         <div class="hero-stats">
           <div class="stat"><strong>Ch01</strong><span>Computer Science Basics</span></div>
           <div class="stat"><strong>Ch02</strong><span>Binary Values & Number Systems</span></div>
           <div class="stat"><strong>Ch03</strong><span>Data Representation</span></div>
-          <div class="stat"><strong>Offline</strong><span>可離線直接開啟</span></div>
+          <div class="stat"><strong>Ch04</strong><span>Gates & Circuits · 可離線學習</span></div>
         </div>
       </header>
 
@@ -1640,6 +1683,104 @@
         <div class="study-actions"><a href="#ch3-start">回到第三章學習路線</a><a href="#exam">考前必會清單 →</a></div>
       </section>
 
+      <section class="section searchable study-section" id="ch4-start" data-study-only>
+        <div class="section-kicker">Chapter 04 · Gates and Circuits · PDF 全 38 頁</div>
+        <h2>第四章：bits 怎麼真的被電路算出來？</h2>
+        <p class="intro">第二章算二進位，第三章用 bits 表示資料；第四章把它們接到硬體：<strong>電晶體做出邏輯閘，邏輯閘組成電路，電路可以計算、選擇資料，也能記住狀態。</strong>先看輸入和輸出，再讀英文名詞。</p>
+        <div class="study-path"><a href="#ch4-gates">01 六種邏輯閘與真值表</a><a href="#ch4-transistors">02 電晶體如何做出閘</a><a href="#ch4-circuits">03 從電路讀運算式</a><a href="#ch4-boolean">04 布林代數</a><a href="#ch4-adders">05 Half／Full Adder</a><a href="#ch4-mux">06 MUX／DEMUX</a><a href="#ch4-memory">07 NAND 型 S-R latch</a><a href="#ch4-chips">08 IC 與 CPU</a><a href="#ch4-test">英文測驗 · 36 題 →</a></div>
+        <div class="callout"><strong>每節的讀法：</strong>先用規則預測 → 切換 0／1 → 核對真值表或中間結果 → 解釋原因。測驗題目、選項與按鈕用英文，解析用中文；題目是依講義自製的理解練習。</div>
+        <details><summary>先認識考試用語：英文題目在問什麼？</summary><div class="answer"><div class="table-scroll"><table class="compare"><thead><tr><th scope="col">English</th><th scope="col">中文意思</th><th scope="col">讀題提醒</th></tr></thead><tbody><tr><td>input / output</td><td>輸入／輸出</td><td>先列出輸入，再沿訊號方向求結果。</td></tr><tr><td>truth table</td><td>真值表</td><td>列出所有輸入組合；n 個獨立 bits 有 2ⁿ 列。</td></tr><tr><td>complement / inverter</td><td>反相／反相器</td><td>0 與 1 互換；A′ 讀成 NOT A。</td></tr><tr><td>equivalent</td><td>等效</td><td>每一種輸入組合的輸出都相同。</td></tr><tr><td>carry-in / carry-out / sum</td><td>輸入進位／輸出進位／和位</td><td>Full adder 要把 carry-in 一起加。</td></tr><tr><td>select signal / routed to</td><td>選擇訊號／被送到</td><td>MUX 問哪一條 D 被選中，不是把 D 全部相加。</td></tr><tr><td>set / reset / hold / existing state</td><td>設為 1／設為 0／保持／既有狀態</td><td>先看 latch 用 NAND 還是 NOR；本章講義用 NAND。</td></tr><tr><td>Which statement is correct?</td><td>哪個敘述正確？</td><td>留意 only、all、at least one、same、different。</td></tr></tbody></table></div></div></details>
+        <p class="source-note">來源：ch04.pdf 第 1–38 頁（重複目錄頁亦已核對）。頁碼使用 PDF 頁碼。互動為理想邏輯模型；電晶體術語校正與 latch 禁止狀態附補充來源。沿用前面章節的已學標記。</p>
+      </section>
+
+      <section class="section searchable study-section" id="ch4-gates" data-study-only data-learn-id="ch4-gates">
+        <div class="section-head"><div><div class="section-kicker">Chapter 04 · 01 · PDF p.3–13</div><h2>邏輯閘：先懂規則，再看符號</h2><p class="section-desc">Gate 做基本操作；Circuit 把多個閘接起來，完成更複雜的工作。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <p class="intro">同一個電路可以用三種方式描述：<strong>Boolean expression</strong> 寫規則、<strong>Logic diagram</strong> 畫接線、<strong>Truth table</strong> 列所有結果。例如 AND 的三種說法，都在表達「A、B 都是 1，X 才是 1」。</p>
+        <div class="callout"><strong>先分清符號：</strong>在布林代數中 <code>+</code> 是 OR，不是一般加法；<code>AB</code> 是 AND；<code>A′</code> 是 NOT A。因此 <code>1 + 1 = 1</code>（OR），而第二章的二進位算術 <code>1 + 1 = 10₂</code> 是另一種運算。</div>
+        <div class="grid three ch4-gate-grid"><article class="card ch4-gate-card"><span class="tag">NOT</span><h3>反相器 Inverter</h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 100" role="img"><title>NOT gate 邏輯符號</title><g class="ch4-gate-wire"><path d="M24 50 H55"/><path d="M122 50 H153"/></g><path d="M55 22 L55 78 L112 50 Z" class="ch4-gate-shape"/><circle cx="117" cy="50" r="5" class="ch4-gate-bubble"/><text x="5" y="55">A</text><text x="160" y="55">X</text></svg><code>X = A′</code><p>輸出與 A 相反；只吃一個輸入。</p></article><article class="card ch4-gate-card"><span class="tag">AND</span><h3>而且</h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 100" role="img"><title>AND gate 邏輯符號</title><g class="ch4-gate-wire"><path d="M24 35 H61 M24 65 H61"/><path d="M116 50 H153"/></g><path d="M55 22 H88 A28 28 0 0 1 88 78 H55 Z" class="ch4-gate-shape"/><text x="5" y="40">A</text><text x="5" y="70">B</text><text x="160" y="55">X</text></svg><code>X = AB 或 A·B</code><p>兩個都 1 才是 1。</p></article><article class="card ch4-gate-card"><span class="tag">OR</span><h3>或者（含兩者皆真）</h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 100" role="img"><title>OR gate 邏輯符號</title><g class="ch4-gate-wire"><path d="M24 35 H61 M24 65 H61"/><path d="M119 50 H153"/></g><path d="M55 22 Q94 22 119 50 Q94 78 55 78 Q76 50 55 22 Z" class="ch4-gate-shape"/><text x="5" y="40">A</text><text x="5" y="70">B</text><text x="160" y="55">X</text></svg><code>X = A + B</code><p>至少一個 1 就是 1；1 OR 1 仍是 1。</p></article><article class="card ch4-gate-card"><span class="tag">XOR</span><h3>互斥或 Exclusive OR</h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 100" role="img"><title>XOR gate 邏輯符號</title><g class="ch4-gate-wire"><path d="M24 35 H61 M24 65 H61"/><path d="M119 50 H153"/></g><path d="M55 22 Q94 22 119 50 Q94 78 55 78 Q76 50 55 22 Z" class="ch4-gate-shape"/><path d="M46 22 Q67 50 46 78" class="ch4-gate-wire"/><text x="5" y="40">A</text><text x="5" y="70">B</text><text x="160" y="55">X</text></svg><code>X = A ⊕ B</code><p>兩個不同才是 1；相同就是 0。</p></article><article class="card ch4-gate-card"><span class="tag">NAND</span><h3>NOT of AND</h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 100" role="img"><title>NAND gate 邏輯符號</title><g class="ch4-gate-wire"><path d="M24 35 H61 M24 65 H61"/><path d="M126 50 H153"/></g><path d="M55 22 H88 A28 28 0 0 1 88 78 H55 Z" class="ch4-gate-shape"/><circle cx="121" cy="50" r="5" class="ch4-gate-bubble"/><text x="5" y="40">A</text><text x="5" y="70">B</text><text x="160" y="55">X</text></svg><code>X = (AB)′</code><p>先 AND 再反轉；只有 11 輸出 0。</p></article><article class="card ch4-gate-card"><span class="tag">NOR</span><h3>NOT of OR</h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 100" role="img"><title>NOR gate 邏輯符號</title><g class="ch4-gate-wire"><path d="M24 35 H61 M24 65 H61"/><path d="M129 50 H153"/></g><path d="M55 22 Q94 22 119 50 Q94 78 55 78 Q76 50 55 22 Z" class="ch4-gate-shape"/><circle cx="124" cy="50" r="5" class="ch4-gate-bubble"/><text x="5" y="40">A</text><text x="5" y="70">B</text><text x="160" y="55">X</text></svg><code>X = (A + B)′</code><p>先 OR 再反轉；只有 00 輸出 1。</p></article></div>
+        <p class="source-note">符號觀察：輸出端的小圓圈表示反相；XOR 比 OR 多一條輸入側的弧線。這六個圖依講義 p.7–12 重畫。</p>
+        <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">A</th><th scope="col">B</th><th scope="col">AND</th><th scope="col">OR</th><th scope="col">XOR</th><th scope="col">NAND</th><th scope="col">NOR</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr><tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td></tr><tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div>
+        <div class="lab"><div class="lab-kicker">TRY IT · 切換輸入，核對真值表</div><h3>六種閘實驗室</h3><div class="ch4-fields"><label>Gate<select id="ch4GateType"><option>AND</option><option>OR</option><option>XOR</option><option>NAND</option><option>NOR</option><option>NOT</option></select></label><label>Input A<select id="ch4GateA"><option value="0">0</option><option value="1" selected>1</option></select></label><label>Input B<select id="ch4GateB"><option value="0" selected>0</option><option value="1">1</option></select></label></div><div class="ch4-signal-flow" id="ch4GateFlow"></div><div class="lab-output" id="ch4GateOutput" aria-live="polite"></div><div class="table-scroll"><table class="compare"><thead id="ch4GateHead"></thead><tbody id="ch4GateRows"></tbody></table></div></div>
+        <h3>從 2 個輸入延伸到 3 個</h3><p>3-input AND：<code>X = ABC</code>，只有 <code>111</code> 會得到 1，其餘七種都是 0。三個獨立輸入有 <code>2³ = 8</code> 種組合。兩輸入 XOR 的「不同才是 1」不能直接拿來描述任意多輸入；先讀題目指定的閘與輸入數。</p>
+        <details><summary>小例題：A = 1、B = 1，OR 和 XOR 分別是多少？</summary><div class="answer">OR = 1，因為至少一個為 1；XOR = 0，因為兩個相同。英文 exclusive 意思是排除「兩者同時為真」。</div></details>
+      </section>
+
+      <section class="section searchable study-section" id="ch4-transistors" data-study-only data-learn-id="ch4-transistors">
+        <div class="section-head"><div><div class="section-kicker">Chapter 04 · 02 · PDF p.15–17</div><h2>電晶體：用受控制的導通路徑做邏輯</h2><p class="section-desc">Transistor 是 semiconductor 元件；一個邏輯閘可使用一個或多個電晶體。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <p class="intro">講義以開關模型說明電晶體：輸入改變時，導通路徑也跟著改變。在圖中的簡化反相器，輸出平時由高電位端維持為 1；當通往 ground 的路徑導通，輸出被拉低成 0。<strong>輸入高 → 輸出低；輸入低 → 輸出高</strong>，所以可做出 NOT。</p>
+        <div class="grid three"><div class="card"><span class="tag">NOT · 一條路徑</span><h3>輸入 1 才拉低</h3><p>A = 1 時通往地的路徑成立，X = 0；A = 0 時沒有此導通路徑，X = 1。</p></div><div class="card"><span class="tag">NAND · 串聯 Series</span><h3>兩個都導通才拉低</h3><p>通往地要依序經過兩個開關；A、B 都是 1 才完整導通。於是 11 → 0，其餘 → 1。</p></div><div class="card"><span class="tag">NOR · 並聯 Parallel</span><h3>任一條導通就拉低</h3><p>A 或 B 有一條通往地的路徑成立，X 就變 0。只有 00 時沒有路徑，X 才是 1。</p></div></div>
+        <h3>講義圖上的標示</h3><div class="table-scroll"><table class="compare"><thead><tr><th scope="col">標示</th><th scope="col">講義模型中的角色</th></tr></thead><tbody><tr><td>Base（基極）</td><td>控制導通路徑的輸入。</td></tr><tr><td>Emitter（射極）</td><td>圖中接到 ground。</td></tr><tr><td>Source / Output line</td><td>講義用 Source 標示上方高電位端（例 5 V），Output 是取出邏輯訊號的位置。</td></tr></tbody></table></div>
+        <details><summary>術語校正：Source 與 on 不要混著背</summary><div class="answer"><p>講義圖是教學簡化模型，術語有混用。標準 BJT 三個端子是 <strong>Base、Collector、Emitter</strong>；Source 是場效電晶體常見的端子名稱，不是 BJT 的標準第三端。此處依圖上的高電位／接地路徑理解即可。</p><p>p.16 最後一句把 base 低、輸出保持高寫成 transistor is on，容易混淆「輸出為 1」與「開關導通」。本節的開關模型以<strong>通往地的路徑有沒有導通</strong>來解釋，不能把輸出高直接等同電晶體 on。</p><p class="source-note">補充來源：<a href="https://toshiba.semicon-storage.com/us/semiconductor/knowledge/faq/mosfet_common/what-is-a-bipolar-transistor.html" target="_blank" rel="noopener noreferrer">Toshiba：BJT 結構與開關工作區</a>、<a href="https://toshiba.semicon-storage.com/us/semiconductor/knowledge/faq/mosfet_common/what-is-a-mosfet.html" target="_blank" rel="noopener noreferrer">MOSFET 的 Source／Drain／Gate</a>。實際晶片另有不同電晶體與電路實作，這裡不把簡化圖當實體接線設計。</p></div></details>
+      </section>
+
+      <section class="section searchable study-section" id="ch4-circuits" data-study-only data-learn-id="ch4-circuits">
+        <div class="section-head"><div><div class="section-kicker">Chapter 04 · 03 · PDF p.19–22</div><h2>從輸入一路算到輸出：電路怎麼讀？</h2><p class="section-desc">Combinational 看目前輸入；Sequential 還要看既有狀態。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">電路</th><th scope="col">輸出由什麼決定？</th><th scope="col">本章例子</th></tr></thead><tbody><tr><td>Combinational circuit（組合電路）</td><td>目前輸入。理想模型中同樣輸入得到同樣輸出。</td><td>邏輯運算、加法器、多工器。</td></tr><tr><td>Sequential circuit（循序電路）</td><td>目前輸入＋existing state（既有狀態）。</td><td>使用回授保存 1 bit 的 S-R latch。</td></tr></tbody></table></div>
+        <h3>講義例 1：X = AB + AC</h3><ol class="ch4-steps"><li>先算上面的 AND：<code>D = AB</code>。</li><li>再算下面的 AND：<code>E = AC</code>。</li><li>把兩個結果送進 OR：<code>X = D + E</code>。</li></ol><p>例如 A = 1、B = 0、C = 1：D = 0、E = 1，所以 X = 1。不是把三個輸入當成二進位數字相加。</p>
+        <h3>講義例 2：X = A(B + C)</h3><p>先讓 B、C 進 OR，得到 T = B + C，再把 A、T 送進 AND。例子同樣得到 T = 1、X = 1。這兩個電路用的閘數不同，但在<strong>全部 8 種輸入組合</strong>下都會得到相同輸出，才叫 circuit equivalence。</p>
+        <div class="lab"><div class="lab-kicker">TRY IT · 分別看兩條運算路徑</div><h3>等效電路比較器</h3><div class="ch4-fields"><label>Input A<select id="ch4CircuitA"><option value="0">0</option><option value="1" selected>1</option></select></label><label>Input B<select id="ch4CircuitB"><option value="0" selected>0</option><option value="1">1</option></select></label><label>Input C<select id="ch4CircuitC"><option value="0">0</option><option value="1" selected>1</option></select></label></div><div class="grid two"><div class="card"><h4>AB + AC · 3 gates</h4><div class="ch4-signal-flow" id="ch4ExpandedFlow"></div></div><div class="card"><h4>A(B + C) · 2 gates</h4><div class="ch4-signal-flow" id="ch4FactoredFlow"></div></div></div><div class="lab-output" id="ch4CircuitOutput" aria-live="polite"></div><div class="table-scroll"><table class="compare"><thead><tr><th>A</th><th>B</th><th>C</th><th>AB</th><th>AC</th><th>AB + AC</th><th>B + C</th><th>A(B + C)</th></tr></thead><tbody id="ch4CircuitRows"></tbody></table></div></div>
+        <div class="callout"><strong>讀圖口訣：</strong>沿訊號從輸入走向輸出，先處理前面的閘，給中間線命名，再算下一個閘。要證明等效，不能只看一列相同。</div>
+      </section>
+
+      <section class="section searchable study-section" id="ch4-boolean" data-study-only data-learn-id="ch4-boolean">
+        <div class="section-head"><div><div class="section-kicker">Chapter 04 · 04 · PDF p.22–23</div><h2>布林代數：把電路改寫，結果仍然相同</h2><p class="section-desc">先辨認 NOT、AND、OR，再用規則化簡；不要套用錯誤的普通算術。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">Property</th><th scope="col">AND 形式</th><th scope="col">OR 形式</th><th scope="col">怎麼理解</th></tr></thead><tbody><tr><td>Commutative（交換律）</td><td>AB = BA</td><td>A + B = B + A</td><td>交換輸入順序不影響這兩種運算。</td></tr><tr><td>Associative（結合律）</td><td>(AB)C = A(BC)</td><td>(A + B) + C = A + (B + C)</td><td>同一種運算可改分組。</td></tr><tr><td>Distributive（分配律）</td><td>A(B + C) = AB + AC</td><td>A + BC = (A + B)(A + C)</td><td>布林代數也有 OR 對 AND 的分配律。</td></tr><tr><td>Identity（單位律）</td><td>A·1 = A</td><td>A + 0 = A</td><td>AND 的中性元素是 1；OR 的是 0。</td></tr><tr><td>Complement（互補律）</td><td>AA′ = 0</td><td>A + A′ = 1</td><td>A 與反相值不會同時是 1，卻必有一個是 1。</td></tr><tr><td>De Morgan’s law（德摩根定律）</td><td>(AB)′ = A′ + B′</td><td>(A + B)′ = A′B′</td><td>整體取反：AND／OR 互換，每個輸入也取反。</td></tr></tbody></table></div>
+        <h3>手算一次 De Morgan</h3><p><code>(AB)′</code>：先 AND，再整體 NOT。它等於 <code>A′ + B′</code>，意思是「A 不是 1，或 B 不是 1」。例如 A = 1、B = 0：左側是 NOT 0 = 1；右側是 0 OR 1 = 1。</p><p><code>(A + B)′</code> 則等於 <code>A′B′</code>。例如 A = 1、B = 0：左側 NOT 1 = 0；右側 0 AND 1 = 0。</p>
+        <div class="callout"><strong>最常見陷阱：</strong><code>(AB)′</code> 不能寫成 <code>A′B′</code>。A = 1、B = 0 就是反例：前者 1，後者 0。括號外的反相作用在整個結果上。</div>
+        <div class="lab"><div class="lab-kicker">TRY IT · 用每一列驗證</div><h3>De Morgan 真值表驗證</h3><div class="ch4-fields"><label>Input A<select id="ch4MorganA"><option value="0">0</option><option value="1" selected>1</option></select></label><label>Input B<select id="ch4MorganB"><option value="0" selected>0</option><option value="1">1</option></select></label></div><div class="lab-output" id="ch4MorganOutput" aria-live="polite"></div><div class="table-scroll"><table class="compare"><thead><tr><th>A</th><th>B</th><th>(AB)′</th><th>A′ + B′</th><th>(A + B)′</th><th>A′B′</th></tr></thead><tbody id="ch4MorganRows"></tbody></table></div></div>
+      </section>
+
+      <section class="section searchable study-section" id="ch4-adders" data-study-only data-learn-id="ch4-adders">
+        <div class="section-head"><div><div class="section-kicker">Chapter 04 · 05 · PDF p.24–26</div><h2>加法器：二進位加法由 XOR 與 AND 做出來</h2><p class="section-desc">Sum 是本欄的和位；Carry 是送往下一欄的進位。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <p class="intro">Half adder（半加器）接收 A、B 兩個 bits；算出 <strong>Sum = A ⊕ B</strong> 和 <strong>Carry = AB</strong>。例如 1 + 1 = 10₂，右邊的 0 是 Sum，左邊的 1 是 Carry，不是把 Sum 寫成 2。</p>
+        <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">A</th><th scope="col">B</th><th scope="col">Sum = A ⊕ B</th><th scope="col">Carry = AB</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>1</td><td>0</td><td>1</td></tr></tbody></table></div>
+        <h3>為什麼還需要 Full adder（全加器）？</h3><p>多欄二進位加法可能收到右邊一欄的進位，因此要算 <code>A + B + Cin</code>。例如 1 + 1 + 1 = 11₂：Sum = 1、Cout = 1。<strong>Half adder 沒有 carry-in；Full adder 有。</strong></p>
+        <ol class="ch4-steps"><li>第一個半加器：<code>T = A ⊕ B</code>，<code>C1 = AB</code>。</li><li>第二個半加器：<code>Sum = T ⊕ Cin</code>，<code>C2 = T·Cin</code>。</li><li>兩條進位線用 OR 合起來：<code>Cout = C1 + C2</code>。</li></ol>
+        <div class="formula">Sum = A ⊕ B ⊕ Cin<br>Cout = AB + (A ⊕ B)Cin</div><p>三個輸入中至少兩個為 1，Cout 才為 1。這裡加法器的數學加法，與進位線公式中的布林 OR，請分開讀。</p>
+        <div class="lab"><div class="lab-kicker">TRY IT · 看到每一步怎麼生出進位</div><h3>半加器／全加器實驗室</h3><div class="ch4-fields"><label>Adder<select id="ch4AdderType"><option value="full">Full adder</option><option value="half">Half adder</option></select></label><label>Input A<select id="ch4AdderA"><option value="0">0</option><option value="1" selected>1</option></select></label><label>Input B<select id="ch4AdderB"><option value="0">0</option><option value="1" selected>1</option></select></label><label>Carry-in Cin<select id="ch4AdderCin"><option value="0">0</option><option value="1" selected>1</option></select></label></div><div class="ch4-signal-flow" id="ch4AdderFlow"></div><div class="lab-output" id="ch4AdderOutput" aria-live="polite"></div><div class="table-scroll"><table class="compare"><thead id="ch4AdderHead"></thead><tbody id="ch4AdderRows"></tbody></table></div></div>
+        <details><summary>理解用例：用加法器逐欄算 0111₂ + 0001₂</summary><div class="answer">從右到左：1+1+0 → Sum 0、Cout 1；1+0+1 → Sum 0、Cout 1；1+0+1 → Sum 0、Cout 1；0+0+1 → Sum 1、Cout 0。由左到右讀 Sum 得 1000₂。這就是第二章進位規則如何接到硬體。<a href="#radix-arithmetic">回到加減教練 →</a></div></details>
+      </section>
+
+      <section class="section searchable study-section" id="ch4-mux" data-study-only data-learn-id="ch4-mux">
+        <div class="section-head"><div><div class="section-kicker">Chapter 04 · 06 · PDF p.27–28</div><h2>MUX：很多條輸入，只選一條送出去</h2><p class="section-desc">Multiplexer 是多工器；select signals 決定哪一條 input signal 被送到 F。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <p class="intro">講義是 <strong>8-to-1 mux</strong>：資料輸入 D0–D7，共八條；三條選擇線 S0、S1、S2；只有一條輸出 F。三個選擇 bits 有 <code>2³ = 8</code> 種組合，剛好選八條。資料值與選擇編號是兩件事。</p>
+        <div class="callout"><strong>照講義的位元順序：</strong>p.28 表格由左到右是 <code>S0 S1 S2</code>，把這三位讀成二進位編號；這張表中 S0 的權重是 4、S1 是 2、S2 是 1。例如 <code>100 → D4</code>、<code>101 → D5</code>。別只憑 S0 的名字猜它一定是最低位，考題以指定表格為準。</div>
+        <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">S0</th><th scope="col">S1</th><th scope="col">S2</th><th scope="col">F 選哪條？</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>0</td><td>D0</td></tr><tr><td>0</td><td>0</td><td>1</td><td>D1</td></tr><tr><td>0</td><td>1</td><td>0</td><td>D2</td></tr><tr><td>0</td><td>1</td><td>1</td><td>D3</td></tr><tr><td>1</td><td>0</td><td>0</td><td>D4</td></tr><tr><td>1</td><td>0</td><td>1</td><td>D5</td></tr><tr><td>1</td><td>1</td><td>0</td><td>D6</td></tr><tr><td>1</td><td>1</td><td>1</td><td>D7</td></tr></tbody></table></div>
+        <h3>分兩步答題</h3><p>若 S0S1S2 = 101：先找出被選中的是 D5；如果題目還告訴你 D5 = 0，才能進一步回答 F = 0。其他 D 的值不會改變此時的 F。</p>
+        <div class="lab"><div class="lab-kicker">TRY IT · 選擇線決定路徑，D 決定資料</div><h3>8-to-1 MUX 路由器</h3><div class="ch4-fields"><label>S0 · weight 4<select id="ch4MuxS0"><option value="0" selected>0</option><option value="1">1</option></select></label><label>S1 · weight 2<select id="ch4MuxS1"><option value="0" selected>0</option><option value="1">1</option></select></label><label>S2 · weight 1<select id="ch4MuxS2"><option value="0" selected>0</option><option value="1">1</option></select></label></div><p>點擊下面的 D 按鈕切換資料值，觀察被選中與未被選中的差別。</p><div class="ch4-mux-inputs" id="ch4MuxInputs"><button type="button" class="ghost-btn" data-ch4-data="0" aria-pressed="false">D0 = 0</button><button type="button" class="ghost-btn" data-ch4-data="1" aria-pressed="true">D1 = 1</button><button type="button" class="ghost-btn" data-ch4-data="2" aria-pressed="false">D2 = 0</button><button type="button" class="ghost-btn" data-ch4-data="3" aria-pressed="true">D3 = 1</button><button type="button" class="ghost-btn" data-ch4-data="4" aria-pressed="false">D4 = 0</button><button type="button" class="ghost-btn" data-ch4-data="5" aria-pressed="true">D5 = 1</button><button type="button" class="ghost-btn" data-ch4-data="6" aria-pressed="false">D6 = 0</button><button type="button" class="ghost-btn" data-ch4-data="7" aria-pressed="true">D7 = 1</button></div><div class="ch4-signal-flow" id="ch4MuxFlow"></div><div class="lab-output" id="ch4MuxOutput" aria-live="polite"></div></div>
+        <h3>那 DEMUX 呢？</h3><p>Demultiplexer（解多工器）是反方向的選路概念：<strong>一條資料輸入，依選擇線送往多條輸出中的一條</strong>。它不是把 1 bit 自動變成 8 bits 的資料。這是講義 p.28 提問的補充解釋；實際 enable 與未選中輸出的值由具體電路規格決定。</p>
+      </section>
+
+      <section class="section searchable study-section" id="ch4-memory" data-study-only data-learn-id="ch4-memory">
+        <div class="section-head"><div><div class="section-kicker">Chapter 04 · 07 · PDF p.30–33</div><h2>S-R latch：輸入回到原樣，為什麼還能記住？</h2><p class="section-desc">兩個 NAND 閘交叉回授；X 是這張講義採用的儲存狀態。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <p class="intro">把一個閘的輸出接回另一個閘的輸入，形成 feedback（回授），就能讓某種狀態持續存在。講義的 S-R latch 儲存<strong>一個 binary digit（1 bit）</strong>，X = 1 表示存 1，X = 0 表示存 0。</p>
+        <div class="formula">X = NAND(S, Y) = (SY)′<br>Y = NAND(R, X) = (RX)′</div>
+        <div class="callout"><strong>這裡是 NAND 型、低有效 active-low：</strong>S = 0 表示啟動 Set；R = 0 表示啟動 Reset。講義仍將端點標成 S、R，本筆記沿用；別把 NOR 型 latch 的輸入表直接套過來。</div>
+        <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">S</th><th scope="col">R</th><th scope="col">Action</th><th scope="col">X</th><th scope="col">Y</th></tr></thead><tbody><tr><td>1</td><td>1</td><td>Hold · 保持</td><td>原本的 X</td><td>原本的 Y</td></tr><tr><td>0</td><td>1</td><td>Set · 存 1</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>Reset · 存 0</td><td>0</td><td>1</td></tr><tr><td>0</td><td>0</td><td>Invalid · 禁止使用</td><td>被強迫為 1</td><td>被強迫為 1</td></tr></tbody></table></div>
+        <h3>跟著講義 p.33，存入 1 再保持</h3><ol class="ch4-steps"><li>先保持 R = 1，令 S = 0。由 NAND 規則，<code>X = NAND(0,Y) = 1</code>。</li><li>把 X = 1 回授到下方，<code>Y = NAND(1,1) = 0</code>。</li><li>S 回到 1；現在 <code>X = NAND(1,0) = 1</code>，而 Y 仍是 0。輸入 S、R 都回到 1，記住的 1 仍留下。</li></ol><p>存 0 的對稱做法是 S = 1、R = 0，得到 Y = 1、X = 0；再把 R 返回 1，維持 X = 0。這兩個 Hold 情況的輸入同樣是 11，但輸出可能不同，因為<strong>之前的狀態不同</strong>。</p>
+        <details><summary>為什麼不能說 X、Y「永遠」互補？</summary><div class="answer">p.32 的互補敘述適用於有效的穩定狀態。若 S = R = 0，兩個 NAND 的輸出會同時為 1，不再互補；兩個輸入同時回到 1 後的最終狀態不能可靠預測。這是禁止狀態，不應當作正常寫入操作。下面的模型會顯示此限制；離開禁止狀態後需明確 Set 或 Reset 才重新建立已知狀態。<p class="source-note">補充來源：<a href="https://www.ti.com/document-viewer/lit/html/SSZTCV9/GUID-2505F085-178B-4C5F-A9D1-9021A6A6C184" target="_blank" rel="noopener noreferrer">Texas Instruments：active-low SR latch（Figure 2）</a>。本互動不模擬延遲或亞穩態。</p></div></details>
+        <div class="lab"><div class="lab-kicker">TRY IT · 每個動作保留上一個狀態</div><h3>NAND S-R latch 記憶實驗</h3><div class="lab-controls"><button type="button" class="primary-btn" id="ch4LatchSet">Set · S=0, R=1</button><button type="button" class="ghost-btn" id="ch4LatchReset">Reset · S=1, R=0</button><button type="button" class="ghost-btn" id="ch4LatchHold">Hold · S=1, R=1</button><button type="button" class="ghost-btn" id="ch4LatchInvalid">Invalid · S=0, R=0</button><button type="button" class="ghost-btn" id="ch4LatchClear">Restart demonstration</button></div><div class="ch4-signal-flow" id="ch4LatchFlow"></div><div class="lab-output" id="ch4LatchOutput" aria-live="polite"></div><div class="table-scroll"><table class="compare"><thead><tr><th>Step</th><th>S</th><th>R</th><th>Action</th><th>X</th><th>Y</th></tr></thead><tbody id="ch4LatchRows"></tbody></table></div><p class="source-note">示範初始已用 Reset 建立 X=0；不代表真實電路上電必然為 0。只保留最近 12 次操作紀錄。</p></div>
+      </section>
+
+      <section class="section searchable study-section" id="ch4-chips" data-study-only data-learn-id="ch4-chips">
+        <div class="section-head"><div><div class="section-kicker">Chapter 04 · 08 · PDF p.35–38</div><h2>IC 與 CPU：把很多邏輯閘放到一片矽上</h2><p class="section-desc">Integrated circuit 也叫 chip；silicon 是矽，不是 silicone（矽膠）。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <p class="intro">講義將 IC 定義為在一片 silicon 上整合多個邏輯閘。從小型整合到大型整合，差別在可容納的閘數；以下是<strong>這份講義採用的分級</strong>，不把年代與資料來源不同的分類界線當成通用固定標準。</p>
+        <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">Abbreviation</th><th scope="col">Name</th><th scope="col">講義 Number of Gates</th></tr></thead><tbody><tr><td>SSI</td><td>Small-scale integration</td><td>1–10</td></tr><tr><td>MSI</td><td>Medium-scale integration</td><td>10–100</td></tr><tr><td>LSI</td><td>Large-scale integration</td><td>100–100,000</td></tr><tr><td>VLSI</td><td>Very-large-scale integration</td><td>more than 100,000</td></tr></tbody></table></div>
+        <p class="source-note">p.35 的範圍在 10、100 邊界有重疊，若題目問界線，依題目給定的表或教師定義判斷；本測驗避開此歧義。</p>
+        <h3>p.36：一顆 SSI 晶片，不等於只有一個閘</h3><p>講義例子是一顆內含 <strong>4 個獨立 two-input NAND gates</strong> 的 14-pin 晶片。各閘有自己的輸入與輸出，並共用電源與接地；圖中 pin 14 是 Power、pin 7 是 Ground。4 個 NAND 在同一個封裝裡，並不代表已自動組成一個四輸入 NAND。</p>
+        <h3>CPU chip（中央處理器晶片）</h3><p>講義 p.38 將 CPU 視為最重要的積體電路。晶片的 pins（接腳）提供與外部元件的連接，包含 memory 和 I/O devices。<strong>本章的連結：</strong>Transistors → Gates → Circuits → Integrated circuits → CPU 中的計算與控制電路。</p>
+        <div class="study-path"><a href="#ch4-test">開始第四章英文測驗 · 36 題 →</a><a href="#exam">更新後的考前清單 →</a></div>
+      </section>
+
+      <section class="section searchable study-section" id="ch4-test" data-practice-only aria-labelledby="ch4QuizTitle">
+        <div class="section-kicker">Chapter 04 · Practice · English questions / 中文解析</div>
+        <h2 id="ch4QuizTitle" lang="en">Gates and Circuits · 36-Question Quiz</h2>
+        <p class="intro">題目、四個選項、作答狀態與下一題按鈕使用英文；選完才顯示中文讀題、推理與講義頁碼。涵蓋六種閘、電晶體、布林代數、加法器、MUX、NAND latch、IC 和 CPU。</p>
+        <div class="lab" data-mini="ch4review"><div data-mini-mount></div></div>
+        <p class="source-note">題目是依 ch04.pdf 自製的理解練習，並非老師原題。本輪答題在重新整理後重置；完成可展開錯題解析再重練。記憶電路題目明確指定 NAND 型低有效輸入。</p>
+        <div class="study-path"><a href="#ch4-start">回到第四章教學 →</a><a href="#ch4-memory">複習 Set／Reset／Hold →</a><a href="#ch4-adders">複習 carry-in →</a></div>
+      </section>
+
       <section class="section searchable" id="practice" data-practice-only data-learn-id="practice">
         <div class="section-head">
           <div>
@@ -1724,6 +1865,12 @@
           <label class="check"><input type="checkbox" data-check="ch3-compression"><span><strong>會算壓縮率、RLE 和 Huffman 編解碼</strong><span>壓縮後÷原始；25→15 的比例是 0.6；使用題目指定碼表。</span></span></label>
           <label class="check"><input type="checkbox" data-check="ch3-media"><span><strong>能比較取樣／量化、解析度／色彩深度</strong><span>取樣看時間；量化看振幅等級；像素數 × 每像素 bits ÷ 8＝理論 Bytes。</span></span></label>
           <label class="check"><input type="checkbox" data-check="ch3-video"><span><strong>能比較點陣／向量、空間／時間壓縮</strong><span>點陣記像素、向量記幾何；Spatial 看一張、Temporal 看前後影格。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="ch4-gates"><span><strong>能辨認六種閘的英文、符號與真值表</strong><span>NOT、AND、OR、XOR、NAND、NOR；布林 OR 的 + 與算術相加不同。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="ch4-boolean"><span><strong>能讀出電路、用分配律與 De Morgan 改寫</strong><span>AB+AC=A(B+C)；(AB)′=A′+B′；(A+B)′=A′B′；每列輸出相同才等效。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="ch4-adder"><span><strong>能分清 Half／Full adder 的 Sum 與 Carry</strong><span>Half：XOR／AND；Full 還要 carry-in，111 → Sum 1、Cout 1。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="ch4-mux"><span><strong>能依講義順序判斷 MUX 選哪條線</strong><span>S0S1S2 的權重是 4、2、1；101 → D5，再看 D5 的值求 F。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="ch4-latch"><span><strong>能解釋 NAND 型 latch 為何保留狀態</strong><span>01 Set、10 Reset、11 Hold、00 Invalid；X 是儲存值，有效穩定狀態 X／Y 互補。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="ch4-chips"><span><strong>能把電晶體、閘、電路、IC 與 CPU 連起來</strong><span>半導體開關組成閘；多個閘整合在矽晶片；CPU 接腳連接 memory、I/O。</span></span></label>
         </div>
       </section>
 
@@ -1796,10 +1943,15 @@
         <details><summary>19. 取樣更多與量化 bits 更多，分別改變什麼？</summary><div class="answer">前者增加時間上量測的密度；後者增加可用振幅等級（2ᵇ）。兩者也會影響未壓縮樣本資料量。</div></details>
         <details><summary>20. 影片的 Temporal 與 Spatial 差在哪？</summary><div class="answer">Temporal 比較連續影格與變化，包含 keyframe／delta 的概念；Spatial 在同一張影格內減少冗餘。</div></details>
         <details><summary>21. 八進位與十六進位的加減法，進位、借位有什麼差別？</summary><div class="answer">加法分別滿 8、滿 16 進 1；向左借 1 時，本欄分別補 8、補 16。左欄的位權是本欄的基底倍，所以總值不變。1000₈−1₈＝777₈；1000₁₆−1₁₆＝FFF₁₆。<a href="#radix-arithmetic">用逐步教練操作 →</a></div></details>
+        <details><summary>22. OR、XOR、二進位加法遇到 1 與 1 各是多少？</summary><div class="answer">OR 得 1；XOR 得 0；算術相加得 10₂。先看題目在問哪一種運算。<a href="#ch4-gates">操作六種閘 →</a></div></details>
+        <details><summary>23. 為什麼 (AB)′ 不是 A′B′？</summary><div class="answer">De Morgan 要把 AND 改成 OR，所以 (AB)′=A′+B′。用 A=1、B=0 作反例，(AB)′=1，但 A′B′=0。</div></details>
+        <details><summary>24. Full adder 的 1+1+1 為何 Sum=1、Cout=1？</summary><div class="answer">三個 1 的數學和為 3=11₂，最低位是 Sum，較高位是 Carry。Full adder 包含 carry-in；Half adder 不含。</div></details>
+        <details><summary>25. MUX 的 101 代表輸出一定為 1 嗎？</summary><div class="answer">依講義 S0S1S2 的順序，101 只代表選 D5；F 等於 D5 的資料值，可能為 0 也可能為 1。</div></details>
+        <details><summary>26. NAND latch 的輸入都是 11，為什麼 X 不一定相同？</summary><div class="answer">11 是 Hold，保留先前狀態；曾 Set 可保持 X=1，曾 Reset 可保持 X=0。這就是 Sequential 與只看目前輸入的 Combinational 不同之處。<a href="#ch4-memory">試一次 Set → Hold → Reset → Hold →</a></div></details>
       </section>
 
       <div class="no-results" id="noResults">找不到符合的內容。可以試試「SIMD」、「Babbage」、「Hex」或「Byte」。</div>
-      <footer>計算機概論 Ch01–Ch03 · Interactive Study Notes · Progress saved locally</footer>
+      <footer>計算機概論 Ch01–Ch04 · Interactive Study Notes · Progress saved locally</footer>
     </div>
   </main>
 </div>
@@ -2586,6 +2738,61 @@
     $('#radixBorrowPreset').addEventListener('click',()=>loadRadixExample('borrow'));
     resetRadixCoach();
 
+    // Chapter 04 ideal logic models. MUX bit order follows ch04.pdf p.28.
+    function ch4Gate(type,a,b){
+      switch(type){case 'NOT':return 1-a;case 'AND':return a&b;case 'OR':return a|b;case 'XOR':return a^b;case 'NAND':return 1-(a&b);case 'NOR':return 1-(a|b);default:throw new Error('Unknown gate');}
+    }
+    function ch4FullAdder(a,b,cin){const t=a^b,c1=a&b,c2=t&cin;return {t,c1,c2,sum:t^cin,carry:c1|c2};}
+    function ch4MuxIndex(s0,s1,s2){return s0*4+s1*2+s2;}
+    function ch4LatchStep(previous,s,r){
+      if(s===0 && r===0)return {x:1,y:1,stored:null,action:'Invalid',reason:'S=R=0：兩個 NAND 都強迫輸出 1，X、Y 不再互補。此為禁止狀態；不能視為可靠寫入。'};
+      if(s===0)return {x:1,y:0,stored:1,action:'Set',reason:'S=0 → X=NAND(0,Y)=1；R=1、X=1 → Y=0。存入 1。'};
+      if(r===0)return {x:0,y:1,stored:0,action:'Reset',reason:'R=0 → Y=NAND(0,X)=1；S=1、Y=1 → X=0。存入 0。'};
+      if(previous===null)return {x:null,y:null,stored:null,action:'Hold (unknown)',reason:'S=R=1，但之前曾處於禁止狀態，最終儲存值未知。需明確 Set 或 Reset；模型不猜測結果。'};
+      return {x:previous,y:1-previous,stored:previous,action:'Hold',reason:'S=R=1：回授維持原本的 '+previous+'，沒有建立新值。同樣的 11 輸入，可能保持 0，也可能保持 1。'};
+    }
+    const ch4Read=id=>Number($('#'+id).value);
+    function ch4Flow(id,signals){
+      const host=$('#'+id);host.replaceChildren();
+      signals.forEach((item,i)=>{if(i){const arrow=document.createElement('span');arrow.className='arrow';arrow.textContent='→';host.append(arrow);}const node=document.createElement('span');node.className='ch4-signal';node.textContent=item[0];if(item.length>1)node.dataset.value=item[1]===null?'?':String(item[1]);host.append(node);});
+    }
+    function ch4Rows(id,rows,selected){const host=$('#'+id);host.replaceChildren();rows.forEach((values,i)=>{const tr=document.createElement('tr');if(i===selected){tr.className='ch4-current';tr.setAttribute('aria-current','true');}values.forEach(value=>{const td=document.createElement('td');td.textContent=String(value);tr.append(td);});host.append(tr);});}
+    function ch4Head(id,labels){const host=$('#'+id),row=document.createElement('tr');host.replaceChildren();labels.forEach(text=>{const th=document.createElement('th');th.scope='col';th.textContent=text;row.append(th);});host.append(row);}
+    function ch4Bind(ids,render){ids.forEach(id=>$('#'+id).addEventListener('change',render));render();}
+    ch4Bind(['ch4GateType','ch4GateA','ch4GateB'],()=>{
+      const type=$('#ch4GateType').value,a=ch4Read('ch4GateA'),b=ch4Read('ch4GateB'),single=type==='NOT',x=ch4Gate(type,a,b);$('#ch4GateB').disabled=single;
+      const expr={NOT:'A′',AND:'AB',OR:'A + B',XOR:'A ⊕ B',NAND:'(AB)′',NOR:'(A + B)′'}[type];
+      ch4Flow('ch4GateFlow',[[single?'A='+a:'A='+a+', B='+b],[type],['X='+x,x]]);
+      $('#ch4GateOutput').textContent=type+'：X='+expr+'='+x+'。'+(single?'NOT 只有 A 一個輸入，B 不參與運算。':'下表標亮目前的輸入組合；切換 00、01、10、11 檢查規則。');
+      ch4Head('ch4GateHead',single?['A','X']:['A','B','X']);ch4Rows('ch4GateRows',Array.from({length:single?2:4},(_,i)=>single?[i,ch4Gate(type,i,0)]:[i>>1,i&1,ch4Gate(type,i>>1,i&1)]),single?a:a*2+b);
+    });
+    ch4Bind(['ch4CircuitA','ch4CircuitB','ch4CircuitC'],()=>{
+      const a=ch4Read('ch4CircuitA'),b=ch4Read('ch4CircuitB'),c=ch4Read('ch4CircuitC'),d=a&b,e=a&c,t=b|c,x=d|e,z=a&t;
+      ch4Flow('ch4ExpandedFlow',[['並行：AND(A,B) → D='+d+'；AND(A,C) → E='+e],['OR(D,E): X='+x,x]]);
+      ch4Flow('ch4FactoredFlow',[['OR(B,C): T='+t,t],['AND(A,T): X='+z,z]]);
+      $('#ch4CircuitOutput').textContent='目前 A='+a+'、B='+b+'、C='+c+'：AB='+d+'，AC='+e+'，AB+AC='+x+'；B+C='+t+'，A(B+C)='+z+'。下表所有 8 列兩個結果都相同，所以這兩個電路等效。';
+      ch4Rows('ch4CircuitRows',Array.from({length:8},(_,i)=>{const a=i>>2,b=(i>>1)&1,c=i&1;return [a,b,c,a&b,a&c,(a&b)|(a&c),b|c,a&(b|c)];}),a*4+b*2+c);
+    });
+    ch4Bind(['ch4MorganA','ch4MorganB'],()=>{
+      const a=ch4Read('ch4MorganA'),b=ch4Read('ch4MorganB'),n=1-(a&b),r=(1-a)|(1-b),m=1-(a|b),t=(1-a)&(1-b);
+      $('#ch4MorganOutput').textContent='A='+a+'、B='+b+'：(AB)′='+n+'，A′+B′='+r+'；(A+B)′='+m+'，A′B′='+t+'。整體反相會把 AND／OR 互換，每個輸入也取反。';
+      ch4Rows('ch4MorganRows',Array.from({length:4},(_,i)=>{const a=i>>1,b=i&1;return [a,b,1-(a&b),(1-a)|(1-b),1-(a|b),(1-a)&(1-b)];}),a*2+b);
+    });
+    ch4Bind(['ch4AdderType','ch4AdderA','ch4AdderB','ch4AdderCin'],()=>{
+      const full=$('#ch4AdderType').value==='full',a=ch4Read('ch4AdderA'),b=ch4Read('ch4AdderB'),cin=full?ch4Read('ch4AdderCin'):0,r=ch4FullAdder(a,b,cin);$('#ch4AdderCin').disabled=!full;
+      ch4Flow('ch4AdderFlow',[['中間結果 A ⊕ B = '+r.t,r.t],['輸出 Sum='+r.sum+'；Cout='+r.carry]]);
+      $('#ch4AdderOutput').textContent=(full?'Full adder：'+a+'+'+b+'+'+cin:'Half adder：'+a+'+'+b)+' = '+(a+b+cin)+'（十進位數值），二進位的 Carry｜Sum = '+r.carry+'｜'+r.sum+'。'+(full?'\n第一段 T='+r.t+'、C1='+r.c1+'；第二段 C2='+r.c2+'；Cout=C1 OR C2='+r.carry+'。':'\n沒有 carry-in；Sum 用 XOR，Carry 用 AND。');
+      ch4Head('ch4AdderHead',full?['A','B','Cin','Sum','Cout']:['A','B','Sum','Carry']);
+      ch4Rows('ch4AdderRows',Array.from({length:full?8:4},(_,i)=>{const a=full?i>>2:i>>1,b=full?(i>>1)&1:i&1,cin=full?i&1:0,r=ch4FullAdder(a,b,cin);return full?[a,b,cin,r.sum,r.carry]:[a,b,r.sum,r.carry];}),full?a*4+b*2+cin:a*2+b);
+    });
+    const ch4MuxData=Array.from({length:8},(_,i)=>i%2);
+    function ch4RenderMux(){const s0=ch4Read('ch4MuxS0'),s1=ch4Read('ch4MuxS1'),s2=ch4Read('ch4MuxS2'),i=ch4MuxIndex(s0,s1,s2),f=ch4MuxData[i];$$('[data-ch4-data]').forEach(button=>{const j=Number(button.dataset.ch4Data);button.textContent='D'+j+' = '+ch4MuxData[j]+(j===i?' · selected':'');button.setAttribute('aria-pressed',String(!!ch4MuxData[j]));button.classList.toggle('ch4-selected',j===i);});ch4Flow('ch4MuxFlow',[['S0S1S2 = '+s0+s1+s2],['D'+i+' = '+f,f],['F = '+f,f]]);$('#ch4MuxOutput').textContent='依講義 p.28 順序：'+s0+'×4 + '+s1+'×2 + '+s2+' = '+i+'，所以選中 D'+i+'。D'+i+'='+f+'，因此 F='+f+'；未選中的 D 值不影響目前輸出。';}
+    $$('[data-ch4-data]').forEach(button=>button.addEventListener('click',()=>{const i=Number(button.dataset.ch4Data);ch4MuxData[i]=1-ch4MuxData[i];ch4RenderMux();}));ch4Bind(['ch4MuxS0','ch4MuxS1','ch4MuxS2'],ch4RenderMux);
+    let ch4Stored=0,ch4LatchCount=0,ch4LatchHistory=[];
+    function ch4ActLatch(s,r){const result=ch4LatchStep(ch4Stored,s,r);ch4Stored=result.stored;ch4LatchCount++;ch4LatchHistory.push([ch4LatchCount,s,r,result.action,result.x===null?'?':result.x,result.y===null?'?':result.y]);ch4LatchHistory=ch4LatchHistory.slice(-12);ch4Flow('ch4LatchFlow',[['S='+s+', R='+r],[result.action],['X='+(result.x===null?'?':result.x),result.x],['Y='+(result.y===null?'?':result.y),result.y]]);$('#ch4LatchOutput').textContent=result.reason;$('#ch4LatchOutput').classList.toggle('bad',result.stored===null);ch4Rows('ch4LatchRows',ch4LatchHistory,ch4LatchHistory.length-1);}
+    [['ch4LatchSet',0,1],['ch4LatchReset',1,0],['ch4LatchHold',1,1],['ch4LatchInvalid',0,0]].forEach(([id,s,r])=>$('#'+id).addEventListener('click',()=>ch4ActLatch(s,r)));
+    $('#ch4LatchClear').addEventListener('click',()=>{ch4Stored=0;ch4LatchCount=0;ch4LatchHistory=[];ch4ActLatch(1,0);});ch4ActLatch(1,0);
+
     const MINI_EXERCISES={
       hardware:{
         options:['Hardware（硬體）','Software（軟體）'],
@@ -2731,6 +2938,411 @@
         options:question.options.map(value=>'('+value+')'+suffix),answer:question.answer,
         why:'英文讀題：'+(question.operation==='add'?'sum 是相加的結果，也就是 '+upper+'＋'+lower+'。':'Subtract B from A 是 A−B，所以這題算 '+upper+'−'+lower+'；difference 是相減的結果。')+'\n方法：從右往左逐欄'+(question.operation==='add'?'相加；滿 '+question.base+' 就進 1。':'相減；不夠減就借 1，本欄補 '+question.base+'。')+'下列中間計算用十進位數值說明。\n'+trace.rows.map(row=>radixStepText(trace,row)).join('\n')+'\n結果：('+trace.result+')'+suffix+'。'};
     })};
+
+    MINI_EXERCISES.ch4review={
+  "language": "en",
+  "letters": true,
+  "nextLabel": "Next question →",
+  "reviewMistakes": true,
+  "cases": [
+    {
+      "prompt": "Which statement best describes the relationship between gates and circuits?",
+      "options": [
+        "Gates perform basic operations; circuits combine gates.",
+        "A gate always stores an entire byte.",
+        "A circuit contains only one transistor.",
+        "Gates are software instructions only."
+      ],
+      "answer": 0,
+      "why": "Gate 是對電訊號做基本操作的元件；Circuit 將閘組合起來做更複雜的工作。不要把 gate 和整顆晶片當同一個層次。\n講義：PDF p.3。"
+    },
+    {
+      "prompt": "How many rows are needed in a complete truth table for three independent binary inputs?",
+      "options": [
+        "3",
+        "8",
+        "6",
+        "9"
+      ],
+      "answer": 1,
+      "why": "complete truth table 要列所有輸入組合。每個輸入有 2 種可能，三個共有 2³=8 列，不是只有三列。\n講義：PDF p.4、13。"
+    },
+    {
+      "prompt": "What is the output of a NOT gate when A = 1?",
+      "options": [
+        "1",
+        "10",
+        "0",
+        "It depends on B."
+      ],
+      "answer": 2,
+      "why": "NOT／inverter 將 0 和 1 互換，所以 NOT 1=0。它只有一個輸入，不需要 B。\n講義：PDF p.7。"
+    },
+    {
+      "prompt": "What is the output of an AND gate when A = 1 and B = 0?",
+      "options": [
+        "1",
+        "10",
+        "2",
+        "0"
+      ],
+      "answer": 3,
+      "why": "AND 要 both inputs 都是 1。這裡 B=0，因此 AB=0；不是把 1 與 0 做數字相加。\n講義：PDF p.8。"
+    },
+    {
+      "prompt": "What is the output of an OR gate when A = 1 and B = 1?",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "10"
+      ],
+      "answer": 0,
+      "why": "OR 的 + 是布林或：at least one input is 1 就輸出 1，所以 1 OR 1=1。二進位算術 1+1=10₂ 是不同運算。\n講義：PDF p.9。"
+    },
+    {
+      "prompt": "What is the output of a two-input XOR gate when A = 1 and B = 1?",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "10"
+      ],
+      "answer": 1,
+      "why": "XOR 是 exclusive OR；兩個輸入相同時輸出 0，不同才是 1。這題 1、1 相同。\n講義：PDF p.10。"
+    },
+    {
+      "prompt": "What is the output of a NAND gate when A = 0 and B = 1?",
+      "options": [
+        "0",
+        "01",
+        "1",
+        "It must store the previous output."
+      ],
+      "answer": 2,
+      "why": "先 AND：0 AND 1=0；再 NOT：NOT 0=1。NAND 只有 11 這列輸出 0。\n講義：PDF p.11。"
+    },
+    {
+      "prompt": "Which input combination makes a two-input NOR gate output 1?",
+      "options": [
+        "A = 1, B = 0",
+        "A = 0, B = 1",
+        "A = 1, B = 1",
+        "A = 0, B = 0"
+      ],
+      "answer": 3,
+      "why": "NOR 是 NOT of OR。要輸出 1，OR 先得 0，因此 A、B 都必須是 0。\n講義：PDF p.12。"
+    },
+    {
+      "prompt": "Which input combination makes a three-input AND gate output 1?",
+      "options": [
+        "A = 1, B = 1, C = 1",
+        "A = 1, B = 0, C = 1",
+        "A = 0, B = 1, C = 1",
+        "A = 1, B = 1, C = 0"
+      ],
+      "answer": 0,
+      "why": "三輸入 AND 是 ABC；all inputs 都為 1 才輸出 1，只要一個是 0 就是 0。\n講義：PDF p.13。"
+    },
+    {
+      "prompt": "What does a small circle at the output of a logic-gate symbol indicate?",
+      "options": [
+        "An extra data input",
+        "Inversion (NOT)",
+        "A carry-in signal",
+        "A connection to memory"
+      ],
+      "answer": 1,
+      "why": "輸出端的 bubble 表示將該輸出反相，所以 AND 加 bubble 是 NAND，OR 加 bubble 是 NOR。\n講義：PDF p.7、11–12。"
+    },
+    {
+      "prompt": "A transistor used to construct a logic gate is made of which type of material?",
+      "options": [
+        "Paper",
+        "An insulating plastic only",
+        "Semiconductor material",
+        "Magnetic tape"
+      ],
+      "answer": 2,
+      "why": "Semiconductor 是半導體。講義以輸入控制導通路徑的模型，說明電晶體怎麼構成閘。\n講義：PDF p.15。"
+    },
+    {
+      "prompt": "In the lecture's series-transistor NAND model, when is the output pulled low?",
+      "options": [
+        "When either input is 0",
+        "Only when both inputs are 0",
+        "For every input combination",
+        "When both inputs are 1"
+      ],
+      "answer": 3,
+      "why": "Series 是串聯；通往地的路徑要兩個都導通才成立，所以 A=B=1 時 X=0，符合 NAND。\n講義：PDF p.17。"
+    },
+    {
+      "prompt": "In the lecture's parallel-transistor NOR model, when is the output pulled low?",
+      "options": [
+        "When at least one input is 1",
+        "Only when both inputs are 0",
+        "Only when the inputs are different",
+        "Never"
+      ],
+      "answer": 0,
+      "why": "Parallel 是並聯。只要任一輸入啟動一條通往 ground 的路徑，輸出就被拉低；只有 00 會輸出 1。\n講義：PDF p.17。"
+    },
+    {
+      "prompt": "What determines the output of a sequential circuit?",
+      "options": [
+        "Only the current inputs",
+        "The current inputs and the existing state",
+        "Only the number of output pins",
+        "Only the name of the circuit"
+      ],
+      "answer": 1,
+      "why": "Sequential 不只看現在輸入，也看 existing state；它涉及資訊儲存。Combinational 才只由目前輸入決定。\n講義：PDF p.19。"
+    },
+    {
+      "prompt": "Evaluate X = AB + AC for A = 1, B = 0, and C = 1. Here, + means OR.",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "10"
+      ],
+      "answer": 2,
+      "why": "先算 AB=1 AND 0=0，AC=1 AND 1=1，再 OR：0+1=1。按閘的先後順序算，不做十進位相加。\n講義：PDF p.20。"
+    },
+    {
+      "prompt": "When are two combinational circuits equivalent?",
+      "options": [
+        "When they use the same number of gates",
+        "When they match for only one input combination",
+        "When their diagrams have the same shape",
+        "When their outputs match for every possible input combination"
+      ],
+      "answer": 3,
+      "why": "Equivalent 不是長得像，也不是只驗證一組。每一列真值表的輸出都一樣才是等效。\n講義：PDF p.22。"
+    },
+    {
+      "prompt": "Which expression is equivalent to AB + AC by the distributive law?",
+      "options": [
+        "A(B + C)",
+        "A + BC",
+        "(A + B)C",
+        "A(B ⊕ C)"
+      ],
+      "answer": 0,
+      "why": "Distributive law 把共同的 A 提出：AB+AC=A(B+C)。講義 p.20、21 的兩個電路因此等效。\n講義：PDF p.20–23。"
+    },
+    {
+      "prompt": "Which expression is equivalent to (AB)' by De Morgan's law?",
+      "options": [
+        "A'B'",
+        "A' + B'",
+        "AB",
+        "A + B"
+      ],
+      "answer": 1,
+      "why": "整個 AND 結果反相，必須把 AND 換成 OR，並把每個輸入反相：(AB)′=A′+B′。不能只變成 A′B′。\n講義：PDF p.23。"
+    },
+    {
+      "prompt": "Which expression is equivalent to (A + B)' by De Morgan's law?",
+      "options": [
+        "A' + B'",
+        "AB",
+        "A'B'",
+        "A + B"
+      ],
+      "answer": 2,
+      "why": "整個 OR 結果反相，改成反相輸入的 AND：(A+B)′=A′B′。和上一題的 AND／OR 方向剛好互換。\n講義：PDF p.23。"
+    },
+    {
+      "prompt": "What is A + A' in Boolean algebra?",
+      "options": [
+        "0 for either value of A",
+        "2 when A = 1",
+        "It cannot be determined.",
+        "1 for either value of A"
+      ],
+      "answer": 3,
+      "why": "Complement 互補律：A 和 A′ 必有一個為 1，所以 OR 結果總是 1；AND 的 AA′ 才總是 0。\n講義：PDF p.23。"
+    },
+    {
+      "prompt": "Which pair correctly states the Boolean identity laws?",
+      "options": [
+        "A·1 = A and A + 0 = A",
+        "A·0 = A and A + 1 = A",
+        "A·1 = 0 and A + 0 = 1",
+        "A·A' = A and A + A' = A"
+      ],
+      "answer": 0,
+      "why": "Identity 的中性元素：AND 1 不改變 A，OR 0 也不改變 A。A·0 會變 0，A+1 會變 1。\n講義：PDF p.23。"
+    },
+    {
+      "prompt": "A half adder receives A = 1 and B = 1. What are Sum and Carry?",
+      "options": [
+        "Sum = 1, Carry = 0",
+        "Sum = 0, Carry = 1",
+        "Sum = 1, Carry = 1",
+        "Sum = 0, Carry = 0"
+      ],
+      "answer": 1,
+      "why": "1+1=10₂；本欄 Sum 是右邊的 0，Carry 是左邊的 1。按題目 Sum、Carry 的順序答。\n講義：PDF p.25。"
+    },
+    {
+      "prompt": "Which pair of gates produces the half-adder Sum and Carry?",
+      "options": [
+        "OR for Sum; XOR for Carry",
+        "AND for Sum; OR for Carry",
+        "XOR for Sum; AND for Carry",
+        "NAND for Sum; NOR for Carry"
+      ],
+      "answer": 2,
+      "why": "Half adder：Sum=A⊕B，兩個不同就留 1；Carry=AB，兩個都是 1 才產生進位。\n講義：PDF p.25。"
+    },
+    {
+      "prompt": "A full adder receives A = 1, B = 1, and carry-in = 1. What are Sum and carry-out?",
+      "options": [
+        "Sum = 0, carry-out = 0",
+        "Sum = 0, carry-out = 1",
+        "Sum = 1, carry-out = 0",
+        "Sum = 1, carry-out = 1"
+      ],
+      "answer": 3,
+      "why": "三個 1 相加是 3₁₀=11₂。因此本欄 Sum=1，送往下一欄的 carry-out=1。別漏掉 carry-in。\n講義：PDF p.26。"
+    },
+    {
+      "prompt": "What distinguishes a full adder from a half adder?",
+      "options": [
+        "A full adder includes a carry-in input.",
+        "A half adder has no carry output.",
+        "A full adder adds decimal digits only.",
+        "A full adder stores its previous result."
+      ],
+      "answer": 0,
+      "why": "Full adder 把前一欄帶來的 carry-in 考慮進去；兩種加法器都有和位及進位輸出，它們本身是組合電路。\n講義：PDF p.25–26。"
+    },
+    {
+      "prompt": "How many select lines are required to select among eight inputs of an 8-to-1 multiplexer?",
+      "options": [
+        "2",
+        "3",
+        "8",
+        "1"
+      ],
+      "answer": 1,
+      "why": "需要 8 種選擇組合，2³=8，所以三條 select lines 即可；八條 D 是資料線，不是八條選擇線。\n講義：PDF p.27–28。"
+    },
+    {
+      "prompt": "Using the lecture's order S0 S1 S2, which input is selected when S0 = 1, S1 = 0, and S2 = 0?",
+      "options": [
+        "D1",
+        "D0",
+        "D4",
+        "D7"
+      ],
+      "answer": 2,
+      "why": "題目明確用講義 p.28 的 S0S1S2 順序：100₂=4，所以 F 選到 D4。不能只憑 S0 的名字猜最低位。\n講義：PDF p.28。"
+    },
+    {
+      "prompt": "Which statement describes a demultiplexer (demux)?",
+      "options": [
+        "It sums all input data values.",
+        "It converts decimal values to hexadecimal.",
+        "It stores a byte in two NAND gates.",
+        "It routes one data input to a selected output line."
+      ],
+      "answer": 3,
+      "why": "DEMUX 是解多工器：一條資料輸入，依選擇線選一條輸出去送。MUX 則是多條資料輸入選一條輸出；這是 p.28 提問的概念補充。\n講義：PDF p.28。"
+    },
+    {
+      "prompt": "How much information does the S-R latch in the lecture store?",
+      "options": [
+        "One bit",
+        "One byte",
+        "Eight words",
+        "A complete truth table"
+      ],
+      "answer": 0,
+      "why": "S-R latch 儲存 single binary digit，也就是一個 bit，可表示 0 或 1，不是一個 byte。\n講義：PDF p.31。"
+    },
+    {
+      "prompt": "For the lecture's active-low NAND S-R latch, S = 1 and R = 1 cause which action?",
+      "options": [
+        "Set X to 1 regardless of the previous state",
+        "Hold the existing state",
+        "Reset X to 0 regardless of the previous state",
+        "Force both outputs to 1"
+      ],
+      "answer": 1,
+      "why": "NAND 型低有效 latch 的 11 是 Hold，回授保留既有狀態。輸出要看之前存了 0 還是 1，不會自動設成固定值。\n講義：PDF p.33。"
+    },
+    {
+      "prompt": "For the lecture's NAND S-R latch, S = 0 and R = 1 give which stable outputs?",
+      "options": [
+        "X = 0, Y = 1",
+        "X = 1, Y = 1",
+        "X = 1, Y = 0",
+        "X = 0, Y = 0"
+      ],
+      "answer": 2,
+      "why": "低有效 S=0 啟動 Set：X=NAND(0,Y)=1；下方 Y=NAND(1,1)=0。X 是儲存的 1。\n講義：PDF p.31–33。"
+    },
+    {
+      "prompt": "For the lecture's NAND S-R latch, S = 1 and R = 0 give which stable outputs?",
+      "options": [
+        "X = 1, Y = 0",
+        "X = 1, Y = 1",
+        "X = 0, Y = 0",
+        "X = 0, Y = 1"
+      ],
+      "answer": 3,
+      "why": "低有效 R=0 啟動 Reset：Y=NAND(0,X)=1；X=NAND(1,1)=0。這是 p.31 回授電路依 NAND 規則的對稱推導。\n講義：PDF p.31–33。"
+    },
+    {
+      "prompt": "Why should S = 0 and R = 0 be avoided in a basic active-low NAND S-R latch?",
+      "options": [
+        "Both outputs are forced high, and the state after simultaneous release is not reliably known.",
+        "It always performs a normal reset.",
+        "It always performs a normal hold.",
+        "It increases the storage capacity to two bits."
+      ],
+      "answer": 0,
+      "why": "00 是禁止狀態：兩個 NAND 輸出都被強迫成 1，不互補；兩輸入同時回到 1 後最終狀態不能可靠預測。這是對 p.32 互補敘述的補充限制，亦對照 TI Figure 2。\n講義：PDF p.31–33（補充）。"
+    },
+    {
+      "prompt": "The SSI chip diagram contains four independent two-input NAND gates. Which statement is correct?",
+      "options": [
+        "The chip is automatically one four-input NAND gate.",
+        "Each gate has its own input and output signals.",
+        "Every pin is a data output.",
+        "The chip contains no power or ground connection."
+      ],
+      "answer": 1,
+      "why": "Independent 是獨立：四個 NAND 各有輸入和輸出，共用 Power／Ground；放在同一封裝不代表已接成一個四輸入閘。\n講義：PDF p.36。"
+    },
+    {
+      "prompt": "Using the lecture's IC table, a chip with 500 gates falls into which category?",
+      "options": [
+        "SSI (Small-scale integration)",
+        "MSI (Medium-scale integration)",
+        "LSI (Large-scale integration)",
+        "VLSI (Very-large-scale integration)"
+      ],
+      "answer": 2,
+      "why": "講義 LSI 是 100–100,000 gates，500 在其範圍內。分類數字依這份表；此題避開 10、100 的重疊邊界。\n講義：PDF p.35。"
+    },
+    {
+      "prompt": "According to the lecture, CPU-chip pins provide connections to which components?",
+      "options": [
+        "Only the monitor pixels",
+        "Only the keyboard characters",
+        "Only the transistor base terminals inside one gate",
+        "Memory and I/O devices"
+      ],
+      "answer": 3,
+      "why": "講義 CPU chip 的 pins 連接處理器與 memory、I/O devices，讓晶片與外部元件交換訊號。\n講義：PDF p.38。"
+    }
+  ]
+};
 
     $$('[data-mini]').forEach(host=>{
       const exercise=MINI_EXERCISES[host.dataset.mini], mount=$('[data-mini-mount]',host);
