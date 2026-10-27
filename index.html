@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark light">
-  <title>計算機概論｜Ch01–Ch04 互動筆記</title>
+  <title>計算機概論｜Ch01–Ch05 互動筆記</title>
   <style>
     :root{
       --bg:#07111f;
@@ -220,7 +220,7 @@
     h1{font-size:clamp(34px,5vw,64px);line-height:1.04;letter-spacing:-.04em;margin:0;max-width:760px}
     .hero p{max-width:720px;color:var(--muted);font-size:16px;margin:18px 0 0}
     .hero-stats{
-      display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:28px
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:28px
     }
     .stat{
       padding:14px 15px;border-radius:15px;background:var(--panel-soft);border:1px solid var(--border)
@@ -620,6 +620,15 @@
     #ch4-test .mini-question{font-size:19px;line-height:1.55}
     @media(max-width:680px){.ch4-gate-grid.grid.three{grid-template-columns:repeat(2,minmax(0,1fr))}.ch4-fields label{min-width:90px}#ch4-test .mini-options{grid-template-columns:1fr}}
     @media(max-width:420px){.ch4-gate-grid.grid.three{grid-template-columns:1fr}.ch4-mux-inputs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    #ch5-test .mini-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+    #ch5-test .mini-options button{text-align:left;min-height:54px;overflow-wrap:anywhere}
+    #ch5-test .lab-output,#ch5-test .conversion-review p{white-space:pre-wrap;overflow-wrap:anywhere}
+    #ch5-test .conversion-review{margin-top:16px}
+    #ch5-test .mini-question{font-size:19px;line-height:1.55}
+    .ch5-fields-note{font-size:13px;color:var(--muted)}
+    .ch4-fields input[type="number"]{width:100%;min-height:44px;padding:8px 12px;border:1px solid var(--border);border-radius:11px;background:var(--panel-strong);color:var(--text);font:inherit}
+    #ch5-cycle .ch4-signal-flow,#ch5-bus .lab-output{overflow-wrap:anywhere}
+    @media(max-width:680px){#ch5-test .mini-options{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -629,7 +638,7 @@
       <div class="brand-mark">CS</div>
       <div>
         <strong>計算機概論</strong>
-        <small>Ch01–Ch04 Study Lab</small>
+        <small>Ch01–Ch05 Study Lab</small>
       </div>
     </div>
 
@@ -669,7 +678,7 @@
     <a class="nav-link" href="#ch3-test"><span class="nav-dot"></span>第三章練習 · 18 題</a>
 
     <div class="side-label">Chapter 04</div>
-    <a class="nav-link" href="#ch4-start"><span class="nav-dot"></span>第四章學習路線 · NEW</a>
+    <a class="nav-link" href="#ch4-start"><span class="nav-dot"></span>第四章學習路線</a>
     <a class="nav-link" href="#ch4-gates"><span class="nav-dot"></span>六種閘 · 真值表</a>
     <a class="nav-link" href="#ch4-transistors"><span class="nav-dot"></span>電晶體與導通路徑</a>
     <a class="nav-link" href="#ch4-circuits"><span class="nav-dot"></span>組合／循序 · 電路比較</a>
@@ -679,6 +688,17 @@
     <a class="nav-link" href="#ch4-memory"><span class="nav-dot"></span>S-R latch 記憶實驗</a>
     <a class="nav-link" href="#ch4-chips"><span class="nav-dot"></span>IC／CPU 晶片</a>
     <a class="nav-link" href="#ch4-test"><span class="nav-dot"></span>第四章英文測驗 · 36 題</a>
+
+    <div class="side-label">Chapter 05</div>
+    <a class="nav-link" href="#ch5-start"><span class="nav-dot"></span>第五章學習路線 · NEW</a>
+    <a class="nav-link" href="#ch5-components"><span class="nav-dot"></span>規格表 · 單位字首</a>
+    <a class="nav-link" href="#ch5-architecture"><span class="nav-dot"></span>von Neumann 五大單元</a>
+    <a class="nav-link" href="#ch5-bus"><span class="nav-dot"></span>Bus · Cache · Pipelining</a>
+    <a class="nav-link" href="#ch5-cycle"><span class="nav-dot"></span>Fetch-Execute 步進器</a>
+    <a class="nav-link" href="#ch5-storage"><span class="nav-dot"></span>記憶體與儲存裝置</a>
+    <a class="nav-link" href="#ch5-embedded"><span class="nav-dot"></span>嵌入式系統</a>
+    <a class="nav-link" href="#ch5-parallel"><span class="nav-dot"></span>平行架構 · SIMD／MIMD</a>
+    <a class="nav-link" href="#ch5-test"><span class="nav-dot"></span>第五章英文測驗 · 39 題</a>
 
     <div class="side-label">Review</div>
     <a class="nav-link" href="#practice"><span class="nav-dot"></span>互動練習</a>
@@ -709,17 +729,18 @@
     <div class="content">
       <header class="hero" id="overview" data-study-only>
         <div class="eyebrow">Introduction to Computers</div>
-        <h1>把 Ch01–Ch04<br>變成真的會用的知識</h1>
+        <h1>把 Ch01–Ch05<br>變成真的會用的知識</h1>
         <p>
-          第一章先讀概念，再動手配對、探索分層、執行模擬，最後用選擇題檢查理解。第二章接著學進位換算與二、八、十六進位加減；第三章學補數、小數、文字與多媒體的資料表示；第四章把 bits 連到邏輯閘、計算與記憶電路。
+          第一章先讀概念，再動手配對、探索分層、執行模擬，最後用選擇題檢查理解。第二章接著學進位換算與二、八、十六進位加減；第三章學補數、小數、文字與多媒體的資料表示；第四章把 bits 連到邏輯閘、計算與記憶電路；第五章把元件組成完整電腦，看它如何一步步執行指令。
           每讀完一節就按「標記已學」，進度會自動存在這台電腦。
         </p>
-        <div class="study-path"><a href="#ch4-start">最新：第四章 Gates and Circuits →</a><a href="#ch4-test">第四章英文測驗 · 36 題 →</a><a href="#radix-arithmetic">不同進位加減 · 逐步教練 →</a><a href="#arithmetic-test">加減法測驗 · 20 題 →</a><a href="#conversion-test">進位轉換測驗 →</a><a href="#ch3-start">第三章資料表示 →</a></div>
+        <div class="study-path"><a href="#ch5-start">最新：第五章 Computing Components →</a><a href="#ch5-test">第五章英文測驗 · 39 題 →</a><a href="#ch4-start">第四章 Gates and Circuits →</a><a href="#ch4-test">第四章英文測驗 · 36 題 →</a><a href="#radix-arithmetic">不同進位加減 · 逐步教練 →</a><a href="#arithmetic-test">加減法測驗 · 20 題 →</a><a href="#conversion-test">進位轉換測驗 →</a><a href="#ch3-start">第三章資料表示 →</a></div>
         <div class="hero-stats">
           <div class="stat"><strong>Ch01</strong><span>Computer Science Basics</span></div>
           <div class="stat"><strong>Ch02</strong><span>Binary Values & Number Systems</span></div>
           <div class="stat"><strong>Ch03</strong><span>Data Representation</span></div>
-          <div class="stat"><strong>Ch04</strong><span>Gates & Circuits · 可離線學習</span></div>
+          <div class="stat"><strong>Ch04</strong><span>Gates & Circuits</span></div>
+          <div class="stat"><strong>Ch05</strong><span>Computing Components · 可離線學習</span></div>
         </div>
       </header>
 
@@ -1781,6 +1802,184 @@
         <div class="study-path"><a href="#ch4-start">回到第四章教學 →</a><a href="#ch4-memory">複習 Set／Reset／Hold →</a><a href="#ch4-adders">複習 carry-in →</a></div>
       </section>
 
+      <section class="section searchable study-section" id="ch5-start" data-study-only>
+        <div class="section-kicker">Chapter 05 · Computing Components · 講義 32 頁</div>
+        <h2>第五章：零件怎麼合作，把一個程式跑起來？</h2>
+        <p class="intro">第四章把電晶體組成閘與電路；第五章再往上一層，看<strong>一台完整電腦由哪些元件組成，以及它怎麼一次一條地執行放在記憶體裡的指令。</strong>主線只有一句話：<strong>程式與資料都存在記憶體；CPU 反覆做 fetch → decode → get data → execute。</strong></p>
+        <div class="study-path"><a href="#ch5-components">01 規格表與單位</a><a href="#ch5-architecture">02 von Neumann 五大單元</a><a href="#ch5-bus">03 Bus、Cache、Pipelining</a><a href="#ch5-cycle">04 Fetch-Execute 步進器</a><a href="#ch5-storage">05 記憶體與儲存裝置</a><a href="#ch5-embedded">06 嵌入式系統</a><a href="#ch5-parallel">07 平行架構</a><a href="#ch5-test">章末英文測驗 →</a></div>
+        <div class="callout"><strong>建議順序：</strong>先把五大單元，以及 PC 與 IR 的差別記牢；再操作 Fetch-Execute 步進器，看 PC 怎麼前進；最後讀儲存裝置與平行架構。第五章名詞多，但大多是「這個東西是什麼、屬於哪一類」的配對題。</div>
+        <details><summary>先認識考試用語：英文題目在問什麼？</summary><div class="answer"><div class="table-scroll"><table class="compare"><thead><tr><th scope="col">English</th><th scope="col">中文意思</th><th scope="col">讀題提醒</th></tr></thead><tbody>
+          <tr><td>component / specification</td><td>元件／規格</td><td>規格表每一行都對應一個元件，先判斷它是處理、記憶、儲存還是輸出入。</td></tr>
+          <tr><td>cell / address</td><td>儲存格／位址</td><td>位址是「這一格在哪裡」，內容是「這一格裡放什麼」，別互換。</td></tr>
+          <tr><td>register / cache</td><td>暫存器／快取記憶體</td><td>都比主記憶體快；register 在 ALU 內，cache 存常用資料的副本。</td></tr>
+          <tr><td>volatile</td><td>揮發性</td><td>斷電後內容消失。RAM 是揮發性，ROM 不是。</td></tr>
+          <tr><td>bus / bus width</td><td>匯流排／匯流排寬度</td><td>寬度是一次可同時傳送的 bit 數，不是長度。</td></tr>
+          <tr><td>fetch / decode / execute</td><td>擷取／解碼／執行</td><td>PC 指到下一條指令；IR 放正在執行的那一條。</td></tr>
+          <tr><td>seek time / latency / access time</td><td>搜尋時間／潛伏時間／存取時間</td><td>access time = seek time + latency；transfer rate 是另一個指標。</td></tr>
+          <tr><td>embedded system</td><td>嵌入式系統</td><td>專門做少數功能、嵌在更大系統裡的電腦。</td></tr>
+          <tr><td>SIMD / MIMD</td><td>單指令多資料／多指令多資料</td><td>SIMD 屬 data-level；MIMD 屬 task-level。</td></tr>
+        </tbody></table></div></div></details>
+        <p class="source-note">來源：ch05.pdf。頁碼為投影片右下角的講義頁碼：共 1–24、26–32 頁；檔案沒有印出第 25 頁，所以從第 26 頁起，PDF 檢視器的頁數比講義頁碼少 1。標為「自製」或「補充」的例題與說明，不是老師原題，也不是講義原文。</p>
+      </section>
+
+      <section class="section searchable study-section" id="ch5-components" data-study-only data-learn-id="ch5-components">
+        <div class="section-head"><div><div class="section-kicker">Chapter 05 · 01 · 講義 p.3–5</div><h2>先讀規格表：每一行都是一個元件</h2><p class="section-desc">講義用一張筆電規格當起點；學完本章，要能看到規格就說出它負責什麼。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <p class="intro">p.3 的規格表像是整章的地圖。把每一項放進對的類別，是考試常見的配對題。</p>
+        <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">規格</th><th scope="col">屬於哪個元件</th><th scope="col">它負責什麼</th></tr></thead><tbody>
+          <tr><td>Intel Core i7（2.8 GHz Quad-Core）</td><td>CPU（處理器）</td><td>執行指令；Quad-Core 是四個核心（p.32 的 multicore）。GHz 是時脈頻率，本章講義未展開。</td></tr>
+          <tr><td>12 MB Intel Smart Cache</td><td>Cache memory</td><td>小而快，存放常用資料的副本（p.13）。</td></tr>
+          <tr><td>20 GB SDRAM</td><td>Main memory（RAM）</td><td>放執行中的程式與資料；揮發性（p.17）。SDRAM 這個名稱講義未解釋。</td></tr>
+          <tr><td>1 TB SSD</td><td>Secondary storage</td><td>長期保存資料；全電子、沒有移動零件（p.23）。</td></tr>
+          <tr><td>17.3 inch HD LED display（1920 × 1080）</td><td>Output device</td><td>把結果呈現給外界（p.10）；1920 × 1080 是第三章的像素數。</td></tr>
+          <tr><td>Intel Iris Xe GPU</td><td>圖形處理器（補充）</td><td>講義只列在規格表，沒有細講；視為處理畫面的元件。</td></tr>
+          <tr><td>WiFi 6、Bluetooth 5、USB Type-A、HDMI</td><td>連接與輸出入埠（補充）</td><td>讓電腦與外界交換資料；USB 在 p.23 的 flash drive 出現。</td></tr>
+          <tr><td>Windows 11 Home OS</td><td>Software（作業系統）</td><td>不是硬體元件；對應第一章的軟體層。</td></tr>
+          <tr><td>5.63 lbs</td><td>重量</td><td>不是計算元件，是干擾選項。</td></tr>
+        </tbody></table></div>
+        <div class="lab" data-mini="ch5components"><div class="lab-kicker">TRY IT · 規格配對</div><h4>這一行規格是哪個元件？</h4><div data-mini-mount></div></div>
+        <h3>Sizes in Perspective：K、M、G、T 是多大？（p.4–5）</h3>
+        <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">字首（符號）</th><th scope="col">10 的次方</th><th scope="col">2 的次方（講義）</th><th scope="col">中文（p.5）</th></tr></thead><tbody>
+          <tr><td>kilo（K）</td><td>10³</td><td>2¹⁰ = 1,024</td><td>仟</td></tr>
+          <tr><td>mega（M）</td><td>10⁶</td><td>2²⁰ = 1,048,576</td><td>百萬</td></tr>
+          <tr><td>giga（G）</td><td>10⁹</td><td>2³⁰ = 1,073,741,824</td><td>十億</td></tr>
+          <tr><td>tera（T）</td><td>10¹²</td><td>2⁴⁰</td><td>兆</td></tr>
+          <tr><td>peta（P）</td><td>10¹⁵</td><td>2⁵⁰</td><td>仟兆</td></tr>
+          <tr><td>milli（m）</td><td>10⁻³</td><td>—</td><td>毫</td></tr>
+          <tr><td>micro（μ）</td><td>10⁻⁶</td><td>—</td><td>微</td></tr>
+          <tr><td>nano（n）</td><td>10⁻⁹</td><td>—</td><td>塵</td></tr>
+          <tr><td>pico（p）</td><td>10⁻¹²</td><td>—</td><td>漠</td></tr>
+        </tbody></table></div>
+        <p class="source-note">p.5 還列出 exa（E，10¹⁸，百萬兆）、femto（f，10⁻¹⁵，毫漠）、atto（a，10⁻¹⁸，微漠）等；p.5 把 10⁻¹ 寫成 dice，標準字首是 deci（d，分）。</p>
+        <div class="callout"><strong>記容量的兩條線：</strong>字首同時有 10 的次方與 2 的次方兩種讀法（例如 K 可以是 1,000 或 1,024）。講義 p.4 的 2 的次方欄用 1,024、1,048,576、1,073,741,824；題目沒說時，以題目給的換算或老師的教法為準。</div>
+      </section>
+
+      <section class="section searchable study-section" id="ch5-architecture" data-study-only data-learn-id="ch5-architecture">
+        <div class="section-head"><div><div class="section-kicker">Chapter 05 · 02 · 講義 p.7–11</div><h2>von Neumann 架構：五個單元分工</h2><p class="section-desc">資料與指令邏輯上相同，可以存在同一個地方；「處理」與「儲存」分開。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <p class="intro">講義 p.7 的重點有兩句：<strong>Data 與 instructions 在邏輯上相同，可以存在同一個地方（stored-program concept）；process information 與 store information 分開。</strong>CPU 負責處理，memory 負責儲存。</p>
+        <div class="grid three">
+          <div class="card"><span class="tag">Input unit</span><h3>輸入單元</h3><p>把外界的資料與程式送進電腦（p.10）。例：鍵盤。</p></div>
+          <div class="card"><span class="tag">Output unit</span><h3>輸出單元</h3><p>把記憶體裡的結果交給外界（p.10）。例：螢幕。</p></div>
+          <div class="card"><span class="tag">Memory unit</span><h3>記憶單元</h3><p>放程式與資料。由許多 cells 組成，每一格有唯一的位址（p.8）。</p></div>
+          <div class="card"><span class="tag">ALU</span><h3>算術／邏輯單元</h3><p>加減乘除，以及 AND、OR、NOT（p.9）。內有速度遠高於記憶體的 registers。</p></div>
+          <div class="card"><span class="tag">Control unit</span><h3>控制單元</h3><p>電腦裡的「組織力量」，負責 fetch-execute cycle（p.11）。</p></div>
+          <div class="card"><span class="tag">CPU</span><h3>ALU + Control unit</h3><p>講義 p.11 的定義：CPU = ALU + control unit。記憶體與輸出入不在 CPU 內。</p></div>
+        </div>
+        <h3>記憶體：位址與內容是兩件事（p.8）</h3>
+        <p>Memory 是一群 cells（儲存格）。大多數電腦是 <strong>byte-addressable</strong>：以一個 byte（8 bits）為可定址單位。講義的例子：位址 <code>11111110</code> 的格子裡放著 <code>10101010</code>；格內的 bit 位置由左到右標為 7、6、5、4、3、2、1、0。</p>
+        <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">Address（位址）</th><th scope="col">Contents（內容）</th></tr></thead><tbody>
+          <tr><td>00000000</td><td>11100011</td></tr><tr><td>00000001</td><td>10101001</td></tr><tr><td>⋮</td><td>⋮</td></tr><tr><td>11111100</td><td>00000000</td></tr><tr><td>11111101</td><td>11111111</td></tr><tr class="ch4-current"><td>11111110</td><td>10101010</td></tr><tr><td>11111111</td><td>00110011</td></tr>
+        </tbody></table></div>
+        <h3>控制單元：PC 與 IR 要分清楚（p.11）</h3>
+        <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">暫存器</th><th scope="col">全名</th><th scope="col">裡面放什麼</th></tr></thead><tbody>
+          <tr><td>PC</td><td>Program counter（程式計數器）</td><td>下一條要執行的指令的<strong>位址</strong>。</td></tr>
+          <tr><td>IR</td><td>Instruction register（指令暫存器）</td><td>正在執行的那條<strong>指令</strong>本身。</td></tr>
+        </tbody></table></div>
+        <div class="callout"><strong>最常見的陷阱：</strong>PC 存的是位址，不是指令；IR 存的才是指令。另外，記憶體格的「內容」可能是資料也可能是指令，位址則是格子的編號。</div>
+        <div class="lab" data-mini="ch5units"><div class="lab-kicker">TRY IT · 五大單元辨認</div><h4>這個動作由哪個單元負責？</h4><div data-mini-mount></div></div>
+        <details><summary>補充：為什麼 stored program 很重要？</summary><div class="answer">因為程式和資料都在記憶體裡，換一組記憶體內容就能換一個程式，不必重新接線。這是補充說明，不是講義原文。</div></details>
+      </section>
+
+      <section class="section searchable study-section" id="ch5-bus" data-study-only data-learn-id="ch5-bus">
+        <div class="section-head"><div><div class="section-kicker">Chapter 05 · 03 · 講義 p.12–13</div><h2>Bus、Cache、Pipelining 與 N-bit 處理器</h2><p class="section-desc">Bus 是元件之間的共用通道；後三者都是讓 CPU 更快的設計。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">名詞</th><th scope="col">講義說法</th><th scope="col">一句話記</th></tr></thead><tbody>
+          <tr><td>Bus（匯流排）</td><td>每條 bus 傳三種資訊：address、data、control。</td><td>連接 CPU、記憶體與輸出入的通道。</td></tr>
+          <tr><td>Bus width</td><td>一次可同時傳送的 bits 數。</td><td>越寬，一次傳得越多。</td></tr>
+          <tr><td>Cache memory（快取記憶體）</td><td>少量高速記憶體，存放常用資料的副本。</td><td>放常用資料的副本。</td></tr>
+          <tr><td>Pipelining（管線化）</td><td>把一條指令切成較小的步驟，讓步驟彼此重疊，加快 fetch-execute cycle。</td><td>步驟重疊。</td></tr>
+          <tr><td>N-bit processor</td><td>一條指令就能把兩個 n-bit 數相加；也和位址匯流排、資料匯流排的寬度有關。</td><td>一次處理 n 位元。</td></tr>
+        </tbody></table></div>
+        <h3>位址匯流排寬度決定能分辨幾格記憶體（補充）</h3>
+        <p>n 條位址線有 <code>2ⁿ</code> 種組合，所以最多能指向 2ⁿ 個 cells。講義 p.8 的 8 位元位址就是 00000000 到 11111111，共 256 格。這是依 bits 容量推出來的補充算法，和第三章「n bits 有 2ⁿ 種組合」是同一個概念。</p>
+        <div class="lab"><div class="lab-kicker">TRY IT · 位址位元數 → 記憶體格數</div><h3>位址線計算機</h3><div class="ch4-fields"><label>Address bits<select id="ch5AddrBits"><option value="8" selected>8</option><option value="10">10</option><option value="16">16</option><option value="20">20</option><option value="24">24</option><option value="32">32</option><option value="64">64</option></select></label></div><div class="lab-output" id="ch5AddrOut" aria-live="polite"></div><p class="source-note">假設 byte-addressable，所以 1 格 = 1 byte；單位換算採講義 p.4 的 2¹⁰ = 1,024 進位。</p></div>
+        <details><summary>自製例：Pipelining 為什麼比較快？</summary><div class="answer"><p>把一條指令切成 3 個步驟，每步 1 個時間單位。理想情形（沒有阻塞）：</p><div class="table-scroll"><table class="compare"><thead><tr><th scope="col">指令數</th><th scope="col">不重疊</th><th scope="col">重疊（pipelined）</th></tr></thead><tbody><tr><td>1</td><td>3</td><td>3</td></tr><tr><td>3</td><td>9</td><td>5</td></tr><tr><td>10</td><td>30</td><td>12</td></tr></tbody></table></div><p>重疊後的總時間是「步驟數 + 指令數 − 1」。單一條指令沒有變快，但整體吞吐量提高。這是理想化的自製例，不是講義的數字。</p></div></details>
+        <div class="callout"><strong>別混在一起：</strong>Cache 是「快的記憶體」，pipelining 是「步驟重疊」，N-bit 是「一次處理幾位元」。三個都是為了加速，但回答的是不同的問題。</div>
+      </section>
+
+      <section class="section searchable study-section" id="ch5-cycle" data-study-only data-learn-id="ch5-cycle">
+        <div class="section-head"><div><div class="section-kicker">Chapter 05 · 04 · 講義 p.14–16</div><h2>Fetch-Execute Cycle：CPU 一次一條指令</h2><p class="section-desc">四個步驟：Fetch → Decode → Get data → Execute，做完再從頭開始。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <ol class="ch4-steps">
+          <li><strong>Fetch the next instruction：</strong>PC 存著下一條指令的位址。指令在記憶體中連續存放，所以下一個 PC = 目前指令的 bytes 數 + 原 PC 的位址（p.15）。</li>
+          <li><strong>Decode the instruction：</strong>控制單元判斷這是哪一種指令，並把它解成 control signals（p.15）。</li>
+          <li><strong>Get data if needed：</strong>有些指令需要額外存取記憶體才能完成（p.16）。</li>
+          <li><strong>Execute the instruction：</strong>送訊號給 ALU 做運算；做完後，循環重新開始（p.16）。</li>
+        </ol>
+        <div class="formula">next PC = 原 PC + 目前指令的 bytes 數<br>例：PC = 100，指令長 3 bytes → 下一個 PC = 103</div>
+        <div class="lab"><div class="lab-kicker">TRY IT · 一步一步看 PC、IR 與暫存器</div><h3>Fetch-Execute 步進器</h3>
+          <p>程式放在位址 100 起的記憶體：<code>LOAD R1,[200]</code>（3 bytes）、<code>ADD R1,#5</code>（2 bytes）、<code>STORE R1,[201]</code>（3 bytes）、<code>HALT</code>（1 byte）。位址 200 的資料是 7。每按一次「下一步」做一個步驟。</p>
+          <div class="lab-controls"><button type="button" class="primary-btn" id="ch5CycleNext">下一步 →</button><button type="button" class="ghost-btn" id="ch5CycleReset">重新開始</button></div>
+          <div class="ch4-signal-flow" id="ch5CycleFlow"></div>
+          <div class="lab-output" id="ch5CycleOut" aria-live="polite"></div>
+          <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">Address</th><th scope="col">Contents</th><th scope="col">Bytes</th></tr></thead><tbody id="ch5CycleRows"></tbody></table></div>
+          <p class="source-note">這是自製的簡化教學模型：指令名稱與長度為示意。講義只說明四個步驟與「下一個 PC = 指令 bytes 數 + 原 PC」，沒有規定指令集。</p></div>
+        <div class="lab" data-mini="ch5cycle"><div class="lab-kicker">TRY IT · 步驟辨認</div><h4>這個動作發生在哪個步驟？</h4><div data-mini-mount></div></div>
+      </section>
+
+      <section class="section searchable study-section" id="ch5-storage" data-study-only data-learn-id="ch5-storage">
+        <div class="section-head"><div><div class="section-kicker">Chapter 05 · 05 · 講義 p.17–24</div><h2>記憶體與儲存裝置：誰會斷電消失？誰怎麼存取？</h2><p class="section-desc">主記憶體多半揮發又有限，所以需要 secondary（auxiliary）storage。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <h3>RAM 與 ROM（p.17）</h3>
+        <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">類型</th><th scope="col">講義說法</th><th scope="col">揮發性？</th></tr></thead><tbody>
+          <tr><td>RAM（Random access memory）</td><td>每個 cell 都可以直接存取。</td><td>是（volatile）：斷電後內容消失。</td></tr>
+          <tr><td>ROM（Read only memory）</td><td>內容只能讀取，不能改變。</td><td>否（non-volatile）。</td></tr>
+        </tbody></table></div>
+        <h3>輔助儲存裝置（p.18–23）</h3>
+        <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">裝置</th><th scope="col">重點</th></tr></thead><tbody>
+          <tr><td>Magnetic tape（磁帶，p.19）</td><td>第一個真正的大量輔助儲存裝置。缺點：要讀中段資料，前面的資料都得先存取再丟掉（循序存取）。</td></tr>
+          <tr><td>Magnetic disk（磁碟，p.20–21）</td><td>Tracks（磁軌）是同心圓；每個 track 分成 sectors（磁區）；每個 sector 放一個 block（區塊）。圖中另標示 cylinder（磁柱），指多片碟片上相同位置的 tracks 疊起來的集合。</td></tr>
+          <tr><td>CD / DVD / Blu-ray（p.22）</td><td>用雷射讀取光學方式存在塑膠碟片上的資訊。CD：CD-DA、CD-ROM、CD-R、CD-RW。DVD：4.7 GB，DL（雙層）8.5 GB。Blu-ray：25 GB，DL 50 GB。</td></tr>
+          <tr><td>Flash drive / SSD（p.23）</td><td>Flash memory 是 non-volatile，可擦除與重寫；USB（universal serial bus）接口。SSD 全電子、沒有移動零件，更快、耗電更低。</td></tr>
+          <tr><td>Touch screen（p.24）</td><td>可回應手指或觸控筆的螢幕。四種：resistive（電阻式）、capacitive（電容式）、infrared（紅外線）、surface acoustic wave（SAW，表面聲波）。</td></tr>
+        </tbody></table></div>
+        <h3>磁碟的四個效能指標（p.21）</h3>
+        <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">指標</th><th scope="col">意思</th></tr></thead><tbody>
+          <tr><td>Seek time（搜尋時間）</td><td>讀寫頭移到指定 track 上方所需的時間。</td></tr>
+          <tr><td>Latency（潛伏時間，rotation delay）</td><td>指定的 sector 轉到讀寫頭下方所需的時間。</td></tr>
+          <tr><td>Access time（存取時間）</td><td>= seek time + latency。</td></tr>
+          <tr><td>Transfer rate（傳輸率）</td><td>資料從磁碟傳到記憶體的速率。</td></tr>
+        </tbody></table></div>
+        <div class="formula">Access time = Seek time + Latency</div>
+        <div class="lab"><div class="lab-kicker">TRY IT · 存取時間與傳輸時間分開算</div><h3>磁碟時間計算機</h3><div class="ch4-fields"><label>Seek time (ms)<input type="number" id="ch5Seek" value="9" min="0" step="0.1"></label><label>Latency (ms)<input type="number" id="ch5Latency" value="4" min="0" step="0.1"></label><label>檔案大小 (MB)<input type="number" id="ch5FileMB" value="50" min="0" step="1"></label><label>Transfer rate (MB/s)<input type="number" id="ch5Rate" value="100" min="1" step="1"></label></div><div class="lab-output" id="ch5DiskOut" aria-live="polite"></div><p class="source-note">講義只定義 access time = seek + latency，並把 transfer rate 當作另一個指標；「總時間 = access time + 傳輸時間」是自製的補充算法（理想化，忽略其他延遲）。</p></div>
+        <div class="lab" data-mini="ch5storage"><div class="lab-kicker">TRY IT · 儲存裝置辨認</div><h4>這段描述說的是哪一種？</h4><div data-mini-mount></div></div>
+        <div class="callout"><strong>最常見的配對：</strong>揮發性 → RAM；唯讀 → ROM；循序、要先讀前面的 → 磁帶；track／sector／seek → 磁碟；無移動零件、可重寫 → flash／SSD；DVD 4.7 GB、Blu-ray 25 GB。</div>
+      </section>
+
+      <section class="section searchable study-section" id="ch5-embedded" data-study-only data-learn-id="ch5-embedded">
+        <div class="section-head"><div><div class="section-kicker">Chapter 05 · 06 · 講義 p.26–27</div><h2>嵌入式系統：少數功能，嵌在大系統裡</h2><p class="section-desc">程式碼大小與執行速度非常重要，所以常用組合語言。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <p class="intro">Embedded system 是<strong>專門執行少數功能、作為更大系統一部分的電腦</strong>（p.27）。它和通用電腦的差別在於「用途很窄」。</p>
+        <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">講義列出的處理器</th><th scope="col">位元數</th></tr></thead><tbody><tr><td>Micro-processors</td><td>8-bit</td></tr><tr><td>DSPs</td><td>32-bit</td></tr><tr><td>RISC</td><td>64-bit</td></tr></tbody></table></div>
+        <p>因為<strong>程式碼大小（size of code）與執行速度（executing speed）</strong>都很重要，講義提到會使用 assembly language（組合語言）。</p>
+        <div class="callout"><strong>記法：</strong>8 → micro-processor、32 → DSP、64 → RISC；原因是 code size 與 speed 很重要，所以用組合語言。</div>
+      </section>
+
+      <section class="section searchable study-section" id="ch5-parallel" data-study-only data-learn-id="ch5-parallel">
+        <div class="section-head"><div><div class="section-kicker">Chapter 05 · 07 · 講義 p.28–32</div><h2>平行架構：四個層級與三種硬體</h2><p class="section-desc">Bit → Instruction → Data → Task：從一次處理的位元，到不同處理器做不同任務。</p></div><button class="learn-btn">○ 標記已學</button></div>
+        <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">層級</th><th scope="col">講義說法</th><th scope="col">關鍵字</th></tr></thead><tbody>
+          <tr><td>Bit-level（位元級）</td><td>增加電腦的 word size。</td><td>字長變大</td></tr>
+          <tr><td>Instruction-level（指令級）</td><td>程式中有些指令可以彼此獨立、同時進行。</td><td>Superscalar（超純量）：多個 execution units</td></tr>
+          <tr><td>Data-level（資料級）</td><td>同一組指令，同時作用在不同的資料集上。</td><td>SIMD、synchronous processing</td></tr>
+          <tr><td>Task-level（任務級）</td><td>不同的處理器，在相同或不同的資料集上執行不同的任務。</td><td>MIMD、pipelined processing</td></tr>
+        </tbody></table></div>
+        <h3>Shared-memory parallel processor（p.31）</h3>
+        <p>屬於 task-level 的 MIMD；多個 processors 透過<strong>shared memory</strong> 溝通，每個 processor 另有自己的 local memory。</p>
+        <h3>平行硬體（p.32）</h3>
+        <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">硬體</th><th scope="col">講義說法</th></tr></thead><tbody>
+          <tr><td>Multicore processors（多核心處理器）</td><td>多個獨立的 cores；把多條指令送給多個 execution units。</td></tr>
+          <tr><td>Symmetric multi-processors（SMPs，對稱多處理器）</td><td>多個相同的 cores；共用記憶體，並由 bus 連接。</td></tr>
+          <tr><td>Massively parallel processors（大規模平行處理器）</td><td>講義只列出名稱。</td></tr>
+        </tbody></table></div>
+        <div class="callout"><strong>講義歸類提醒：</strong>p.30 把 pipelined processing 放在 task-level；p.13 的 pipelining 則是把單一指令切成可重疊的步驟。考試以講義的歸類為準。第一章也出現 SIMD／MIMD，可回到<a href="#ch1-parallel">第一章的平行運算</a>對照。</div>
+        <div class="lab" data-mini="ch5parallel"><div class="lab-kicker">TRY IT · 換個情境，還認得出哪一級嗎？</div><h4>選出平行層級</h4><div data-mini-mount></div></div>
+        <div class="study-path"><a href="#ch5-test">開始第五章英文測驗 →</a><a href="#exam">更新後的考前清單 →</a></div>
+      </section>
+
+      <section class="section searchable study-section" id="ch5-test" data-practice-only aria-labelledby="ch5QuizTitle">
+        <div class="section-kicker">Chapter 05 · Practice · English questions / 中文解析</div>
+        <h2 id="ch5QuizTitle" lang="en">Computing Components · 39-Question Quiz</h2>
+        <p class="intro">題目、四個選項、作答狀態與下一題按鈕使用英文；選完才顯示中文讀題、推理與講義頁碼。涵蓋規格與單位、von Neumann、記憶體位址、PC 與 IR、bus、cache、fetch-execute、儲存裝置、嵌入式系統與平行架構。</p>
+        <div class="lab" data-mini="ch5review"><div data-mini-mount></div></div>
+        <p class="source-note">題目是依 ch05.pdf 自製的理解練習，並非老師原題；少數計算題的數字為自製。本輪答題在重新整理後重置；完成可展開錯題解析再重練。</p>
+        <div class="study-path"><a href="#ch5-start">回到第五章教學 →</a><a href="#ch5-cycle">複習 Fetch-Execute →</a><a href="#ch5-storage">複習儲存裝置 →</a></div>
+      </section>
+
       <section class="section searchable" id="practice" data-practice-only data-learn-id="practice">
         <div class="section-head">
           <div>
@@ -1871,6 +2070,13 @@
           <label class="check"><input type="checkbox" data-check="ch4-mux"><span><strong>能依講義順序判斷 MUX 選哪條線</strong><span>S0S1S2 的權重是 4、2、1；101 → D5，再看 D5 的值求 F。</span></span></label>
           <label class="check"><input type="checkbox" data-check="ch4-latch"><span><strong>能解釋 NAND 型 latch 為何保留狀態</strong><span>01 Set、10 Reset、11 Hold、00 Invalid；X 是儲存值，有效穩定狀態 X／Y 互補。</span></span></label>
           <label class="check"><input type="checkbox" data-check="ch4-chips"><span><strong>能把電晶體、閘、電路、IC 與 CPU 連起來</strong><span>半導體開關組成閘；多個閘整合在矽晶片；CPU 接腳連接 memory、I/O。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="ch5-components"><span><strong>能把規格表每一項對到元件，並讀懂 K／M／G／T</strong><span>CPU、Cache、SDRAM（main memory）、SSD（secondary storage）、顯示器（output）；2¹⁰ = 1,024、2²⁰ = 1,048,576。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="ch5-architecture"><span><strong>能說出 von Neumann 五大單元，並分清 PC 與 IR</strong><span>CPU = ALU + control unit；PC 存下一條指令的位址，IR 存正在執行的指令；記憶體位址 ≠ 內容。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="ch5-bus"><span><strong>能解釋 bus、bus width、cache、pipelining 與 N-bit</strong><span>Bus 傳 address／data／control；width = 一次傳的 bits；cache 存常用資料副本；pipelining 讓步驟重疊。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="ch5-cycle"><span><strong>能依序說出 fetch-execute 四步，並算出下一個 PC</strong><span>Fetch → Decode → Get data → Execute；PC = 原 PC + 指令 bytes 數（100 + 3 = 103）。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="ch5-storage"><span><strong>能分清 RAM／ROM、磁帶、磁碟、光碟、flash／SSD</strong><span>RAM 揮發、ROM 不揮發；磁帶循序；磁碟 track／sector／block；Access time = seek + latency。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="ch5-embedded"><span><strong>能說出嵌入式系統的定義與講義列的處理器</strong><span>專門做少數功能、嵌在大系統；8-bit micro、32-bit DSP、64-bit RISC；code size 與 speed 重要，常用組合語言。</span></span></label>
+          <label class="check"><input type="checkbox" data-check="ch5-parallel"><span><strong>能把情境配對到 bit／instruction／data／task 四個層級</strong><span>Word size → bit；superscalar → instruction；SIMD → data；MIMD、shared memory → task；multicore、SMP。</span></span></label>
         </div>
       </section>
 
@@ -1951,7 +2157,7 @@
       </section>
 
       <div class="no-results" id="noResults">找不到符合的內容。可以試試「SIMD」、「Babbage」、「Hex」或「Byte」。</div>
-      <footer>計算機概論 Ch01–Ch04 · Interactive Study Notes · Progress saved locally</footer>
+      <footer>計算機概論 Ch01–Ch05 · Interactive Study Notes · Progress saved locally</footer>
     </div>
   </main>
 </div>
@@ -3343,6 +3549,547 @@
     }
   ]
 };
+
+    MINI_EXERCISES.ch5review={
+  "language": "en",
+  "letters": true,
+  "nextLabel": "Next question →",
+  "reviewMistakes": true,
+  "cases": [
+    {
+      "prompt": "According to the lecture, which two parts together make up the CPU?",
+      "options": [
+        "Arithmetic/logic unit and control unit.",
+        "Memory unit and input device.",
+        "Cache memory and secondary storage.",
+        "Input device and output device."
+      ],
+      "answer": 0,
+      "why": "講義把 CPU 定義為 ALU + control unit。Memory unit 與輸入／輸出裝置在 von Neumann 圖中位於 CPU 之外。\n講義：p.7、p.11。"
+    },
+    {
+      "prompt": "What is the main idea of the stored-program (von Neumann) concept on the slide?",
+      "options": [
+        "Only the control unit may hold data.",
+        "The output device holds the program.",
+        "Instructions must be stored on tape while data stays in RAM.",
+        "Data and instructions are logically the same and can be stored in the same place."
+      ],
+      "answer": 3,
+      "why": "von Neumann 的重點：資料與指令邏輯上相同，可存在同一個地方；處理資訊與儲存資訊分開。\n講義：p.7。"
+    },
+    {
+      "prompt": "In the sample computer specification, which item describes cache memory?",
+      "options": [
+        "20 GB SDRAM",
+        "1 TB SSD",
+        "Intel Core i7 (2.8 GHz Quad-Core)",
+        "12 MB Intel Smart Cache"
+      ],
+      "answer": 3,
+      "why": "Smart Cache 是 cache memory。SDRAM 是 main memory，SSD 是 secondary storage，Core i7 是 CPU。\n講義：p.3、p.13。"
+    },
+    {
+      "prompt": "In the sample computer specification, which item is an example of secondary storage?",
+      "options": [
+        "17.3 inch HD LED display",
+        "1 TB SSD",
+        "20 GB SDRAM",
+        "12 MB Intel Smart Cache"
+      ],
+      "answer": 1,
+      "why": "SSD 是 flash 型的輔助儲存裝置；SDRAM 是主記憶體，Cache 是快取，顯示器是輸出裝置。\n講義：p.3、p.18、p.23。"
+    },
+    {
+      "prompt": "In the slide's size table, what is the value of 2^20 (mega)?",
+      "options": [
+        "1,000,000",
+        "1,048,576",
+        "1,024",
+        "1,073,741,824"
+      ],
+      "answer": 1,
+      "why": "2²⁰ = 1,048,576，對應 mega（M）。1,024 是 2¹⁰（kilo），1,073,741,824 是 2³⁰（giga）。\n講義：p.4。"
+    },
+    {
+      "prompt": "Which prefix and symbol represent 10^-6 on the slide?",
+      "options": [
+        "mega, M",
+        "nano, n",
+        "micro, μ",
+        "milli, m"
+      ],
+      "answer": 2,
+      "why": "10⁻⁶ 是 micro（μ）。milli 是 10⁻³，nano 是 10⁻⁹，mega 是 10⁶。\n講義：p.4。"
+    },
+    {
+      "prompt": "What does \"byte-addressable\" mean?",
+      "options": [
+        "Memory can hold only one byte.",
+        "Each byte-sized cell has its own address.",
+        "Each individual bit has its own address.",
+        "Every address must be exactly one byte wide on every computer."
+      ],
+      "answer": 1,
+      "why": "講義：多數電腦以 byte 為可定址單位，也就是每個 byte 大小的儲存格有各自的位址。\n講義：p.8。"
+    },
+    {
+      "prompt": "In the slide's memory example, which statement is correct?",
+      "options": [
+        "The cell at address 10101010 contains 11111110.",
+        "The cell at address 11111110 contains 11111111.",
+        "The cell at address 11111110 contains 10101010.",
+        "The cell at address 00000000 contains 10101010."
+      ],
+      "answer": 2,
+      "why": "位址 11111110 的內容是 10101010。位址 00000000 的內容是 11100011；11111111 是位址 11111101 的內容。位址與內容別對調。\n講義：p.8。"
+    },
+    {
+      "prompt": "A computer uses 8-bit addresses. How many different memory cells can it identify?",
+      "options": [
+        "256",
+        "512",
+        "64",
+        "8"
+      ],
+      "answer": 0,
+      "why": "8 bits 有 2⁸ = 256 種組合，所以最多 256 個 cells（位址 00000000 到 11111111）。這是依 bits 容量推出的自製計算題。\n講義：p.8。"
+    },
+    {
+      "prompt": "Which list contains only operations performed by the ALU?",
+      "options": [
+        "Fetch instructions, update the PC, decode opcodes",
+        "Store files permanently, spin disks, seek tracks",
+        "Add, subtract, multiply, divide, AND, OR, NOT",
+        "Read keyboard input, print pages, play sound"
+      ],
+      "answer": 2,
+      "why": "ALU 做算術（加減乘除）與邏輯（AND、OR、NOT）。取指令、更新 PC、解碼屬於控制單元；讀鍵盤、列印是輸出入。\n講義：p.9。"
+    },
+    {
+      "prompt": "Compared with a main-memory location, a register in the ALU is:",
+      "options": [
+        "Slower to access but larger.",
+        "Non-volatile like ROM.",
+        "Part of secondary storage.",
+        "Much faster to access."
+      ],
+      "answer": 3,
+      "why": "講義：存取 registers 比存取記憶體位置快得多。它們是 ALU 內少量的特殊儲存單元。\n講義：p.9。"
+    },
+    {
+      "prompt": "Which register holds the address of the next instruction to be executed?",
+      "options": [
+        "Arithmetic/logic unit (ALU)",
+        "Cache memory",
+        "Program counter (PC)",
+        "Instruction register (IR)"
+      ],
+      "answer": 2,
+      "why": "PC 存下一條指令的位址；IR 存正在執行的指令。\n講義：p.11。"
+    },
+    {
+      "prompt": "Which register contains the instruction that is currently being executed?",
+      "options": [
+        "Program counter (PC)",
+        "Address bus",
+        "Instruction register (IR)",
+        "Secondary storage"
+      ],
+      "answer": 2,
+      "why": "IR 放正在執行的指令；PC 放的是下一條指令的位址。\n講義：p.11。"
+    },
+    {
+      "prompt": "Which three kinds of information does each bus carry?",
+      "options": [
+        "Cache, register, and memory",
+        "Address, data, and control",
+        "Fetch, decode, and execute",
+        "Input, output, and storage"
+      ],
+      "answer": 1,
+      "why": "講義：每條 bus 傳送 address、data 與 control 三種資訊。\n講義：p.12。"
+    },
+    {
+      "prompt": "What does \"bus width\" mean?",
+      "options": [
+        "The number of devices that can plug into the bus.",
+        "The number of bits it can transfer simultaneously.",
+        "The physical length of the bus in centimeters.",
+        "The number of instructions executed per second."
+      ],
+      "answer": 1,
+      "why": "Bus width 是一次可同時傳送的 bit 數。\n講義：p.12。"
+    },
+    {
+      "prompt": "What is cache memory?",
+      "options": [
+        "A device that sends results to the outside world.",
+        "A small amount of fast-access memory that stores copies of frequently used data.",
+        "A large permanent storage that replaces the disk.",
+        "Read-only memory that stores the operating system."
+      ],
+      "answer": 1,
+      "why": "Cache 是少量高速記憶體，存放常用資料的副本。\n講義：p.13。"
+    },
+    {
+      "prompt": "Which description best matches pipelining?",
+      "options": [
+        "Copy frequently used data to a faster memory.",
+        "Split an instruction into smaller steps that can be overlapped.",
+        "Increase the word size of the computer.",
+        "Run the same instruction on many data sets at the same time."
+      ],
+      "answer": 1,
+      "why": "Pipelining 是把指令切成較小的步驟並讓步驟重疊。另三個選項分別是 SIMD、cache、bit-level parallelism。\n講義：p.13、p.30。"
+    },
+    {
+      "prompt": "A processor that can add two n-bit numbers with a single instruction is called:",
+      "options": [
+        "An n-stage pipeline",
+        "An n-bit processor",
+        "An n-core processor",
+        "An n-level cache"
+      ],
+      "answer": 1,
+      "why": "講義：N-bit processor 能用一條指令把兩個 n-bit 的數相加，並與位址匯流排、資料匯流排的寬度有關。\n講義：p.13。"
+    },
+    {
+      "prompt": "Which order of steps does the lecture give for the fetch-execute cycle?",
+      "options": [
+        "Get data, fetch, execute, decode",
+        "Decode, fetch, execute, get data",
+        "Fetch, decode, get data, execute",
+        "Fetch, get data, decode, execute"
+      ],
+      "answer": 2,
+      "why": "四個步驟依序為 fetch the next instruction → decode → get data if needed → execute。\n講義：p.14。"
+    },
+    {
+      "prompt": "An instruction starts at address 100 and is 3 bytes long. Instructions are stored contiguously. What is the PC value for the next instruction?",
+      "options": [
+        "103",
+        "300",
+        "100",
+        "101"
+      ],
+      "answer": 0,
+      "why": "下一個 PC = 目前指令的 bytes 數 + 原 PC 的位址 = 3 + 100 = 103。數字為自製。\n講義：p.15。"
+    },
+    {
+      "prompt": "What does the control unit do in the decode step?",
+      "options": [
+        "It increases the bus width.",
+        "It copies the instruction to a CD.",
+        "It determines which instruction it is and turns it into control signals.",
+        "It stores the result in secondary storage."
+      ],
+      "answer": 2,
+      "why": "Decode 時，控制單元判斷這是哪一條指令，並把它解成 control signals。\n講義：p.15。"
+    },
+    {
+      "prompt": "Why does the cycle include a \"get data if needed\" step?",
+      "options": [
+        "The ALU has no registers.",
+        "The instruction may require additional memory accesses to complete its task.",
+        "The program counter must be reset to zero.",
+        "Every instruction must be read from a disk."
+      ],
+      "answer": 1,
+      "why": "有些指令需要額外存取記憶體才能完成工作，所以多了這個步驟。\n講義：p.16。"
+    },
+    {
+      "prompt": "Which statement about RAM and ROM matches the lecture?",
+      "options": [
+        "Both RAM and ROM lose their contents when the power is turned off.",
+        "RAM cells cannot be accessed directly.",
+        "ROM can be rewritten freely; RAM cannot.",
+        "RAM is volatile; ROM is not."
+      ],
+      "answer": 3,
+      "why": "RAM 每個 cell 可直接存取，但斷電後內容消失（volatile）；ROM 內容只能讀取，不是揮發性。\n講義：p.17。"
+    },
+    {
+      "prompt": "Why is magnetic tape slow when you need data from the middle of the tape?",
+      "options": [
+        "The read/write head cannot touch the tape.",
+        "All the data before that piece must be accessed and discarded.",
+        "The tape must be reformatted first.",
+        "The data are stored in ROM."
+      ],
+      "answer": 1,
+      "why": "磁帶是循序存取：要讀中段資料，前面的資料都得先存取再丟掉。\n講義：p.19。"
+    },
+    {
+      "prompt": "On a magnetic disk, how are tracks, sectors and blocks related?",
+      "options": [
+        "Tracks are concentric circles; each track is divided into sectors; each sector holds a block.",
+        "A block contains several tracks; each track contains several sectors.",
+        "Sectors are concentric circles; each sector is divided into tracks; each track holds a block.",
+        "Tracks are straight lines from the center; each sector holds a cylinder."
+      ],
+      "answer": 0,
+      "why": "Tracks 是碟面上的同心圓；每個 track 分成 sectors；每個 sector 放一個 block。\n講義：p.20。"
+    },
+    {
+      "prompt": "Disk access time equals:",
+      "options": [
+        "Seek time × latency",
+        "Transfer rate − seek time",
+        "Latency + transfer rate",
+        "Seek time + latency"
+      ],
+      "answer": 3,
+      "why": "講義：access time 是 seek time 與 latency 的總和；transfer rate 是另一個指標。\n講義：p.21。"
+    },
+    {
+      "prompt": "A disk has a seek time of 9 ms and a latency of 4 ms. What is its access time?",
+      "options": [
+        "9 ms",
+        "13 ms",
+        "36 ms",
+        "5 ms"
+      ],
+      "answer": 1,
+      "why": "Access time = seek time + latency = 9 + 4 = 13 ms。數字為自製。\n講義：p.21。"
+    },
+    {
+      "prompt": "Which measure is the time it takes for the specified sector to spin to the read/write head?",
+      "options": [
+        "Transfer rate",
+        "Seek time",
+        "Access time",
+        "Latency (rotation delay)"
+      ],
+      "answer": 3,
+      "why": "Seek time 是讀寫頭移到 track 的時間；latency（rotation delay）是 sector 轉到讀寫頭的時間。\n講義：p.21。"
+    },
+    {
+      "prompt": "Which pair of capacities appears on the slide for a DVD-R and a single-layer Blu-ray disk?",
+      "options": [
+        "4.7 GB and 25 GB",
+        "8.5 GB and 50 GB",
+        "25 GB and 4.7 GB",
+        "4.7 GB and 50 GB"
+      ],
+      "answer": 0,
+      "why": "DVD-R 是 4.7 GB，雙層 DL DVD-R 是 8.5 GB；Blu-ray 是 25 GB，雙層是 50 GB。\n講義：p.22。"
+    },
+    {
+      "prompt": "Which statement about flash memory and SSDs is supported by the lecture?",
+      "options": [
+        "Flash drives cannot connect through a USB port.",
+        "Flash memory is non-volatile and can be erased and rewritten; an SSD is all electronic with no moving parts.",
+        "Flash memory is volatile and loses its data without power.",
+        "An SSD uses spinning platters and read/write heads."
+      ],
+      "answer": 1,
+      "why": "Flash 是非揮發性、可擦除重寫，也支援 USB；SSD 全電子、沒有移動零件，更快且耗電更低。\n講義：p.23。"
+    },
+    {
+      "prompt": "Which one is NOT a touch-screen type listed on the slide?",
+      "options": [
+        "Surface acoustic wave",
+        "Magnetic tape",
+        "Resistive",
+        "Capacitive"
+      ],
+      "answer": 1,
+      "why": "講義列出四種：resistive、capacitive、infrared、SAW（surface acoustic wave）。Magnetic tape 是儲存裝置。\n講義：p.24。"
+    },
+    {
+      "prompt": "Which description matches an embedded system?",
+      "options": [
+        "A general-purpose desktop computer that runs many user programs.",
+        "A cluster of thousands of processors connected by a network.",
+        "A computer dedicated to a narrow range of functions as part of a larger system.",
+        "A storage device that has no processor."
+      ],
+      "answer": 2,
+      "why": "Embedded system 專門執行少數功能，是更大系統的一部分。\n講義：p.27。"
+    },
+    {
+      "prompt": "Why does the lecture mention assembly language for embedded systems?",
+      "options": [
+        "The size of code and executing speed are very important.",
+        "Embedded systems have no memory.",
+        "Embedded processors can only be 64-bit.",
+        "Assembly language is the only language that humans can read."
+      ],
+      "answer": 0,
+      "why": "講義說 embedded system 對 code size 與 executing speed 的要求很高，所以提到 assembly language。\n講義：p.27。"
+    },
+    {
+      "prompt": "Increasing the word size of a computer is which kind of parallelism?",
+      "options": [
+        "Bit-level parallelism",
+        "Data-level parallelism",
+        "Task-level parallelism",
+        "Instruction-level parallelism"
+      ],
+      "answer": 0,
+      "why": "Bit-level parallelism 就是增加電腦的 word size。\n講義：p.29。"
+    },
+    {
+      "prompt": "A superscalar processor has multiple execution units. Which level of parallelism does this represent?",
+      "options": [
+        "Task-level parallelism",
+        "Data-level parallelism",
+        "Bit-level parallelism",
+        "Instruction-level parallelism"
+      ],
+      "answer": 3,
+      "why": "講義：instruction-level 是讓部分獨立的指令同時進行；superscalar 的特徵是多個 execution units。\n講義：p.29。"
+    },
+    {
+      "prompt": "A single set of instructions runs on different data sets at the same time, using synchronous processing. What is this called?",
+      "options": [
+        "Task-level parallelism (MIMD)",
+        "Instruction-level parallelism",
+        "Data-level parallelism (SIMD)",
+        "Bit-level parallelism"
+      ],
+      "answer": 2,
+      "why": "同一組指令作用在不同資料上，是 data-level，也就是 SIMD（single instruction, multiple data）。\n講義：p.30。"
+    },
+    {
+      "prompt": "Different processors execute different tasks on the same or different data sets. What is this called?",
+      "options": [
+        "Task-level parallelism (MIMD)",
+        "Instruction-level parallelism",
+        "Bit-level parallelism",
+        "Data-level parallelism (SIMD)"
+      ],
+      "answer": 0,
+      "why": "不同處理器做不同任務，是 task-level，也就是 MIMD（multiple instruction, multiple data）。\n講義：p.30。"
+    },
+    {
+      "prompt": "In a shared-memory parallel processor, how do the processors communicate?",
+      "options": [
+        "Only through the keyboard.",
+        "By copying all data to magnetic tape.",
+        "Through the shared memory.",
+        "They cannot communicate."
+      ],
+      "answer": 2,
+      "why": "講義：shared memory parallel processor 屬於 task-level 的 MIMD，用 shared memory 溝通。\n講義：p.31。"
+    },
+    {
+      "prompt": "Which description matches symmetric multi-processors (SMPs)?",
+      "options": [
+        "A single instruction applied to one data item.",
+        "One core with a very wide data bus.",
+        "Thousands of 8-bit micro-processors inside separate appliances.",
+        "Multiple identical cores that share memory and are connected by a bus."
+      ],
+      "answer": 3,
+      "why": "SMPs 是多個相同的 cores，共用記憶體並由 bus 連接。\n講義：p.32。"
+    }
+  ]
+};
+    Object.assign(MINI_EXERCISES,{
+      ch5components:{options:['CPU','Cache memory','Main memory（RAM）','Secondary storage','Output device'],cases:[
+        {prompt:'Intel Core i7（2.8 GHz Quad-Core）',answer:0,why:'Core i7 是處理器，也就是 CPU。Quad-Core 表示有四個核心。'},
+        {prompt:'12 MB Intel Smart Cache',answer:1,why:'Cache memory 是少量高速記憶體，存放常用資料的副本。'},
+        {prompt:'20 GB SDRAM',answer:2,why:'SDRAM 是主記憶體（RAM），放執行中的程式與資料，斷電後內容消失。'},
+        {prompt:'1 TB SSD',answer:3,why:'SSD 是長期保存資料的輔助儲存裝置，全電子、無移動零件。'},
+        {prompt:'17.3 inch HD LED display',answer:4,why:'螢幕把結果呈現給外界，屬於輸出裝置。'}]},
+      ch5units:{options:['Input unit','Output unit','Memory unit','ALU','Control unit'],cases:[
+        {prompt:'鍵盤把使用者輸入的資料送進電腦。',answer:0,why:'把外界資料與程式送進電腦的是輸入單元。'},
+        {prompt:'同時存放程式與資料，每格有唯一位址。',answer:2,why:'記憶單元由許多 cells 組成，stored-program 概念讓程式與資料放在同一個地方。'},
+        {prompt:'做加法，或對兩個值做 AND／OR。',answer:3,why:'算術與邏輯運算是 ALU 的工作。'},
+        {prompt:'決定下一條要執行哪條指令，並負責 fetch-execute cycle。',answer:4,why:'控制單元是電腦的組織力量，負責 fetch-execute cycle。'},
+        {prompt:'螢幕把運算結果顯示給使用者。',answer:1,why:'把記憶體中的結果交給外界的是輸出單元。'}]},
+      ch5cycle:{options:['Fetch','Decode','Get data','Execute'],cases:[
+        {prompt:'控制單元依 PC 的位址，把下一條指令從記憶體取出。',answer:0,why:'依 PC 取得下一條指令是 fetch。'},
+        {prompt:'控制單元判斷這是哪一種指令，並產生 control signals。',answer:1,why:'判斷指令種類、解成 control signals 是 decode。'},
+        {prompt:'指令需要的運算元存放在記憶體，需要額外存取記憶體。',answer:2,why:'需要額外記憶體存取，屬於 get data if needed。'},
+        {prompt:'送訊號給 ALU 執行運算；做完後循環重新開始。',answer:3,why:'送訊號給 ALU 進行處理是 execute；完成後再回到 fetch。'},
+        {prompt:'PC 增加目前指令的 bytes 數，指向下一條指令。',answer:0,why:'講義把「下一個 PC = bytes 數 + 原 PC」放在 fetch 步驟。'}]},
+      ch5storage:{options:['RAM','ROM','Magnetic tape','Magnetic disk','Flash／SSD'],cases:[
+        {prompt:'斷電後內容消失，但每個 cell 都能直接存取。',answer:0,why:'RAM 是揮發性（volatile）、可直接存取的記憶體。'},
+        {prompt:'內容可以讀取但不能改變；不是揮發性。',answer:1,why:'ROM 是唯讀記憶體，不是揮發性。'},
+        {prompt:'要讀中段資料，前面的資料都得先存取再丟掉。',answer:2,why:'磁帶是循序存取，這是它的缺點。'},
+        {prompt:'資料放在 tracks 與 sectors，效能用 seek time 與 latency 衡量。',answer:3,why:'磁軌、磁區、seek time 與 latency 都是磁碟的概念。'},
+        {prompt:'全電子、沒有移動零件、不揮發，可擦除重寫。',answer:4,why:'Flash memory 與 SSD 符合：非揮發、可重寫、無移動零件、速度快、耗電低。'}]},
+      ch5parallel:{options:['Bit-level','Instruction-level','Data-level（SIMD）','Task-level（MIMD）'],cases:[
+        {prompt:'把處理器從 32-bit 升級成 64-bit，一次處理更長的字。',answer:0,why:'增加 word size 屬於 bit-level parallelism。'},
+        {prompt:'超純量處理器有多個 execution units，同一時間執行兩條互不相依的指令。',answer:1,why:'獨立指令同時進行，屬於 instruction-level；superscalar 有多個 execution units。'},
+        {prompt:'同一個運算同時套用到一大批影像像素上。',answer:2,why:'單一組指令作用在不同資料上，是 data-level，也就是 SIMD。'},
+        {prompt:'四個處理器各自執行不同的任務，並透過 shared memory 溝通。',answer:3,why:'不同處理器做不同任務是 task-level（MIMD）；shared memory 溝通屬於此類。'}]}
+    });
+
+    // Chapter 5 labs
+    (function(){
+      const units=['bytes','KB','MB','GB','TB','PB','EB'];
+      function humanBytes(n){let i=0,v=n;while(v>=1024n&&i<units.length-1){v=v/1024n;i++;}return v.toLocaleString('en-US')+' '+units[i];}
+      const addrBits=$('#ch5AddrBits');
+      function renderAddr(){
+        const n=BigInt(addrBits.value),cells=2n**n;
+        $('#ch5AddrOut').textContent='位址 '+addrBits.value+' bits → 2^'+addrBits.value+' = '+cells.toLocaleString('en-US')+' 種位址\n若 byte-addressable：最多 '+cells.toLocaleString('en-US')+' bytes'+(cells>=1024n?' ≈ '+humanBytes(cells)+'（每單位 ×1,024）':'');
+        $('#ch5AddrOut').style.whiteSpace='pre-wrap';
+      }
+      addrBits.addEventListener('change',renderAddr);renderAddr();
+
+      const program=[
+        {addr:100,text:'LOAD R1,[200]',size:3},
+        {addr:103,text:'ADD R1,#5',size:2},
+        {addr:105,text:'STORE R1,[201]',size:3},
+        {addr:108,text:'HALT',size:1}
+      ];
+      let st;
+      function initCycle(){st={pc:100,ir:'—',r1:'—',m200:7,m201:'—',idx:0,phase:0,halted:false,note:'準備開始。PC = 100，指向第一條指令。按「下一步」執行 Fetch。',phaseName:'Ready'};renderCycle();}
+      function renderCycle(){
+        const hi=st.phase===0?st.pc:program[st.idx].addr;
+        const nodes=[['PC = '+st.pc],['IR = '+st.ir],['R1 = '+st.r1],['M[200] = '+st.m200],['M[201] = '+st.m201]];
+        const flow=$('#ch5CycleFlow');flow.replaceChildren();
+        nodes.forEach((item,i)=>{const node=document.createElement('span');node.className='ch4-signal';node.textContent=item[0];flow.append(node);});
+        const out=$('#ch5CycleOut');out.style.whiteSpace='pre-wrap';
+        out.textContent='階段：'+st.phaseName+'\n'+st.note;
+        const rows=$('#ch5CycleRows');rows.replaceChildren();
+        program.forEach(p=>{const tr=document.createElement('tr');if(!st.halted&&p.addr===hi){tr.className='ch4-current';tr.setAttribute('aria-current','true');}[p.addr,p.text,p.size].forEach(v=>{const td=document.createElement('td');td.textContent=String(v);tr.append(td);});rows.append(tr);});
+        [[200,st.m200,'資料'],[201,st.m201,'結果']].forEach(r=>{const tr=document.createElement('tr');[r[0],String(r[1])+'（'+r[2]+'）','—'].forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.append(td);});rows.append(tr);});
+        $('#ch5CycleNext').disabled=st.halted;
+      }
+      function stepCycle(){
+        if(st.halted)return;
+        if(st.phase===0)st.idx=program.findIndex(p=>p.addr===st.pc);
+        const cur=program[st.idx];
+        if(st.phase===0){
+          const old=st.pc;st.ir=cur.text;st.pc=old+cur.size;
+          st.phaseName='1 · Fetch';st.note='PC 指向位址 '+old+'，把這條指令放進 IR：'+cur.text+'。\n下一個 PC = 原 PC + 指令 bytes 數 = '+old+' + '+cur.size+' = '+st.pc+'。';st.phase=1;
+        }else if(st.phase===1){
+          st.phaseName='2 · Decode';
+          const kind={'LOAD':'從記憶體讀值到暫存器','ADD':'暫存器加上立即值，不需再讀記憶體','STORE':'把暫存器的值寫回記憶體','HALT':'停止'}[cur.text.split(' ')[0]];
+          st.note='控制單元判斷這是 '+cur.text.split(' ')[0]+'：'+kind+'，並解成 control signals。';st.phase=2;
+        }else if(st.phase===2){
+          st.phaseName='3 · Get data';const op=cur.text.split(' ')[0];
+          st.note=op==='LOAD'?'需要額外存取記憶體：讀出 M[200] = 7。':op==='STORE'?'需要再次存取記憶體：準備把 R1 寫入 M[201]。':'這一條不需要額外的記憶體存取。';st.phase=3;
+        }else{
+          st.phaseName='4 · Execute';const op=cur.text.split(' ')[0];
+          if(op==='LOAD'){st.r1=7;st.note='送訊號完成：R1 ← 7。循環重新開始，下一個 Fetch 會讀 PC = '+st.pc+'。';}
+          else if(op==='ADD'){st.r1=st.r1+5;st.note='ALU 計算 7 + 5 = 12，R1 ← 12。循環重新開始，下一個 Fetch 會讀 PC = '+st.pc+'。';}
+          else if(op==='STORE'){st.m201=st.r1;st.note='M[201] ← R1 = 12。循環重新開始，下一個 Fetch 會讀 PC = '+st.pc+'。';}
+          else{st.halted=true;st.note='HALT：程式停止。最後 M[201] = 12。按「重新開始」可重跑。';}
+          st.phase=0;
+        }
+        renderCycle();
+      }
+      $('#ch5CycleNext').addEventListener('click',stepCycle);
+      $('#ch5CycleReset').addEventListener('click',initCycle);
+      initCycle();
+
+      const diskIds=['ch5Seek','ch5Latency','ch5FileMB','ch5Rate'];
+      function renderDisk(){
+        const v=diskIds.map(id=>Number($('#'+id).value));
+        const out=$('#ch5DiskOut');out.style.whiteSpace='pre-wrap';
+        if(v.some(x=>!isFinite(x)||x<0)||v[3]<=0){out.textContent='請輸入大於或等於 0 的數值；transfer rate 必須大於 0。';return;}
+        const access=v[0]+v[1],transfer=v[2]/v[3]*1000,total=access+transfer;
+        const f=x=>(Math.round(x*100)/100).toLocaleString('en-US');
+        out.textContent='Access time = seek + latency = '+f(v[0])+' + '+f(v[1])+' = '+f(access)+' ms\n傳輸時間 = '+f(v[2])+' MB ÷ '+f(v[3])+' MB/s = '+f(transfer)+' ms\n總時間 ≈ '+f(access)+' + '+f(transfer)+' = '+f(total)+' ms';
+      }
+      diskIds.forEach(id=>$('#'+id).addEventListener('input',renderDisk));renderDisk();
+    })();
 
     $$('[data-mini]').forEach(host=>{
       const exercise=MINI_EXERCISES[host.dataset.mini], mount=$('[data-mini-mount]',host);

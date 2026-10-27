@@ -1,6 +1,6 @@
 # 計算機概論互動筆記
 
-Ch01–Ch04 的繁體中文學習筆記，包含概念解釋、進位換算、二／八／十六進位加減、互動示範與第一章選擇題，以及第三章資料表示、編碼與多媒體互動，第四章邏輯閘、布林代數與計算／記憶電路。
+Ch01–Ch05 的繁體中文學習筆記，包含概念解釋、進位換算、二／八／十六進位加減、互動示範與第一章選擇題，以及第三章資料表示、編碼與多媒體互動，第四章邏輯閘、布林代數與計算／記憶電路，第五章電腦元件、von Neumann 架構、fetch-execute 週期、儲存裝置與平行架構。
 
 **直接閱讀：[計算機概論互動筆記](https://rtxmythically.github.io/computer-science-study-notes/)**
 
@@ -11,6 +11,7 @@ Ch01–Ch04 的繁體中文學習筆記，包含概念解釋、進位換算、�
 3. 第二章包含進位換算、二進位加減與資料單位；「不同進位加減」逐步教練可輸入二／八／十六進位整數，逐欄看進位、借位與連續借位。完成後做 20 題加減法測驗：英文題目、選項與作答提示，中文讀題及逐步解析，另附考試用語表；保留 20 題進位轉換測驗。直接選 A／B／C／D，答完看計算步驟與錯題解析。
 4. 從「第三章學習路線」操作補數、小數乘 2、RLE／Huffman、聲音取樣及 RGB，最後做 18 題章末練習。
 5. 第四章逐頁對照 38 頁講義，包含六種閘的符號與真值表、電晶體導通模型、等效電路比較、De Morgan 驗證、半／全加器、8-to-1 MUX、NAND 型 S-R latch 記憶實驗，以及 IC／CPU。最後做 36 題英文題目與選項的測驗，答完看中文推理、講義頁碼與錯題解析。直接前往 [第四章](https://rtxmythically.github.io/computer-science-study-notes/#ch4-start) 或 [第四章測驗](https://rtxmythically.github.io/computer-science-study-notes/#ch4-test)。
+6. 第五章依 ch05.pdf 整理：規格表與 K／M／G／T 單位、von Neumann 五大單元、PC 與 IR、bus／cache／pipelining、Fetch-Execute 步進器（可逐步看 PC 與暫存器）、位址線計算機、磁碟時間計算機、嵌入式系統與平行架構，最後做 39 題英文測驗。直接前往 [第五章](https://rtxmythically.github.io/computer-science-study-notes/#ch5-start) 或 [第五章測驗](https://rtxmythically.github.io/computer-science-study-notes/#ch5-test)。
 
 不需要安裝軟體或登入。主題偏好、已學標記與部分答題進度保存在各自瀏覽器中。
 
@@ -19,7 +20,7 @@ Ch01–Ch04 的繁體中文學習筆記，包含概念解釋、進位換算、�
 - `index.html`：完整互動筆記。
 - `ch01_p05.png`：第一章六層架構的講義對照圖。
 
-筆記依課堂 ch01.pdf、ch02.pdf、ch03.pdf、ch04.pdf 整理，互動中的理解用例另有標示。本頁為學習整理，考試範圍與用語仍以老師的教材為準。
+筆記依課堂 ch01.pdf、ch02.pdf、ch03.pdf、ch04.pdf、ch05.pdf 整理，互動中的理解用例另有標示。本頁為學習整理，考試範圍與用語仍以老師的教材為準。
 
 ## 更新本機筆記後發布
 
