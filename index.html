@@ -629,6 +629,11 @@
     .ch4-fields input[type="number"]{width:100%;min-height:44px;padding:8px 12px;border:1px solid var(--border);border-radius:11px;background:var(--panel-strong);color:var(--text);font:inherit}
     #ch5-cycle .ch4-signal-flow,#ch5-bus .lab-output{overflow-wrap:anywhere}
     @media(max-width:680px){#ch5-test .mini-options{grid-template-columns:1fr}}
+    .quick-q{margin-top:26px}
+    .quick-q .mini-options{display:grid;grid-template-columns:1fr;gap:9px}
+    .quick-q .mini-options button{text-align:left;min-height:48px;white-space:normal;overflow-wrap:anywhere;line-height:1.6}
+    .quick-q .mini-question{font-size:17px;line-height:1.7}
+    .quick-q .lab-output{white-space:pre-wrap;overflow-wrap:anywhere}
   </style>
 </head>
 <body>
@@ -787,12 +792,6 @@
           </div>
         </div>
         <div class="callout"><strong>兩者的關係：</strong>軟體提供做事的規則，硬體執行這些規則。辨認時看名詞的角色：下載的程式屬於軟體，承載它的儲存設備屬於硬體。</div>
-        <div class="lab" data-mini="hardware">
-          <div class="lab-kicker">TRY IT · 硬體還是軟體？</div>
-          <h4>先分對角色</h4>
-          <p class="hint">選一個答案，看原因，再換下一個例子。</p>
-          <div data-mini-mount></div>
-        </div>
 
         <h3>六層架構：點一層，看它負責什麼</h3>
         <p>講義第 5 頁的圖，由內到外是 <strong>Information → Hardware → Programming → Operating systems → Applications → Communications</strong>。最內層關心資訊，外側逐步加入操作資訊的設備、程式、管理、應用與通訊。</p>
@@ -819,6 +818,7 @@
           <div class="answer"><img src="ch01_p05.png" alt="講義第5頁：由內至外為 Information、Hardware、Programming、Operating systems、Applications、Communications" style="display:block;width:100%;max-width:800px;height:auto;border-radius:12px"></div>
         </details>
         <div class="study-actions"><a href="#ch1-history">下一節：人物與發明 →</a></div>
+        <div class="lab quick-q" data-mini="q_ch1_system"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch1-history" data-study-only data-learn-id="ch1-history">
@@ -856,6 +856,7 @@
           <div class="lab-controls"><button class="ghost-btn" id="historyMatchReset" type="button">重新配對</button><span class="mini-position" id="historyMatchScore"></span></div>
         </div>
         <div class="study-actions"><a href="#ch1-hardware">下一節：硬體四世代 →</a></div>
+        <div class="lab quick-q" data-mini="q_ch1_history"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch1-hardware" data-study-only data-learn-id="ch1-hardware">
@@ -919,8 +920,8 @@
           </div>
           <div class="lab-output" id="mooreExplanation" aria-live="polite"></div>
         </div>
-        <div class="lab" data-mini="generations"><div class="lab-kicker">TRY IT · 世代辨認</div><h4>把元件與記憶體分清楚</h4><div data-mini-mount></div></div>
         <div class="study-actions"><a href="#ch1-parallel">下一節：平行計算 →</a></div>
+        <div class="lab quick-q" data-mini="q_ch1_hardware"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch1-parallel" data-study-only data-learn-id="ch1-parallel">
@@ -950,8 +951,8 @@
           <div class="lab-output" id="parallelFeedback" role="status" aria-live="polite"></div>
           <p class="source-note">理解示意：使用四組小數字觀察指令與資料的差異。</p>
         </div>
-        <div class="lab" data-mini="parallel"><div class="lab-kicker">TRY IT · 換個情境還認得出來嗎？</div><h4>選 SIMD 或 MIMD</h4><div data-mini-mount></div></div>
         <div class="study-actions"><a href="#ch1-network">下一節：網路與雲端 →</a></div>
+        <div class="lab quick-q" data-mini="q_ch1_parallel"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch1-network" data-study-only data-learn-id="ch1-network">
@@ -993,8 +994,8 @@
           <div class="lab-controls"><button class="primary-btn" id="packetNext" type="button">下一步 →</button><button class="ghost-btn" id="packetReset" type="button">從頭看一次</button></div>
           <p class="source-note">理解示意：用三段資料展示封包傳輸與有序重組的概念。</p>
         </div>
-        <div class="lab" data-mini="network"><div class="lab-kicker">TRY IT · 網路名詞辨認</div><h4>從用途判斷名詞</h4><div data-mini-mount></div></div>
         <div class="study-actions"><a href="#ch1-software">下一節：軟體五世代 →</a></div>
+        <div class="lab quick-q" data-mini="q_ch1_network"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch1-software" data-study-only data-learn-id="ch1-software">
@@ -1069,8 +1070,8 @@
           <div class="card"><h4>Object-Oriented Design（物件導向設計）</h4><p>講義以資料物件的階層來描述設計，並列 C++、Java 為例。理解時，可以想成將相關資料與行為組織在物件中。</p><p>C++ 在講義第四、第五代都出現；辨認世代時，看主題是在說結構化程式設計，還是物件導向。</p></div>
           <div class="card"><h4>WWW 與 Embedded System</h4><p><strong>WWW</strong> 透過 Internet 支援全球溝通，Browser 的講義例子有 Mosaic、Netscape、IE、Firefox。</p><p><strong>Embedded System（嵌入式系統）</strong>把晶片整合到設備中，執行或控制功能。理解用例：設備內的控制晶片依設定調節運作。</p></div>
         </div>
-        <div class="lab" data-mini="software"><div class="lab-kicker">TRY IT · 先看工作動詞</div><h4>翻譯、連結、載入，分得清楚嗎？</h4><div data-mini-mount></div></div>
         <div class="study-actions"><a href="#ch1-discipline">下一節：工具與學科 →</a></div>
+        <div class="lab quick-q" data-mini="q_ch1_software"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch1-discipline" data-study-only data-learn-id="ch1-discipline">
@@ -1090,8 +1091,8 @@
           <div class="card"><span class="tag">Design</span><h4>設計：規劃整體如何合作</h4><p>安排系統的流程、功能與各部分的關係，讓使用者能完成目標。</p><p class="example-label">理解用例</p><p>規劃成績輸入、資料檢查、平均計算與結果呈現的完整流程。</p></div>
         </div>
         <div class="callout"><strong>串起四項能力：</strong>思考步驟 → 選擇表示方式 → 用程式實作 → 規劃整體設計。實際做事時會一起使用；練習題先辨認情境主要強調哪個角色。</div>
-        <div class="lab" data-mini="skills"><div class="lab-kicker">TRY IT · 把能力連到實際行為</div><h4>這個動作主要在做什麼？</h4><div data-mini-mount></div></div>
         <div class="study-actions"><a href="#ch1-test">讀完了，開始 30 題選擇題 →</a><a href="#ch1-start">回到第一章學習路線</a></div>
+        <div class="lab quick-q" data-mini="q_ch1_discipline"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable ch1-quiz" id="ch1-test" aria-labelledby="ch1TestTitle">
@@ -1227,6 +1228,7 @@
             <div class="formula">(112)₈ = 1×8² + 1×8¹ + 2×8⁰ = (74)₁₀</div>
           </div>
         </div>
+        <div class="lab quick-q" data-mini="q_ch2_number"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable" id="ch2-conversion" data-study-only data-learn-id="ch2-conversion">
@@ -1344,6 +1346,7 @@
         <div class="callout">
           <strong>超重要：</strong> Binary ↔ Octal：每 <b>3 bits</b> 分一組。Binary ↔ Hex：每 <b>4 bits</b> 分一組。
         </div>
+        <div class="lab quick-q" data-mini="q_ch2_conversion"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
         <div class="study-path"><a href="#conversion-test">換算方法讀完了，開始 20 題測驗 →</a></div>
       </section>
 
@@ -1456,6 +1459,7 @@
         <div class="callout">
           <strong>考試口訣：</strong>從右往左減；<strong>夠減就直接減，不夠減就向左借 1</strong>。如果左邊是 0，就繼續往左找到第一個 1。Addition 看 carry；Subtraction 看 borrow。
         </div>
+        <div class="lab quick-q" data-mini="q_ch2_binary"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="radix-arithmetic" data-study-only data-learn-id="radix-arithmetic" aria-labelledby="radixTitle">
@@ -1493,6 +1497,7 @@
           <div class="table-scroll"><table class="compare"><caption>逐欄紀錄：計算中的數值以十進位說明，寫回結果時使用所選基底。</caption><thead><tr><th>欄位</th><th>上方</th><th>下方</th><th>右欄的進／借</th><th>本欄計算</th><th>寫下</th><th>往左進／借</th></tr></thead><tbody id="radixRows"></tbody></table></div>
         </div>
         <p class="source-note">講義 ch02.pdf 的加減範例是二進位；本節八、十六進位的教學與互動，是用同一套位置記數規則延伸的自製練習。</p>
+        <div class="lab quick-q" data-mini="q_radix_arithmetic"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
         <div class="study-path"><a href="#arithmetic-test">開始二、八、十六進位加減測驗 →</a><a href="#ch2-binary">複習講義二進位例題 →</a></div>
       </section>
 
@@ -1542,6 +1547,7 @@
             <p>教材接著列出 64-bit machines；理解時對照 32-bit machine，重點是資料處理單位提升為 <strong>64 bits</strong>。</p>
           </div>
         </div>
+        <div class="lab quick-q" data-mini="q_ch2_data"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch3-start" data-study-only>
@@ -1571,8 +1577,8 @@
         <p>儲存空間和傳輸頻寬有限，所以希望用較少資料表示內容。<strong>Lossless（無失真）</strong>能還原原始資料；<strong>Lossy（失真）</strong>會捨棄部分原始資訊。</p>
         <div class="formula">講義的 Compression ratio＝壓縮後大小 ÷ 原始大小</div>
         <p>例如 100 Bytes 變成 60 Bytes：壓縮率是 0.6＝60%，省下的是 40%。依這個定義，比例越小，檔案縮得越多；計算時分子分母必須用相同單位。</p>
-        <div class="lab" data-mini="ch3basics"><div class="lab-kicker">TRY IT · 先分清基本概念</div><div data-mini-mount></div></div>
         <div class="study-actions"><a href="#ch3-integer">下一節：補數與溢位 →</a></div>
+        <div class="lab quick-q" data-mini="q_ch3_data"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch3-integer" data-study-only data-learn-id="ch3-integer">
@@ -1604,8 +1610,8 @@
         <div class="formula">127＋3：01111111＋00000011＝10000010 → 8-bit 有號解讀為 −126</div>
         <p>數學答案 130 超過 int8 的上限 127，所以發生溢位。<strong>「有進位」和「有號溢位」不同：</strong>−1＋1 有超出 8 bits 的進位，但保留低 8 位得到 0，結果正確；127＋3 沒有第 9 位進位，卻有號溢位。</p>
         <div class="lab"><div class="lab-kicker">TRY IT · 先算數學答案，再檢查範圍</div><h4>8-bit 有號加減法</h4><div class="ch3-fields"><label>A<input id="ch3IntA" type="number" min="-128" max="127" value="127" step="1"></label><label>運算<select id="ch3IntOperation"><option value="add">＋ 加法</option><option value="sub">− 減法</option></select></label><label>B<input id="ch3IntB" type="number" min="-128" max="127" value="3" step="1"></label></div><button type="button" class="primary-btn" id="ch3IntRun">計算並看位元</button><div class="lab-output" id="ch3IntOutput" aria-live="polite"></div><p class="source-note">此工具模擬固定 8-bit 保留低位的結果，用於理解講義；實際程式語言對溢位的處理可能不同。</p></div>
-        <div class="lab" data-mini="ch3integers"><div class="lab-kicker">TRY IT · 不只背公式</div><div data-mini-mount></div></div>
         <div class="study-actions"><a href="#ch3-fraction">下一節：小數與浮點數 →</a></div>
+        <div class="lab quick-q" data-mini="q_ch3_integer"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch3-fraction" data-study-only data-learn-id="ch3-fraction">
@@ -1625,6 +1631,7 @@
         <p>科學記號把非零數的十進位點留在第一個非零數字右邊。例如 0.0012＝1.2 × 10⁻³，正指數使數值變大，負指數使數值變小。浮點數仍只有有限的 bits，所以能表示的精度與範圍都有上限。</p>
         <p class="source-note">講義 p.22 的一般形式將 mantissa 視為整數；p.24 科學記號則使用 1.200132708 這種有效數字形式。兩者調整尾數與指數後可以代表同一數值；此處未展開 IEEE 754 欄位。</p>
         <div class="study-actions"><a href="#ch3-text">下一節：文字編碼 →</a></div>
+        <div class="lab quick-q" data-mini="q_ch3_fraction"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch3-text" data-study-only data-learn-id="ch3-text">
@@ -1634,6 +1641,7 @@
         <details><summary>補充：講義的「前 256 個字元」要怎麼讀？</summary><div class="answer">講義用早期／簡化的 Unicode mapping 與 Extended ASCII 對照；實際上各延伸 ASCII 表不同，不能概括為都相同。ASCII 的 0–127 對應保留在 Unicode；UTF-8 對 ASCII 使用相同的單一位元組。<a href="https://www.unicode.org/faq/utf_bom.html" target="_blank" rel="noopener">來源：Unicode 官方 FAQ</a>。</div></details>
         <div class="lab"><div class="lab-kicker">TRY IT · 把字元和實際編碼連起來</div><h4>文字代碼觀察器</h4><div class="ch3-fields"><label>輸入最多 6 個 Unicode code points<input id="ch3TextValue" type="text" value="Aa0中😀" maxlength="24"></label></div><div class="table-scroll"><table class="compare"><thead><tr><th>字元</th><th>Unicode code point</th><th>ASCII 十進位</th><th>UTF-8 bytes（十六進位）</th><th>UTF-8 bits</th></tr></thead><tbody id="ch3TextRows"></tbody></table></div><p class="source-note" id="ch3TextSummary" aria-live="polite"></p><p class="hint">理解用例：觀察 A、中文和 emoji 的位元組數。此表逐 code point 顯示；使用者看見的一個字形有時由多個 code points 組成。</p></div>
         <div class="study-actions"><a href="#ch3-compression">下一節：文字壓縮 →</a></div>
+        <div class="lab quick-q" data-mini="q_ch3_text"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch3-compression" data-study-only data-learn-id="ch3-compression">
@@ -1657,8 +1665,8 @@
         <p>例：A 出現 3 次，B、C、D 各 1 次。<strong>反覆合併權重最小的兩個節點</strong>：B1＋C1→2；D1＋2→3；A3＋3→6。最後從根向下，左邊標 0、右邊標 1，沿路串起就是代碼。</p>
         <div class="arrow-flow"><span class="pill">根 6 → 左 0 → A：0</span><span class="pill">根 → 右 1 → 左 0 → D：10</span><span class="pill">根 → 右 1 → 右 1 → 左 0 → B：110</span><span class="pill">根 → 右 1 → 右 1 → 右 1 → C：111</span></div>
         <p class="source-note">同權重時選擇及左右標記可能不同，因此可以有不同的有效 Huffman 碼。p.39 的 A–D 樹與 p.37 的 DOORBELL 碼表是兩個例子，不能混著用。以上例題比例依講義，不包含儲存碼表的額外成本。</p>
-        <div class="lab" data-mini="ch3compression"><div class="lab-kicker">TRY IT · 找對壓縮方法</div><div data-mini-mount></div></div>
         <div class="study-actions"><a href="#ch3-audio">下一節：聲音表示 →</a></div>
+        <div class="lab quick-q" data-mini="q_ch3_compression"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch3-audio" data-study-only data-learn-id="ch3-audio">
@@ -1670,6 +1678,7 @@
         <div class="callout"><strong>MP3 與 Huffman：</strong>MPEG＝Moving Picture Experts Group。MP3 是 MPEG Audio Layer III，整體屬失真音訊編碼；內部可用 Huffman 這種無失真編碼步驟，並不表示捨棄的聲音資訊能恢復。講義 p.44 列 MPEG-2，MP3 也涵蓋 MPEG-1 Layer III。<a href="https://www.loc.gov/preservation/digital/formats/fdd/fdd000012.shtml" target="_blank" rel="noopener">來源：美國國會圖書館 MP3 格式說明</a>。</div>
         <details><summary>理解延伸：未壓縮音訊的大小怎麼算？</summary><div class="answer">取樣率 × 每樣本 bits × 聲道數 × 秒數＝bits；再除以 8 得 Bytes。例如教學設定每秒 8000 樣本、8 bits、單聲道、10 秒：8000×8×1×10/8＝80000 Bytes。這不含檔頭、壓縮或額外資料。</div></details>
         <div class="study-actions"><a href="#ch3-image">下一節：影像與圖形 →</a></div>
+        <div class="lab quick-q" data-mini="q_ch3_audio"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch3-image" data-study-only data-learn-id="ch3-image">
@@ -1685,8 +1694,8 @@
         <ul><li><strong>BMP（Bitmap）：</strong>講義列 24-bit true color，並介紹可用 RLE 壓縮的情況。</li><li><strong>GIF（Graphics Interchange Format）：</strong>索引色，講義列 256 色或更少；每像素用 8 bits 或更少指定色盤索引，可有簡單動畫。</li><li><strong>PNG（Portable Network Graphics）：</strong>支援較廣的色彩深度與無失真壓縮；講義區分靜態 PNG 和 APNG（Animated PNG）動畫。</li><li><strong>JPEG（Joint Photographic Experts Group）：</strong>利用人眼感知特性壓縮，常見照片 JPEG 使用失真方式；講義也提到 JPEG 家族中的無失真方法。</li><li><strong>SVG（Scalable Vector Graphics）：</strong>以純文字描述圖形，講義強調瀏覽器支援。Flash 為講義中的二進位格式歷史例。</li></ul>
         <h3>Metadata：data about data</h3>
         <p>描述資料的資料，例如影像建立日期與時間、尺寸和解析度、拍攝位置、作者、版權資訊。像素描述「畫面是什麼」，metadata 描述「這份影像的屬性」。</p>
-        <div class="lab" data-mini="ch3media"><div class="lab-kicker">TRY IT · 聲音與影像分清楚</div><div data-mini-mount></div></div>
         <div class="study-actions"><a href="#ch3-video">下一節：影片壓縮 →</a></div>
+        <div class="lab quick-q" data-mini="q_ch3_image"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch3-video" data-study-only data-learn-id="ch3-video">
@@ -1696,6 +1705,7 @@
         <div class="lab"><div class="lab-kicker">TRY IT · 移動的亮格子</div><h4>看完整畫面，再看改變的部分</h4><div class="lab-controls"><button class="primary-btn" type="button" id="ch3VideoNext">下一張影格 →</button><button class="ghost-btn" type="button" id="ch3VideoReset">回到 keyframe</button></div><div class="grid two"><div><h4 id="ch3VideoFrameTitle">目前畫面</h4><div class="video-pixels" id="ch3VideoFrame" role="img" aria-label="目前的完整影格"></div></div><div><h4>相對前一張的改變</h4><div class="video-pixels" id="ch3VideoDelta" role="img" aria-label="有變化的格子"></div></div></div><div class="lab-output" id="ch3VideoOutput" aria-live="polite"></div><p class="source-note">理解示意：8×4 格子的亮點逐格移動。只以亮度值示範 delta，不是實際影片檔案大小，也未模擬動作預測等編碼工具。</p></div>
         <div class="callout"><strong>選擇題抓關鍵字：</strong>consecutive frames、keyframe、delta → Temporal；within a frame、同色區域 → Spatial。兩種方法可在同一個影片編碼流程中使用。</div>
         <div class="study-actions"><a href="#ch3-test">讀完了，開始第三章練習 →</a><a href="#ch3-start">回到第三章學習路線</a></div>
+        <div class="lab quick-q" data-mini="q_ch3_video"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch3-test" data-practice-only>
@@ -1724,6 +1734,7 @@
         <div class="lab"><div class="lab-kicker">TRY IT · 切換輸入，核對真值表</div><h3>六種閘實驗室</h3><div class="ch4-fields"><label>Gate<select id="ch4GateType"><option>AND</option><option>OR</option><option>XOR</option><option>NAND</option><option>NOR</option><option>NOT</option></select></label><label>Input A<select id="ch4GateA"><option value="0">0</option><option value="1" selected>1</option></select></label><label>Input B<select id="ch4GateB"><option value="0" selected>0</option><option value="1">1</option></select></label></div><div class="ch4-signal-flow" id="ch4GateFlow"></div><div class="lab-output" id="ch4GateOutput" aria-live="polite"></div><div class="table-scroll"><table class="compare"><thead id="ch4GateHead"></thead><tbody id="ch4GateRows"></tbody></table></div></div>
         <h3>從 2 個輸入延伸到 3 個</h3><p>3-input AND：<code>X = ABC</code>，只有 <code>111</code> 會得到 1，其餘七種都是 0。三個獨立輸入有 <code>2³ = 8</code> 種組合。兩輸入 XOR 的「不同才是 1」不能直接拿來描述任意多輸入；先讀題目指定的閘與輸入數。</p>
         <details><summary>小例題：A = 1、B = 1，OR 和 XOR 分別是多少？</summary><div class="answer">OR = 1，因為至少一個為 1；XOR = 0，因為兩個相同。英文 exclusive 意思是排除「兩者同時為真」。</div></details>
+        <div class="lab quick-q" data-mini="q_ch4_gates"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch4-transistors" data-study-only data-learn-id="ch4-transistors">
@@ -1732,6 +1743,7 @@
         <div class="grid three"><div class="card"><span class="tag">NOT · 一條路徑</span><h3>輸入 1 才拉低</h3><p>A = 1 時通往地的路徑成立，X = 0；A = 0 時沒有此導通路徑，X = 1。</p></div><div class="card"><span class="tag">NAND · 串聯 Series</span><h3>兩個都導通才拉低</h3><p>通往地要依序經過兩個開關；A、B 都是 1 才完整導通。於是 11 → 0，其餘 → 1。</p></div><div class="card"><span class="tag">NOR · 並聯 Parallel</span><h3>任一條導通就拉低</h3><p>A 或 B 有一條通往地的路徑成立，X 就變 0。只有 00 時沒有路徑，X 才是 1。</p></div></div>
         <h3>講義圖上的標示</h3><div class="table-scroll"><table class="compare"><thead><tr><th scope="col">標示</th><th scope="col">講義模型中的角色</th></tr></thead><tbody><tr><td>Base（基極）</td><td>控制導通路徑的輸入。</td></tr><tr><td>Emitter（射極）</td><td>圖中接到 ground。</td></tr><tr><td>Source / Output line</td><td>講義用 Source 標示上方高電位端（例 5 V），Output 是取出邏輯訊號的位置。</td></tr></tbody></table></div>
         <details><summary>術語校正：Source 與 on 不要混著背</summary><div class="answer"><p>講義圖是教學簡化模型，術語有混用。標準 BJT 三個端子是 <strong>Base、Collector、Emitter</strong>；Source 是場效電晶體常見的端子名稱，不是 BJT 的標準第三端。此處依圖上的高電位／接地路徑理解即可。</p><p>p.16 最後一句把 base 低、輸出保持高寫成 transistor is on，容易混淆「輸出為 1」與「開關導通」。本節的開關模型以<strong>通往地的路徑有沒有導通</strong>來解釋，不能把輸出高直接等同電晶體 on。</p><p class="source-note">補充來源：<a href="https://toshiba.semicon-storage.com/us/semiconductor/knowledge/faq/mosfet_common/what-is-a-bipolar-transistor.html" target="_blank" rel="noopener noreferrer">Toshiba：BJT 結構與開關工作區</a>、<a href="https://toshiba.semicon-storage.com/us/semiconductor/knowledge/faq/mosfet_common/what-is-a-mosfet.html" target="_blank" rel="noopener noreferrer">MOSFET 的 Source／Drain／Gate</a>。實際晶片另有不同電晶體與電路實作，這裡不把簡化圖當實體接線設計。</p></div></details>
+        <div class="lab quick-q" data-mini="q_ch4_transistors"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch4-circuits" data-study-only data-learn-id="ch4-circuits">
@@ -1741,6 +1753,7 @@
         <h3>講義例 2：X = A(B + C)</h3><p>先讓 B、C 進 OR，得到 T = B + C，再把 A、T 送進 AND。例子同樣得到 T = 1、X = 1。這兩個電路用的閘數不同，但在<strong>全部 8 種輸入組合</strong>下都會得到相同輸出，才叫 circuit equivalence。</p>
         <div class="lab"><div class="lab-kicker">TRY IT · 分別看兩條運算路徑</div><h3>等效電路比較器</h3><div class="ch4-fields"><label>Input A<select id="ch4CircuitA"><option value="0">0</option><option value="1" selected>1</option></select></label><label>Input B<select id="ch4CircuitB"><option value="0" selected>0</option><option value="1">1</option></select></label><label>Input C<select id="ch4CircuitC"><option value="0">0</option><option value="1" selected>1</option></select></label></div><div class="grid two"><div class="card"><h4>AB + AC · 3 gates</h4><div class="ch4-signal-flow" id="ch4ExpandedFlow"></div></div><div class="card"><h4>A(B + C) · 2 gates</h4><div class="ch4-signal-flow" id="ch4FactoredFlow"></div></div></div><div class="lab-output" id="ch4CircuitOutput" aria-live="polite"></div><div class="table-scroll"><table class="compare"><thead><tr><th>A</th><th>B</th><th>C</th><th>AB</th><th>AC</th><th>AB + AC</th><th>B + C</th><th>A(B + C)</th></tr></thead><tbody id="ch4CircuitRows"></tbody></table></div></div>
         <div class="callout"><strong>讀圖口訣：</strong>沿訊號從輸入走向輸出，先處理前面的閘，給中間線命名，再算下一個閘。要證明等效，不能只看一列相同。</div>
+        <div class="lab quick-q" data-mini="q_ch4_circuits"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch4-boolean" data-study-only data-learn-id="ch4-boolean">
@@ -1749,6 +1762,7 @@
         <h3>手算一次 De Morgan</h3><p><code>(AB)′</code>：先 AND，再整體 NOT。它等於 <code>A′ + B′</code>，意思是「A 不是 1，或 B 不是 1」。例如 A = 1、B = 0：左側是 NOT 0 = 1；右側是 0 OR 1 = 1。</p><p><code>(A + B)′</code> 則等於 <code>A′B′</code>。例如 A = 1、B = 0：左側 NOT 1 = 0；右側 0 AND 1 = 0。</p>
         <div class="callout"><strong>最常見陷阱：</strong><code>(AB)′</code> 不能寫成 <code>A′B′</code>。A = 1、B = 0 就是反例：前者 1，後者 0。括號外的反相作用在整個結果上。</div>
         <div class="lab"><div class="lab-kicker">TRY IT · 用每一列驗證</div><h3>De Morgan 真值表驗證</h3><div class="ch4-fields"><label>Input A<select id="ch4MorganA"><option value="0">0</option><option value="1" selected>1</option></select></label><label>Input B<select id="ch4MorganB"><option value="0" selected>0</option><option value="1">1</option></select></label></div><div class="lab-output" id="ch4MorganOutput" aria-live="polite"></div><div class="table-scroll"><table class="compare"><thead><tr><th>A</th><th>B</th><th>(AB)′</th><th>A′ + B′</th><th>(A + B)′</th><th>A′B′</th></tr></thead><tbody id="ch4MorganRows"></tbody></table></div></div>
+        <div class="lab quick-q" data-mini="q_ch4_boolean"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch4-adders" data-study-only data-learn-id="ch4-adders">
@@ -1760,6 +1774,7 @@
         <div class="formula">Sum = A ⊕ B ⊕ Cin<br>Cout = AB + (A ⊕ B)Cin</div><p>三個輸入中至少兩個為 1，Cout 才為 1。這裡加法器的數學加法，與進位線公式中的布林 OR，請分開讀。</p>
         <div class="lab"><div class="lab-kicker">TRY IT · 看到每一步怎麼生出進位</div><h3>半加器／全加器實驗室</h3><div class="ch4-fields"><label>Adder<select id="ch4AdderType"><option value="full">Full adder</option><option value="half">Half adder</option></select></label><label>Input A<select id="ch4AdderA"><option value="0">0</option><option value="1" selected>1</option></select></label><label>Input B<select id="ch4AdderB"><option value="0">0</option><option value="1" selected>1</option></select></label><label>Carry-in Cin<select id="ch4AdderCin"><option value="0">0</option><option value="1" selected>1</option></select></label></div><div class="ch4-signal-flow" id="ch4AdderFlow"></div><div class="lab-output" id="ch4AdderOutput" aria-live="polite"></div><div class="table-scroll"><table class="compare"><thead id="ch4AdderHead"></thead><tbody id="ch4AdderRows"></tbody></table></div></div>
         <details><summary>理解用例：用加法器逐欄算 0111₂ + 0001₂</summary><div class="answer">從右到左：1+1+0 → Sum 0、Cout 1；1+0+1 → Sum 0、Cout 1；1+0+1 → Sum 0、Cout 1；0+0+1 → Sum 1、Cout 0。由左到右讀 Sum 得 1000₂。這就是第二章進位規則如何接到硬體。<a href="#radix-arithmetic">回到加減教練 →</a></div></details>
+        <div class="lab quick-q" data-mini="q_ch4_adders"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch4-mux" data-study-only data-learn-id="ch4-mux">
@@ -1770,6 +1785,7 @@
         <h3>分兩步答題</h3><p>若 S0S1S2 = 101：先找出被選中的是 D5；如果題目還告訴你 D5 = 0，才能進一步回答 F = 0。其他 D 的值不會改變此時的 F。</p>
         <div class="lab"><div class="lab-kicker">TRY IT · 選擇線決定路徑，D 決定資料</div><h3>8-to-1 MUX 路由器</h3><div class="ch4-fields"><label>S0 · weight 4<select id="ch4MuxS0"><option value="0" selected>0</option><option value="1">1</option></select></label><label>S1 · weight 2<select id="ch4MuxS1"><option value="0" selected>0</option><option value="1">1</option></select></label><label>S2 · weight 1<select id="ch4MuxS2"><option value="0" selected>0</option><option value="1">1</option></select></label></div><p>點擊下面的 D 按鈕切換資料值，觀察被選中與未被選中的差別。</p><div class="ch4-mux-inputs" id="ch4MuxInputs"><button type="button" class="ghost-btn" data-ch4-data="0" aria-pressed="false">D0 = 0</button><button type="button" class="ghost-btn" data-ch4-data="1" aria-pressed="true">D1 = 1</button><button type="button" class="ghost-btn" data-ch4-data="2" aria-pressed="false">D2 = 0</button><button type="button" class="ghost-btn" data-ch4-data="3" aria-pressed="true">D3 = 1</button><button type="button" class="ghost-btn" data-ch4-data="4" aria-pressed="false">D4 = 0</button><button type="button" class="ghost-btn" data-ch4-data="5" aria-pressed="true">D5 = 1</button><button type="button" class="ghost-btn" data-ch4-data="6" aria-pressed="false">D6 = 0</button><button type="button" class="ghost-btn" data-ch4-data="7" aria-pressed="true">D7 = 1</button></div><div class="ch4-signal-flow" id="ch4MuxFlow"></div><div class="lab-output" id="ch4MuxOutput" aria-live="polite"></div></div>
         <h3>那 DEMUX 呢？</h3><p>Demultiplexer（解多工器）是反方向的選路概念：<strong>一條資料輸入，依選擇線送往多條輸出中的一條</strong>。它不是把 1 bit 自動變成 8 bits 的資料。這是講義 p.28 提問的補充解釋；實際 enable 與未選中輸出的值由具體電路規格決定。</p>
+        <div class="lab quick-q" data-mini="q_ch4_mux"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch4-memory" data-study-only data-learn-id="ch4-memory">
@@ -1781,6 +1797,7 @@
         <h3>跟著講義 p.33，存入 1 再保持</h3><ol class="ch4-steps"><li>先保持 R = 1，令 S = 0。由 NAND 規則，<code>X = NAND(0,Y) = 1</code>。</li><li>把 X = 1 回授到下方，<code>Y = NAND(1,1) = 0</code>。</li><li>S 回到 1；現在 <code>X = NAND(1,0) = 1</code>，而 Y 仍是 0。輸入 S、R 都回到 1，記住的 1 仍留下。</li></ol><p>存 0 的對稱做法是 S = 1、R = 0，得到 Y = 1、X = 0；再把 R 返回 1，維持 X = 0。這兩個 Hold 情況的輸入同樣是 11，但輸出可能不同，因為<strong>之前的狀態不同</strong>。</p>
         <details><summary>為什麼不能說 X、Y「永遠」互補？</summary><div class="answer">p.32 的互補敘述適用於有效的穩定狀態。若 S = R = 0，兩個 NAND 的輸出會同時為 1，不再互補；兩個輸入同時回到 1 後的最終狀態不能可靠預測。這是禁止狀態，不應當作正常寫入操作。下面的模型會顯示此限制；離開禁止狀態後需明確 Set 或 Reset 才重新建立已知狀態。<p class="source-note">補充來源：<a href="https://www.ti.com/document-viewer/lit/html/SSZTCV9/GUID-2505F085-178B-4C5F-A9D1-9021A6A6C184" target="_blank" rel="noopener noreferrer">Texas Instruments：active-low SR latch（Figure 2）</a>。本互動不模擬延遲或亞穩態。</p></div></details>
         <div class="lab"><div class="lab-kicker">TRY IT · 每個動作保留上一個狀態</div><h3>NAND S-R latch 記憶實驗</h3><div class="lab-controls"><button type="button" class="primary-btn" id="ch4LatchSet">Set · S=0, R=1</button><button type="button" class="ghost-btn" id="ch4LatchReset">Reset · S=1, R=0</button><button type="button" class="ghost-btn" id="ch4LatchHold">Hold · S=1, R=1</button><button type="button" class="ghost-btn" id="ch4LatchInvalid">Invalid · S=0, R=0</button><button type="button" class="ghost-btn" id="ch4LatchClear">Restart demonstration</button></div><div class="ch4-signal-flow" id="ch4LatchFlow"></div><div class="lab-output" id="ch4LatchOutput" aria-live="polite"></div><div class="table-scroll"><table class="compare"><thead><tr><th>Step</th><th>S</th><th>R</th><th>Action</th><th>X</th><th>Y</th></tr></thead><tbody id="ch4LatchRows"></tbody></table></div><p class="source-note">示範初始已用 Reset 建立 X=0；不代表真實電路上電必然為 0。只保留最近 12 次操作紀錄。</p></div>
+        <div class="lab quick-q" data-mini="q_ch4_memory"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch4-chips" data-study-only data-learn-id="ch4-chips">
@@ -1790,6 +1807,7 @@
         <p class="source-note">p.35 的範圍在 10、100 邊界有重疊，若題目問界線，依題目給定的表或教師定義判斷；本測驗避開此歧義。</p>
         <h3>p.36：一顆 SSI 晶片，不等於只有一個閘</h3><p>講義例子是一顆內含 <strong>4 個獨立 two-input NAND gates</strong> 的 14-pin 晶片。各閘有自己的輸入與輸出，並共用電源與接地；圖中 pin 14 是 Power、pin 7 是 Ground。4 個 NAND 在同一個封裝裡，並不代表已自動組成一個四輸入 NAND。</p>
         <h3>CPU chip（中央處理器晶片）</h3><p>講義 p.38 將 CPU 視為最重要的積體電路。晶片的 pins（接腳）提供與外部元件的連接，包含 memory 和 I/O devices。<strong>本章的連結：</strong>Transistors → Gates → Circuits → Integrated circuits → CPU 中的計算與控制電路。</p>
+        <div class="lab quick-q" data-mini="q_ch4_chips"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
         <div class="study-path"><a href="#ch4-test">開始第四章英文測驗 · 36 題 →</a><a href="#exam">更新後的考前清單 →</a></div>
       </section>
 
@@ -1836,7 +1854,6 @@
           <tr><td>Windows 11 Home OS</td><td>Software（作業系統）</td><td>不是硬體元件；對應第一章的軟體層。</td></tr>
           <tr><td>5.63 lbs</td><td>重量</td><td>不是計算元件，是干擾選項。</td></tr>
         </tbody></table></div>
-        <div class="lab" data-mini="ch5components"><div class="lab-kicker">TRY IT · 規格配對</div><h4>這一行規格是哪個元件？</h4><div data-mini-mount></div></div>
         <h3>Sizes in Perspective：K、M、G、T 是多大？（p.4–5）</h3>
         <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">字首（符號）</th><th scope="col">10 的次方</th><th scope="col">2 的次方（講義）</th><th scope="col">中文（p.5）</th></tr></thead><tbody>
           <tr><td>kilo（K）</td><td>10³</td><td>2¹⁰ = 1,024</td><td>仟</td></tr>
@@ -1851,6 +1868,7 @@
         </tbody></table></div>
         <p class="source-note">p.5 還列出 exa（E，10¹⁸，百萬兆）、femto（f，10⁻¹⁵，毫漠）、atto（a，10⁻¹⁸，微漠）等；p.5 把 10⁻¹ 寫成 dice，標準字首是 deci（d，分）。</p>
         <div class="callout"><strong>記容量的兩條線：</strong>字首同時有 10 的次方與 2 的次方兩種讀法（例如 K 可以是 1,000 或 1,024）。講義 p.4 的 2 的次方欄用 1,024、1,048,576、1,073,741,824；題目沒說時，以題目給的換算或老師的教法為準。</div>
+        <div class="lab quick-q" data-mini="q_ch5_components"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch5-architecture" data-study-only data-learn-id="ch5-architecture">
@@ -1875,8 +1893,8 @@
           <tr><td>IR</td><td>Instruction register（指令暫存器）</td><td>正在執行的那條<strong>指令</strong>本身。</td></tr>
         </tbody></table></div>
         <div class="callout"><strong>最常見的陷阱：</strong>PC 存的是位址，不是指令；IR 存的才是指令。另外，記憶體格的「內容」可能是資料也可能是指令，位址則是格子的編號。</div>
-        <div class="lab" data-mini="ch5units"><div class="lab-kicker">TRY IT · 五大單元辨認</div><h4>這個動作由哪個單元負責？</h4><div data-mini-mount></div></div>
         <details><summary>補充：為什麼 stored program 很重要？</summary><div class="answer">因為程式和資料都在記憶體裡，換一組記憶體內容就能換一個程式，不必重新接線。這是補充說明，不是講義原文。</div></details>
+        <div class="lab quick-q" data-mini="q_ch5_architecture"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch5-bus" data-study-only data-learn-id="ch5-bus">
@@ -1893,6 +1911,7 @@
         <div class="lab"><div class="lab-kicker">TRY IT · 位址位元數 → 記憶體格數</div><h3>位址線計算機</h3><div class="ch4-fields"><label>Address bits<select id="ch5AddrBits"><option value="8" selected>8</option><option value="10">10</option><option value="16">16</option><option value="20">20</option><option value="24">24</option><option value="32">32</option><option value="64">64</option></select></label></div><div class="lab-output" id="ch5AddrOut" aria-live="polite"></div><p class="source-note">假設 byte-addressable，所以 1 格 = 1 byte；單位換算採講義 p.4 的 2¹⁰ = 1,024 進位。</p></div>
         <details><summary>自製例：Pipelining 為什麼比較快？</summary><div class="answer"><p>把一條指令切成 3 個步驟，每步 1 個時間單位。理想情形（沒有阻塞）：</p><div class="table-scroll"><table class="compare"><thead><tr><th scope="col">指令數</th><th scope="col">不重疊</th><th scope="col">重疊（pipelined）</th></tr></thead><tbody><tr><td>1</td><td>3</td><td>3</td></tr><tr><td>3</td><td>9</td><td>5</td></tr><tr><td>10</td><td>30</td><td>12</td></tr></tbody></table></div><p>重疊後的總時間是「步驟數 + 指令數 − 1」。單一條指令沒有變快，但整體吞吐量提高。這是理想化的自製例，不是講義的數字。</p></div></details>
         <div class="callout"><strong>別混在一起：</strong>Cache 是「快的記憶體」，pipelining 是「步驟重疊」，N-bit 是「一次處理幾位元」。三個都是為了加速，但回答的是不同的問題。</div>
+        <div class="lab quick-q" data-mini="q_ch5_bus"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch5-cycle" data-study-only data-learn-id="ch5-cycle">
@@ -1910,8 +1929,8 @@
           <div class="ch4-signal-flow" id="ch5CycleFlow"></div>
           <div class="lab-output" id="ch5CycleOut" aria-live="polite"></div>
           <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">Address</th><th scope="col">Contents</th><th scope="col">Bytes</th></tr></thead><tbody id="ch5CycleRows"></tbody></table></div>
+        <div class="lab quick-q" data-mini="q_ch5_cycle"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
           <p class="source-note">這是自製的簡化教學模型：指令名稱與長度為示意。講義只說明四個步驟與「下一個 PC = 指令 bytes 數 + 原 PC」，沒有規定指令集。</p></div>
-        <div class="lab" data-mini="ch5cycle"><div class="lab-kicker">TRY IT · 步驟辨認</div><h4>這個動作發生在哪個步驟？</h4><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch5-storage" data-study-only data-learn-id="ch5-storage">
@@ -1938,8 +1957,8 @@
         </tbody></table></div>
         <div class="formula">Access time = Seek time + Latency</div>
         <div class="lab"><div class="lab-kicker">TRY IT · 存取時間與傳輸時間分開算</div><h3>磁碟時間計算機</h3><div class="ch4-fields"><label>Seek time (ms)<input type="number" id="ch5Seek" value="9" min="0" step="0.1"></label><label>Latency (ms)<input type="number" id="ch5Latency" value="4" min="0" step="0.1"></label><label>檔案大小 (MB)<input type="number" id="ch5FileMB" value="50" min="0" step="1"></label><label>Transfer rate (MB/s)<input type="number" id="ch5Rate" value="100" min="1" step="1"></label></div><div class="lab-output" id="ch5DiskOut" aria-live="polite"></div><p class="source-note">講義只定義 access time = seek + latency，並把 transfer rate 當作另一個指標；「總時間 = access time + 傳輸時間」是自製的補充算法（理想化，忽略其他延遲）。</p></div>
-        <div class="lab" data-mini="ch5storage"><div class="lab-kicker">TRY IT · 儲存裝置辨認</div><h4>這段描述說的是哪一種？</h4><div data-mini-mount></div></div>
         <div class="callout"><strong>最常見的配對：</strong>揮發性 → RAM；唯讀 → ROM；循序、要先讀前面的 → 磁帶；track／sector／seek → 磁碟；無移動零件、可重寫 → flash／SSD；DVD 4.7 GB、Blu-ray 25 GB。</div>
+        <div class="lab quick-q" data-mini="q_ch5_storage"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch5-embedded" data-study-only data-learn-id="ch5-embedded">
@@ -1948,6 +1967,7 @@
         <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">講義列出的處理器</th><th scope="col">位元數</th></tr></thead><tbody><tr><td>Micro-processors</td><td>8-bit</td></tr><tr><td>DSPs</td><td>32-bit</td></tr><tr><td>RISC</td><td>64-bit</td></tr></tbody></table></div>
         <p>因為<strong>程式碼大小（size of code）與執行速度（executing speed）</strong>都很重要，講義提到會使用 assembly language（組合語言）。</p>
         <div class="callout"><strong>記法：</strong>8 → micro-processor、32 → DSP、64 → RISC；原因是 code size 與 speed 很重要，所以用組合語言。</div>
+        <div class="lab quick-q" data-mini="q_ch5_embedded"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
       </section>
 
       <section class="section searchable study-section" id="ch5-parallel" data-study-only data-learn-id="ch5-parallel">
@@ -1967,7 +1987,7 @@
           <tr><td>Massively parallel processors（大規模平行處理器）</td><td>講義只列出名稱。</td></tr>
         </tbody></table></div>
         <div class="callout"><strong>講義歸類提醒：</strong>p.30 把 pipelined processing 放在 task-level；p.13 的 pipelining 則是把單一指令切成可重疊的步驟。考試以講義的歸類為準。第一章也出現 SIMD／MIMD，可回到<a href="#ch1-parallel">第一章的平行運算</a>對照。</div>
-        <div class="lab" data-mini="ch5parallel"><div class="lab-kicker">TRY IT · 換個情境，還認得出哪一級嗎？</div><h4>選出平行層級</h4><div data-mini-mount></div></div>
+        <div class="lab quick-q" data-mini="q_ch5_parallel"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
         <div class="study-path"><a href="#ch5-test">開始第五章英文測驗 →</a><a href="#exam">更新後的考前清單 →</a></div>
       </section>
 
@@ -3987,38 +4007,6 @@
     }
   ]
 };
-    Object.assign(MINI_EXERCISES,{
-      ch5components:{options:['CPU','Cache memory','Main memory（RAM）','Secondary storage','Output device'],cases:[
-        {prompt:'Intel Core i7（2.8 GHz Quad-Core）',answer:0,why:'Core i7 是處理器，也就是 CPU。Quad-Core 表示有四個核心。'},
-        {prompt:'12 MB Intel Smart Cache',answer:1,why:'Cache memory 是少量高速記憶體，存放常用資料的副本。'},
-        {prompt:'20 GB SDRAM',answer:2,why:'SDRAM 是主記憶體（RAM），放執行中的程式與資料，斷電後內容消失。'},
-        {prompt:'1 TB SSD',answer:3,why:'SSD 是長期保存資料的輔助儲存裝置，全電子、無移動零件。'},
-        {prompt:'17.3 inch HD LED display',answer:4,why:'螢幕把結果呈現給外界，屬於輸出裝置。'}]},
-      ch5units:{options:['Input unit','Output unit','Memory unit','ALU','Control unit'],cases:[
-        {prompt:'鍵盤把使用者輸入的資料送進電腦。',answer:0,why:'把外界資料與程式送進電腦的是輸入單元。'},
-        {prompt:'同時存放程式與資料，每格有唯一位址。',answer:2,why:'記憶單元由許多 cells 組成，stored-program 概念讓程式與資料放在同一個地方。'},
-        {prompt:'做加法，或對兩個值做 AND／OR。',answer:3,why:'算術與邏輯運算是 ALU 的工作。'},
-        {prompt:'決定下一條要執行哪條指令，並負責 fetch-execute cycle。',answer:4,why:'控制單元是電腦的組織力量，負責 fetch-execute cycle。'},
-        {prompt:'螢幕把運算結果顯示給使用者。',answer:1,why:'把記憶體中的結果交給外界的是輸出單元。'}]},
-      ch5cycle:{options:['Fetch','Decode','Get data','Execute'],cases:[
-        {prompt:'控制單元依 PC 的位址，把下一條指令從記憶體取出。',answer:0,why:'依 PC 取得下一條指令是 fetch。'},
-        {prompt:'控制單元判斷這是哪一種指令，並產生 control signals。',answer:1,why:'判斷指令種類、解成 control signals 是 decode。'},
-        {prompt:'指令需要的運算元存放在記憶體，需要額外存取記憶體。',answer:2,why:'需要額外記憶體存取，屬於 get data if needed。'},
-        {prompt:'送訊號給 ALU 執行運算；做完後循環重新開始。',answer:3,why:'送訊號給 ALU 進行處理是 execute；完成後再回到 fetch。'},
-        {prompt:'PC 增加目前指令的 bytes 數，指向下一條指令。',answer:0,why:'講義把「下一個 PC = bytes 數 + 原 PC」放在 fetch 步驟。'}]},
-      ch5storage:{options:['RAM','ROM','Magnetic tape','Magnetic disk','Flash／SSD'],cases:[
-        {prompt:'斷電後內容消失，但每個 cell 都能直接存取。',answer:0,why:'RAM 是揮發性（volatile）、可直接存取的記憶體。'},
-        {prompt:'內容可以讀取但不能改變；不是揮發性。',answer:1,why:'ROM 是唯讀記憶體，不是揮發性。'},
-        {prompt:'要讀中段資料，前面的資料都得先存取再丟掉。',answer:2,why:'磁帶是循序存取，這是它的缺點。'},
-        {prompt:'資料放在 tracks 與 sectors，效能用 seek time 與 latency 衡量。',answer:3,why:'磁軌、磁區、seek time 與 latency 都是磁碟的概念。'},
-        {prompt:'全電子、沒有移動零件、不揮發，可擦除重寫。',answer:4,why:'Flash memory 與 SSD 符合：非揮發、可重寫、無移動零件、速度快、耗電低。'}]},
-      ch5parallel:{options:['Bit-level','Instruction-level','Data-level（SIMD）','Task-level（MIMD）'],cases:[
-        {prompt:'把處理器從 32-bit 升級成 64-bit，一次處理更長的字。',answer:0,why:'增加 word size 屬於 bit-level parallelism。'},
-        {prompt:'超純量處理器有多個 execution units，同一時間執行兩條互不相依的指令。',answer:1,why:'獨立指令同時進行，屬於 instruction-level；superscalar 有多個 execution units。'},
-        {prompt:'同一個運算同時套用到一大批影像像素上。',answer:2,why:'單一組指令作用在不同資料上，是 data-level，也就是 SIMD。'},
-        {prompt:'四個處理器各自執行不同的任務，並透過 shared memory 溝通。',answer:3,why:'不同處理器做不同任務是 task-level（MIMD）；shared memory 溝通屬於此類。'}]}
-    });
-
     // Chapter 5 labs
     (function(){
       const units=['bytes','KB','MB','GB','TB','PB','EB'];
@@ -4091,6 +4079,604 @@
       diskIds.forEach(id=>$('#'+id).addEventListener('input',renderDisk));renderDisk();
     })();
 
+    Object.assign(MINI_EXERCISES,{
+ "q_ch1_system": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "小美的筆電開機後，她用 Word 寫報告、用鍵盤輸入文字，最後按下列印，由印表機印出。下列分類哪一項正確？",
+    "options": [
+     "Word 與作業系統是 Software；鍵盤與印表機是 Hardware",
+     "Word 是 Software，但作業系統「在機器裡面」，所以是 Hardware",
+     "存放 Word 安裝檔的隨身碟屬於 Software，因為裡面裝的是程式",
+     "連接電路的 wires 是 Software，因為訊號帶著指令"
+    ],
+    "answer": 0,
+    "why": "Software 是提供 instructions 的程式，作業系統也是程式；Hardware 是實體元件，例如鍵盤、印表機、電路板與 wires。\n陷阱：程式存放在硬體裡，不代表硬體變成軟體，隨身碟承載程式，它本身仍是 Hardware；wires 是講義直接列出的 Hardware 例子。"
+   }
+  ]
+ },
+ "q_ch1_history": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "老師給了兩句描述：①「她提出 loop（迴圈）的概念，常被稱為第一位程式設計師。」②「他設計了 Analytical Engine。」① 與 ② 各指誰？",
+    "options": [
+     "① Charles Babbage；② Ada Lovelace",
+     "① Ada Lovelace；② Charles Babbage",
+     "① Alan Turing；② Charles Babbage",
+     "① Ada Lovelace；② Joseph Jacquard"
+    ],
+    "answer": 1,
+    "why": "Ada 對應程式與 loop；Babbage 對應機器設計（Analytical Engine）。兩人都跟分析引擎有關，最容易對調，要看題目問的是「機器」還是「程式」。\nTuring 對應 Turing machine（計算理論）；Jacquard 對應織布機與 punched card。"
+   }
+  ]
+ },
+ "q_ch1_hardware": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "依講義第 12 頁的修訂版 Moore’s Law，晶片密度約每 18 個月加倍。若從現在算起 6 年，晶片密度約是現在的幾倍？",
+    "options": [
+     "64 倍",
+     "8 倍",
+     "16 倍",
+     "4 倍"
+    ],
+    "answer": 2,
+    "why": "6 年 = 72 個月，72 ÷ 18 = 4 次加倍，2⁴ = 16 倍。\n4 倍是把「加倍的次數」誤當成倍數；8 倍只算了 3 次加倍（54 個月）；64 倍是誤套第 11 頁早期版本「每年加倍」（2⁶）。講義有兩個版本，要看題目用哪一個。"
+   }
+  ]
+ },
+ "q_ch1_parallel": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "系統甲：把一張照片每個像素的亮度都加 20，多個處理單元收到同一個「加 20」指令，各處理不同的像素。系統乙：四個處理單元分別執行排序、搜尋、壓縮、加密。甲、乙依序屬於？",
+    "options": [
+     "SIMD；SIMD",
+     "MIMD；MIMD",
+     "MIMD；SIMD",
+     "SIMD；MIMD"
+    ],
+    "answer": 3,
+    "why": "先問「大家收到同一種指令嗎？」甲：指令相同、資料不同 → SIMD。乙：指令不同（四種工作） → MIMD。\n不要因為「兩邊都在處理很多資料」就都選 SIMD：兩者的 MD 都是 Multiple Data，差別只在 Instruction。"
+   }
+  ]
+ },
+ "q_ch1_network": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "傳送一部很大的影片時，系統先把它拆成許多帶有識別資訊的小包，各自在網路上傳送，再由接收端依編號整理還原。這最直接對應哪個概念？",
+    "options": [
+     "Packet switching（封包交換）",
+     "Time-sharing：多位使用者輪流共用同一台電腦的 CPU 時間",
+     "File server：提供其他電腦存取檔案的服務",
+     "Cloud computing：透過 Internet 使用遠端的計算資源"
+    ],
+    "answer": 0,
+    "why": "「拆成封包、各自傳送、接收端重組」就是 packet switching 的定義。\nTime-sharing 是作業系統安排 CPU 時間；Cloud computing 的重點是資源在遠端；File server 的重點是提供檔案存取，三者都沒有「拆成封包」這個動作。"
+   }
+  ]
+ },
+ "q_ch1_software": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "Mia 用 C 語言寫了一個大型程式，分成三個原始檔各自翻成機器碼，再接成一個可執行檔，放進記憶體，並由系統決定何時讓它執行。依序負責「翻譯、連結、載入、排程」的是？",
+    "options": [
+     "Compiler → Loader → Linker → Assembler",
+     "Compiler → Linker → Loader → Operating system",
+     "Assembler → Loader → Linker → Operating system",
+     "Linker → Compiler → Operating system → Loader"
+    ],
+    "answer": 1,
+    "why": "C 是高階語言，翻譯用 Compiler（Assembler 是翻組合語言）。Link＝把片段連結起來；Load＝載入記憶體；排程由 Operating system 負責。\n先看動詞，再配工具；錯誤選項不是把 Compiler／Assembler 弄混，就是把 Linker 與 Loader 的順序對調。"
+   }
+  ]
+ },
+ "q_ch1_discipline": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "設計「班級成績管理」時：(1) 決定用表格存學生姓名與成績；(2) 寫出「逐筆相加再除以人數」的步驟；(3) 用迴圈與變數在電腦上實作；(4) 規劃輸入、檢查、計算、顯示的整體流程。(1)～(4) 依序強調哪項能力？",
+    "options": [
+     "Algorithmic thinking → Representation → Programming → Design",
+     "Representation → Programming → Algorithmic thinking → Design",
+     "Representation → Algorithmic thinking → Programming → Design",
+     "Design → Algorithmic thinking → Representation → Programming"
+    ],
+    "answer": 2,
+    "why": "(1) 決定資料怎麼存放 → Representation；(2) 想出解題步驟 → Algorithmic thinking；(3) 用程式語言實作 → Programming；(4) 安排整體流程與各部分關係 → Design。\n最容易對調的是 (1) 與 (2)：「怎麼存」是 Representation，「怎麼算」才是 Algorithmic thinking。"
+   }
+  ]
+ },
+ "q_ch2_number": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "要把 (2A3)₁₆ 轉成十進位。下列哪個算式與結果正確？",
+    "options": [
+     "2×10² + 10×10 + 3 = 303",
+     "3×16² + 10×16 + 2 = 930",
+     "2×16² + 1×16 + 3 = 531",
+     "2×16² + 10×16 + 3 = 675"
+    ],
+    "answer": 3,
+    "why": "位置記數法：每一位乘上 base 的次方，最右邊是 16⁰，A = 10。2×256 + 10×16 + 3 = 512 + 160 + 3 = 675。\n303 是把權重誤用成 10 的次方；531 是把 A 當成 1；930 是把位權由左往右排反了。"
+   }
+  ]
+ },
+ "q_ch2_conversion": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "(200)₁₀ 先轉成十六進位，再轉成二進位。下列哪組結果正確？",
+    "options": [
+     "C8₁₆ → 11001000₂",
+     "8C₁₆ → 10001100₂",
+     "128₁₆ → 000100101000₂",
+     "C8₁₆ → 11000100₂"
+    ],
+    "answer": 0,
+    "why": "200 ÷ 16 = 12 餘 8；12 = C，餘數由下往上讀 → C8₁₆。每個 Hex 位轉 4 bits：C = 1100、8 = 1000，合起來 11001000₂（128 + 64 + 8 = 200）。\n8C 是把餘數由上往下讀；128 是把商 12 當成十進位直接寫；11000100 是把 8 寫成 0100（那是 4）。"
+   }
+  ]
+ },
+ "q_ch2_binary": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "5 位元二進位直式減法：10000₂ − 00011₂ = ？",
+    "options": [
+     "01110₂",
+     "01101₂",
+     "01111₂",
+     "10011₂"
+    ],
+    "answer": 1,
+    "why": "10000₂ = 16、00011₂ = 3，16 − 3 = 13 = 01101₂。做法：最右欄 0 − 1 不夠，要一路向左借到最左邊的 1，中間被經過的 0 都會變成 1，再逐欄相減。\n10011 是每欄「大的減小的」；01111 只減掉最右欄的 1；01110 只扣掉 10₂ 那一欄，漏掉另一個 1。"
+   }
+  ]
+ },
+ "q_radix_arithmetic": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "八進位加法：65₈ + 47₈ = ？",
+    "options": [
+     "122₈",
+     "112₈",
+     "134₈",
+     "AC₈"
+    ],
+    "answer": 2,
+    "why": "個位：5 + 7 = 12（十進位）= 1×8 + 4 → 寫 4、進 1。八位：6 + 4 + 1 = 11 = 1×8 + 3 → 寫 3、進 1。最左補 1，得 134₈。核對：65₈ = 53、47₈ = 39，53 + 39 = 92 = 134₈。\n112 是用「滿 10」進位；122 是漏掉中間欄的進位 1；AC 含 A、C，八進位不可能出現。"
+   }
+  ]
+ },
+ "q_ch2_data": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "某 32-bit machine 一次以一個 full word（4 bytes）為處理單位。要處理 64 bytes 的資料，至少需要處理幾個 full word？",
+    "options": [
+     "512 個",
+     "8 個",
+     "2 個",
+     "16 個"
+    ],
+    "answer": 3,
+    "why": "Full word = 32 bits = 4 bytes，64 ÷ 4 = 16。\n2 是把 64 bytes 直接除以 32 bits（單位不同）；8 是拿 Double Word（8 bytes）去除；512 是把 64 bytes 換成 bits，沒有再除以每個 word 的大小。"
+   }
+  ]
+ },
+ "q_ch3_data": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "學校要用相同長度的二進位編號，替 200 位學生各配一個唯一的 ID。最少需要幾個 bits？",
+    "options": [
+     "8 bits",
+     "200 bits",
+     "7 bits",
+     "100 bits"
+    ],
+    "answer": 0,
+    "why": "n bits 有 2ⁿ 種組合。2⁷ = 128 不夠 200 人；2⁸ = 256 ≥ 200，所以至少 8 bits。\n100、200 是把「人數」當成 bit 數；7 bits 只有 128 種，會差 72 人。"
+   }
+  ]
+ },
+ "q_ch3_integer": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "在 8-bit 二補數系統中計算 100 + 60（01100100 + 00111100），電腦只保留 8 位。結果的描述何者正確？",
+    "options": [
+     "得到 −160，因為最高位是 1，所以整個結果取負",
+     "得到 10100000，解讀為 −96，發生有號溢位",
+     "得到 96，因為多出來的位元被丟掉",
+     "得到 160，因為 8 bits 能表示到 255"
+    ],
+    "answer": 1,
+    "why": "100 + 60 = 160，超過 8-bit 二補數的上限 127，所以溢位。01100100 + 00111100 = 10100000；最高位是 1，解讀為 160 − 256 = −96。\n「255」是無號整數的上限，這題指定的是二補數；最高位 1 不是「整個值取負」，而是該位的權重為 −128。"
+   }
+  ]
+ },
+ "q_ch3_fraction": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "把 0.375₁₀ 轉成二進位小數，依講義「乘 2、取整數位」的方法，結果是？",
+    "options": [
+     "0.110₂",
+     "0.101₂",
+     "0.011₂",
+     "0.11₂"
+    ],
+    "answer": 2,
+    "why": "0.375×2 = 0.75（取 0）；0.75×2 = 1.5（取 1，留 0.5）；0.5×2 = 1.0（取 1，結束）。整數位由上往下讀 → 0.011₂；核對 1/4 + 1/8 = 0.375。\n0.110 是由下往上讀；0.101 = 0.625；0.11 = 0.75。"
+   }
+  ]
+ },
+ "q_ch3_text": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "某簡化系統用固定 16 bits 替每個字元編一個代碼，且不壓縮。一段 1000 個字元的文字需要多少 bytes？這個編碼最多可分辨幾種字元？",
+    "options": [
+     "16000 bytes；65536 種",
+     "1000 bytes；65536 種",
+     "2000 bytes；256 種",
+     "2000 bytes；65536 種"
+    ],
+    "answer": 3,
+    "why": "16 bits = 2 bytes，1000 × 2 = 2000 bytes；16 bits 有 2¹⁶ = 65536 種代碼。\n1000 bytes 是把每字元當成 1 byte；256 種是 8 bits 的容量；16000 是把 16 bits 當成 16 bytes。注意：這題是「固定 16 bits」的容量題，實際 Unicode 的編碼形式不一定固定 16 bits。"
+   }
+  ]
+ },
+ "q_ch3_compression": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "依講義的 RLE（用 *字元次數 表示連續重複，只編碼連續長度大於 3 的字）壓縮 aaaaaaaabbbbcccccccc（共 20 個字元）。壓縮率（壓縮後 ÷ 原始）是多少？",
+    "options": [
+     "0.45",
+     "0.30",
+     "2.22",
+     "0.55"
+    ],
+    "answer": 0,
+    "why": "a×8、b×4、c×8 都大於 3，編成 *a8*b4*c8，共 9 個字元，9 ÷ 20 = 0.45。\n0.30 是忘了算旗標 * 與次數佔空間；0.55 是「省下的比例」，不是壓縮率；2.22 是把分子分母顛倒。"
+   }
+  ]
+ },
+ "q_ch3_audio": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "未壓縮的單聲道錄音：取樣率 16000 次/秒、每個樣本 8 bits、錄 5 秒。檔案資料量約多少 bytes？",
+    "options": [
+     "160,000 bytes",
+     "80,000 bytes",
+     "16,000 bytes",
+     "640,000 bytes"
+    ],
+    "answer": 1,
+    "why": "取樣率 × 每樣本 bits × 聲道數 × 秒數 ÷ 8 = 16000 × 8 × 1 × 5 ÷ 8 = 80,000 bytes。\n640,000 是忘了除以 8（那是 bits）；160,000 多乘了一個聲道；16,000 只算了 1 秒。"
+   }
+  ]
+ },
+ "q_ch3_image": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "一張 800 × 600 的 24-bit true color 影像，未壓縮、不含檔頭，理論資料量是多少 bytes？",
+    "options": [
+     "11,520,000 bytes",
+     "480,000 bytes",
+     "1,440,000 bytes",
+     "2,880,000 bytes"
+    ],
+    "answer": 2,
+    "why": "像素數 800 × 600 = 480,000；每像素 24 bits = 3 bytes；480,000 × 3 = 1,440,000 bytes。\n480,000 是每像素只算 1 byte（忘了色彩深度）；2,880,000 是以 16 bits 計；11,520,000 是 bits，沒有換成 bytes。"
+   }
+  ]
+ },
+ "q_ch3_video": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "某影片的場景是一面固定的牆，只有一顆球在移動。編碼器保存一張完整的 keyframe，之後每個 frame 只記錄相對前一張改變的部分。這是哪一種壓縮？",
+    "options": [
+     "Spatial compression：減少同一個 frame 內的重複",
+     "Huffman encoding：常見的值用較短的碼",
+     "Keyword encoding：用特殊符號取代常見字串",
+     "Temporal compression：利用前後 frames 的差異"
+    ],
+    "answer": 3,
+    "why": "關鍵字 keyframe、相對前一張改變的部分（delta）→ Temporal。Spatial 是單張畫面內找規則，例如同色區域。\nKeyword、Huffman 是文字壓縮的方法，不是影片 frame 之間的差異編碼。"
+   }
+  ]
+ },
+ "q_ch4_gates": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "X = (A NAND B) XOR (B NOR C)。輸入 A = 1、B = 0、C = 1。NAND、NOR 與 X 的輸出各是多少？",
+    "options": [
+     "NAND = 1，NOR = 0，X = 1",
+     "NAND = 0，NOR = 0，X = 0",
+     "NAND = 1，NOR = 1，X = 0",
+     "NAND = 0，NOR = 1，X = 1"
+    ],
+    "answer": 0,
+    "why": "NAND(1,0) = NOT(1·0) = 1；NOR(0,1) = NOT(0+1) = 0；XOR(1,0) = 1（兩者不同才是 1）。\n第二項是把 NAND 當 AND、NOR 當 OR；第三項是 NOR 只看了 B；第四項是 NAND 當成 AND。先逐閘算中間值，不要跳步。"
+   }
+  ]
+ },
+ "q_ch4_transistors": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "簡化開關模型：輸出平時被拉到高電位（1），若有導通路徑通往 ground，輸出變 0。兩個開關各由 A、B 控制（輸入為 1 時導通）。若兩個開關「串聯」在通往 ground 的路徑上，或「並聯」在該路徑上，分別得到哪種閘？",
+    "options": [
+     "串聯 → AND；並聯 → OR",
+     "串聯 → NAND；並聯 → NOR",
+     "串聯 → NOR；並聯 → NAND",
+     "串聯 → OR；並聯 → AND"
+    ],
+    "answer": 1,
+    "why": "串聯：A、B 都導通才完整通到 ground，輸出才變 0 → 只有 11 輸出 0，是 NAND。並聯：A 或 B 任一個導通就拉低 → 只有 00 輸出 1，是 NOR。\nAND／OR 需要再多一級反相，不是這種單級拉低路徑直接得到。"
+   }
+  ]
+ },
+ "q_ch4_circuits": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "下列哪一個電路與 X = AB + AC 在全部 8 種輸入組合下等效？",
+    "options": [
+     "A + BC",
+     "ABC",
+     "A(B + C)",
+     "(A + B)C"
+    ],
+    "answer": 2,
+    "why": "A(B+C) 由分配律展開正是 AB + AC。\n要證明不等效只要一個反例：A + BC 在 (A,B,C) = (1,0,0) 得 1，但原式得 0；ABC 在 (1,1,0) 得 0，但原式得 1；(A+B)C 在 (1,1,0) 得 0，但原式得 1。等效必須每一列相同，反例只要一列。"
+   }
+  ]
+ },
+ "q_ch4_boolean": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "依 De Morgan 定律，(AB′)′ 等於下列哪一項？",
+    "options": [
+     "A + B′",
+     "A′ + B′",
+     "A′B",
+     "A′ + B"
+    ],
+    "answer": 3,
+    "why": "(AB′)′：AND 變 OR，每個輸入也取反，A → A′，B′ → B，所以得到 A′ + B。\nA′ + B′ 是忘了 B′ 再反相會變回 B；A′B 是只換了輸入、沒有把 AND 換成 OR。可用 A=1、B=0 驗證：(1·1)′ = 0，A′ + B = 0 + 0 = 0，A′ + B′ = 1。"
+   }
+  ]
+ },
+ "q_ch4_adders": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "用 Full adder 逐欄計算 0111₂ + 0011₂。從右數第二欄收到右欄的進位，這一欄的輸入是 A = 1、B = 1、Cin = 1。此欄輸出的 Sum 與 Cout 是？",
+    "options": [
+     "Sum = 1，Cout = 1",
+     "Sum = 0，Cout = 0",
+     "Sum = 0，Cout = 1",
+     "Sum = 1，Cout = 0"
+    ],
+    "answer": 0,
+    "why": "1 + 1 + 1 = 11₂：右位 Sum = 1，左位 Cout = 1。（最右欄 1 + 1 + 0 = 10₂，Sum = 0、Cout = 1，所以第二欄才會有 Cin = 1。）\nSum = 0 是漏掉了 Cin；三個輸入至少兩個為 1，Cout 一定是 1。整題結果 0111₂ + 0011₂ = 1010₂。"
+   }
+  ]
+ },
+ "q_ch4_mux": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "8-to-1 MUX，依講義的順序 S0 S1 S2 的權重是 4、2、1。資料輸入 D0～D7 依序為 0,0,1,0,1,0,1,1。若 S0S1S2 = 110，輸出 F 選到哪一條、值是多少？",
+    "options": [
+     "選 D3，F = 0",
+     "選 D6，F = 1",
+     "選 D4，F = 1",
+     "選 D7，F = 1"
+    ],
+    "answer": 1,
+    "why": "S0S1S2 = 110 → 1×4 + 1×2 + 0×1 = 6，選 D6，D6 = 1，所以 F = 1。\n選 D3 是把 S0 當成最低位（1×1 + 1×2 = 3）；選 D4 是只看了 S0；選 D7 是以為三條線全都選。先找出被選中的是誰，再看那一條的資料值。"
+   }
+  ]
+ },
+ "q_ch4_memory": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "NAND 型 S-R latch（低有效）。依序進行：Set（S=0, R=1）→ Hold（S=1, R=1）→ Reset（S=1, R=0）→ Hold（S=1, R=1）。最後儲存的 X 是多少？",
+    "options": [
+     "X 不確定，因為 S = R = 1 是禁止狀態",
+     "X = 1，因為最早的 Set 存了 1，之後的 Hold 都會保留它",
+     "X = 0，因為最後一次 Hold 保留的是 Reset 之後的狀態",
+     "X = 1，因為 S = R = 1 表示存 1"
+    ],
+    "answer": 2,
+    "why": "Hold（S = R = 1）不寫入新值，只保留上一個狀態。第一次 Hold 保留 1；Reset 之後 X = 0；第二次 Hold 就保留 0。\n同樣的 11 輸入，可能保持 0 也可能保持 1，要看之前的狀態。禁止狀態是 S = R = 0（Invalid），不是 11。"
+   }
+  ]
+ },
+ "q_ch4_chips": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "一顆 14-pin 的 SSI 晶片，內含 4 個獨立的 two-input NAND gate；pin 14 接電源、pin 7 接 ground。下列敘述何者正確？",
+    "options": [
+     "晶片裡只有一個閘，其餘接腳是備用",
+     "四個 NAND 在同一個封裝裡，所以自動組成一個 8-input NAND",
+     "pin 14 是 ground，pin 7 是 power",
+     "四個 NAND 各有自己的輸入與輸出，並共用電源與接地"
+    ],
+    "answer": 3,
+    "why": "講義 p.36：晶片內有 4 個獨立的 two-input NAND，共用電源與接地（pin 14 = Power、pin 7 = Ground）。\n放在同一封裝不代表會自動接成更大的閘；要組成更大的功能，還得另外接線。"
+   }
+  ]
+ },
+ "q_ch5_components": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "某筆電規格：Intel Core i5（6-core）、8 MB cache、16 GB SDRAM、512 GB SSD。若想增加「可長期保存的檔案容量」與「執行中程式可用的主記憶體」，應分別升級哪一項？",
+    "options": [
+     "512 GB SSD；16 GB SDRAM",
+     "16 GB SDRAM；512 GB SSD",
+     "8 MB cache；16 GB SDRAM",
+     "512 GB SSD；8 MB cache"
+    ],
+    "answer": 0,
+    "why": "長期保存檔案 → secondary storage（SSD）；執行中程式與資料放在 main memory（SDRAM，揮發性）。\nCache 只是常用資料的小量高速副本，不是主要容量；兩項對調則是把「儲存」與「主記憶體」弄反。"
+   }
+  ]
+ },
+ "q_ch5_architecture": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "CPU 剛完成 Fetch：控制單元正要解碼放在位址 500、長度 4 bytes 的那條指令。指令在記憶體中連續存放。依講義，此時 PC 與 IR 各放什麼？",
+    "options": [
+     "PC = 500；IR = 位址 500 的那條指令",
+     "PC = 504；IR = 位址 500 的那條指令",
+     "PC = 位址 500 的那條指令；IR = 504",
+     "PC = 504；IR = 位址 504 的那條指令"
+    ],
+    "answer": 1,
+    "why": "PC 放「下一條指令的位址」：500 + 4 = 504；IR 放「正在執行的指令」：位址 500 的那條。\nPC = 500 是 PC 沒更新；第三項把位址與指令放反了（PC 放的是位址，不是指令）；第四項把 IR 當成下一條指令。"
+   }
+  ]
+ },
+ "q_ch5_bus": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "一台 byte-addressable 的電腦，位址匯流排寬度為 12 條線。最多可定址多少個 bytes？",
+    "options": [
+     "1,024",
+     "8,192",
+     "4,096",
+     "144"
+    ],
+    "answer": 2,
+    "why": "每條位址線有 0、1 兩種狀態，12 條線有 2¹² = 4,096 種位址；byte-addressable 時一格是一個 byte。\n144 是 12²；1,024 是 2¹⁰（少算 2 條線）；8,192 是 2¹³（多算 1 條線）。這題的位址位元數與格數關係是由 bits 容量推出的補充算法。"
+   }
+  ]
+ },
+ "q_ch5_cycle": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "位址 100 有一條 3 bytes 的指令 LOAD R1,[200]，要把位址 200 的資料放進暫存器 R1。Fetch 完成時 PC 是多少？而「從位址 200 取得資料」發生在哪一步？",
+    "options": [
+     "PC = 103；Decode",
+     "PC = 200；Get data",
+     "PC = 100；Get data",
+     "PC = 103；Get data"
+    ],
+    "answer": 3,
+    "why": "Fetch 時 PC 更新為 100 + 3 = 103（指向下一條指令）。指令需要額外存取記憶體，屬於「Get data if needed」步驟。\nPC = 100 是沒更新；PC = 200 把資料位址當成指令位址；Decode 只判斷是哪種指令並產生 control signals，還不取資料。"
+   }
+  ]
+ },
+ "q_ch5_storage": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "某磁碟的 seek time 為 7 ms、latency 為 3 ms，transfer rate 為 100 MB/s。讀取一個連續的 20 MB 檔案，總時間約是？",
+    "options": [
+     "210 ms",
+     "10.2 ms",
+     "200 ms",
+     "10 ms"
+    ],
+    "answer": 0,
+    "why": "Access time = seek + latency = 7 + 3 = 10 ms；傳輸時間 = 20 MB ÷ 100 MB/s = 0.2 秒 = 200 ms；合計 210 ms。\n10 ms 只算了 access time；200 ms 只算了傳輸時間；10.2 ms 是把 0.2「秒」直接當成毫秒加。「總時間 = access time + 傳輸時間」是自製的補充算法，講義只定義 access time 與 transfer rate 兩個指標。"
+   }
+  ]
+ },
+ "q_ch5_embedded": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "洗衣機的控制晶片只負責依按鍵設定水位與轉速，開發者為了節省程式空間並加快反應，選擇用組合語言撰寫。下列敘述何者正確？",
+    "options": [
+     "這是通用電腦，因為它有處理器",
+     "這是嵌入式系統；code size 與 executing speed 很重要，所以會考慮 assembly language",
+     "使用組合語言是因為嵌入式系統沒有記憶體",
+     "嵌入式系統一定要使用 8-bit micro-processor，不能用其他處理器"
+    ],
+    "answer": 1,
+    "why": "Embedded system＝專門執行少數功能、嵌在更大系統中的電腦；講義指出 code size 與 executing speed 都很重要，並提到 assembly language。\n有處理器不等於通用電腦；講義列的是 8-bit micro-processors、32-bit DSPs、64-bit RISC，不是只能用 8-bit。"
+   }
+  ]
+ },
+ "q_ch5_parallel": {
+  "single": true,
+  "letters": true,
+  "cases": [
+   {
+    "prompt": "遊戲引擎在四核心 CPU 上執行：核心 1 計算物理、核心 2 計算 AI、核心 3 處理音效、核心 4 負責繪圖，彼此透過 shared memory 交換資料。依講義，這屬於哪一種平行？",
+    "options": [
+     "Bit-level parallelism",
+     "Instruction-level parallelism（superscalar）",
+     "Task-level parallelism（MIMD）",
+     "Data-level parallelism（SIMD）"
+    ],
+    "answer": 2,
+    "why": "不同處理器執行不同任務，並用 shared memory 溝通，是 task-level（MIMD）。\nSIMD 是同一組指令作用在不同資料；bit-level 是加大 word size；instruction-level 是單一處理器內多個 execution units 同時執行獨立指令。"
+   }
+  ]
+ }
+});
+
     $$('[data-mini]').forEach(host=>{
       const exercise=MINI_EXERCISES[host.dataset.mini], mount=$('[data-mini-mount]',host);
       const english=exercise.language==='en';
@@ -4101,8 +4687,8 @@
         const score=answers.filter((answer,i)=>answer===exercise.cases[i].answer).length;
         status.textContent=english?'Answered '+answers.length+' / '+exercise.cases.length+' · Correct '+score:'已答 '+answers.length+' / '+exercise.cases.length+' · 答對 '+score+' 題';
         if(english)status.lang='en';
-        mount.append(status);
-        const reset=document.createElement('button'); reset.type='button'; reset.className='ghost-btn'; reset.textContent=english?'Restart quiz':'重練本節';
+        if(!exercise.single)mount.append(status);
+        const reset=document.createElement('button'); reset.type='button'; reset.className='ghost-btn'; reset.textContent=english?'Restart quiz':(exercise.single?'重做這題':'重練本節');
         if(english)reset.lang='en';
         reset.addEventListener('click',()=>{index=0;answers=[];finished=false;renderMini(true);});
         if (finished) {
@@ -4127,7 +4713,7 @@
         }
         const item=exercise.cases[index], options=item.options || exercise.options, hasAnswer=Number.isInteger(answers[index]);
         const prompt=document.createElement('p'); prompt.className='mini-question'; prompt.tabIndex=-1;
-        prompt.textContent=(english?'Question '+(index+1)+': ':'第 '+(index+1)+' 題：')+item.prompt; if(english)prompt.lang='en';mount.append(prompt);
+        prompt.textContent=(exercise.single?'':(english?'Question '+(index+1)+': ':'第 '+(index+1)+' 題：'))+item.prompt; if(english)prompt.lang='en';mount.append(prompt);
         const choices=document.createElement('div'); choices.className='mini-options';
         choices.setAttribute('role','group'); choices.setAttribute('aria-label',item.prompt);
         const next=document.createElement('button'); next.type='button'; next.className='primary-btn';
@@ -4143,7 +4729,7 @@
           button.addEventListener('click',()=>{
             if (Number.isInteger(answers[index])) return;
             answers[index]=choice; renderMini();
-            $('[data-mini-next]',mount).focus({preventScroll:true});
+            const nextBtn=$('[data-mini-next]',mount);if(nextBtn)nextBtn.focus({preventScroll:true});else{const fb=$('.lab-output',mount);if(fb){fb.tabIndex=-1;fb.focus({preventScroll:true});}}
           });
           choices.append(button);
         });
@@ -4162,8 +4748,9 @@
           if (index===exercise.cases.length-1) finished=true; else index++;
           renderMini(true);
         });
-        const controls=document.createElement('div'); controls.className='lab-controls'; controls.append(next,reset);
-        mount.append(controls);
+        const controls=document.createElement('div'); controls.className='lab-controls';
+        if(exercise.single){if(hasAnswer)controls.append(reset);}else controls.append(next,reset);
+        if(controls.childElementCount)mount.append(controls);
         if(focusPrompt){
           prompt.focus({preventScroll:true});
           if(exercise.letters) host.closest('.section').scrollIntoView({block:'start',behavior:'instant'});
