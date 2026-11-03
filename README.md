@@ -13,6 +13,8 @@ Ch01–Ch05 的繁體中文學習筆記，包含概念解釋、進位換算、�
 5. 第四章逐頁對照 38 頁講義，包含六種閘的符號與真值表、電晶體導通模型、等效電路比較、De Morgan 驗證、半／全加器、8-to-1 MUX、NAND 型 S-R latch 記憶實驗，以及 IC／CPU。最後做 36 題英文題目與選項的測驗，答完看中文推理、講義頁碼與錯題解析。直接前往 [第四章](https://rtxmythically.github.io/computer-science-study-notes/#ch4-start) 或 [第四章測驗](https://rtxmythically.github.io/computer-science-study-notes/#ch4-test)。
 6. 第五章依 ch05.pdf 整理：規格表與 K／M／G／T 單位、von Neumann 五大單元、PC 與 IR、bus／cache／pipelining、Fetch-Execute 步進器（可逐步看 PC 與暫存器）、位址線計算機、磁碟時間計算機、嵌入式系統與平行架構，最後做 39 題英文測驗。直接前往 [第五章](https://rtxmythically.github.io/computer-science-study-notes/#ch5-start) 或 [第五章測驗](https://rtxmythically.github.io/computer-science-study-notes/#ch5-test)。
 
+7. [老師題型練習](https://rtxmythically.github.io/computer-science-study-notes/#exam-style)：依兩次已結束小考和 Homework 1 的題型，新增 26 題自製新題，英文題目、計算直接填答、中文逐步解析。含第一章觀念、整數／小數換算、二／八／十六進位加減、固定 10-bit 補數與溢位、逐次 Huffman 合併與碼字、指定精度浮點數、RLE 編解碼。可依主題練習、保存計算筆記、重練錯題，或做 7 題／100 分模擬小考，交卷後才顯示解析。新區進度保存於本機；切換主題／模式會開新一輪。第四、五章等英文題庫的選項也在載入時打亂。
+
 不需要安裝軟體或登入。主題偏好、已學標記與部分答題進度保存在各自瀏覽器中。
 
 ## 檔案

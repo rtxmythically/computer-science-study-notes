@@ -634,6 +634,40 @@
     .quick-q .mini-options button{text-align:left;min-height:48px;white-space:normal;overflow-wrap:anywhere;line-height:1.6}
     .quick-q .mini-question{font-size:17px;line-height:1.7}
     .quick-q .lab-output{white-space:pre-wrap;overflow-wrap:anywhere}
+    /* Assessed-style practice: direct answers and worked solutions. */
+    .aligned-toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:24px 0 10px}
+    .aligned-toolbar .lab-controls{margin:0;flex-basis:100%}
+    .aligned-toolbar label{font-size:13px;color:var(--muted)}
+    .aligned-toolbar select{min-height:44px;max-width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:10px;color:var(--text);background:var(--panel-strong)}
+    .aligned-toolbar button{padding:10px 14px}
+    .aligned-toolbar button[aria-pressed="true"]{border-color:var(--cyan);box-shadow:inset 0 -2px 0 var(--cyan)}
+    .aligned-status{font-weight:700;color:var(--cyan);margin:20px 0}
+    .aligned-question{border:1px solid var(--border);border-radius:17px;background:var(--panel-soft);padding:22px;margin:18px 0}
+    .aligned-question h3{margin-top:0;font-size:15px;color:var(--muted)}
+    .aligned-prompt{font-size:19px;line-height:1.65;margin-bottom:18px;overflow-wrap:anywhere}
+    .aligned-question .table-scroll{margin:14px 0}
+    .aligned-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin:18px 0}
+    .aligned-field:has(fieldset){grid-column:1/-1}
+    .aligned-field label,.aligned-question>label{display:block;font-size:13px;margin-bottom:6px}
+    .aligned-field input[type="text"],.aligned-question textarea{width:100%;max-width:100%;min-height:46px;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:var(--panel-strong);color:var(--text);font:inherit}
+    .aligned-field input[type="text"]{font-family:monospace;font-size:17px}
+    .aligned-question textarea{resize:vertical;margin:4px 0 12px}
+    .aligned-field input:focus-visible,.aligned-question textarea:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+    .aligned-field input:disabled{opacity:1;color:var(--muted)}
+    .aligned-field small{display:block;color:var(--muted);font-size:11px;line-height:1.5;margin:5px 0}
+    .aligned-field fieldset{border:0;padding:0;margin:0;min-width:0}
+    .aligned-field legend{font-size:13px;margin-bottom:8px}
+    .aligned-field .aligned-choice{display:flex;gap:10px;align-items:center;border:1px solid var(--border);border-radius:10px;padding:11px;margin:7px 0;cursor:pointer}
+    .aligned-choice input{accent-color:var(--cyan);flex:0 0 auto}
+    .aligned-choice:has(input:checked){border-color:var(--cyan);background:rgba(86,214,255,.08)}
+    .aligned-field-result{font-size:13px;overflow-wrap:anywhere;margin:8px 0}
+    .aligned-field-result.ok{color:var(--green)}.aligned-field-result.bad{color:var(--red)}
+    .aligned-solution{border-top:1px solid var(--border);margin-top:18px;padding-top:16px;overflow-wrap:anywhere}
+    .aligned-solution h4{color:var(--cyan)}.aligned-solution ol{padding-left:24px}.aligned-solution li{margin:10px 0}
+    .aligned-overview h3{margin-top:0}.aligned-methods{margin:20px 0}
+    #alignedError[hidden]{display:none}
+    @media(max-width:680px){.aligned-fields{grid-template-columns:1fr}.aligned-question{padding:15px}.aligned-toolbar select{width:100%}.aligned-prompt{font-size:17px}}
+
   </style>
 </head>
 <body>
@@ -705,6 +739,9 @@
     <a class="nav-link" href="#ch5-parallel"><span class="nav-dot"></span>平行架構 · SIMD／MIMD</a>
     <a class="nav-link" href="#ch5-test"><span class="nav-dot"></span>第五章英文測驗 · 39 題</a>
 
+    <div class="side-label">Exam-style practice</div>
+    <a class="nav-link" href="#exam-style"><span class="nav-dot"></span>老師題型 · 26 題填答／推導</a>
+
     <div class="side-label">Review</div>
     <a class="nav-link" href="#practice"><span class="nav-dot"></span>互動練習</a>
     <a class="nav-link" href="#exam"><span class="nav-dot"></span>考前清單</a>
@@ -739,7 +776,7 @@
           第一章先讀概念，再動手配對、探索分層、執行模擬，最後用選擇題檢查理解。第二章接著學進位換算與二、八、十六進位加減；第三章學補數、小數、文字與多媒體的資料表示；第四章把 bits 連到邏輯閘、計算與記憶電路；第五章把元件組成完整電腦，看它如何一步步執行指令。
           每讀完一節就按「標記已學」，進度會自動存在這台電腦。
         </p>
-        <div class="study-path"><a href="#ch5-start">最新：第五章 Computing Components →</a><a href="#ch5-test">第五章英文測驗 · 39 題 →</a><a href="#ch4-start">第四章 Gates and Circuits →</a><a href="#ch4-test">第四章英文測驗 · 36 題 →</a><a href="#radix-arithmetic">不同進位加減 · 逐步教練 →</a><a href="#arithmetic-test">加減法測驗 · 20 題 →</a><a href="#conversion-test">進位轉換測驗 →</a><a href="#ch3-start">第三章資料表示 →</a></div>
+        <div class="study-path"><a href="#exam-style">最新：老師題型 · 填答與推導 →</a><a href="#ch5-start">第五章 Computing Components →</a><a href="#ch5-test">第五章英文測驗 · 39 題 →</a><a href="#ch4-start">第四章 Gates and Circuits →</a><a href="#ch4-test">第四章英文測驗 · 36 題 →</a><a href="#radix-arithmetic">不同進位加減 · 逐步教練 →</a><a href="#arithmetic-test">加減法測驗 · 20 題 →</a><a href="#conversion-test">進位轉換測驗 →</a><a href="#ch3-start">第三章資料表示 →</a></div>
         <div class="hero-stats">
           <div class="stat"><strong>Ch01</strong><span>Computer Science Basics</span></div>
           <div class="stat"><strong>Ch02</strong><span>Binary Values & Number Systems</span></div>
@@ -2000,6 +2037,29 @@
         <div class="study-path"><a href="#ch5-start">回到第五章教學 →</a><a href="#ch5-cycle">複習 Fetch-Execute →</a><a href="#ch5-storage">複習儲存裝置 →</a></div>
       </section>
 
+      <section class="section searchable study-section" id="exam-style" data-practice-only aria-labelledby="alignedTitle">
+        <div class="section-kicker">Ch01–Ch03 · Based on assessed question types</div>
+        <h2 id="alignedTitle">老師題型練習：自己算出來，再核對</h2>
+        <p class="intro">依兩次已結束小考與第一次回家作業的題型設計 <strong>26 題同型新題</strong>。英文題目與選項，計算直接填答，中文解析說明每一步；數字與 Huffman 頻率為自製，不是老師原題。</p>
+        <div class="aligned-overview grid three"><div class="card"><h3>先練會做</h3><p>選主題，一次做一題。卡住可展開方法提示，自己記下過程；檢查後才看答案與完整推導。</p></div><div class="card"><h3>再模擬小考</h3><p>7 題、100 分，參考 10/6 的配置：2 題觀念選擇共 10 分，5 題計算填空共 90 分。整份交卷才顯示解析。</p></div><div class="card"><h3>看清楚哪裡錯</h3><p>多欄題逐欄核對；補數分開看圖樣、有號值與溢位。練習統計首次整題答對，完成後可重練錯題。</p></div></div>
+        <details class="aligned-methods"><summary>先讀：這些題型要怎麼做？</summary><div class="answer">
+          <h3>整數／小數換算</h3><p>整數用位置權重或反覆除；小數換成 base b 時反覆乘 b，整數位按產生順序讀。例：0.6875×16=11=B，所以 0.6875₁₀=0.B₁₆。directly 問直接法，2↔16 用每 4 bits 對應；計算機核對不取代題目要求的過程。</p>
+          <h3>固定 10-bit 補數</h3><p>範圍 −512–511。負數固定 10 位反轉加 1；減法 A−B 改成 A+(−B)。先看數學答案是否超出範圍，再看保留的 10-bit 圖樣。例如 400+200=600 超出上限，低 10 位 1001011000 解讀為 −424；−424 是溢位後的儲存解讀，不能當作數學答案。</p>
+          <h3>Huffman 要自己建樹</h3><p>每輪重新取最小權重兩個節點合併；本區規定小權重在左，同權重用排序後的組名字母比較。左 0、右 1，從根到葉讀碼，解碼每到葉就回根。建樹題要填全部合併步驟與七個碼字，不只認識「常見字用短碼」。</p>
+          <h3>指定有效位數的浮點數</h3><p>本區採 sign × 整數 mantissa × 10^exponent。有效位數不是小數點後幾位。例：12.346，4 位尾數採截取是 +×1234×10⁻²，採四捨五入是 +×1235×10⁻²。原作業未明說捨入方式，本區每題明示截取或四捨五入，避免假定唯一規則。</p>
+          <h3>RLE 保留符號與大小寫</h3><p>本區只有長度大於 3 的連續重複改成 *字元次數；短段保留。#、@、+ 都可當資料字元，* 才是旗標。例：@@@@zz → *@4zz。文字編解碼須保持字元順序。</p>
+        </div></details>
+        <div class="callout"><strong>作答格式：</strong>填計算結果時不用括號與基底；十六進位大小寫皆可。固定 10-bit 圖樣必須保留前導 0。過程筆記可保存，但不會自動評分；對照解析自行檢查推導。</div>
+        <div class="aligned-toolbar"><div class="lab-controls" role="group" aria-label="Practice or exam simulation"><button type="button" class="primary-btn" id="alignedPracticeMode" lang="en" aria-pressed="true">Step-by-step practice</button><button type="button" class="ghost-btn" id="alignedExamMode" lang="en" aria-pressed="false">7-question exam</button></div><label for="alignedTopic" lang="en">Practice topic</label><select id="alignedTopic" lang="en"></select><button type="button" class="ghost-btn" id="alignedRestart" lang="en">Restart current mode</button></div>
+        <p class="source-note">切換主題、模式或按 Restart 會開始新一輪並重置本區作答；其他章節的學習進度不受影響。題序與選項會打亂；同一輪重新整理可繼續作答。</p>
+        <div class="aligned-status" id="alignedStatus" lang="en" aria-live="polite"></div>
+        <div class="lab-output bad" id="alignedError" role="alert" hidden></div>
+        <div id="alignedMount"></div>
+        <p class="source-note" id="alignedStorage"></p>
+        <p class="source-note">題型參考：9/29 實習課小考 1、10/6 Quiz、Homework 1；學習方法對照 Ch01–Ch03 講義。模擬卷只參考已知題型配置，不預測未來考題。</p>
+        <div class="study-path"><a href="#ch2-conversion">複習換算 →</a><a href="#ch3-integer">複習補數 →</a><a href="#ch3-compression">複習壓縮 →</a><a href="#ch3-fraction">複習浮點數 →</a></div>
+      </section>
+
       <section class="section searchable" id="practice" data-practice-only data-learn-id="practice">
         <div class="section-head">
           <div>
@@ -3018,6 +3078,222 @@
     function ch4ActLatch(s,r){const result=ch4LatchStep(ch4Stored,s,r);ch4Stored=result.stored;ch4LatchCount++;ch4LatchHistory.push([ch4LatchCount,s,r,result.action,result.x===null?'?':result.x,result.y===null?'?':result.y]);ch4LatchHistory=ch4LatchHistory.slice(-12);ch4Flow('ch4LatchFlow',[['S='+s+', R='+r],[result.action],['X='+(result.x===null?'?':result.x),result.x],['Y='+(result.y===null?'?':result.y),result.y]]);$('#ch4LatchOutput').textContent=result.reason;$('#ch4LatchOutput').classList.toggle('bad',result.stored===null);ch4Rows('ch4LatchRows',ch4LatchHistory,ch4LatchHistory.length-1);}
     [['ch4LatchSet',0,1],['ch4LatchReset',1,0],['ch4LatchHold',1,1],['ch4LatchInvalid',0,0]].forEach(([id,s,r])=>$('#'+id).addEventListener('click',()=>ch4ActLatch(s,r)));
     $('#ch4LatchClear').addEventListener('click',()=>{ch4Stored=0;ch4LatchCount=0;ch4LatchHistory=[];ch4ActLatch(1,0);});ch4ActLatch(1,0);
+
+    // BEGIN aligned-assessment-core
+    function alignedShuffle(values,random=Math.random){const out=values.slice();for(let i=out.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[out[i],out[j]]=[out[j],out[i]];}return out;}
+    function alignedFraction(text){
+      if(!/^[+-]?\d+(?:\.\d+)?$/.test(text))throw new Error('Use a decimal number without spaces or an exponent.');
+      const negative=text[0]==='-',parts=text.replace(/^[+-]/,'').split('.'),scale=(parts[1]||'').length;
+      return {n:BigInt(parts.join(''))*(negative?-1n:1n),d:10n**BigInt(scale)};
+    }
+    function alignedRadixFraction(text,base){
+      const {n,d}=alignedFraction(text);if(n<0n)throw new Error('Nonnegative conversion only.');
+      const integer=(n/d).toString(base).toUpperCase();let remainder=n%d,digits='',steps=[];
+      while(remainder && digits.length<24){const before=remainder;remainder*=BigInt(base);const digit=remainder/d;remainder%=d;digits+=digit.toString(base).toUpperCase();steps.push({before:String(before),denominator:String(d),digit:digit.toString(base).toUpperCase(),remainder:String(remainder)});}
+      if(remainder)throw new Error('The selected exercise must terminate exactly.');return {answer:integer+(digits?'.'+digits:''),steps};
+    }
+    function alignedTwos(a,b,op,width=10){
+      const modulus=2**width,min=-(2**(width-1)),max=2**(width-1)-1;
+      if(!Number.isInteger(a)||!Number.isInteger(b)||a<min||a>max||b<min||b>max)throw new Error('Operand outside signed range.');
+      const addend=op==='sub'?-b:b,exact=a+addend,encode=n=>(((n%modulus)+modulus)%modulus).toString(2).padStart(width,'0');
+      const raw=((exact%modulus)+modulus)%modulus,decoded=raw>=modulus/2?raw-modulus:raw;
+      return {a:encode(a),addend:encode(addend),result:encode(exact),decoded,exact,overflow:exact<min||exact>max,min,max};
+    }
+    function alignedHuffman(frequencies){
+      let queue=Object.entries(frequencies).map(([label,weight])=>({label,weight}));const trace=[],codes={};
+      const compare=(a,b)=>a.weight-b.weight||(a.label<b.label?-1:a.label>b.label?1:0);
+      while(queue.length>1){queue.sort(compare);const before=queue.map(x=>x.label+':'+x.weight).join(' · '),left=queue.shift(),right=queue.shift();const node={label:(left.label+right.label).split('').sort().join(''),weight:left.weight+right.weight,left,right};trace.push({before,left:left.label,right:right.label,leftWeight:left.weight,rightWeight:right.weight,label:node.label,weight:node.weight});queue.push(node);}
+      function walk(node,path){if(!node.left){codes[node.label]=path||'0';return;}walk(node.left,path+'0');walk(node.right,path+'1');}walk(queue[0],'');
+      return {codes,trace,cost:Object.entries(frequencies).reduce((sum,[letter,count])=>sum+count*codes[letter].length,0)};
+    }
+    function alignedDecode(bits,codes){let pending='',out='';const inverse=Object.fromEntries(Object.entries(codes).map(([letter,code])=>[code,letter]));for(const bit of bits){if(bit!=='0'&&bit!=='1')throw new Error('Invalid bit');pending+=bit;if(Object.hasOwn(inverse,pending)){out+=inverse[pending];pending='';}}if(pending)throw new Error('Incomplete code');return out;}
+    function alignedFloat(text,precision,rounding){
+      const parts=text.replace(/^[+-]/,'').split('.'),fractionLength=(parts[1]||'').length,all=parts.join('').replace(/^0+/,'');if(!all)throw new Error('Use a nonzero number.');
+      let exponent=all.length-fractionLength-precision,mantissa=all.slice(0,precision).padEnd(precision,'0');
+      if(rounding==='half-up' && all.length>precision && all[precision]>='5'){mantissa=String(BigInt(mantissa)+1n);if(mantissa.length>precision){mantissa=mantissa.slice(0,precision);exponent++;}}
+      return {sign:text[0]==='-'?'-':'+',mantissa,exponent,discarded:all.slice(precision)};
+    }
+    function alignedRleEncode(text){let out='';for(let i=0;i<text.length;){let end=i+1;while(end<text.length&&text[end]===text[i])end++;const length=end-i;out+=length>3?'*'+text[i]+length:text.slice(i,end);i=end;}return out;}
+    function alignedRleDecode(text){let out='';for(let i=0;i<text.length;){if(text[i]!=='*'){out+=text[i++];continue;}const match=/^\*([^*\d])([1-9]\d*)/.exec(text.slice(i));if(!match||Number(match[2])>500)throw new Error('Invalid RLE');out+=match[1].repeat(Number(match[2]));i+=match[0].length;}return out;}
+    function alignedFieldResult(field,raw){
+      const text=String(raw??''),value=field.kind==='text'?text:text.trim();if(!value)return {valid:false,correct:false,message:'This answer is blank.'};
+      if(field.kind==='choice')return {valid:field.options.includes(value),correct:value===field.answer,message:'Choose one option.'};
+      if(field.kind==='text')return {valid:true,correct:value===field.answer,message:''};
+      if(field.kind==='merge')return {valid:/^[A-Z]+\+[A-Z]+$/.test(value.toUpperCase()),correct:value.toUpperCase()===field.answer,message:'Use LEFT+RIGHT, with sorted letters inside each group.'};
+      if(field.kind==='int'){if(!/^[+-]?\d+$/.test(value))return {valid:false,correct:false,message:'Enter a signed decimal integer.'};return {valid:true,correct:BigInt(value)===BigInt(field.answer),message:''};}
+      if(field.kind==='decimal'){try{const got=alignedFraction(value),expected=alignedFraction(field.answer);return {valid:true,correct:got.n*expected.d===expected.n*got.d,message:''};}catch{return {valid:false,correct:false,message:'Enter a decimal value only, such as 13.375.'};}}
+      if(field.kind==='mantissa')return {valid:new RegExp('^[1-9][0-9]{'+(field.width-1)+'}$').test(value),correct:value===field.answer,message:'Enter exactly '+field.width+' digits, with a nonzero first digit.'};
+      if(field.kind==='radix'){
+        const digits='0123456789ABCDEF'.slice(0,field.base),pattern=new RegExp('^['+digits+']+(?:\\.['+digits+']+)?$','i');
+        if(!pattern.test(value))return {valid:false,correct:false,message:'Use base-'+field.base+' digits only; omit parentheses, spaces and base suffixes.'};
+        if(field.width && (value.includes('.')||value.length!==field.width))return {valid:false,correct:false,message:'Keep exactly '+field.width+' bits, including leading zeros.'};
+        const normalize=t=>{const parts=t.toUpperCase().split('.'),whole=parts[0].replace(/^0+(?=.)/,'');const fraction=(parts[1]||'').replace(/0+$/,'');return whole+(fraction?'.'+fraction:'');};
+        return {valid:true,correct:normalize(value)===normalize(field.answer),message:''};
+      }
+      throw new Error('Unknown answer field');
+    }
+    function alignedBuildQuestions(){
+      const bank=[];
+      const field=(id,label,answer,kind='radix',extra={})=>({id,label,answer:String(answer),kind,...extra});
+      const add=(id,topic,prompt,fields,steps,hint,extra={})=>bank.push({id,topic,prompt,fields,steps,hint,...extra});
+      const mc=(id,prompt,answer,options,why)=>add(id,'concept',prompt,[field('choice','Choose the best answer',answer,'choice',{options})],[why],'留意 directly above／below、replaced、density 與 revised 這些英文關鍵字。');
+      mc('layer-above','Which layer is located directly above Hardware in the lecture\'s computing-system model?','Programming',['Information','Programming','Operating systems','Applications'],'由內到外：Information → Hardware → Programming → Operating systems → Applications → Communications。directly above 問緊鄰上層，所以是 Programming。');
+      mc('layer-below','Which layer is located directly below Operating systems in the lecture\'s computing-system model?','Programming',['Hardware','Information','Programming','Applications'],'Operating systems 內側緊鄰的是 Programming。Hardware 再更內側一層，不能跳過 Programming。');
+      mc('hardware-component','Which component replaced vacuum tubes in second-generation computers?','Transistor',['Transistor','Integrated circuit','Magnetic core','Magnetic drum'],'第二代的代表元件是 Transistor；IC 是第三代。Magnetic core／drum 是記憶體相關元件，別把世代中的不同替換關係混在一起。');
+      mc('moore-quantity','In the lecture\'s revised Moore\'s Law, which chip property doubles approximately every 18 months?','Density',['Density','Clock frequency','Physical size','Selling price'],'講義修訂版描述 chip density（晶片密度），不是把時脈、實體尺寸或售價都當成每 18 個月必定加倍。');
+      mc('moore-period','According to the lecture\'s revised Moore\'s Law, how often does chip density approximately double?','Every 18 months',['Every 12 months','Every 24 months','Every 18 months','Every 6 months'],'題目指定 revised（修訂版），依講義是 18 個月；先確認問的是哪個版本與哪一個量。');
+      const convert=(id,prompt,value,from,targets)=>{
+        const n=parseInt(value,from),fields=targets.map(base=>field('base'+base,'Answer in base '+base,n.toString(base).toUpperCase(),'radix',{base}));
+        let steps=[];
+        if(from!==10)steps.push('位置權重：'+value.split('').map((digit,i)=>parseInt(digit,from)+'×'+from+'^'+(value.length-i-1)).join(' + ')+' = '+n+'（十進位核對）。');
+        for(const base of targets){if(from===10){let current=n,rows=[];while(current){const quotient=Math.floor(current/base),remainder=current%base;rows.push(current+' ÷ '+base+' = '+quotient+' 餘 '+remainder.toString(base).toUpperCase());current=quotient;}steps.push(rows.join('；')+'。餘數倒讀 → '+n.toString(base).toUpperCase()+'（base '+base+'）。');}
+          else if(from===2&&base===16){const padded=value.padStart(Math.ceil(value.length/4)*4,'0');steps.unshift('直接法：從右每 4 bits 分組，整數不足在左補 0：'+padded.match(/.{4}/g).join(' | ')+' → '+n.toString(16).toUpperCase()+'。不需先轉十進位。');}
+          else if(from===16&&base===2)steps.unshift('直接法：每個 Hex digit 換成 4 bits：'+value.split('').map(ch=>ch+' → '+parseInt(ch,16).toString(2).padStart(4,'0')).join('；')+'。接起來後只可省略整串最左邊的前導 0。');
+        }
+        steps.push('各欄答案：'+fields.map(x=>x.label+' = '+x.answer).join('；')+'。');
+        add(id,'conversion',prompt,fields,steps,'整數轉十進位乘位置權重；十進位轉其他進位反覆除；2↔16 直接每四位分組。');
+      };
+      convert('hex-dec','Convert (3B7)₁₆ to decimal.','3B7',16,[10]);
+      convert('bin-dec','Convert (1011010111)₂ to decimal.','1011010111',2,[10]);
+      convert('bin-hex','Convert (11010110101)₂ directly to hexadecimal. Do not use decimal as an intermediate step.','11010110101',2,[16]);
+      convert('hex-bin','Convert (C3A)₁₆ directly to binary. Do not use decimal as an intermediate step.','C3A',16,[2]);
+      convert('dec-oct-hex','Convert (947)₁₀ to octal and hexadecimal, respectively.','947',10,[8,16]);
+      convert('dec-bin-hex','Convert (427)₁₀ to binary and hexadecimal, respectively.','427',10,[2,16]);
+      add('fraction-dec','fraction','Convert (1101.011)₂ to decimal.',[field('decimal','Decimal value','13.375','decimal')],['整數 1101₂ = 8+4+1 = 13。','小數 .011₂ = 0×1/2 + 1×1/4 + 1×1/8 = 0.375。','合併得到 13.375。小數點後的位置權重是負次方。'],'小數點左右分開算；右側依序乘 1/2、1/4、1/8。');
+      const fractionHex=alignedRadixFraction('2861.8125',16);
+      add('fraction-hex','fraction','Convert (2861.8125)₁₀ to hexadecimal. Give the exact value.',[field('hex','Hexadecimal value',fractionHex.answer,'radix',{base:16})],['整數：2861÷16=178 餘 D；178÷16=11 餘 2；11÷16=0 餘 B。倒讀成 B2D。','小數：0.8125×16=13.0，取 13=D，餘下小數為 0，結束。','合起來 B2D.D₁₆。核對：11×256+2×16+13+13/16=2861.8125。'],'整數反覆除 16，餘數倒讀；小數反覆乘 16，整數位按產生順序讀。');
+      function arithmetic(id,a,b,base,operation){const x=parseInt(a,base),y=parseInt(b,base),result=operation==='add'?x+y:x-y;add(id,'arithmetic','Compute ('+a+')'+{2:'₂',8:'₈',16:'₁₆'}[base]+' '+(operation==='add'?'+':'−')+' ('+b+')'+{2:'₂',8:'₈',16:'₁₆'}[base]+'. Give the result in base '+base+'.',[field('result','Result in base '+base,result.toString(base).toUpperCase(),'radix',{base})],['從最右欄開始，較短的數在左側補 0 對齊。',...radixTrace(base,operation,a,b).rows.map(row=>radixStepText(radixTrace(base,operation,a,b),row)),'核對：'+x+(operation==='add'?' + ':' − ')+y+' = '+result+'（十進位）；原基底答案 '+result.toString(base).toUpperCase()+'。'],'加法滿基底進 1；減法向左借 1，本欄增加基底。');}
+      arithmetic('binary-add','1101011','101101',2,'add');arithmetic('octal-sub','704','157',8,'sub');arithmetic('hex-add','9B','6F',16,'add');
+      for(const [id,a,b,op] of [['twos-positive',437,286,'sub'],['twos-negative',-437,286,'add'],['twos-overflow-positive',437,286,'add'],['twos-overflow-negative',-437,286,'sub']]){
+        const r=alignedTwos(a,b,op);
+        add(id,'twos','Using fixed-width 10-bit two\'s-complement arithmetic, compute ('+a+') '+(op==='sub'?'−':'+')+' ('+b+'). Keep the low 10 bits and determine whether signed overflow occurs.',[
+          field('a','A as 10 bits',r.a,'radix',{base:2,width:10}),field('addend',op==='sub'?'−B as 10 bits (the value added)':'B as 10 bits',r.addend,'radix',{base:2,width:10}),field('result','Stored result: exactly 10 bits',r.result,'radix',{base:2,width:10}),field('decoded','Signed decimal value of the stored bits',r.decoded,'int'),field('overflow','Signed overflow?',r.overflow?'Yes':'No','choice',{options:['Yes','No']})],
+          ['10-bit 二補數範圍是 −512 到 511。先確定數學答案：'+a+(op==='sub'?' − ':' + ')+b+' = '+r.exact+'。',
+          '減法改加負數後，兩個加數圖樣是 '+r.a+' + '+r.addend+'。負數表示法：先在 10 位內反轉正數圖樣，再加 1；等價於 1024 減去絕對值。',
+          '逐欄二進位加法，只保留低 10 位，得到 '+r.result+'。',
+          '圖樣當成無號數是 '+parseInt(r.result,2)+'；最高位'+r.result[0]+'，有號解讀為 '+r.decoded+'。',
+          r.overflow?'數學答案 '+r.exact+' 超出 −512–511，因此有 signed overflow。'+r.decoded+' 是截成 10 位後的解讀，不是正確的數學答案。':'數學答案仍在範圍內，所以沒有 signed overflow。不要把超出位數的 carry 和有號溢位混為一談。'],
+          '先算數學答案判斷範圍；再把減法改成加負數，固定 10 位操作，最後解讀保留下來的 bits。');
+      }
+      const frequencies={A:13,B:7,I:18,M:10,S:9,X:5,Z:2},tree=alignedHuffman(frequencies),context={headers:['Symbol','Frequency'],rows:Object.entries(frequencies)};
+      const treeFields=tree.trace.map((row,i)=>field('merge'+i,'Merge '+(i+1)+': LEFT+RIGHT',row.left+'+'+row.right,'merge')).concat(Object.keys(frequencies).map(letter=>field('code'+letter,'Code for '+letter,tree.codes[letter],'radix',{base:2,width:tree.codes[letter].length})));
+      const treeSteps=tree.trace.map((row,i)=>'第 '+(i+1)+' 次：排序 '+row.before+'。合併 '+row.left+'('+row.leftWeight+') + '+row.right+'('+row.rightWeight+') → '+row.label+'('+row.weight+')。');
+      treeSteps.push('每次取權重最小的兩個節點，小權重放左；同權重按組名字母排序，字母較小者在左。左 0、右 1，從根走到葉得到 '+Object.entries(tree.codes).sort().map(([key,value])=>key+'='+value).join('；')+'。');
+      add('huffman-tree','huffman','Build the Huffman tree from these frequencies. Put the smaller weight on the left; break ties by lexicographic order of the sorted group letters. Label left edges 0 and right edges 1. Enter each merge as LEFT+RIGHT (for example, A+BC), then enter every symbol code.',treeFields,treeSteps,'每輪重新排序，取最小兩個。合併組名以成員字母排序，例如 X 與 Z 合併後叫 XZ；不是只按原始表從左到右配。',{context});
+      const messages=['BASIZX','MIX'],encoded=messages.map(text=>text.split('').map(letter=>tree.codes[letter]).join(''));
+      add('huffman-decode','huffman','Build the same Huffman tree using the frequencies and tie-breaking rule below. Decode these two bit strings: (1) '+encoded[0]+'; (2) '+encoded[1]+'. Smaller weights go left, ties use sorted group-letter order; left=0, right=1.',messages.map((message,i)=>field('decoded'+i,'Decoded string '+(i+1),message,'text')),[...treeSteps,...messages.map((message,i)=>'字串 '+(i+1)+'：'+message.split('').map(letter=>tree.codes[letter]).join(' | ')+' → '+message+'。每到葉節點讀一個字，再回根繼續。')],'需要先建立指定的樹；沿 bits 左右走，到葉才輸出字元，不可固定每四位分組。',{context});
+      for(const [id,value,precision,rounding] of [['float-truncate','-248.7369',5,'truncate'],['float-round','27498360000',6,'half-up']]){
+        const r=alignedFloat(value,precision,rounding);
+        add(id,'floating','Represent '+value+' as sign × integer mantissa × 10^exponent, using exactly '+precision+' significant decimal digits in the mantissa. '+(rounding==='truncate'?'Truncate excess digits toward zero.':'Round to nearest; a discarded leading digit of 5 or more rounds the magnitude up.'),[
+          field('sign','Sign',r.sign,'choice',{options:['+','-']}),field('mantissa','Integer mantissa ('+precision+' digits)',r.mantissa,'mantissa',{width:precision}),field('exponent','Exponent (power of 10)',r.exponent,'int')],[
+          '題目採講義 p.22 的整數尾數形式；先分開 sign 與絕對值，再保留 '+precision+' 位有效數字。',
+          '原數字 '+value+'；'+(rounding==='truncate'?'截取，不做四捨五入；捨去尾端 '+r.discarded+'。':'依本題規則四捨五入；捨棄部分為 '+r.discarded+'，首位 '+r.discarded[0]+'，'+(r.discarded[0]>='5'?'尾數加 1。':'尾數不加 1。')),
+          '答案：'+r.sign+' × '+r.mantissa+' × 10^'+r.exponent+'。檢查小數點移動後的尺度；不是小數點後保留 '+precision+' 位。',
+          '原作業只寫 digits，沒有明說捨入規則；本練習各題明示規則，不把此規則當成老師唯一的標準答案。'],'有效位數從第一個非零數字開始計算；尾數在此必須是整數，指數用來補償移動的尺度。');
+      }
+      const raw='#####rrrrrrtt++++qqqaaaaaa',packed=alignedRleEncode(raw),decodeInput='*m5*@4zz*#6';
+      add('rle-encode','rle','Encode "'+raw+'" using run-length encoding. Use *symbolCount only for runs longer than 3; leave shorter runs unchanged. Preserve case and symbols.',[field('encoded','Encoded string',packed,'text')],['按連續區段分成 #×5、r×6、t×2、+×4、q×3、a×6。','只有長度 >3 的區段用 *字元次數；所以 tt、qqq 保留。','串接結果：'+packed+'。#、+ 是原資料字元，* 才是旗標。'],'逐段數「連續」次數；不能把相隔的相同字元合併，也不要忘了計算 * 與次數所佔空間。');
+      add('rle-decode','rle','Decode the RLE string "'+decodeInput+'". In this notation, *symbolCount repeats the symbol Count times; unmarked symbols are literal.',[field('decoded','Decoded string',alignedRleDecode(decodeInput),'text')],['*m5 → mmmmm；*@4 → @@@@；zz 原樣保留；*#6 → ######。','順序串接得到 '+alignedRleDecode(decodeInput)+'。不要把 @ 或 # 當成額外的控制符號。'],'遇到 * 才依後面的字元與次數展開；沒標記的字元直接保留。');
+      return bank;
+    }
+    // END aligned-assessment-core
+
+    const ALIGNED_QUESTIONS=alignedBuildQuestions();
+    const ALIGNED_BY_ID=new Map(ALIGNED_QUESTIONS.map(q=>[q.id,q]));
+    const ALIGNED_KEY='cs-assessment-aligned-v1';
+    const ALIGNED_TOPICS={all:'All topics',concept:'Ch01 · Concepts',conversion:'Integer conversions',fraction:'Fractional conversions',arithmetic:'Radix arithmetic',twos:'10-bit two’s complement',huffman:'Huffman tree and decoding',floating:'Specified-precision floating point',rle:'RLE encoding and decoding'};
+    let alignedRun=null;
+    function alignedEl(tag,text,className){const node=document.createElement(tag);if(text!==undefined)node.textContent=text;if(className)node.className=className;return node;}
+    function alignedSave(){try{localStorage.setItem(ALIGNED_KEY,JSON.stringify(alignedRun));$('#alignedStorage').textContent='作答、計算筆記與進度會保存在這個瀏覽器。';}catch{$('#alignedStorage').textContent='此瀏覽器無法保存；目前仍可作答，重新整理後可能重置。';}}
+    function alignedRestore(){try{
+      const r=JSON.parse(localStorage.getItem(ALIGNED_KEY)||'null');
+      if(!r||r.version!==1||!['practice','exam'].includes(r.mode)||!Object.hasOwn(ALIGNED_TOPICS,r.topic)||!Array.isArray(r.ids)||!r.ids.length||r.ids.some(id=>!ALIGNED_BY_ID.has(id))||new Set(r.ids).size!==r.ids.length||!Number.isInteger(r.index)||r.index<0||r.index>=r.ids.length)return null;
+      if(!r.drafts||!r.notes||!r.first||!r.orders||!Array.isArray(r.checked)||r.checked.some(id=>!r.ids.includes(id)))return null;
+      for(const id of r.ids){if(r.drafts[id] && (typeof r.drafts[id]!=='object'||Object.values(r.drafts[id]).some(value=>typeof value!=='string'||value.length>500)))return null;if(r.notes[id]!==undefined&&(typeof r.notes[id]!=='string'||r.notes[id].length>6000))return null;}
+      if(r.mode==='exam' && (r.ids.length!==7||!r.points||r.ids.reduce((sum,id)=>sum+(r.points[id]||0),0)!==100))return null;
+      r.submitted=!!r.submitted;r.finished=!!r.finished;r.review=!!r.review;return r;
+    }catch{return null;}}
+    function alignedFresh(mode,topic='all',reviewIds=null,focus=true){
+      let ids,points={};
+      if(mode==='exam'){
+        const concepts=alignedShuffle(ALIGNED_QUESTIONS.filter(q=>q.topic==='concept').map(q=>q.id)).slice(0,2);
+        ids=[...concepts,'hex-dec','bin-dec','bin-hex','dec-oct-hex','binary-add'];ids.forEach((id,i)=>points[id]=[5,5,15,15,15,30,15][i]);
+      }else ids=alignedShuffle(reviewIds||ALIGNED_QUESTIONS.filter(q=>topic==='all'||q.topic===topic).map(q=>q.id));
+      alignedRun={version:1,mode,topic,ids,index:0,points,drafts:{},notes:{},first:{},checked:[],orders:{},finished:false,submitted:false,review:!!reviewIds};
+      for(const id of ids){for(const field of ALIGNED_BY_ID.get(id).fields){if(field.kind==='choice')alignedRun.orders[id+':'+field.id]=alignedShuffle(field.options);}}
+      alignedSave();alignedRender(focus);
+    }
+    function alignedGrade(q){const values=alignedRun.drafts[q.id]||{};return q.fields.map(field=>({field,...alignedFieldResult(field,values[field.id]||'')}));}
+    function alignedAnswered(q){const values=alignedRun.drafts[q.id]||{};return q.fields.every(field=>typeof values[field.id]==='string'&&values[field.id].trim().length>0);}
+    function alignedUpdateCount(){if(alignedRun.mode==='exam')$('#alignedStatus').textContent='Exam simulation · '+alignedRun.ids.filter(id=>alignedAnswered(ALIGNED_BY_ID.get(id))).length+' / 7 questions filled · 100 points';}
+    function alignedContext(q,host){if(!q.context)return;const wrap=alignedEl('div',undefined,'table-scroll'),table=alignedEl('table',undefined,'compare'),head=alignedEl('thead'),tr=alignedEl('tr');for(const title of q.context.headers){const th=alignedEl('th',title);th.scope='col';tr.append(th);}head.append(tr);const body=alignedEl('tbody');for(const values of q.context.rows){const row=alignedEl('tr');values.forEach(value=>row.append(alignedEl('td',String(value))));body.append(row);}table.append(head,body);wrap.append(table);host.append(wrap);}
+    function alignedWorkedSolution(q,host){
+      const panel=alignedEl('div',undefined,'aligned-solution');panel.lang='zh-Hant';panel.append(alignedEl('h4','中文逐步解析'));
+      const list=alignedEl('ol');q.steps.forEach(step=>list.append(alignedEl('li',step)));panel.append(list);
+      if(q.id==='huffman-tree')panel.append(alignedEl('p','請把上面的每次合併畫成左右分支，左邊標 0、右邊標 1。手寫樹形與計算筆記不會被自動判分，需對照合併順序自行核對。','source-note'));
+      host.append(panel);
+    }
+    function alignedQuestionCard(q,number,showFeedback=false){
+      const card=alignedEl('article',undefined,'aligned-question');card.id='aligned-card-'+q.id;
+      const title=alignedEl('h3','Question '+number+(alignedRun.mode==='exam'?' · '+alignedRun.points[q.id]+' points':''));title.lang='en';card.append(title);
+      const prompt=alignedEl('p',q.prompt,'aligned-prompt');prompt.lang='en';card.append(prompt);alignedContext(q,card);
+      if(alignedRun.mode==='practice'&&!showFeedback){const hint=alignedEl('details'),summary=alignedEl('summary','Hint · 方法提示');hint.append(summary,alignedEl('p',q.hint));card.append(hint);}
+      const grades=showFeedback?alignedGrade(q):[],fields=alignedEl('div',undefined,'aligned-fields');
+      q.fields.forEach(field=>{
+        const row=alignedEl('div',undefined,'aligned-field'),id='aligned-'+q.id+'-'+field.id;let controls=[];
+        if(field.kind==='choice'){
+          const group=alignedEl('fieldset'),legend=alignedEl('legend',field.label);legend.lang='en';group.append(legend);
+          const order=alignedRun.orders[q.id+':'+field.id];const options=Array.isArray(order)&&order.length===field.options.length&&new Set(order).size===field.options.length&&order.every(x=>field.options.includes(x))?order:field.options;
+          options.forEach((option,i)=>{const label=alignedEl('label',undefined,'aligned-choice'),input=alignedEl('input');input.type='radio';input.name=id;input.value=option;input.checked=alignedRun.drafts[q.id]?.[field.id]===option;input.disabled=showFeedback;input.id=id+'-'+i;label.append(input,alignedEl('span',String.fromCharCode(65+i)+'. '+option));label.lang='en';group.append(label);controls.push(input);});row.append(group);
+        }else{
+          const label=alignedEl('label',field.label);label.htmlFor=id;label.lang='en';const input=alignedEl('input');input.type='text';input.id=id;input.maxLength=500;input.autocomplete='off';input.spellcheck=false;input.value=alignedRun.drafts[q.id]?.[field.id]||'';input.disabled=showFeedback;input.setAttribute('aria-describedby',id+'-format');
+          const helper=alignedEl('small',field.kind==='radix'?(field.width?'Exactly '+field.width+' bits; keep leading zeros.':'Base '+field.base+' only; no parentheses or base suffix.'):field.kind==='merge'?'LEFT+RIGHT; group letters in A–Z order.':field.kind==='mantissa'?'Exactly '+field.width+' significant digits; integer mantissa.':field.kind==='text'?'Case-sensitive; preserve literal symbols.':'Enter the requested numeric value.');helper.id=id+'-format';helper.lang='en';row.append(label,input,helper);controls.push(input);
+        }
+        for(const control of controls){control.addEventListener('input',()=>{alignedRun.drafts[q.id]??={};alignedRun.drafts[q.id][field.id]=control.value;alignedSave();alignedUpdateCount();});control.addEventListener('change',()=>{alignedRun.drafts[q.id]??={};alignedRun.drafts[q.id][field.id]=control.value;alignedSave();alignedUpdateCount();});}
+        if(showFeedback){const result=grades.find(x=>x.field.id===field.id),note=alignedEl('p',result.correct?'✓ Correct':'✗ Correct answer: '+field.answer,'aligned-field-result '+(result.correct?'ok':'bad'));note.lang='en';row.append(note);}
+        fields.append(row);
+      });card.append(fields);
+      const workLabel=alignedEl('label','計算過程／樹形推導筆記（不自動評分）');workLabel.htmlFor='aligned-work-'+q.id;const work=alignedEl('textarea');work.id=workLabel.htmlFor;work.rows=3;work.maxLength=6000;work.value=alignedRun.notes[q.id]||'';work.placeholder='在紙上計算，或把中間步驟記在這裡。';work.addEventListener('input',()=>{alignedRun.notes[q.id]=work.value;alignedSave();});card.append(workLabel,work);
+      if(showFeedback){const total=grades.filter(x=>x.correct).length,feedback=alignedEl('div',(total===grades.length?'✓ 全部正確':'本題 '+total+' / '+grades.length+' 欄正確')+'。'+(alignedRun.mode==='exam'?'':'首次紀錄：'+(alignedRun.first[q.id]?'整題正確。':'未全對（重做不改寫首次紀錄）。')),'lab-output '+(total===grades.length?'ok':'bad'));feedback.setAttribute('role','status');card.append(feedback);alignedWorkedSolution(q,card);}
+      return card;
+    }
+    function alignedError(message){const box=$('#alignedError');box.textContent=message;box.hidden=!message;if(message){box.tabIndex=-1;box.focus({preventScroll:true});}}
+    function alignedCheck(reveal=false){
+      const q=ALIGNED_BY_ID.get(alignedRun.ids[alignedRun.index]);const results=alignedGrade(q);
+      if(!reveal){const invalid=results.filter(x=>!x.valid);if(invalid.length){alignedError(invalid[0].field.label+': '+invalid[0].message);return;}}
+      if(!Object.hasOwn(alignedRun.first,q.id))alignedRun.first[q.id]=!reveal&&results.every(x=>x.correct);
+      if(!alignedRun.checked.includes(q.id))alignedRun.checked.push(q.id);alignedSave();alignedRender(false);
+    }
+    function alignedReview(){const wrong=alignedRun.ids.filter(id=>alignedRun.mode==='exam'?!alignedGrade(ALIGNED_BY_ID.get(id)).every(x=>x.correct):!alignedRun.first[id]);if(wrong.length)alignedFresh('practice','all',wrong);}
+    function alignedRender(focus=false){
+      const mount=$('#alignedMount');mount.replaceChildren();alignedError('');$('#alignedTopic').value=alignedRun.topic;
+      $('#alignedPracticeMode').setAttribute('aria-pressed',String(alignedRun.mode==='practice'));$('#alignedExamMode').setAttribute('aria-pressed',String(alignedRun.mode==='exam'));
+      if(alignedRun.mode==='exam'){
+        alignedUpdateCount();
+        if(alignedRun.submitted){const score=alignedRun.ids.reduce((sum,id)=>sum+alignedRun.points[id]*alignedGrade(ALIGNED_BY_ID.get(id)).filter(x=>x.correct).length/ALIGNED_BY_ID.get(id).fields.length,0);const result=alignedEl('div','Exam complete · '+Number(score.toFixed(2))+' / 100 points','lab-output');result.lang='en';result.setAttribute('role','status');mount.append(result,alignedEl('p','多欄題依正確欄數平均分配該題分數；過程筆記不自動評分。這是自製練習的計分方式。','source-note'));}
+        else mount.append(alignedEl('p','Suggested time: 25 minutes. Complete all 7 questions, then submit the whole paper. Explanations stay hidden until submission.','section-desc'));
+        alignedRun.ids.forEach((id,i)=>mount.append(alignedQuestionCard(ALIGNED_BY_ID.get(id),i+1,alignedRun.submitted)));
+        if(!alignedRun.submitted){const submit=alignedEl('button','Submit paper','primary-btn');submit.type='button';submit.id='alignedSubmit';submit.lang='en';submit.addEventListener('click',()=>{const missing=alignedRun.ids.find(id=>!alignedAnswered(ALIGNED_BY_ID.get(id)));if(missing){alignedError('Question '+(alignedRun.ids.indexOf(missing)+1)+': fill in every answer before submitting.');return;}alignedRun.submitted=true;alignedRun.finished=true;alignedSave();alignedRender(true);});mount.append(submit);}else{const retry=alignedEl('button','Practice mistakes','ghost-btn');retry.type='button';retry.id='alignedReview';retry.disabled=alignedRun.ids.every(id=>alignedGrade(ALIGNED_BY_ID.get(id)).every(x=>x.correct));retry.addEventListener('click',alignedReview);mount.append(retry);}
+      }else{
+        const total=alignedRun.ids.length,answered=Object.keys(alignedRun.first).filter(id=>alignedRun.ids.includes(id)).length,correct=alignedRun.ids.filter(id=>alignedRun.first[id]).length;
+        $('#alignedStatus').textContent=(alignedRun.review?'Mistake review · ':'Practice · ')+(alignedRun.finished?'Complete':(alignedRun.index+1)+' / '+total)+' · First try fully correct: '+correct+' / '+answered;
+        if(alignedRun.finished){const summary=alignedEl('div','Practice complete · '+correct+' / '+total+' questions fully correct on the first try.','lab-output');summary.setAttribute('role','status');mount.append(summary);const retry=alignedEl('button','Practice mistakes','primary-btn');retry.type='button';retry.id='alignedReview';retry.disabled=correct===total;retry.addEventListener('click',alignedReview);mount.append(retry);for(const id of alignedRun.ids.filter(id=>!alignedRun.first[id])){const q=ALIGNED_BY_ID.get(id),details=alignedEl('details');details.append(alignedEl('summary',q.prompt));alignedWorkedSolution(q,details);mount.append(details);}}
+        else{
+          const id=alignedRun.ids[alignedRun.index],checked=alignedRun.checked.includes(id),q=ALIGNED_BY_ID.get(id);mount.append(alignedQuestionCard(q,alignedRun.index+1,checked));
+          const controls=alignedEl('div',undefined,'lab-controls');
+          if(!checked){const check=alignedEl('button','Check answer','primary-btn');check.type='button';check.id='alignedCheck';check.addEventListener('click',()=>alignedCheck());const reveal=alignedEl('button','Show worked solution','ghost-btn');reveal.type='button';reveal.id='alignedReveal';reveal.addEventListener('click',()=>alignedCheck(true));controls.append(check,reveal);}
+          else{const next=alignedEl('button',alignedRun.index===total-1?'Finish practice':'Next question →','primary-btn');next.type='button';next.id='alignedNext';next.addEventListener('click',()=>{if(alignedRun.index===total-1)alignedRun.finished=true;else alignedRun.index++;alignedSave();alignedRender(true);});const retry=alignedEl('button','Retry this question','ghost-btn');retry.type='button';retry.id='alignedRetry';retry.addEventListener('click',()=>{delete alignedRun.drafts[id];alignedRun.checked=alignedRun.checked.filter(x=>x!==id);alignedSave();alignedRender(true);});controls.append(next,retry);}
+          mount.append(controls);
+        }
+      }
+      if(focus){const heading=$('#alignedTitle');heading.tabIndex=-1;heading.focus({preventScroll:true});$('#exam-style').scrollIntoView({block:'start',behavior:'instant'});}
+    }
+    $('#alignedTopic').addEventListener('change',()=>alignedFresh('practice',$('#alignedTopic').value));
+    $('#alignedPracticeMode').addEventListener('click',()=>{if(alignedRun.mode!=='practice')alignedFresh('practice',$('#alignedTopic').value);});
+    $('#alignedExamMode').addEventListener('click',()=>{if(alignedRun.mode!=='exam')alignedFresh('exam');});
+    $('#alignedRestart').addEventListener('click',()=>alignedFresh(alignedRun.mode,alignedRun.topic));
+    for(const [value,label] of Object.entries(ALIGNED_TOPICS)){const option=alignedEl('option',label);option.value=value;$('#alignedTopic').append(option);}
+    alignedRun=alignedRestore();if(alignedRun){alignedRender();alignedSave();}else alignedFresh('practice','all',null,false);
 
     const MINI_EXERCISES={
       hardware:{
@@ -4678,7 +4954,8 @@
 });
 
     $$('[data-mini]').forEach(host=>{
-      const exercise=MINI_EXERCISES[host.dataset.mini], mount=$('[data-mini-mount]',host);
+      const originalExercise=MINI_EXERCISES[host.dataset.mini];
+      const exercise=originalExercise.language==='en'?{...originalExercise,cases:originalExercise.cases.map(item=>{const correct=item.options[item.answer],options=alignedShuffle(item.options);return {...item,options,answer:options.indexOf(correct)};})}:originalExercise, mount=$('[data-mini-mount]',host);
       const english=exercise.language==='en';
       let index=0, answers=[], finished=false;
       function renderMini(focusPrompt=false) {
