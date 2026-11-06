@@ -700,6 +700,26 @@
     .unit-past-index small{display:block;color:var(--muted);font-size:12px}
     @media(max-width:680px){[data-unit-past-mount]{padding:14px}.unit-past>summary{padding:14px}.unit-past-prompt{font-size:17px}.unit-past .lab-controls button{max-width:100%;white-space:normal}}
 
+    .ta-guide{margin:22px 0;border-left:3px solid var(--cyan);background:var(--panel-soft);border-radius:8px;padding:12px 16px}
+    .ta-guide summary{font-weight:700;cursor:pointer;line-height:1.8}.ta-guide p{line-height:1.9;font-size:14px}
+    .ta-check-note{margin:22px 0}.ta-check-note summary{cursor:pointer;font-weight:700}.ta-check-note .answer{line-height:1.9}
+    .ta-circuit-controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:24px 0}
+    .ta-circuit-controls select{padding:10px 14px;max-width:100%;color:var(--text);background:var(--panel-strong);border:1px solid var(--border);border-radius:8px}
+    .ta-checkbox{display:flex;align-items:center;gap:9px;font-size:14px;margin:16px 0;line-height:1.7}.ta-checkbox input{accent-color:var(--cyan);flex:0 0 auto}
+    .ta-circuit-scroll{overflow:auto;max-width:100%;margin:16px 0;background:var(--panel-soft);border-radius:10px}
+    .ta-circuit-svg{display:block;width:100%;min-width:720px;height:auto;color:var(--text);font:18px system-ui,sans-serif}
+    .ta-wire,.ta-gate-line{fill:none;stroke:var(--text);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+    .ta-wire[data-value="1"]{stroke:var(--cyan)}.ta-wire[data-value="0"]{stroke:var(--muted)}
+    .ta-gate-body{fill:var(--panel-strong);stroke:var(--text);stroke-width:2.4;stroke-linejoin:round}
+    .ta-active-gate{fill:var(--panel-soft);stroke:var(--cyan);stroke-width:1.5;stroke-dasharray:5 4}
+    .ta-gate[data-value="1"] .ta-gate-body{stroke:var(--cyan)}
+    .ta-pin-text,.ta-gate-id{fill:var(--text);font-weight:700}.ta-gate-value{fill:var(--cyan);font-weight:800}.ta-junction{fill:var(--text)}
+    #taCircuitInputs button[aria-pressed="true"]{border-color:var(--cyan);color:var(--cyan)}
+    #taCircuitOutput,#taHuffOutput{white-space:pre-wrap;overflow-wrap:anywhere}
+    #taHuffInput{display:block;box-sizing:border-box;width:100%;max-width:100%;padding:12px;margin:8px 0;color:var(--text);background:var(--panel-strong);border:1px solid var(--border);border-radius:8px;font:16px monospace}
+    .unit-past-badge.tutorial{color:var(--cyan);border-style:dashed;border-color:var(--cyan)}
+    @media(max-width:680px){.ta-circuit-svg{min-width:680px}.ta-circuit-controls{align-items:stretch;flex-direction:column}}
+
   </style>
 </head>
 <body>
@@ -772,7 +792,8 @@
     <a class="nav-link" href="#ch5-test"><span class="nav-dot"></span>第五章英文測驗 · 39 題</a>
 
     <div class="side-label">Exam-style practice</div>
-    <a class="nav-link" href="#unit-past-exams"><span class="nav-dot"></span>各單元原題／同型 · 82 題</a>
+    <a class="nav-link" href="#ta-review"><span class="nav-dot"></span>助教實習 · 電路與作業檢討</a>
+    <a class="nav-link" href="#unit-past-exams"><span class="nav-dot"></span>各單元原題／同型 · 92 題</a>
     <a class="nav-link" href="#exam-style"><span class="nav-dot"></span>老師題型 · 26 題填答／推導</a>
 
     <div class="side-label">Review</div>
@@ -809,7 +830,7 @@
           第一章先讀概念，再動手配對、探索分層、執行模擬，最後用選擇題檢查理解。第二章接著學進位換算與二、八、十六進位加減；第三章學補數、小數、文字與多媒體的資料表示；第四章把 bits 連到邏輯閘、計算與記憶電路；第五章把元件組成完整電腦，看它如何一步步執行指令。
           每讀完一節就按「標記已學」，進度會自動存在這台電腦。
         </p>
-        <div class="study-path"><a href="#unit-past-exams">最新：每單元考題 · 82 題 →</a><a href="#exam-style">老師題型 · 填答與推導 →</a><a href="#ch5-start">第五章 Computing Components →</a><a href="#ch5-test">第五章英文測驗 · 39 題 →</a><a href="#ch4-start">第四章 Gates and Circuits →</a><a href="#ch4-test">第四章英文測驗 · 36 題 →</a><a href="#radix-arithmetic">不同進位加減 · 逐步教練 →</a><a href="#arithmetic-test">加減法測驗 · 20 題 →</a><a href="#conversion-test">進位轉換測驗 →</a><a href="#ch3-start">第三章資料表示 →</a></div>
+        <div class="study-path"><a href="#ta-review">最新：助教實習 · 電路與檢討 →</a><a href="#unit-past-exams">每單元考題 · 92 題 →</a><a href="#exam-style">老師題型 · 填答與推導 →</a><a href="#ch5-start">第五章 Computing Components →</a><a href="#ch5-test">第五章英文測驗 · 39 題 →</a><a href="#ch4-start">第四章 Gates and Circuits →</a><a href="#ch4-test">第四章英文測驗 · 36 題 →</a><a href="#radix-arithmetic">不同進位加減 · 逐步教練 →</a><a href="#arithmetic-test">加減法測驗 · 20 題 →</a><a href="#conversion-test">進位轉換測驗 →</a><a href="#ch3-start">第三章資料表示 →</a></div>
         <div class="hero-stats">
           <div class="stat"><strong>Ch01</strong><span>Computer Science Basics</span></div>
           <div class="stat"><strong>Ch02</strong><span>Binary Values & Number Systems</span></div>
@@ -819,13 +840,47 @@
         </div>
       </header>
 
+      <section class="section searchable study-section" id="ta-review" data-practice-only aria-labelledby="taReviewTitle">
+        <div class="section-kicker">實習課 PDF · 68 頁已核對</div>
+        <h2 id="taReviewTitle">照助教的例題練：電路、真值表與作業解法</h2>
+        <p class="intro">這份實習課補上了正課筆記以外的<strong>電路繪圖、完整真值表與作業檢討</strong>。新增 8 題電路導練、2 題 Huffman 末尾檢核；原本 82 題保留，合計 92 題。英文題目、中文逐步解析；原題、講義例題與自編題分別標示。</p>
+        <p class="source-note">來源：<a href="https://iclass.tku.edu.tw/course/266139/learning-activity#/2040976" target="_blank" rel="noopener noreferrer">計算機概論 → 教材 → 實習課PPT</a>，使用本次提供的 68 頁 PDF 核對。頁碼均為 PDF 頁碼；這份講義仍未明文確認期中出題者。</p>
+        <div class="study-path"><a href="#ta-circuit-lab">先做電路逐閘教練 →</a><a href="#ch4-circuits" data-open-unit="ch4-circuits" data-open-question="ch4-circuits-4">練 Exercise 56 →</a><a href="#ch3-compression" data-open-unit="ch3-compression" data-open-question="ch3-compression-5">練 Huffman 原字串檢核 →</a><a href="#ch3-fraction" data-open-unit="ch3-fraction" data-open-question="ch3-fraction-4">核對浮點數截取 →</a></div>
+        <div class="table-scroll"><table class="compare"><thead><tr><th>助教簡報</th><th>實際內容</th><th>在這裡怎麼練</th></tr></thead><tbody>
+          <tr><td>p.5–21</td><td>第一章與 Quiz 1 檢討；換算、二進位加法。</td><td>原小考題已有收錄，補上助教檢討頁碼；不用重做一套重複題。</td></tr>
+          <tr><td>p.22–38</td><td>資料表示、壓縮、邏輯閘、加法器、MUX、latch。</td><td>各教學單元增加實習對照；先讀規則，再操作原有互動。</td></tr>
+          <tr><td>p.39–46</td><td>Exercises 55–62：公式畫電路、電路填真值表。</td><td>預設練 p.40、42、43、44。其餘 4 頁標「實習課未講」，需勾選才進入教練。</td></tr>
+          <tr><td>p.47–59</td><td>Homework 1 配分與完整檢討。</td><td>補數分開寫圖樣／有號值／溢位；Huffman 同時檢查碼字和殘留位元；浮點數依 p.59 採截取。</td></tr>
+          <tr><td>p.60–68</td><td>單位、架構、PC／IR、指令週期、儲存與平行處理。</td><td>對照第五章各節現有題目；此部分是講義摘要，不把自編情境題改標為考古題。</td></tr>
+        </tbody></table></div>
+        <details class="ta-check-note"><summary>先避開兩個抄答案陷阱：Carry 和 Huffman 尾端</summary><div class="answer"><p><strong>p.36 半加器：</strong>「A 與 B 相同時 Carry 為 1」少了條件。00 時兩輸入相同，但 Carry=0；只有 11 才 Carry=1。應以同頁真值表及 <code>Carry=A·B</code> 為準。</p><p><strong>p.58 Huffman：</strong>依 p.57 碼表，原題兩串分別留下 <code>11</code> 與 <code>1</code>，尚未到葉節點。檢討的分組相當於各在末端增加一個 0；網頁把原字串和補齊版本分開，避免默默補 bits。</p><p>「實習課未講」是講義的標示，並不等於正式排除考試範圍；期中範圍仍依課程公告。</p></div></details>
+        <div class="lab" id="ta-huffman-check"><div class="lab-kicker">PDF p.56–58 · 解碼也要檢查是否走完</div><h3>Huffman 逐碼檢查器</h3><p>使用助教建樹結果：A=01、B=000、I=10、M=111、S=110、X=0011、Z=0010。每讀到一個完整碼字才輸出字母。</p>
+          <label for="taHuffInput">Bits</label><input id="taHuffInput" type="text" value="11101010100011" autocomplete="off" spellcheck="false" maxlength="300">
+          <div class="lab-controls"><button type="button" class="primary-btn" id="taHuffCheck">逐碼解讀</button><button type="button" class="ghost-btn" data-ta-bits="11101010100011">原題 (a)</button><button type="button" class="ghost-btn" data-ta-bits="111010101000110">(a) 明確補 0</button><button type="button" class="ghost-btn" data-ta-bits="110001011010011">原題 (b)</button><button type="button" class="ghost-btn" data-ta-bits="1100010110100110">(b) 明確補 0</button></div>
+          <div class="lab-output" id="taHuffOutput" aria-live="polite">先看最後能否形成完整碼字，再按「逐碼解讀」。</div>
+        </div>
+      </section>
+
+      <section class="section searchable study-section" id="ta-circuit-lab" data-practice-only aria-labelledby="taCircuitTitle">
+        <div class="section-kicker">實習課 PDF p.39–46 · Exercises 55–62</div>
+        <h2 id="taCircuitTitle">電路逐閘教練：每一條線都要知道從哪裡來</h2>
+        <p class="intro">公式畫圖：先處理反相與括號，再接後一層。看圖填表：由輸入往右逐閘算，把中間結果留下；XOR 前多一條弧線，小圓圈是反相。</p>
+        <div class="ta-circuit-controls"><label for="taCircuitSelect">Lecture exercise</label><select id="taCircuitSelect"></select><label class="ta-checkbox"><input id="taIncludeUntaught" type="checkbox"> 加入講義標示「實習課未講」的 4 題</label></div>
+        <p class="source-note" id="taCircuitSource"></p>
+        <div class="lab"><div class="lab-kicker">點輸入切換 0／1，再逐步推導</div><div class="lab-controls" id="taCircuitInputs"></div><div class="ta-circuit-scroll" id="taCircuitDiagram"></div><div class="lab-controls"><button type="button" class="primary-btn" id="taCircuitNext">算下一個閘 →</button><button type="button" class="ghost-btn" id="taCircuitReset">重新推導</button></div><div class="lab-output" id="taCircuitOutput" aria-live="polite"></div>
+          <label class="ta-checkbox"><input type="checkbox" id="taShowTruth"> 顯示完整真值表（含中間節點）</label><div class="table-scroll" id="taCircuitTable" hidden></div>
+        </div>
+        <p class="source-note">依講義連線重畫，G1、G2 等為本站加入的中間節點名稱。線路交叉只有標圓點才相接；教練可核對邏輯，手繪電路仍需自行練習。</p>
+        <div class="study-path"><a href="#ch4-circuits" data-open-unit="ch4-circuits" data-open-question="ch4-circuits-4" id="taCircuitQuestion">改做英文題目 →</a><a href="#ta-review">回實習複習路線 →</a></div>
+      </section>
+
       <section class="section searchable study-section" id="unit-past-exams" data-practice-only aria-labelledby="unitPastTitle">
         <div class="section-kicker">Chapter 01–05 · Sourced questions / 中文解析</div>
         <h2 id="unitPastTitle">每單元考題：已出原題與同型練習</h2>
-        <p class="intro"><strong>35 個單元、82 題</strong>，直接放在各節教學後面。英文題目與作答欄位，作答後看中文解析；可保存計算筆記、重練本節或只練錯題。</p>
-        <div class="grid three"><div class="card"><h3>10 題小考原題</h3><p>來自本學期 2026/09/29 實習課小考 1 及 2026/10/06 Quiz。保留已出題目的數值與要求，題幹重新排版；選項順序會打亂。</p></div><div class="card"><h3>15 題作業原題</h3><p>來自 115-1 Homework 1，另標「作業原題」。部分題目增加核對欄位或明列規則；解析為本站推導，非教師公布解答。</p></div><div class="card"><h3>57 題同型練習</h3><p>尚無老師原題的單元，依本節講義補題，逐題標示「非歷屆原題」。第 4、5 章目前皆屬此類。</p></div></div>
+        <p class="intro"><strong>35 個單元、92 題</strong>，直接放在各節教學後面。英文題目與作答欄位，作答後看中文解析；可保存計算筆記、重練本節或只練錯題。</p>
+        <div class="grid two"><div class="card"><h3>10 題小考原題</h3><p>來自本學期 2026/09/29 實習課小考 1 及 2026/10/06 Quiz。保留已出題目的數值與要求，題幹重新排版；選項順序會打亂。</p></div><div class="card"><h3>15 題作業原題</h3><p>來自 115-1 Homework 1，另標「作業原題」。部分題目增加核對欄位或明列規則；解析為本站推導，非教師公布解答。</p></div><div class="card"><h3>10 題實習講義導練</h3><p>8 題電路繪圖／真值表，2 題 Huffman 末尾檢核。依實習課例題重編作答欄位，逐題標頁碼；不是新增 10 題歷屆考題。</p></div><div class="card"><h3>57 題同型練習</h3><p>尚無老師原題的單元，依本節講義補題，逐題標示「非歷屆原題」。第五章題目仍標為自編；第四章另補實習講義導練。</p></div></div>
         <p class="source-note">來源範圍：目前確認的是本學期已出小考與作業，尚未取得往年同課考卷；因此不把自編題或作業混稱為往年考試題。各題附來源與題號，TronClass 來源連結需有課程權限。練習本身不需登入。</p>
-        <details><summary>原題如何整理？哪些地方有補充規則？</summary><div class="answer"><p>小考題保留答案要求與選項文字，重新排版；中文解析另寫。作業題保留數值，補數另問有號解讀與溢位；Huffman 明示分支約定以統一核對；RLE 明示長度大於 3 才改寫。浮點數原題未指定捨入規則，會列出截取與四捨五入的差異，不擅定唯一標準。紙本作業要求的計算過程仍需自行練習，網頁只自動核對答案欄位。</p></div></details>
+        <details><summary>原題如何整理？哪些地方有補充規則？</summary><div class="answer"><p>小考題保留答案要求與選項文字，重新排版；中文解析另寫。作業題保留數值，補數另問有號解讀與溢位；Huffman 分支與實習課 p.56–57 相符，另檢查 p.58 原字串的殘留位元；RLE 明示長度大於 3 才改寫。浮點數原題現依實習課 p.59 採截取，自編題仍依題目明示規則。紙本作業要求的計算過程仍需自行練習，網頁只自動核對答案欄位。</p></div></details>
         <h3>選一節，直接開始</h3>
         <div class="unit-past-index"><h3>Chapter 01</h3>
           <a href="#ch1-system" data-open-unit="ch1-system">Computing System：零件怎麼一起完成工作？<small>2 題 · 小考原題 2</small></a>
@@ -848,7 +903,7 @@
           <a href="#ch3-integer" data-open-unit="ch3-integer">負數：固定的 bits，要用什麼規則解讀？<small>5 題 · 作業原題 4 · 同型練習 1</small></a>
           <a href="#ch3-fraction" data-open-unit="ch3-fraction">小數換算：整數一直除，小數一直乘<small>4 題 · 作業原題 4</small></a>
           <a href="#ch3-text" data-open-unit="ch3-text">文字：為每個字元指定代碼<small>2 題 · 同型練習 2</small></a>
-          <a href="#ch3-compression" data-open-unit="ch3-compression">文字壓縮：重複的字串、連續的字、常見的字<small>4 題 · 作業原題 3 · 同型練習 1</small></a>
+          <a href="#ch3-compression" data-open-unit="ch3-compression">文字壓縮：重複的字串、連續的字、常見的字<small>6 題 · 作業原題 3 · 實習講義導練 2 · 同型練習 1</small></a>
           <a href="#ch3-audio" data-open-unit="ch3-audio">聲音：取樣決定「何時量」，量化決定「分多細」<small>2 題 · 同型練習 2</small></a>
           <a href="#ch3-image" data-open-unit="ch3-image">影像與圖形：像素記顏色，向量記幾何<small>2 題 · 同型練習 2</small></a>
           <a href="#ch3-video" data-open-unit="ch3-video">影片壓縮：一張畫面內，與畫面之間<small>2 題 · 同型練習 2</small></a>
@@ -856,7 +911,7 @@
         <div class="unit-past-index"><h3>Chapter 04</h3>
           <a href="#ch4-gates" data-open-unit="ch4-gates">邏輯閘：先懂規則，再看符號<small>2 題 · 同型練習 2</small></a>
           <a href="#ch4-transistors" data-open-unit="ch4-transistors">電晶體：用受控制的導通路徑做邏輯<small>2 題 · 同型練習 2</small></a>
-          <a href="#ch4-circuits" data-open-unit="ch4-circuits">從輸入一路算到輸出：電路怎麼讀？<small>2 題 · 同型練習 2</small></a>
+          <a href="#ch4-circuits" data-open-unit="ch4-circuits">從輸入一路算到輸出：電路怎麼讀？<small>10 題 · 實習講義導練 8 · 同型練習 2</small></a>
           <a href="#ch4-boolean" data-open-unit="ch4-boolean">布林代數：把電路改寫，結果仍然相同<small>2 題 · 同型練習 2</small></a>
           <a href="#ch4-adders" data-open-unit="ch4-adders">加法器：二進位加法由 XOR 與 AND 做出來<small>2 題 · 同型練習 2</small></a>
           <a href="#ch4-mux" data-open-unit="ch4-mux">MUX：很多條輸入，只選一條送出去<small>2 題 · 同型練習 2</small></a>
@@ -944,6 +999,7 @@
         </details>
         <div class="study-actions"><a href="#ch1-history">下一節：人物與發明 →</a></div>
         <div class="lab quick-q" data-mini="q_ch1_system"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch1-system"><summary>助教實習對照 · p.6–7、21</summary><p>先分硬體／軟體，再記 Information → Hardware → Programming → OS → Applications → Communications。Quiz 1 的選項只列到 Application，不表示講義最外層 Communications 消失。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch1-system"><summary>本節考題 · 2 題 · 小考原題 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -983,6 +1039,7 @@
         </div>
         <div class="study-actions"><a href="#ch1-hardware">下一節：硬體四世代 →</a></div>
         <div class="lab quick-q" data-mini="q_ch1_history"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch1-history"><summary>助教實習對照 · p.8</summary><p>人物配對要連到具體貢獻：Jacquard／打孔卡織布，Babbage／Analytical Engine，Ada／迴圈，Turing／計算理論。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch1-history"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1049,6 +1106,7 @@
         </div>
         <div class="study-actions"><a href="#ch1-parallel">下一節：平行計算 →</a></div>
         <div class="lab quick-q" data-mini="q_ch1_hardware"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch1-hardware"><summary>助教實習對照 · p.9、20</summary><p>元件主線是 Vacuum Tube → Transistor → IC → LSI/VLSI。p.20 文字概述寫 18–24 個月，但本課小考指定 revised 時依正課 p.12 的 18 個月作答。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch1-hardware"><summary>本節考題 · 3 題 · 小考原題 3</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1081,6 +1139,7 @@
         </div>
         <div class="study-actions"><a href="#ch1-network">下一節：網路與雲端 →</a></div>
         <div class="lab quick-q" data-mini="q_ch1_parallel"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch1-parallel"><summary>助教實習對照 · p.10</summary><p>先看指令流：同一指令套不同資料是 SIMD；不同處理器做不同任務是 MIMD。不要只靠「很多處理器」判斷。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch1-parallel"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1125,6 +1184,7 @@
         </div>
         <div class="study-actions"><a href="#ch1-software">下一節：軟體五世代 →</a></div>
         <div class="lab quick-q" data-mini="q_ch1_network"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch1-network"><summary>助教實習對照 · p.11</summary><p>乙太網路與檔案伺服器對應區域資源共享；packet switching／TCP-IP 對應傳輸；cloud 對應遠端資源。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch1-network"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1202,6 +1262,7 @@
         </div>
         <div class="study-actions"><a href="#ch1-discipline">下一節：工具與學科 →</a></div>
         <div class="lab quick-q" data-mini="q_ch1_software"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch1-software"><summary>助教實習對照 · p.12</summary><p>把語言與用途分開：Assembler 對應組合語言翻譯；Compiler 對應高階語言翻譯；OS／time-sharing 對應資源與工作排程。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch1-software"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1224,6 +1285,7 @@
         <div class="callout"><strong>串起四項能力：</strong>思考步驟 → 選擇表示方式 → 用程式實作 → 規劃整體設計。實際做事時會一起使用；練習題先辨認情境主要強調哪個角色。</div>
         <div class="study-actions"><a href="#ch1-test">讀完了，開始 30 題選擇題 →</a><a href="#ch1-start">回到第一章學習路線</a></div>
         <div class="lab quick-q" data-mini="q_ch1_discipline"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch1-discipline"><summary>助教實習對照 · p.13</summary><p>Algorithmic Thinking 是步驟，Representation 是資料如何表示，Programming 是寫成程式，Design 是設計完整系統。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch1-discipline"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1361,6 +1423,7 @@
           </div>
         </div>
         <div class="lab quick-q" data-mini="q_ch2_number"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch2-number"><summary>助教實習對照 · p.16–17</summary><p>助教把每個數字下方寫出位權，再乘開加總。2AD₁₆ 中 D=13；110011111₂ 的最高位是 2⁸，不是 2⁹。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch2-number"><summary>本節考題 · 2 題 · 小考原題 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1481,6 +1544,7 @@
         </div>
         <div class="lab quick-q" data-mini="q_ch2_conversion"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
         <div class="study-path"><a href="#conversion-test">換算方法讀完了，開始 20 題測驗 →</a></div>
+        <details class="ta-guide" data-ta-guide="ch2-conversion"><summary>助教實習對照 · p.15、18、48–51</summary><p>除法的餘數倒讀；Binary ↔ Hex 每四位直接換。D27 → 1101 | 0010 | 0111，中間的前導 0 必須保留。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch2-conversion"><summary>本節考題 · 6 題 · 小考原題 2 · 作業原題 4</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1594,6 +1658,7 @@
           <strong>考試口訣：</strong>從右往左減；<strong>夠減就直接減，不夠減就向左借 1</strong>。如果左邊是 0，就繼續往左找到第一個 1。Addition 看 carry；Subtraction 看 borrow。
         </div>
         <div class="lab quick-q" data-mini="q_ch2_binary"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch2-binary"><summary>助教實習對照 · p.19</summary><p>助教實際檢討 1110101₂ + 101111₂；要對齊最右欄並把 carry 寫在上一列，結果是 10100100₂。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch2-binary"><summary>本節考題 · 2 題 · 小考原題 1 · 同型練習 1</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1634,6 +1699,7 @@
         <p class="source-note">講義 ch02.pdf 的加減範例是二進位；本節八、十六進位的教學與互動，是用同一套位置記數規則延伸的自製練習。</p>
         <div class="lab quick-q" data-mini="q_radix_arithmetic"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
         <div class="study-path"><a href="#arithmetic-test">開始二、八、十六進位加減測驗 →</a><a href="#ch2-binary">複習講義二進位例題 →</a></div>
+        <details class="ta-guide" data-ta-guide="radix-arithmetic"><summary>助教實習對照 · p.19（二進位）</summary><p>本份簡報的加法例題是二進位；八進位與十六進位加減保留為自編延伸，分別滿 8／16 進 1，借 1 就補 8／16。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="radix-arithmetic"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1684,6 +1750,7 @@
           </div>
         </div>
         <div class="lab quick-q" data-mini="q_ch2_data"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch2-data"><summary>助教實習對照 · 本份簡報未另列 Bit／Byte／Word 題</summary><p>本節以正課第二章為主；第五章 p.61 另有單位表。先用 1 byte = 8 bits，再依題目明示的 word 寬度換算。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch2-data"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1716,6 +1783,7 @@
         <p>例如 100 Bytes 變成 60 Bytes：壓縮率是 0.6＝60%，省下的是 40%。依這個定義，比例越小，檔案縮得越多；計算時分子分母必須用相同單位。</p>
         <div class="study-actions"><a href="#ch3-integer">下一節：補數與溢位 →</a></div>
         <div class="lab quick-q" data-mini="q_ch3_data"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch3-data"><summary>助教實習對照 · p.23–24</summary><p>類比是連續，數位是離散；Lossless 能完整還原，Lossy 會捨棄資訊。數位化與壓縮是兩個不同步驟。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch3-data"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1750,6 +1818,7 @@
         <div class="lab"><div class="lab-kicker">TRY IT · 先算數學答案，再檢查範圍</div><h4>8-bit 有號加減法</h4><div class="ch3-fields"><label>A<input id="ch3IntA" type="number" min="-128" max="127" value="127" step="1"></label><label>運算<select id="ch3IntOperation"><option value="add">＋ 加法</option><option value="sub">− 減法</option></select></label><label>B<input id="ch3IntB" type="number" min="-128" max="127" value="3" step="1"></label></div><button type="button" class="primary-btn" id="ch3IntRun">計算並看位元</button><div class="lab-output" id="ch3IntOutput" aria-live="polite"></div><p class="source-note">此工具模擬固定 8-bit 保留低位的結果，用於理解講義；實際程式語言對溢位的處理可能不同。</p></div>
         <div class="study-actions"><a href="#ch3-fraction">下一節：小數與浮點數 →</a></div>
         <div class="lab quick-q" data-mini="q_ch3_integer"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch3-integer"><summary>助教實習對照 · p.25、54–55</summary><p>正課的 8-bit 示範與作業的 10-bit 不同。作業要固定十位；465+325=790 超出 −512～511，保留圖樣不等於正確的有號數學結果。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch3-integer"><summary>本節考題 · 5 題 · 作業原題 4 · 同型練習 1</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1771,6 +1840,7 @@
         <p class="source-note">講義 p.22 的一般形式將 mantissa 視為整數；p.24 科學記號則使用 1.200132708 這種有效數字形式。兩者調整尾數與指數後可以代表同一數值；此處未展開 IEEE 754 欄位。</p>
         <div class="study-actions"><a href="#ch3-text">下一節：文字編碼 →</a></div>
         <div class="lab quick-q" data-mini="q_ch3_fraction"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch3-fraction"><summary>助教實習對照 · p.26、52–53、59</summary><p>整數一直除，小數一直乘。作業浮點數解答 p.59 使用十進位整數尾數與截取，不能把 p.26 的一般二進位模型直接套進這兩題。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch3-fraction"><summary>本節考題 · 4 題 · 作業原題 4</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1782,6 +1852,7 @@
         <div class="lab"><div class="lab-kicker">TRY IT · 把字元和實際編碼連起來</div><h4>文字代碼觀察器</h4><div class="ch3-fields"><label>輸入最多 6 個 Unicode code points<input id="ch3TextValue" type="text" value="Aa0中😀" maxlength="24"></label></div><div class="table-scroll"><table class="compare"><thead><tr><th>字元</th><th>Unicode code point</th><th>ASCII 十進位</th><th>UTF-8 bytes（十六進位）</th><th>UTF-8 bits</th></tr></thead><tbody id="ch3TextRows"></tbody></table></div><p class="source-note" id="ch3TextSummary" aria-live="polite"></p><p class="hint">理解用例：觀察 A、中文和 emoji 的位元組數。此表逐 code point 顯示；使用者看見的一個字形有時由多個 code points 組成。</p></div>
         <div class="study-actions"><a href="#ch3-compression">下一節：文字壓縮 →</a></div>
         <div class="lab quick-q" data-mini="q_ch3_text"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch3-text"><summary>助教實習對照 · p.27</summary><p>ASCII 7 bits 有 128 個代碼，8 bits 有 256 個圖樣。Unicode 的 code point 和 UTF 編碼的實際儲存位元數要分開。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch3-text"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1808,7 +1879,8 @@
         <p class="source-note">同權重時選擇及左右標記可能不同，因此可以有不同的有效 Huffman 碼。p.39 的 A–D 樹與 p.37 的 DOORBELL 碼表是兩個例子，不能混著用。以上例題比例依講義，不包含儲存碼表的額外成本。</p>
         <div class="study-actions"><a href="#ch3-audio">下一節：聲音表示 →</a></div>
         <div class="lab quick-q" data-mini="q_ch3_compression"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
-        <details class="unit-past" data-unit-past="ch3-compression"><summary>本節考題 · 4 題 · 作業原題 3 · 同型練習 1</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
+        <details class="ta-guide" data-ta-guide="ch3-compression"><summary>助教實習對照 · p.23、28、56–59</summary><p>Huffman 每輪挑兩個最小權重，合併後重新排序；p.57 有完整碼表。p.58 原字串與檢討分組差一個末端 0，請用逐碼檢查器確認殘留，不要直接背完整字母答案。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
+        <details class="unit-past" data-unit-past="ch3-compression"><summary>本節考題 · 6 題 · 作業原題 3 · 實習講義導練 2 · 同型練習 1</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
       <section class="section searchable study-section" id="ch3-audio" data-study-only data-learn-id="ch3-audio">
@@ -1821,6 +1893,7 @@
         <details><summary>理解延伸：未壓縮音訊的大小怎麼算？</summary><div class="answer">取樣率 × 每樣本 bits × 聲道數 × 秒數＝bits；再除以 8 得 Bytes。例如教學設定每秒 8000 樣本、8 bits、單聲道、10 秒：8000×8×1×10/8＝80000 Bytes。這不含檔頭、壓縮或額外資料。</div></details>
         <div class="study-actions"><a href="#ch3-image">下一節：影像與圖形 →</a></div>
         <div class="lab quick-q" data-mini="q_ch3_audio"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch3-audio"><summary>助教實習對照 · p.29</summary><p>Sampling 問何時量、每秒幾次；Quantization 問每次分幾個振幅等級。資料量題還要乘聲道數與秒數，最後 bits ÷ 8 才是 bytes。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch3-audio"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1839,6 +1912,7 @@
         <p>描述資料的資料，例如影像建立日期與時間、尺寸和解析度、拍攝位置、作者、版權資訊。像素描述「畫面是什麼」，metadata 描述「這份影像的屬性」。</p>
         <div class="study-actions"><a href="#ch3-video">下一節：影片壓縮 →</a></div>
         <div class="lab quick-q" data-mini="q_ch3_image"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch3-image"><summary>助教實習對照 · p.30</summary><p>True Color 採 RGB 各 8 bits，共 24 bits。16-bit high color 的通道分配依格式／題目決定，不把 5+5+5+1 當成所有 16-bit 影像唯一配置。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch3-image"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1850,6 +1924,7 @@
         <div class="callout"><strong>選擇題抓關鍵字：</strong>consecutive frames、keyframe、delta → Temporal；within a frame、同色區域 → Spatial。兩種方法可在同一個影片編碼流程中使用。</div>
         <div class="study-actions"><a href="#ch3-test">讀完了，開始第三章練習 →</a><a href="#ch3-start">回到第三章學習路線</a></div>
         <div class="lab quick-q" data-mini="q_ch3_video"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch3-video"><summary>助教實習對照 · p.31</summary><p>Temporal 比不同影格；Spatial 比同一影格。Raster 記像素，Vector 記幾何，放大效果因此不同。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch3-video"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1880,6 +1955,7 @@
         <h3>從 2 個輸入延伸到 3 個</h3><p>3-input AND：<code>X = ABC</code>，只有 <code>111</code> 會得到 1，其餘七種都是 0。三個獨立輸入有 <code>2³ = 8</code> 種組合。兩輸入 XOR 的「不同才是 1」不能直接拿來描述任意多輸入；先讀題目指定的閘與輸入數。</p>
         <details><summary>小例題：A = 1、B = 1，OR 和 XOR 分別是多少？</summary><div class="answer">OR = 1，因為至少一個為 1；XOR = 0，因為兩個相同。英文 exclusive 意思是排除「兩者同時為真」。</div></details>
         <div class="lab quick-q" data-mini="q_ch4_gates"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch4-gates"><summary>助教實習對照 · p.33</summary><p>小圓圈代表輸出反相；OR 輸入側多一條弧線是 XOR。畫完圖後，可代入 00、01、10、11 檢查是否和真值表一致。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch4-gates"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1890,6 +1966,7 @@
         <h3>講義圖上的標示</h3><div class="table-scroll"><table class="compare"><thead><tr><th scope="col">標示</th><th scope="col">講義模型中的角色</th></tr></thead><tbody><tr><td>Base（基極）</td><td>控制導通路徑的輸入。</td></tr><tr><td>Emitter（射極）</td><td>圖中接到 ground。</td></tr><tr><td>Source / Output line</td><td>講義用 Source 標示上方高電位端（例 5 V），Output 是取出邏輯訊號的位置。</td></tr></tbody></table></div>
         <details><summary>術語校正：Source 與 on 不要混著背</summary><div class="answer"><p>講義圖是教學簡化模型，術語有混用。標準 BJT 三個端子是 <strong>Base、Collector、Emitter</strong>；Source 是場效電晶體常見的端子名稱，不是 BJT 的標準第三端。此處依圖上的高電位／接地路徑理解即可。</p><p>p.16 最後一句把 base 低、輸出保持高寫成 transistor is on，容易混淆「輸出為 1」與「開關導通」。本節的開關模型以<strong>通往地的路徑有沒有導通</strong>來解釋，不能把輸出高直接等同電晶體 on。</p><p class="source-note">補充來源：<a href="https://toshiba.semicon-storage.com/us/semiconductor/knowledge/faq/mosfet_common/what-is-a-bipolar-transistor.html" target="_blank" rel="noopener noreferrer">Toshiba：BJT 結構與開關工作區</a>、<a href="https://toshiba.semicon-storage.com/us/semiconductor/knowledge/faq/mosfet_common/what-is-a-mosfet.html" target="_blank" rel="noopener noreferrer">MOSFET 的 Source／Drain／Gate</a>。實際晶片另有不同電晶體與電路實作，這裡不把簡化圖當實體接線設計。</p></div></details>
         <div class="lab quick-q" data-mini="q_ch4_transistors"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch4-transistors"><summary>助教實習對照 · p.34</summary><p>助教圖的 Base 高時導通，Output 被拉向低電位；Base 低時截止，Output 保持高。先問電流是否有通到 Ground 的路，再判斷輸出。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch4-transistors"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1901,7 +1978,8 @@
         <div class="lab"><div class="lab-kicker">TRY IT · 分別看兩條運算路徑</div><h3>等效電路比較器</h3><div class="ch4-fields"><label>Input A<select id="ch4CircuitA"><option value="0">0</option><option value="1" selected>1</option></select></label><label>Input B<select id="ch4CircuitB"><option value="0" selected>0</option><option value="1">1</option></select></label><label>Input C<select id="ch4CircuitC"><option value="0">0</option><option value="1" selected>1</option></select></label></div><div class="grid two"><div class="card"><h4>AB + AC · 3 gates</h4><div class="ch4-signal-flow" id="ch4ExpandedFlow"></div></div><div class="card"><h4>A(B + C) · 2 gates</h4><div class="ch4-signal-flow" id="ch4FactoredFlow"></div></div></div><div class="lab-output" id="ch4CircuitOutput" aria-live="polite"></div><div class="table-scroll"><table class="compare"><thead><tr><th>A</th><th>B</th><th>C</th><th>AB</th><th>AC</th><th>AB + AC</th><th>B + C</th><th>A(B + C)</th></tr></thead><tbody id="ch4CircuitRows"></tbody></table></div></div>
         <div class="callout"><strong>讀圖口訣：</strong>沿訊號從輸入走向輸出，先處理前面的閘，給中間線命名，再算下一個閘。要證明等效，不能只看一列相同。</div>
         <div class="lab quick-q" data-mini="q_ch4_circuits"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
-        <details class="unit-past" data-unit-past="ch4-circuits"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
+        <details class="ta-guide" data-ta-guide="ch4-circuits"><summary>助教實習對照 · p.39–46</summary><p>這是本次新增的重點：Exercises 55–58 從公式畫圖；59–62 從電路列完整真值表。p.39、41、45、46 標示「實習課未講」，導練中也會標出。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
+        <details class="unit-past" data-unit-past="ch4-circuits"><summary>本節考題 · 10 題 · 實習講義導練 8 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
       <section class="section searchable study-section" id="ch4-boolean" data-study-only data-learn-id="ch4-boolean">
@@ -1911,6 +1989,7 @@
         <div class="callout"><strong>最常見陷阱：</strong><code>(AB)′</code> 不能寫成 <code>A′B′</code>。A = 1、B = 0 就是反例：前者 1，後者 0。括號外的反相作用在整個結果上。</div>
         <div class="lab"><div class="lab-kicker">TRY IT · 用每一列驗證</div><h3>De Morgan 真值表驗證</h3><div class="ch4-fields"><label>Input A<select id="ch4MorganA"><option value="0">0</option><option value="1" selected>1</option></select></label><label>Input B<select id="ch4MorganB"><option value="0" selected>0</option><option value="1">1</option></select></label></div><div class="lab-output" id="ch4MorganOutput" aria-live="polite"></div><div class="table-scroll"><table class="compare"><thead><tr><th>A</th><th>B</th><th>(AB)′</th><th>A′ + B′</th><th>(A + B)′</th><th>A′B′</th></tr></thead><tbody id="ch4MorganRows"></tbody></table></div></div>
         <div class="lab quick-q" data-mini="q_ch4_boolean"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch4-boolean"><summary>助教實習對照 · p.35</summary><p>De Morgan 必須連運算一起換：整體反相 AND → OR、OR → AND，且各輸入取反。等效電路要對所有輸入組合都相同。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch4-boolean"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1924,6 +2003,7 @@
         <div class="lab"><div class="lab-kicker">TRY IT · 看到每一步怎麼生出進位</div><h3>半加器／全加器實驗室</h3><div class="ch4-fields"><label>Adder<select id="ch4AdderType"><option value="full">Full adder</option><option value="half">Half adder</option></select></label><label>Input A<select id="ch4AdderA"><option value="0">0</option><option value="1" selected>1</option></select></label><label>Input B<select id="ch4AdderB"><option value="0">0</option><option value="1" selected>1</option></select></label><label>Carry-in Cin<select id="ch4AdderCin"><option value="0">0</option><option value="1" selected>1</option></select></label></div><div class="ch4-signal-flow" id="ch4AdderFlow"></div><div class="lab-output" id="ch4AdderOutput" aria-live="polite"></div><div class="table-scroll"><table class="compare"><thead id="ch4AdderHead"></thead><tbody id="ch4AdderRows"></tbody></table></div></div>
         <details><summary>理解用例：用加法器逐欄算 0111₂ + 0001₂</summary><div class="answer">從右到左：1+1+0 → Sum 0、Cout 1；1+0+1 → Sum 0、Cout 1；1+0+1 → Sum 0、Cout 1；0+0+1 → Sum 1、Cout 0。由左到右讀 Sum 得 1000₂。這就是第二章進位規則如何接到硬體。<a href="#radix-arithmetic">回到加減教練 →</a></div></details>
         <div class="lab quick-q" data-mini="q_ch4_adders"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch4-adders"><summary>助教實習對照 · p.36</summary><p>同頁的公式與真值表正確：Sum=A XOR B，Carry=A AND B。文字「A 與 B 相同才 Carry=1」不完整；A=B=0 是反例，只有兩者皆 1 才有進位。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch4-adders"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1936,6 +2016,7 @@
         <div class="lab"><div class="lab-kicker">TRY IT · 選擇線決定路徑，D 決定資料</div><h3>8-to-1 MUX 路由器</h3><div class="ch4-fields"><label>S0 · weight 4<select id="ch4MuxS0"><option value="0" selected>0</option><option value="1">1</option></select></label><label>S1 · weight 2<select id="ch4MuxS1"><option value="0" selected>0</option><option value="1">1</option></select></label><label>S2 · weight 1<select id="ch4MuxS2"><option value="0" selected>0</option><option value="1">1</option></select></label></div><p>點擊下面的 D 按鈕切換資料值，觀察被選中與未被選中的差別。</p><div class="ch4-mux-inputs" id="ch4MuxInputs"><button type="button" class="ghost-btn" data-ch4-data="0" aria-pressed="false">D0 = 0</button><button type="button" class="ghost-btn" data-ch4-data="1" aria-pressed="true">D1 = 1</button><button type="button" class="ghost-btn" data-ch4-data="2" aria-pressed="false">D2 = 0</button><button type="button" class="ghost-btn" data-ch4-data="3" aria-pressed="true">D3 = 1</button><button type="button" class="ghost-btn" data-ch4-data="4" aria-pressed="false">D4 = 0</button><button type="button" class="ghost-btn" data-ch4-data="5" aria-pressed="true">D5 = 1</button><button type="button" class="ghost-btn" data-ch4-data="6" aria-pressed="false">D6 = 0</button><button type="button" class="ghost-btn" data-ch4-data="7" aria-pressed="true">D7 = 1</button></div><div class="ch4-signal-flow" id="ch4MuxFlow"></div><div class="lab-output" id="ch4MuxOutput" aria-live="polite"></div></div>
         <h3>那 DEMUX 呢？</h3><p>Demultiplexer（解多工器）是反方向的選路概念：<strong>一條資料輸入，依選擇線送往多條輸出中的一條</strong>。它不是把 1 bit 自動變成 8 bits 的資料。這是講義 p.28 提問的補充解釋；實際 enable 與未選中輸出的值由具體電路規格決定。</p>
         <div class="lab quick-q" data-mini="q_ch4_mux"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch4-mux"><summary>助教實習對照 · p.37</summary><p>先用 select bits 找被選中的資料線，再讀它的資料值；選到 D5 不代表 F=5。位元權重須依題目或正課表格的順序。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch4-mux"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1949,6 +2030,7 @@
         <details><summary>為什麼不能說 X、Y「永遠」互補？</summary><div class="answer">p.32 的互補敘述適用於有效的穩定狀態。若 S = R = 0，兩個 NAND 的輸出會同時為 1，不再互補；兩個輸入同時回到 1 後的最終狀態不能可靠預測。這是禁止狀態，不應當作正常寫入操作。下面的模型會顯示此限制；離開禁止狀態後需明確 Set 或 Reset 才重新建立已知狀態。<p class="source-note">補充來源：<a href="https://www.ti.com/document-viewer/lit/html/SSZTCV9/GUID-2505F085-178B-4C5F-A9D1-9021A6A6C184" target="_blank" rel="noopener noreferrer">Texas Instruments：active-low SR latch（Figure 2）</a>。本互動不模擬延遲或亞穩態。</p></div></details>
         <div class="lab"><div class="lab-kicker">TRY IT · 每個動作保留上一個狀態</div><h3>NAND S-R latch 記憶實驗</h3><div class="lab-controls"><button type="button" class="primary-btn" id="ch4LatchSet">Set · S=0, R=1</button><button type="button" class="ghost-btn" id="ch4LatchReset">Reset · S=1, R=0</button><button type="button" class="ghost-btn" id="ch4LatchHold">Hold · S=1, R=1</button><button type="button" class="ghost-btn" id="ch4LatchInvalid">Invalid · S=0, R=0</button><button type="button" class="ghost-btn" id="ch4LatchClear">Restart demonstration</button></div><div class="ch4-signal-flow" id="ch4LatchFlow"></div><div class="lab-output" id="ch4LatchOutput" aria-live="polite"></div><div class="table-scroll"><table class="compare"><thead><tr><th>Step</th><th>S</th><th>R</th><th>Action</th><th>X</th><th>Y</th></tr></thead><tbody id="ch4LatchRows"></tbody></table></div><p class="source-note">示範初始已用 Reset 建立 X=0；不代表真實電路上電必然為 0。只保留最近 12 次操作紀錄。</p></div>
         <div class="lab quick-q" data-mini="q_ch4_memory"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch4-memory"><summary>助教實習對照 · p.37</summary><p>這是 NAND 型低有效 latch：01 Set、10 Reset、11 Hold、00 Invalid。X、Y 在有效穩定狀態才互補，不把禁止狀態也當作正常記憶。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch4-memory"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -1961,6 +2043,7 @@
         <h3>CPU chip（中央處理器晶片）</h3><p>講義 p.38 將 CPU 視為最重要的積體電路。晶片的 pins（接腳）提供與外部元件的連接，包含 memory 和 I/O devices。<strong>本章的連結：</strong>Transistors → Gates → Circuits → Integrated circuits → CPU 中的計算與控制電路。</p>
         <div class="lab quick-q" data-mini="q_ch4_chips"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
         <div class="study-path"><a href="#ch4-test">開始第四章英文測驗 · 36 題 →</a><a href="#exam">更新後的考前清單 →</a></div>
+        <details class="ta-guide" data-ta-guide="ch4-chips"><summary>助教實習對照 · p.38</summary><p>SSI／MSI／LSI／VLSI 是整合閘數的分級；CPU 以接腳連接記憶體與 I/O。講義界線有重疊時，依題目指定表格判讀。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch4-chips"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -2022,6 +2105,7 @@
         <p class="source-note">p.5 還列出 exa（E，10¹⁸，百萬兆）、femto（f，10⁻¹⁵，毫漠）、atto（a，10⁻¹⁸，微漠）等；p.5 把 10⁻¹ 寫成 dice，標準字首是 deci（d，分）。</p>
         <div class="callout"><strong>記容量的兩條線：</strong>字首同時有 10 的次方與 2 的次方兩種讀法（例如 K 可以是 1,000 或 1,024）。講義 p.4 的 2 的次方欄用 1,024、1,048,576、1,073,741,824；題目沒說時，以題目給的換算或老師的教法為準。</div>
         <div class="lab quick-q" data-mini="q_ch5_components"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch5-components"><summary>助教實習對照 · p.61</summary><p>課堂單位表並列 10 的次方與 2 的次方。計算容量時先確認題目採十進位或二進位；本頁明確使用 MiB 的題採 2²⁰ bytes。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch5-components"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -2049,6 +2133,7 @@
         <div class="callout"><strong>最常見的陷阱：</strong>PC 存的是位址，不是指令；IR 存的才是指令。另外，記憶體格的「內容」可能是資料也可能是指令，位址則是格子的編號。</div>
         <details><summary>補充：為什麼 stored program 很重要？</summary><div class="answer">因為程式和資料都在記憶體裡，換一組記憶體內容就能換一個程式，不必重新接線。這是補充說明，不是講義原文。</div></details>
         <div class="lab quick-q" data-mini="q_ch5_architecture"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch5-architecture"><summary>助教實習對照 · p.62–63</summary><p>Stored program：指令與資料同存記憶體。CPU=ALU+Control Unit；IR 裝目前指令，PC 裝下一次取指令的位置。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch5-architecture"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -2067,6 +2152,7 @@
         <details><summary>自製例：Pipelining 為什麼比較快？</summary><div class="answer"><p>把一條指令切成 3 個步驟，每步 1 個時間單位。理想情形（沒有阻塞）：</p><div class="table-scroll"><table class="compare"><thead><tr><th scope="col">指令數</th><th scope="col">不重疊</th><th scope="col">重疊（pipelined）</th></tr></thead><tbody><tr><td>1</td><td>3</td><td>3</td></tr><tr><td>3</td><td>9</td><td>5</td></tr><tr><td>10</td><td>30</td><td>12</td></tr></tbody></table></div><p>重疊後的總時間是「步驟數 + 指令數 − 1」。單一條指令沒有變快，但整體吞吐量提高。這是理想化的自製例，不是講義的數字。</p></div></details>
         <div class="callout"><strong>別混在一起：</strong>Cache 是「快的記憶體」，pipelining 是「步驟重疊」，N-bit 是「一次處理幾位元」。三個都是為了加速，但回答的是不同的問題。</div>
         <div class="lab quick-q" data-mini="q_ch5_bus"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch5-bus"><summary>助教實習對照 · p.64</summary><p>Bus 傳資料／位址／控制；Cache 保存常用副本；Pipelining 讓階段重疊。三者都能幫助效能，但做法不同。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch5-bus"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -2087,6 +2173,7 @@
           <div class="table-scroll"><table class="compare"><thead><tr><th scope="col">Address</th><th scope="col">Contents</th><th scope="col">Bytes</th></tr></thead><tbody id="ch5CycleRows"></tbody></table></div>
         <div class="lab quick-q" data-mini="q_ch5_cycle"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
           <p class="source-note">這是自製的簡化教學模型：指令名稱與長度為示意。講義只說明四個步驟與「下一個 PC = 指令 bytes 數 + 原 PC」，沒有規定指令集。</p></div>
+        <details class="ta-guide" data-ta-guide="ch5-cycle"><summary>助教實習對照 · p.64</summary><p>依序 Fetch → Decode → Get data → Execute。Fetch 先依 PC 取指令，讀到的資料位址不會自動成為下一個 PC。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch5-cycle"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -2116,6 +2203,7 @@
         <div class="lab"><div class="lab-kicker">TRY IT · 存取時間與傳輸時間分開算</div><h3>磁碟時間計算機</h3><div class="ch4-fields"><label>Seek time (ms)<input type="number" id="ch5Seek" value="9" min="0" step="0.1"></label><label>Latency (ms)<input type="number" id="ch5Latency" value="4" min="0" step="0.1"></label><label>檔案大小 (MB)<input type="number" id="ch5FileMB" value="50" min="0" step="1"></label><label>Transfer rate (MB/s)<input type="number" id="ch5Rate" value="100" min="1" step="1"></label></div><div class="lab-output" id="ch5DiskOut" aria-live="polite"></div><p class="source-note">講義只定義 access time = seek + latency，並把 transfer rate 當作另一個指標；「總時間 = access time + 傳輸時間」是自製的補充算法（理想化，忽略其他延遲）。</p></div>
         <div class="callout"><strong>最常見的配對：</strong>揮發性 → RAM；唯讀 → ROM；循序、要先讀前面的 → 磁帶；track／sector／seek → 磁碟；無移動零件、可重寫 → flash／SSD；DVD 4.7 GB、Blu-ray 25 GB。</div>
         <div class="lab quick-q" data-mini="q_ch5_storage"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch5-storage"><summary>助教實習對照 · p.65–66</summary><p>RAM 揮發、ROM 非揮發；HDD 的 Access time=Seek+Latency，Transfer rate 是另一個量。SSD 沒有機械移動零件。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch5-storage"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -2126,6 +2214,7 @@
         <p>因為<strong>程式碼大小（size of code）與執行速度（executing speed）</strong>都很重要，講義提到會使用 assembly language（組合語言）。</p>
         <div class="callout"><strong>記法：</strong>8 → micro-processor、32 → DSP、64 → RISC；原因是 code size 與 speed 很重要，所以用組合語言。</div>
         <div class="lab quick-q" data-mini="q_ch5_embedded"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
+        <details class="ta-guide" data-ta-guide="ch5-embedded"><summary>助教實習對照 · p.67</summary><p>Embedded system 是大系統中負責特定功能的電腦；code size 與執行速度重要，因此講義提到 assembly language。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch5-embedded"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -2148,6 +2237,7 @@
         <div class="callout"><strong>講義歸類提醒：</strong>p.30 把 pipelined processing 放在 task-level；p.13 的 pipelining 則是把單一指令切成可重疊的步驟。考試以講義的歸類為準。第一章也出現 SIMD／MIMD，可回到<a href="#ch1-parallel">第一章的平行運算</a>對照。</div>
         <div class="lab quick-q" data-mini="q_ch5_parallel"><div class="lab-kicker">CHECK · 本節一題</div><div data-mini-mount></div></div>
         <div class="study-path"><a href="#ch5-test">開始第五章英文測驗 →</a><a href="#exam">更新後的考前清單 →</a></div>
+        <details class="ta-guide" data-ta-guide="ch5-parallel"><summary>助教實習對照 · p.68</summary><p>加大 word size → bit；多個 execution units 發出獨立指令 → instruction；SIMD → data；多處理器分工不同任務 → task／MIMD。</p><p class="source-note"><a href="#ta-review">實習複習路線與講義核對 →</a></p></details>
         <details class="unit-past" data-unit-past="ch5-parallel"><summary>本節考題 · 2 題 · 同型練習 2</summary><div data-unit-past-mount></div><noscript><p>請啟用 JavaScript 以作答互動題目。</p></noscript></details>
       </section>
 
@@ -2169,7 +2259,7 @@
           <h3>整數／小數換算</h3><p>整數用位置權重或反覆除；小數換成 base b 時反覆乘 b，整數位按產生順序讀。例：0.6875×16=11=B，所以 0.6875₁₀=0.B₁₆。directly 問直接法，2↔16 用每 4 bits 對應；計算機核對不取代題目要求的過程。</p>
           <h3>固定 10-bit 補數</h3><p>範圍 −512–511。負數固定 10 位反轉加 1；減法 A−B 改成 A+(−B)。先看數學答案是否超出範圍，再看保留的 10-bit 圖樣。例如 400+200=600 超出上限，低 10 位 1001011000 解讀為 −424；−424 是溢位後的儲存解讀，不能當作數學答案。</p>
           <h3>Huffman 要自己建樹</h3><p>每輪重新取最小權重兩個節點合併；本區規定小權重在左，同權重用排序後的組名字母比較。左 0、右 1，從根到葉讀碼，解碼每到葉就回根。建樹題要填全部合併步驟與七個碼字，不只認識「常見字用短碼」。</p>
-          <h3>指定有效位數的浮點數</h3><p>本區採 sign × 整數 mantissa × 10^exponent。有效位數不是小數點後幾位。例：12.346，4 位尾數採截取是 +×1234×10⁻²，採四捨五入是 +×1235×10⁻²。原作業未明說捨入方式，本區每題明示截取或四捨五入，避免假定唯一規則。</p>
+          <h3>指定有效位數的浮點數</h3><p>本區採 sign × 整數 mantissa × 10^exponent。有效位數不是小數點後幾位。例：12.346，4 位尾數採截取是 +×1234×10⁻²，採四捨五入是 +×1235×10⁻²。原作業題幹未明說捨入，但實習課 p.59 解答採截取；本區的自編題仍各自明示截取或四捨五入。</p>
           <h3>RLE 保留符號與大小寫</h3><p>本區只有長度大於 3 的連續重複改成 *字元次數；短段保留。#、@、+ 都可當資料字元，* 才是旗標。例：@@@@zz → *@4zz。文字編解碼須保持字元順序。</p>
         </div></details>
         <div class="callout"><strong>作答格式：</strong>填計算結果時不用括號與基底；十六進位大小寫皆可。固定 10-bit 圖樣必須保留前導 0。過程筆記可保存，但不會自動評分；對照解析自行檢查推導。</div>
@@ -5159,6 +5249,75 @@
       renderMini();
     });
 
+    // BEGIN TA-source-models
+    const TA_SOURCE_URL='https://iclass.tku.edu.tw/course/266139/learning-activity#/2040976';
+    const TA_CIRCUITS=[
+      {no:55,page:39,taught:false,inputs:['A','B','C'],expr:'(A+B)(B+C)',gates:[['G1','OR',['A','B'],260,105],['G2','OR',['B','C'],260,295],['F','AND',['G1','G2'],650,200]]},
+      {no:56,page:40,taught:true,inputs:['A','B','C','D'],expr:'(AB+C)D',gates:[['G1','AND',['A','B'],210,100],['G2','OR',['G1','C'],470,200],['F','AND',['G2','D'],740,290]]},
+      {no:57,page:41,taught:false,inputs:['A','B','C'],expr:'A′B+(B+C)′',gates:[['G1','NOT',['A'],220,70],['G2','AND',['G1','B'],470,130],['G3','NOR',['B','C'],220,320],['F','OR',['G2','G3'],740,225]]},
+      {no:58,page:42,taught:true,inputs:['A','B','C','D'],expr:'(AB)′+(CD)′',gates:[['G1','NAND',['A','B'],260,105],['G2','NAND',['C','D'],260,295],['F','OR',['G1','G2'],650,200]]},
+      {no:59,page:43,taught:true,inputs:['A','B'],expr:'AB+(A+B)',gates:[['G1','AND',['A','B'],260,105],['G2','OR',['A','B'],260,295],['F','OR',['G1','G2'],650,200]]},
+      {no:60,page:44,taught:true,inputs:['A','B'],expr:'A′ ⊕ (AB)',gates:[['G1','NOT',['A'],260,105],['G2','AND',['A','B'],260,295],['F','XOR',['G1','G2'],650,200]]},
+      {no:61,page:45,taught:false,inputs:['A','B','C'],expr:'A′(B ⊕ C)',gates:[['G1','NOT',['A'],260,80],['G2','XOR',['B','C'],260,295],['F','AND',['G1','G2'],650,200]]},
+      {no:62,page:46,taught:false,inputs:['A','B','C'],expr:'(BC)′+(AB+C′)′',gates:[['G1','AND',['A','B'],230,65],['G2','NAND',['B','C'],230,220],['G3','NOT',['C'],230,355],['G4','NOR',['G1','G3'],500,100],['F','OR',['G4','G2'],760,220]]}
+    ];
+    function taCircuitTrace(circuit,inputs){
+      const values={...inputs},steps=[];
+      for(const [id,type,args] of circuit.gates){const a=values[args[0]],b=values[args[1]]??0;values[id]=ch4Gate(type,a,b);steps.push({id,type,args,value:values[id],inputValues:args.map(x=>values[x])});}
+      return {values,steps,result:values.F};
+    }
+    function taCircuitRows(circuit){return Array.from({length:2**circuit.inputs.length},(_,i)=>{const bits=i.toString(2).padStart(circuit.inputs.length,'0'),inputs=Object.fromEntries(circuit.inputs.map((letter,j)=>[letter,Number(bits[j])]));return {bits,...taCircuitTrace(circuit,inputs)};});}
+    const TA_HUFFMAN_CODES={A:'01',B:'000',I:'10',M:'111',S:'110',X:'0011',Z:'0010'};
+    function taDecodeTrace(bits){
+      if(!/^[01]+$/.test(bits))throw new Error('Use a nonempty bit string.');
+      const inverse=Object.fromEntries(Object.entries(TA_HUFFMAN_CODES).map(([x,code])=>[code,x])),tokens=[];let tail='',decoded='';
+      for(const bit of bits){tail+=bit;if(Object.hasOwn(inverse,tail)){tokens.push({bits:tail,letter:inverse[tail]});decoded+=inverse[tail];tail='';}}
+      return {tokens,decoded,tail,complete:tail===''};
+    }
+    let taSvgSerial=0;
+    function taMakeDiagram(circuit,inputs={},shown=0){
+      const ns='http://www.w3.org/2000/svg',make=(tag,attrs={},text)=>{const e=document.createElementNS(ns,tag);for(const [key,value] of Object.entries(attrs))e.setAttribute(key,String(value));if(text!==undefined)e.textContent=text;return e;};
+      const svg=make('svg',{viewBox:'0 0 1000 430',class:'ta-circuit-svg',role:'img'}),serial=++taSvgSerial,title='ta-svg-title-'+serial,desc='ta-svg-desc-'+serial;
+      svg.setAttribute('aria-labelledby',title+' '+desc);svg.append(make('title',{id:title},'Exercise '+circuit.no+' circuit'),make('desc',{id:desc},circuit.gates.map(([id,type,args])=>id+' is '+type+' with inputs '+args.join(', ')).join('. ')+'. Crossing wires connect only at marked dots.'));
+      const positions={},inputY={2:[105,295],3:[70,210,350],4:[55,155,265,365]}[circuit.inputs.length];
+      circuit.inputs.forEach((letter,i)=>{positions[letter]={x:90,y:inputY[i]};svg.append(make('text',{x:20,y:inputY[i]+6,class:'ta-pin-text'},letter+(inputs[letter]===undefined?'':' = '+inputs[letter])),make('circle',{cx:90,cy:inputY[i],r:4,class:'ta-junction'}));});
+      const known={...inputs};let evaluated={};if(circuit.inputs.every(x=>inputs[x]!==undefined))evaluated=taCircuitTrace(circuit,inputs).values;
+      circuit.gates.forEach(([id,type,args,x,y],i)=>{
+        args.forEach((from,j)=>{const p=positions[from],toY=y+(args.length===1?0:j===0?-14:14),bend=p.x+(x-p.x)*(0.42+0.08*j);svg.append(make('path',{d:'M'+p.x+','+p.y+' H'+bend+' V'+toY+' H'+x,class:'ta-wire','data-value':known[from]===undefined?'?':known[from]}));});
+        const g=make('g',{transform:'translate('+x+' '+y+')',class:'ta-gate','data-value':i<shown&&evaluated[id]!==undefined?evaluated[id]:'?'});if(i===shown)g.append(make('rect',{x:-16,y:-54,width:126,height:106,rx:8,class:'ta-active-gate'}));
+        if(type==='NOT')g.append(make('path',{d:'M0 -30 L62 0 L0 30 Z',class:'ta-gate-body'}));
+        else if(type==='AND'||type==='NAND')g.append(make('path',{d:'M0 -30 H38 C82 -30 82 30 38 30 H0 Z',class:'ta-gate-body'}));
+        else {g.append(make('path',{d:'M0 -32 Q44 -34 82 0 Q44 34 0 32 Q24 0 0 -32 Z',class:'ta-gate-body'}),make('path',{d:'M0 -14 H12 M0 14 H12',class:'ta-wire'}));if(type==='XOR')g.append(make('path',{d:'M-10 -32 Q14 0 -10 32',class:'ta-gate-line'}));}
+        let end=(type==='AND'||type==='NAND')?72:type==='NOT'?62:82;
+        if(['NOT','NAND','NOR'].includes(type)){g.append(make('circle',{cx:end+8,cy:0,r:6,class:'ta-gate-body'}));end+=14;}
+        g.append(make('text',{x:34,y:-42,'text-anchor':'middle',class:'ta-gate-id'},id));
+        if(i<shown&&evaluated[id]!==undefined){known[id]=evaluated[id];g.append(make('text',{x:end+17,y:-9,class:'ta-gate-value'},String(known[id])));}
+        svg.append(g);positions[id]={x:x+end,y};
+      });
+      const p=positions.F;svg.append(make('path',{d:'M'+p.x+','+p.y+' H'+(p.x+75),class:'ta-wire','data-value':known.F===undefined?'?':known.F}),make('text',{x:p.x+80,y:p.y+6,class:'ta-pin-text'},known.F===undefined?'F':'F = '+known.F));return svg;
+    }
+    function taInitCircuitLab(){
+      const select=$('#taCircuitSelect'),supplement=$('#taIncludeUntaught'),inputsHost=$('#taCircuitInputs'),diagram=$('#taCircuitDiagram'),output=$('#taCircuitOutput'),table=$('#taCircuitTable');
+      let selected=56,shown=0,values={A:0,B:0,C:0,D:0};
+      function circuit(){return TA_CIRCUITS.find(x=>x.no===selected);}
+      function options(){select.replaceChildren();TA_CIRCUITS.filter(x=>x.taught||supplement.checked).forEach(c=>{const o=document.createElement('option');o.value=String(c.no);o.textContent='Exercise '+c.no+' · PDF p.'+c.page+(c.taught?'':' · 實習課未講');o.selected=c.no===selected;select.append(o);});}
+      function render(){
+        const c=circuit(),trace=taCircuitTrace(c,values);inputsHost.replaceChildren();
+        c.inputs.forEach(letter=>{const b=document.createElement('button');b.type='button';b.className='ghost-btn';b.textContent=letter+' = '+values[letter];b.setAttribute('aria-pressed',String(values[letter]===1));b.addEventListener('click',()=>{values[letter]=1-values[letter];shown=0;render();});inputsHost.append(b);});
+        diagram.replaceChildren(taMakeDiagram(c,values,shown));$('#taCircuitQuestion').dataset.openQuestion='ch4-circuits-'+(TA_CIRCUITS.indexOf(c)+3);$('#taCircuitSource').textContent='實習課 PDF p.'+c.page+' · 原書 Exercise '+c.no+'。'+(c.taught?'':'本頁標示「實習課未講」，列為補充；不等於官方刪除考試範圍。');
+        const lines=trace.steps.slice(0,shown).map(step=>step.id+' = '+step.type+'('+step.inputValues.join(', ')+') = '+step.value);output.textContent=shown?lines.join('\n')+(shown===c.gates.length?'\nF = '+c.expr+' = '+trace.result:'\n下一步：接著算 '+c.gates[shown][0]+'。'):'從輸入端開始。先預測 '+c.gates[0][0]+' 的輸出，再按「算下一個閘」。';
+        $('#taCircuitNext').disabled=shown===c.gates.length;
+        table.replaceChildren();table.hidden=!$('#taShowTruth').checked;
+        if(!table.hidden){const t=document.createElement('table');t.className='compare';const head=document.createElement('thead'),hr=document.createElement('tr');[...c.inputs,...c.gates.map(g=>g[0])].forEach(name=>{const th=document.createElement('th');th.scope='col';th.textContent=name;hr.append(th);});head.append(hr);const body=document.createElement('tbody');taCircuitRows(c).forEach(row=>{const tr=document.createElement('tr');[...c.inputs,...c.gates.map(g=>g[0])].forEach(name=>{const td=document.createElement('td');td.textContent=String(row.values[name]);tr.append(td);});body.append(tr);});t.append(head,body);table.append(t);}
+      }
+      select.addEventListener('change',()=>{selected=Number(select.value);shown=0;render();});supplement.addEventListener('change',()=>{if(!supplement.checked&&!circuit().taught)selected=56;options();shown=0;render();});$('#taCircuitNext').addEventListener('click',()=>{shown=Math.min(shown+1,circuit().gates.length);render();});$('#taCircuitReset').addEventListener('click',()=>{shown=0;render();});$('#taShowTruth').addEventListener('change',render);options();render();
+      const huff=$('#taHuffInput'),huffOut=$('#taHuffOutput');$('#taHuffCheck').addEventListener('click',()=>{try{const result=taDecodeTrace(huff.value.trim());huffOut.textContent=result.tokens.map(t=>t.bits+' → '+t.letter).join(' | ')+'\n完整解出的字母：'+result.decoded+'\n'+(result.complete?'字串已全部走完，沒有殘留 bits。':'尚未完成碼字的尾端：'+result.tail+'。不可自行當成一個完整字母，也不能默默補 0。');huffOut.className='lab-output '+(result.complete?'ok':'bad');}catch(e){huffOut.textContent='請只輸入 0 和 1。';huffOut.className='lab-output bad';}});
+      $$('[data-ta-bits]').forEach(button=>button.addEventListener('click',()=>{huff.value=button.dataset.taBits;huffOut.textContent='已載入字串；按「逐碼解讀」再核對。';huffOut.className='lab-output';}));
+    }
+    // END TA-source-models
+
+    taInitCircuitLab();
+
     // BEGIN unit-past-question-bank
     // Past assessments were read in this chat; links never include a student's submission.
     function buildUnitPastQuestions(){
@@ -5262,6 +5421,31 @@
       mc('ch5-embedded','Why might assembly language be chosen for a constrained embedded controller?','To control code size and execution speed closely',['To control code size and execution speed closely','Because embedded systems have no memory','Because assembly is automatically portable across all CPUs','Because every embedded system must use exactly 8 bits'],['依講義，code size 和 executing speed 很重要；組合語言可提供較細部的控制。','不代表所有嵌入式系統都必須用組合語言，也不代表架構只有 8-bit。']);
       mc('ch5-parallel','Different cores run physics, audio, and AI tasks on shared memory. Which lecture category best fits?','Task-level parallelism (MIMD)',['Bit-level parallelism','Instruction-level parallelism','Data-level parallelism (SIMD)','Task-level parallelism (MIMD)'],['各核心做不同任務，屬 task-level／MIMD。','SIMD 是同樣指令處理不同資料；不要只看到 many cores 就選 SIMD。']);
       mc('ch5-parallel','A single CPU issues independent instructions to multiple execution units in one clock cycle. Which level of parallelism is this?','Instruction-level parallelism',['Bit-level parallelism','Instruction-level parallelism','Data-level parallelism only','Task-level parallelism only'],['同一處理器內，同時發出獨立指令給多個 execution units，是 instruction-level（例如 superscalar）。','和多個核心各跑不同程式的 task-level 不同。']);
+      // Exact exercises in the TA deck, with guided answer fields added by this site.
+      TA_CIRCUITS.forEach(c=>{
+        const source={kind:'tutorial',label:'實習課PPT',ref:'PDF p.'+c.page+' · Exercise '+c.no,url:TA_SOURCE_URL};
+        const note=(c.taught?'':'講義標示「實習課未講」，此題列為補充；並非官方排除考試範圍。')+(c.no<=58?'原題要求畫電路；這裡改成辨認各閘，手繪部分請對照解析圖自行檢查。':'保留原圖連線關係，以完整 F 欄核對真值表。');
+        if(c.no<=58){
+          add('ch4-circuits','Draw a circuit for F = '+c.expr+'. In this guided version, identify each gate in dependency order.',c.gates.map(([id,type,args])=>F('gate'+id,id+' takes '+args.join(' and '),type,'choice',{options:['AND','OR','NOT','XOR','NAND','NOR']})),c.gates.map(([id,type,args])=>id+'：把 '+args.join('、')+' 接到 '+type+'；'+(type==='NOT'||type==='NAND'||type==='NOR'?'輸出小圓圈代表反相。':'')).concat('沿訊號流接完後，F = '+c.expr+'。AND 不是把兩條線直接接在一起；每個中間輸出都要保留正確的來源。'),source,note);
+          Object.assign(units['ch4-circuits'].at(-1),{diagram:c.no,diagramAfter:true});
+        }else{
+          const rows=taCircuitRows(c),letters=c.inputs.join(''),column=rows.map(row=>row.result).join('');
+          add('ch4-circuits','Show the behavior of the circuit with a truth table. Order '+letters+' as '+rows.map(row=>row.bits).join(', ')+'. Enter the complete F column as '+rows.length+' bits, without spaces.',[F('column','F column in the stated row order',column,'radix',{base:2,width:rows.length})],['先沿箭頭確認每個閘的輸入。小圓圈是 NOT，OR 前多一條弧線是 XOR；沒有圓點的線路交叉不代表相接。',...rows.map(row=>letters+'='+row.bits+'：'+c.gates.map(([id])=>id+'='+row.values[id]).join('，')+'。'),'完整 F 欄：'+column+'；對應公式是 F = '+c.expr+'。'],source,note);
+          Object.assign(units['ch4-circuits'].at(-1),{diagram:c.no,diagramAfter:false});
+        }
+      });
+      ['11101010100011','110001011010011'].forEach((bits,i)=>{
+        const raw=taDecodeTrace(bits),fixed=taDecodeTrace(bits+'0');
+        add('ch3-compression','Use A=01, B=000, I=10, M=111, S=110, X=0011, Z=0010. Decode '+bits+' as far as possible. Enter the complete decoded prefix, the incomplete trailing bits, and the decoded text for the explicitly extended string '+bits+'0.',[F('prefix','Complete decoded prefix',raw.decoded,'text'),F('tail','Incomplete trailing bits',raw.tail,'radix',{base:2,width:raw.tail.length}),F('extended','Decoded text after the stated extra 0',fixed.decoded,'text')],['原字串分組：'+raw.tokens.map(t=>t.bits+'→'+t.letter).join(' | ')+'；剩下 '+raw.tail+' 還不是完整碼字。','助教 p.58 的解答分組，相當於在原字串最後再加一個 0。明確補齊後：'+fixed.tokens.map(t=>t.bits+'→'+t.letter).join(' | ')+'。','原字串只完整解出 '+raw.decoded+'，補齊版本才是 '+fixed.decoded+'。遇到此類題目，應寫出缺位情況並確認題目，不可默默當作沒有殘留。'],{kind:'tutorial',label:'實習課PPT',ref:'PDF p.58 · Homework 1 Q4(2) '+(i===0?'(a)':'(b)'),url:TA_SOURCE_URL},'原題與解答的 bits 長度不一致；本題將「原字串」與「明確補 0」分開核對，不把補齊後的答案直接當成原字串解碼。');
+      });
+      const floatOriginal=units['ch3-fraction'].find(q=>q.id==='ch3-fraction-4');
+      delete floatOriginal.fields.find(f=>f.id==='mantissa').accepted;
+      floatOriginal.prompt+=' Follow the TA solution on PDF p.59: truncate extra significant digits; do not round.';
+      floatOriginal.steps=['15699470000 = 156994.7×10⁵。六位整數尾數只保留 156994。','助教 p.59 的作業解答採截取，答案為 + × 156994 × 10⁵，這是近似表示。','四捨五入會得到 156995，但不是這份作業檢討採用的規則；其他自編題仍依各題明示的捨入方式。'];
+      floatOriginal.note='已依實習課 PDF p.59 更新：本原題採截取，不接受四捨五入的 156995。此題舊核對紀錄會重新計算，計算筆記保留。';floatOriginal.revision=2;
+      const taRefs={'ch1-system-2':[21],'ch1-hardware-3':[20],'ch2-number-1':[17],'ch2-number-2':[16],'ch2-conversion-1':[18],'ch2-conversion-2':[15],'ch2-conversion-3':[48],'ch2-conversion-4':[49],'ch2-conversion-5':[50],'ch2-conversion-6':[51],'ch2-binary-1':[19],'ch3-integer-1':[54],'ch3-integer-2':[54],'ch3-integer-3':[55],'ch3-integer-4':[55],'ch3-fraction-1':[52],'ch3-fraction-2':[53],'ch3-fraction-3':[59],'ch3-fraction-4':[59],'ch3-compression-1':[56,57],'ch3-compression-2':[59],'ch3-compression-3':[59]};
+      Object.values(units).flat().forEach(q=>{if(taRefs[q.id])q.taPages=taRefs[q.id];});
+
       return units;
     }
     // END unit-past-question-bank
@@ -5276,19 +5460,22 @@
     const unitPastKey='cs-unit-past-v1';let unitPastSaved={};
     try{const stored=JSON.parse(localStorage.getItem(unitPastKey)||'null');if(stored&&stored.version===1&&stored.units&&typeof stored.units==='object')unitPastSaved=stored.units;}catch{}
     const unitPastElement=(tag,className,text)=>{const node=document.createElement(tag);if(className)node.className=className;if(text!==undefined)node.textContent=text;return node;};
-    const unitPastKind={quiz:'小考原題',homework:'作業原題',practice:'同型練習 · 非歷屆原題'};
+    const unitPastKind={quiz:'小考原題',homework:'作業原題',tutorial:'實習講義導練',practice:'同型練習 · 非歷屆原題'};
+    const unitPastOpeners={};
     Object.entries(UNIT_PAST_BANK).forEach(([unit,questions])=>{
       const host=$('[data-unit-past="'+unit+'"]'),summary=$('summary',host),mount=$('[data-unit-past-mount]',host);
       const validIds=new Set(questions.map(q=>q.id)),saved=unitPastSaved[unit];
-      let run={index:0,drafts:{},notes:{},first:{},checked:[],revealed:[],orders:{},review:[]};
+      let run={index:0,drafts:{},notes:{},first:{},checked:[],revealed:[],orders:{},review:[],taRevision:2};
       if(saved&&typeof saved==='object'){
         ['drafts','notes','first','orders'].forEach(key=>{if(saved[key]&&typeof saved[key]==='object'&&!Array.isArray(saved[key]))run[key]=saved[key];});
         ['checked','revealed','review'].forEach(key=>{if(Array.isArray(saved[key]))run[key]=saved[key].filter(id=>validIds.has(id));});
         const length=run.review.length||questions.length;if(Number.isInteger(saved.index)&&saved.index>=0&&saved.index<length)run.index=saved.index;
       }
+      // Only the original floating-point item's old grading is invalidated; retain all notes and other progress.
+      if(unit==='ch3-fraction'&&saved&&saved.taRevision!==2){const revised='ch3-fraction-4';delete run.first[revised];run.checked=run.checked.filter(id=>id!==revised);run.revealed=run.revealed.filter(id=>id!==revised);}
       function save(){unitPastSaved[unit]=run;try{localStorage.setItem(unitPastKey,JSON.stringify({version:1,units:unitPastSaved}));}catch{const note=$('.unit-past-save',host);if(note)note.textContent='瀏覽器無法保存；本次仍可作答，重新整理後將不保留。';}}
       function list(){return run.review.length?run.review.map(id=>questions.find(q=>q.id===id)):questions;}
-      function updateSummary(){const parts=['本節考題 · '+questions.length+' 題'];['quiz','homework','practice'].forEach(kind=>{const count=questions.filter(q=>q.source.kind===kind).length;if(count)parts.push((kind==='practice'?'同型練習':unitPastKind[kind])+' '+count);});const checked=run.checked.length;if(checked)parts.push('已核對 '+checked);summary.textContent=parts.join(' · ');}
+      function updateSummary(){const parts=['本節考題 · '+questions.length+' 題'];['quiz','homework','tutorial','practice'].forEach(kind=>{const count=questions.filter(q=>q.source.kind===kind).length;if(count)parts.push((kind==='practice'?'同型練習':unitPastKind[kind])+' '+count);});const checked=run.checked.length;if(checked)parts.push('已核對 '+checked);summary.textContent=parts.join(' · ');}
       function render(focus=false){
         const current=list(),question=current[run.index],draft=run.drafts[question.id]||{},checked=run.checked.includes(question.id),revealed=run.revealed.includes(question.id);
         mount.replaceChildren();updateSummary();
@@ -5296,12 +5483,14 @@
         const source=unitPastElement('p','source-note unit-past-source');
         if(question.source.url){const link=unitPastElement('a','',question.source.label+' · '+question.source.ref);link.href=question.source.url;link.target='_blank';link.rel='noopener noreferrer';source.append(link,' · 題幹排版重整；中文解析為本站整理。');}
         else source.textContent='來源：'+question.source.label+'；對照本節教材自製，未取得本節老師原題。';mount.append(source);
+        if(question.taPages){const extra=unitPastElement('a','','另對照實習課 PDF p.'+question.taPages.join('、'));extra.href=TA_SOURCE_URL;extra.target='_blank';extra.rel='noopener noreferrer';source.append(' · ',extra);}
         if(question.note)mount.append(unitPastElement('p','unit-past-note',question.note));
         const pickerLabel=unitPastElement('label','unit-past-picker','Question · '),picker=document.createElement('select');picker.setAttribute('aria-label','Question for '+unit);
         current.forEach((q,i)=>{const option=document.createElement('option');option.value=String(i);option.textContent=(i+1)+' / '+current.length+' · '+unitPastKind[q.source.kind]+' · '+q.prompt.slice(0,65);option.selected=i===run.index;picker.append(option);});
         picker.addEventListener('change',()=>{run.index=Number(picker.value);save();render(true);});pickerLabel.append(picker);mount.append(pickerLabel);
         const form=unitPastElement('form','unit-past-form');form.noValidate=true;
         const prompt=unitPastElement('h3','unit-past-prompt',question.prompt);prompt.lang='en';prompt.tabIndex=-1;prompt.id='unit-past-prompt-'+unit;form.setAttribute('aria-labelledby',prompt.id);form.append(prompt);
+        if(question.diagram&&!question.diagramAfter){const picture=unitPastElement('div','ta-circuit-scroll');picture.append(taMakeDiagram(TA_CIRCUITS.find(c=>c.no===question.diagram)));form.append(picture);}
         const inputs={};
         question.fields.forEach(field=>{
           const group=unitPastElement('fieldset','unit-past-field');group.append(unitPastElement('legend','',field.label));group.lang='en';
@@ -5322,6 +5511,7 @@
           if(mode==='check'){const all=results.every(r=>r.correct);feedback.classList.add(all?'ok':'bad');feedback.append(unitPastElement('p','',all?'答對了，來對照過程。':'還沒全對，逐欄看是哪一步需要修正。'));}
           else feedback.append(unitPastElement('p','','已展開解析；先看過答案的題目不列入首次成績。'));
           question.fields.forEach((field,i)=>{const expected=field.accepted?field.accepted.join(' 或 '):field.answer;feedback.append(unitPastElement('p','unit-past-field-result',field.label+'：'+(mode==='check'?(results[i].correct?'✓':'✗')+'　':'')+expected));});
+          if(question.diagramAfter){const picture=unitPastElement('div','ta-circuit-scroll');picture.append(taMakeDiagram(TA_CIRCUITS.find(c=>c.no===question.diagram)));feedback.append(picture);}
           const steps=document.createElement('ol');question.steps.forEach(text=>steps.append(unitPastElement('li','',text)));feedback.append(steps);
           const first=run.first[question.id];if(typeof first==='boolean')feedback.append(unitPastElement('p','source-note','首次紀錄：'+(first?'全對':'未全對')+'；修改重做不改寫首次紀錄。'));form.append(feedback);
         }
@@ -5338,14 +5528,15 @@
         previous.addEventListener('click',()=>{run.index--;save();render(true);});next.addEventListener('click',()=>{run.index++;save();render(true);});navigation.append(previous,next);mount.append(navigation);
         const first=Object.values(run.first).filter(value=>typeof value==='boolean'),correct=first.filter(Boolean).length;
         mount.append(unitPastElement('p','unit-past-progress','本節首次全對 '+correct+' / '+first.length+' 題；全節 '+questions.length+' 題。'+(run.review.length?'目前為錯題重練。':'')));
-        const reset=unitPastElement('button','ghost-btn','重練本節（清除本節紀錄）');reset.type='button';reset.addEventListener('click',()=>{run={index:0,drafts:{},notes:{},first:{},checked:[],revealed:[],orders:{},review:[]};save();render(true);});
+        const reset=unitPastElement('button','ghost-btn','重練本節（清除本節紀錄）');reset.type='button';reset.addEventListener('click',()=>{run={index:0,drafts:{},notes:{},first:{},checked:[],revealed:[],orders:{},review:[],taRevision:2};save();render(true);});
         const wrong=questions.filter(q=>run.first[q.id]===false).map(q=>q.id),retry=unitPastElement('button','ghost-btn','重練錯題 · '+wrong.length);retry.type='button';retry.disabled=!wrong.length;retry.addEventListener('click',()=>{run.review=wrong;run.index=0;wrong.forEach(id=>{run.checked=run.checked.filter(x=>x!==id);run.revealed=run.revealed.filter(x=>x!==id);delete run.drafts[id];});save();render(true);});
         const bottom=unitPastElement('div','lab-controls');bottom.append(retry,reset);mount.append(bottom);mount.append(unitPastElement('p','source-note unit-past-save','答案、計算筆記與本節進度保存在此瀏覽器；只會清除你選擇重練的本節紀錄。'));
         save();if(focus)prompt.focus({preventScroll:true});
       }
       host.addEventListener('toggle',()=>{if(host.open&&!mount.childElementCount)render();});updateSummary();
+      unitPastOpeners[unit]=qid=>{const index=questions.findIndex(q=>q.id===qid);if(index<0)return;run.review=[];run.index=index;host.open=true;save();render();};
     });
-    $$('[data-open-unit]').forEach(link=>link.addEventListener('click',()=>{const id=link.dataset.openUnit;revealStudyTarget(id);$('[data-unit-past="'+id+'"]').open=true;}));
+    $$('[data-open-unit]').forEach(link=>link.addEventListener('click',()=>{const id=link.dataset.openUnit;revealStudyTarget(id);if(link.dataset.openQuestion&&unitPastOpeners[id])unitPastOpeners[id](link.dataset.openQuestion);else $('[data-unit-past="'+id+'"]').open=true;}));
     // END unit-past-interface
 
 
