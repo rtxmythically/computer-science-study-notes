@@ -5174,7 +5174,7 @@
         else if(from===16&&targets.includes(2))steps.push('直接法：每一個十六進位數字保留 4 bits：'+value.split('').map(d=>d+' → '+parseInt(d,16).toString(2).padStart(4,'0')).join('；')+'。接起來，中間的 0 不可刪。');
         else if(from!==10)steps.push('乘位置權重：'+value.split('').map((d,i)=>parseInt(d,from)+'×'+from+'^'+(value.length-1-i)).join(' + ')+' = '+value10+'。');
         targets.filter(base=>from===10).forEach(base=>{let current=value10;const rows=[];while(current){rows.push(current+'÷'+base+'='+Math.floor(current/base)+' 餘 '+(current%base).toString(base).toUpperCase());current=Math.floor(current/base);}steps.push(rows.join('；')+'。餘數由最後一次往回讀。');});
-        steps.push(fields.map(f=>f.label+' = '+f.answer).join('；')+'。直接法題目要寫分組，不用十進位當中介。');
+        steps.push(fields.map(f=>f.label+' = '+f.answer).join('；')+'。'+((from===2&&targets.includes(16))||(from===16&&targets.includes(2))?'本題的直接法須保留分組過程，不用十進位當中介。':''));
         add(unit,prompt,fields,steps,source);
       };
       const arith=(unit,a,b,base,op,source)=>{const t=radixTrace(base,op,a,b);n(unit,'Calculate ('+a+') in base '+base+' '+(op==='add'?'+':'−')+' ('+b+') in base '+base+'. Give the result in base '+base+'.',t.result,t.rows.map(r=>radixStepText(t,r)).concat('由左到右讀得 '+t.result+'（base '+base+'）。'),source,'radix',{base});};
