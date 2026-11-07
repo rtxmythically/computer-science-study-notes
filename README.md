@@ -21,6 +21,8 @@ Ch01–Ch05 的繁體中文學習筆記，包含概念解釋、進位換算、�
 
 不需要安裝軟體或登入。主題偏好、已學標記與部分答題進度保存在各自瀏覽器中。
 
+「電路實驗講義」介面依 Damir Sokolovsky 的 [unslop](https://github.com/heydamir/unslop) 方法整理（CC BY 4.0）。
+
 ## 檔案
 
 - `index.html`：完整互動筆記。
