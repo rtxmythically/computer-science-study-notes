@@ -600,7 +600,7 @@
     .quick-q{margin-top:24px}
     .quick-q .mini-options{display:grid;grid-template-columns:1fr;gap:8px}
     .quick-q .mini-options button{text-align:left;min-height:48px;white-space:normal;overflow-wrap:anywhere;line-height:1.6}
-    .quick-q .mini-question{font-size:17px;line-height:1.7}
+    .quick-q .mini-question{font-size:17px;line-height:1.7;scroll-margin-top:80px}
     .quick-q .lab-output{white-space:pre-wrap;overflow-wrap:anywhere}
     /* Assessed-style practice: direct answers and worked solutions. */
     .aligned-toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:24px 0 8px}
@@ -5256,7 +5256,8 @@
         if(controls.childElementCount)mount.append(controls);
         if(focusPrompt){
           prompt.focus({preventScroll:true});
-          if(exercise.letters) host.closest('.section').scrollIntoView({block:'start',behavior:'instant'});
+          if(exercise.single) prompt.scrollIntoView({block:'nearest',behavior:'instant'});
+          else if(exercise.letters) host.closest('.section').scrollIntoView({block:'start',behavior:'instant'});
         }
       }
       renderMini();
